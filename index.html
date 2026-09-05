@@ -6,31 +6,31 @@
 <title>MARANELLO | Tablero Financiero Ejecutivo H1 2026 V3</title>
 <style>
 :root{
- --navy:#17365D;--navy2:#244D7B;--orange:#C55A11;--ink:#20252A;--muted:#687079;
- --bg:#F5F7FA;--card:#FFFFFF;--border:#D8DEE6;--light:#EDF3F8;
- --green:#256D32;--green-bg:#E8F4EA;--yellow:#806000;--yellow-bg:#FFF4CE;
- --red:#A61B1B;--red-bg:#FBE7E3;--blue-bg:#DCEAF7;--shadow:0 8px 24px rgba(23,54,93,.08)
+ --navy:#224D8E;--navy2:#183A6B;--turquoise:#6DC1CB;--yellow-brand:#FABF00;--orange:#E96C24;
+ --ink:#25303A;--muted:#6E7780;--bg:#FFFFFF;--card:#FFFFFF;--border:#E6DCCF;--light:#F2F7FA;
+ --green:#357F84;--green-bg:#E6F6F7;--yellow:#806000;--yellow-bg:#FFF4C2;
+ --red:#B84D22;--red-bg:#FDEBDD;--blue-bg:#E5F3F5;--shadow:0 8px 24px rgba(34,77,142,.10)
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
 button,select,input{font:inherit}
-header{background:var(--navy);color:#fff;padding:16px 22px;position:sticky;top:0;z-index:30;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+header{background:#FFFFFF;color:var(--navy);padding:12px 22px;position:sticky;top:0;z-index:30;box-shadow:0 2px 10px rgba(34,77,142,.12);border-bottom:4px solid var(--yellow-brand)}
 .header-row{max-width:1480px;margin:auto;display:flex;align-items:center;gap:16px;justify-content:space-between}
-.brand{font-size:24px;font-weight:900;letter-spacing:.08em} .subtitle{font-size:12px;opacity:.82;margin-top:4px}
+.brand{display:flex;align-items:center;gap:14px}.brand-logo{height:58px;width:auto;display:block}.brand-text{font-size:22px;font-weight:900;letter-spacing:.04em;color:var(--navy)} .subtitle{font-size:12px;color:#526273;margin-top:3px}
 .header-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;padding:8px 11px;border-radius:8px;font-weight:700;cursor:pointer}
-.btn:hover{background:rgba(255,255,255,.1)}
+.btn{border:1px solid var(--navy);background:#fff;color:var(--navy);padding:8px 11px;border-radius:8px;font-weight:800;cursor:pointer}
+.btn:hover{background:var(--blue-bg)}
 nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:71px;z-index:25}
 .nav-inner{max-width:1480px;margin:auto;display:flex;gap:4px;padding:8px 14px;overflow:auto}
 .nav-link{border:0;background:transparent;padding:9px 11px;border-radius:8px;cursor:pointer;font-weight:800;color:var(--navy);white-space:nowrap}
-.nav-link.active,.nav-link:hover{background:var(--light)}
+.nav-link.active,.nav-link:hover{background:var(--yellow-brand);color:var(--navy)}
 main{max-width:1480px;margin:auto;padding:18px}
 .controlbar{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:13px;padding:12px;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:14px}
 .field label{display:block;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 5px}
 .field select,.field input{width:100%;min-height:40px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:8px;color:var(--ink)}
 .mode-group{display:flex;gap:6px;align-items:center;min-height:40px}
 .mode-btn{border:1px solid var(--border);background:#fff;color:var(--navy);font-weight:800;border-radius:8px;padding:9px 11px;cursor:pointer}
-.mode-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.mode-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:inset 0 -3px 0 var(--yellow-brand)}
 .coverage{padding:11px 13px;border-radius:10px;background:var(--blue-bg);color:var(--navy);font-size:12px;line-height:1.4;margin-bottom:14px}
 .coverage.warn{background:var(--yellow-bg);color:#684F00}
 .notice{background:var(--yellow-bg);border:1px solid #E5D18A;color:#5F4C00;padding:12px 14px;border-radius:10px;font-weight:700;margin-bottom:14px;font-size:12px;line-height:1.45}
@@ -45,8 +45,8 @@ main{max-width:1480px;margin:auto;padding:18px}
 .card h3{margin:0 0 7px;font-size:13px;color:var(--navy)} .kpi-value{font-size:27px;font-weight:900;letter-spacing:-.02em}
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35}
 .status{display:inline-block;margin-top:8px;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-.status.confirmado{background:var(--green-bg);color:var(--green)} .status.provisional{background:var(--yellow-bg);color:var(--yellow)}
-.status.pendiente{background:var(--red-bg);color:var(--red)} .status.sensibilidad{background:var(--blue-bg);color:var(--navy)}
+.status.confirmado{background:#E5F6F8;color:#276F77;border:1px solid #B6E3E7} .status.provisional{background:#FFF3BE;color:#725800;border:1px solid #F1D96B}
+.status.pendiente{background:#FDE9DA;color:#A3441A;border:1px solid #F3BE99} .status.sensibilidad{background:var(--blue-bg);color:var(--navy)}
 .metric-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px}
 .metric-row:last-child{border-bottom:0} .metric-row b{color:var(--navy)}
 .callout{padding:13px;border-radius:10px;background:var(--light);border-left:5px solid var(--navy);font-size:12px;line-height:1.45}
@@ -57,7 +57,7 @@ td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top} tr:last
 svg{display:block;width:100%;height:auto} .axis-label{fill:#66717B;font-size:10px} .bar-label{font-size:10px;fill:#334}
 .category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .category-btn{border:1px solid var(--border);background:#fff;border-radius:11px;padding:13px;text-align:left;cursor:pointer;min-height:110px}
-.category-btn:hover,.category-btn.active{border-color:var(--navy);background:var(--light)} .category-btn b{display:block;color:var(--navy);font-size:12px;line-height:1.3}
+.category-btn:hover,.category-btn.active{border-color:var(--turquoise);background:#F1FBFC;box-shadow:inset 0 3px 0 var(--yellow-brand)} .category-btn b{display:block;color:var(--navy);font-size:12px;line-height:1.3}
 .category-btn strong{display:block;font-size:22px;margin-top:8px;color:var(--ink)} .category-btn small{display:block;margin-top:5px;color:var(--muted)}
 .detail-panel{margin-top:10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
 .pill-row{display:flex;gap:6px;flex-wrap:wrap} .filter-pill{border:1px solid var(--border);background:#fff;color:var(--navy);padding:7px 10px;border-radius:999px;font-size:10px;font-weight:800;cursor:pointer}
@@ -69,9 +69,9 @@ svg{display:block;width:100%;height:auto} .axis-label{fill:#66717B;font-size:10p
 .gauge-row{display:grid;grid-template-columns:170px 1fr 100px;gap:10px;align-items:center;margin:9px 0;font-size:11px}
 .gauge-track{height:10px;border-radius:999px;background:#E9EDF1;overflow:hidden} .gauge-fill{height:100%;border-radius:999px;background:var(--navy)}
 .traffic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px} .traffic-item{border:1px solid var(--border);border-radius:10px;background:#fff;padding:11px}
-.traffic-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px} .traffic-dot.red{background:#B52B2B} .traffic-dot.yellow{background:#C89A00} .traffic-dot.green{background:#2E7D32}
+.traffic-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px} .traffic-dot.red{background:var(--orange)} .traffic-dot.yellow{background:var(--yellow-brand)} .traffic-dot.green{background:var(--turquoise)}
 .traffic-item b{display:block;color:var(--navy);font-size:12px;margin-top:6px} .traffic-item small{display:block;color:var(--muted);margin-top:4px;line-height:1.35}
-.report-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:20px;box-shadow:var(--shadow)} .report-hero h3{margin:0 0 8px;font-size:20px} .report-hero p{margin:0;font-size:12px;line-height:1.55}
+.report-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:20px;box-shadow:var(--shadow);border-bottom:6px solid var(--yellow-brand)} .report-hero h3{margin:0 0 8px;font-size:20px} .report-hero p{margin:0;font-size:12px;line-height:1.55}
 .tech-only{display:none} body.tech-mode .tech-only{display:block}
 body.tech-mode .exec-only{display:none}
 dialog{border:0;border-radius:14px;max-width:820px;width:calc(100% - 28px);padding:0;box-shadow:0 20px 70px rgba(0,0,0,.25)} dialog::backdrop{background:rgba(17,29,43,.55)}
@@ -82,12 +82,39 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 @media(max-width:1150px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three,.four{grid-template-columns:1fr 1fr}.category-grid{grid-template-columns:1fr 1fr}.traffic{grid-template-columns:repeat(3,1fr)}.controlbar{grid-template-columns:1fr 1fr}}
 @media(max-width:720px){header{position:static}nav{top:0}main{padding:12px}.kpis,.two,.three,.four,.category-grid,.traffic,.sim-grid,.controlbar,.compare-grid{grid-template-columns:1fr}.header-row{align-items:flex-start}.header-actions{display:none}.gauge-row{grid-template-columns:120px 1fr 80px}}
 @media print{header,nav,.controlbar,.header-actions,dialog{display:none!important}body{background:#fff}.section{display:block!important;page-break-inside:auto}.card{box-shadow:none;break-inside:avoid}}
+
+.brand-stripe{height:5px;background:linear-gradient(90deg,var(--navy) 0 25%,var(--turquoise) 25% 50%,var(--yellow-brand) 50% 75%,var(--orange) 75% 100%);border-radius:999px;margin:10px 0 0}
+.brand-mark-card{display:flex;align-items:center;gap:16px;background:#FFFFFF;border:1px solid #EADAC4;border-radius:12px;padding:13px}
+.brand-mark-card img{width:110px;max-height:100px;object-fit:contain}
+.brand-mark-card p{margin:0;color:#526273;font-size:11px;line-height:1.45}
+.brand-swatch{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.swatch{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);font-weight:700}
+.swatch i{display:inline-block;width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.08)}
+
+
+.coverage{display:none !important;}
+.notice{display:none !important;}
+.diag-narrative{display:grid;gap:14px}
+.diag-block{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
+.diag-block h3{margin:0 0 8px;color:var(--navy);font-size:16px}
+.diag-block p{margin:0 0 10px;color:var(--ink);font-size:13px;line-height:1.62}
+.diag-block p:last-child{margin-bottom:0}
+.diag-highlight{background:#F4F8FC;border-left:6px solid var(--navy)}
+.diag-warning{background:#FFF4E8;border-left:6px solid var(--orange)}
+.diag-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.diag-actions .diag-block{height:100%}
+@media(max-width:900px){.diag-actions{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
 <header>
  <div class="header-row">
-  <div><div class="brand">MARANELLO</div><div class="subtitle">Tablero Financiero Ejecutivo V3 | H1 2026 | Corte 30-jun-2026</div></div>
+  <div>
+  <div class="brand"><img class="brand-logo" src="assets/logo_maranello_horizontal.png" alt="MARANELLO buona & fresca"></div>
+  <div class="subtitle">Tablero Financiero Ejecutivo V5 · H1 2026 · Corte 30-jun-2026</div>
+  <div class="brand-stripe"></div>
+ </div>
   <div class="header-actions"><button class="btn" id="resetBtn">Restablecer</button><button class="btn" onclick="window.print()">Imprimir / PDF</button></div>
  </div>
 </header>
@@ -263,7 +290,22 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
    <div class="card"><h3>PENDIENTE</h3><p class="kpi-sub">Falta información o una decisión crítica.</p><span class="status pendiente">PENDIENTE</span></div>
    <div class="card"><h3>SENSIBILIDAD</h3><p class="kpi-sub">Escenario de gestión; no cifra contable certificada.</p><span class="status sensibilidad">SENSIBILIDAD</span></div>
   </div>
-  <div class="card tech-only" style="margin-top:13px">
+  
+  <div class="brand-mark-card tech-only" style="margin-top:13px">
+   <img src="assets/logo_maranello_isologo.png" alt="Isologo MARANELLO">
+   <div>
+    <h3 style="margin:0 0 5px;color:var(--navy)">Identidad de marca aplicada</h3>
+    <p>El tablero utiliza la paleta corporativa definida en el Brandbook y conserva una presentación ejecutiva: azul para estructura y confianza, turquesa para información confirmada, amarillo para alertas/provisionales y naranja para señales críticas.</p>
+    <div class="brand-swatch">
+     <span class="swatch"><i style="background:#224D8E"></i>#224D8E</span>
+     <span class="swatch"><i style="background:#6DC1CB"></i>#6DC1CB</span>
+     <span class="swatch"><i style="background:#FABF00"></i>#FABF00</span>
+     <span class="swatch"><i style="background:#E96C24"></i>#E96C24</span>
+    </div>
+   </div>
+  </div>
+
+<div class="card tech-only" style="margin-top:13px">
    <h3>Flujo metodológico</h3>
    <div class="metric-row"><span>1. Fuentes originales</span><b>Ventas, UBL, correo, WhatsApp, nómina, bancos, impuestos, inversión</b></div>
    <div class="metric-row"><span>2. Depuración</span><b>Duplicados, NC, pagos vs facturas, continuidad</b></div>
@@ -289,37 +331,79 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
    </tbody></table></div></div>
  </section>
 
- <section id="diagnostico" class="section">
-  <div class="section-title"><h2>Diagnóstico financiero concluyente</h2><p>Lectura gerencial H1 2026</p></div>
-  <div class="report-hero"><h3>Conclusión central</h3><p><b>MARANELLO está operando bajo una estructura financieramente tensionada y, con la información disponible, probablemente por debajo de su punto de equilibrio.</b> La señal se explica por la combinación de caída de ventas, carga laboral y operativa elevada, compras relevantes de insumos, deterioro de caja y mayor dependencia de financiación.</p></div>
-  <div class="grid four" style="margin-top:13px">
-   <div class="card"><h3>Ventas H1</h3><div class="kpi-value">$376,38 M</div><div class="kpi-sub">Existe capacidad comercial.</div></div>
-   <div class="card"><h3>Ventas junio</h3><div class="kpi-value">$48,07 M</div><div class="kpi-sub">-36,3 % vs enero.</div></div>
-   <div class="card"><h3>Equilibrio operativo</h3><div class="kpi-value">≈ $68,2 M</div><div class="kpi-sub">Referencia mensual provisional.</div></div>
-   <div class="card"><h3>Liquidez</h3><div class="kpi-value">$1,85 M</div><div class="kpi-sub">Saldo empresarial al 30-jun.</div></div>
+ 
+<section id="diagnostico" class="section">
+  <div class="section-title">
+    <h2>Diagnóstico financiero</h2>
+    <p>Lectura ejecutiva y concluyente de la operación H1 2026</p>
   </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card"><h3>Qué está ocurriendo</h3>
-    <div class="metric-row"><span>Ventas</span><b>Deteriorándose</b></div>
-    <div class="metric-row"><span>Estructura laboral</span><b>Alta / por depurar</b></div>
-    <div class="metric-row"><span>Gastos operativos</span><b>Elevados</b></div>
-    <div class="metric-row"><span>Rentabilidad</span><b>Probablemente negativa</b></div>
-    <div class="metric-row"><span>Liquidez</span><b>Tensionada</b></div>
-    <div class="metric-row"><span>Endeudamiento</span><b>En aumento</b></div>
-   </div>
-   <div class="card"><h3>Prioridades de intervención</h3>
-    <div class="metric-row"><span>1. Recuperar ventas</span><b>≥ $68 M/mes</b></div>
-    <div class="metric-row"><span>2. Depurar nómina</span><b>Costo laboral real</b></div>
-    <div class="metric-row"><span>3. Cerrar food cost</span><b>Inventarios</b></div>
-    <div class="metric-row"><span>4. Proteger liquidez</span><b>Caja mínima</b></div>
-    <div class="metric-row"><span>5. Control mensual</span><b>Ventas + COGS + nómina + caja</b></div>
-   </div>
+
+  <div class="report-hero">
+    <h3>Conclusión central</h3>
+    <p><b>MARANELLO sí tiene capacidad comercial, pero actualmente está operando bajo una estructura financieramente tensionada y, con la información disponible, probablemente por debajo de su punto de equilibrio.</b> La señal general del semestre no apunta a una sola causa, sino a una combinación de menor nivel de ventas entre abril y junio, una estructura laboral y operativa pesada, compras importantes de insumos, caída de liquidez y necesidad creciente de financiación.</p>
   </div>
-  <div class="callout danger" style="margin-top:13px"><b>Conclusión gerencial:</b> MARANELLO no parece un negocio sin mercado; la estructura actual parece dimensionada para un nivel de ventas superior al observado de abril a junio. Mantener ventas cercanas a junio sin correcciones implicaría seguir consumiendo caja.</div>
- </section>
+
+  <div class="diag-narrative" style="margin-top:14px">
+    <div class="diag-block diag-highlight">
+      <h3>1. Qué muestran las ventas</h3>
+      <p>Durante el primer semestre de 2026, MARANELLO registró ventas netas por <b>$376,38 millones</b>, con un promedio mensual cercano a <b>$62,73 millones</b>. Esto confirma que el negocio sí tiene capacidad de venta y que existe demanda real por su operación.</p>
+      <p>Sin embargo, la tendencia del semestre es preocupante. En enero las ventas se ubicaron en aproximadamente <b>$75,41 millones</b> y en junio cerraron alrededor de <b>$48,07 millones</b>. Esto representa una reducción cercana al <b>36,3 %</b>. En otras palabras, el restaurante sí vende, pero perdió tracción comercial a medida que avanzó el semestre.</p>
+      <p>El hallazgo clave es que la estructura del negocio parece estar diseñada para operar cómodamente con ventas superiores a las observadas al cierre del semestre. Cuando las ventas estuvieron alrededor de <b>$74–75 millones</b>, la operación se acercó más a un nivel sostenible; cuando bajaron hacia el rango de <b>$48–58 millones</b>, la presión financiera se hizo evidente.</p>
+    </div>
+
+    <div class="diag-block">
+      <h3>2. Qué está absorbiendo la venta</h3>
+      <p>La principal conclusión del análisis es que una porción muy alta de la venta se consume antes de llegar a una utilidad real. Los <b>gastos operativos</b> documentados del semestre suman aproximadamente <b>$119,92 millones</b>, equivalentes a cerca del <b>31,9 %</b> de las ventas netas.</p>
+      <p>Además, el universo de <b>nómina, prestaciones y seguridad social</b> procesado asciende a aproximadamente <b>$157,52 millones</b>, lo que representa alrededor del <b>41,9 %</b> de las ventas. Solo entre estos dos bloques ya se estaría comprometiendo cerca del <b>73,7 %</b> de los ingresos del semestre.</p>
+      <p>Esto significa que, antes incluso de calcular plenamente el costo de los alimentos y bebidas vendidos, la empresa ya llega con una estructura muy cargada. Esa es la razón por la cual cualquier caída en ventas golpea de forma directa la liquidez y la rentabilidad.</p>
+    </div>
+
+    <div class="diag-block">
+      <h3>3. El costo de insumos sigue siendo decisivo</h3>
+      <p>Las compras clasificadas como candidatas a inventario suman aproximadamente <b>$121,36 millones</b>, equivalentes a cerca del <b>32,2 %</b> de las ventas. Aun así, metodológicamente estas compras <b>no pueden asumirse automáticamente como costo de ventas</b> porque todavía falta el cierre de inventario inicial y final.</p>
+      <p>El punto importante es que, aun sin cerrar completamente ese dato, el nivel de compras ya muestra que el negocio maneja una carga relevante de insumos. Si el inventario final no compensa materialmente estas compras, el resultado del semestre tiende a volverse negativo.</p>
+      <p>Por eso el inventario no es un detalle menor: es una de las piezas que puede ajustar el resultado final, pero no cambia por sí sola la señal estructural que deja el resto del análisis.</p>
+    </div>
+
+    <div class="diag-block diag-warning">
+      <h3>4. La liquidez es la alerta más clara</h3>
+      <p>Más allá del análisis de resultados, la señal más fuerte aparece en caja. La cuenta empresarial pasó de un saldo inicial cercano a <b>$26,59 millones</b> a un saldo al cierre de junio de apenas <b>$1,85 millones</b>. Esto implica una reducción cercana al <b>93 %</b> del saldo disponible en la cuenta principal del negocio.</p>
+      <p>Adicionalmente, durante el semestre fue necesario incorporar un <b>crédito Bancolombia</b>, cuyo saldo de capital al cierre se ubica alrededor de <b>$26,27 millones</b>. También se evidenció presión asociada a los compromisos con inversionistas.</p>
+      <p>En términos gerenciales, esto significa que el problema no es únicamente contable o teórico. La operación sí está consumiendo liquidez y por eso la financiación empezó a jugar un papel más importante en la sostenibilidad del negocio.</p>
+    </div>
+
+    <div class="diag-block">
+      <h3>5. Qué conclusión deja el resultado del semestre</h3>
+      <p>Con la información disponible, MARANELLO <b>probablemente operó por debajo de su punto de equilibrio</b> en el primer semestre de 2026. La magnitud exacta del resultado todavía puede moverse cuando se cierre inventario y se depure totalmente la nómina, pero la señal general ya es suficientemente clara.</p>
+      <p>Las sensibilidades construidas indican que el negocio necesitaría vender aproximadamente en un rango cercano a <b>$67–68 millones mensuales</b> para sostener la estructura provisional actual. Frente a esa referencia, junio quedó significativamente por debajo, con una brecha aproximada de <b>$19–20 millones</b>.</p>
+      <p>En otras palabras, el negocio no parece estar sin mercado, pero sí muestra una estructura pesada para el nivel de ventas con el que terminó operando en el cierre del semestre.</p>
+    </div>
+
+    <div class="diag-actions">
+      <div class="diag-block">
+        <h3>6. Qué no explica por sí solo el problema</h3>
+        <p>Los <b>impuestos</b> están identificados y controlados, pero no son la causa principal del deterioro. De igual manera, los <b>inversionistas</b> y el componente financiero agregan presión, aunque no parecen ser el origen del desequilibrio operativo.</p>
+        <p>La raíz del problema está más bien en la combinación de <b>ventas decrecientes</b>, <b>estructura alta</b> y <b>presión sobre la caja</b>.</p>
+      </div>
+
+      <div class="diag-block">
+        <h3>7. Qué debería hacer MARANELLO</h3>
+        <p>La primera prioridad es recuperar un nivel de ventas mensual superior al actual, idealmente en el rango mínimo de equilibrio. La segunda es depurar con precisión la nómina para distinguir el costo laboral real de otros pagos o conceptos mezclados en la fuente.</p>
+        <p>La tercera es cerrar inventarios para calcular el food cost real. Sin esa cifra, la rentabilidad seguirá teniendo incertidumbre técnica, aunque la tendencia general ya esté clara.</p>
+      </div>
+
+      <div class="diag-block">
+        <h3>8. Mensaje final para gerencia e inversionistas</h3>
+        <p><b>MARANELLO no parece un negocio inviable, pero sí una operación que requiere intervención y control inmediato.</b> Existen señales positivas, como la capacidad comercial demostrada en algunos meses, pero la trayectoria reciente no debería mantenerse sin ajustes.</p>
+        <p>Si el negocio continúa operando con ventas cercanas a junio, sin mejorar margen ni reducir presión estructural, es probable que siga consumiendo caja y aumentando su dependencia de financiación. La situación es corregible, pero exige decisiones gerenciales y seguimiento disciplinado mes a mes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<footer>MARANELLO · Tablero Financiero Ejecutivo V3 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
+<footer>MARANELLO · Tablero Financiero Ejecutivo V5 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
 
 <dialog id="detailDialog">
  <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
@@ -393,7 +477,7 @@ function svgBarChart(values, selected){
  s+=`<line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
  values.forEach((x,i)=>{
    const bh=(x.v/max)*(H-85), xx=pad+i*(bw+gap), yy=H-35-bh;
-   const fill=(selected==="H1"||selected===x.k)?"#17365D":"#B8C4D0";
+   const fill=(selected==="H1"||selected===x.k)?"#224D8E":"#BFD6DC";
    s+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${fill}"/>`;
    s+=`<text x="${xx+bw/2}" y="${H-17}" text-anchor="middle" class="axis-label">${x.k.slice(0,3)}</text>`;
    s+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-6)}" text-anchor="middle" class="axis-label">${(x.v/1e6).toFixed(1)}</text>`;
@@ -404,8 +488,8 @@ function svgLineChart(values, selected){
  const W=760,H=260,pad=42,max=Math.max(...values.map(x=>x.v),1),min=Math.min(...values.map(x=>x.v),0),span=Math.max(max-min,1);
  const pts=values.map((x,i)=>{const xx=pad+i*((W-pad*2)/(values.length-1));const yy=25+(max-x.v)/span*(H-75);return {...x,x:xx,y:yy};});
  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de línea"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
- s+=`<polyline fill="none" stroke="#17365D" stroke-width="4" points="${pts.map(p=>p.x+","+p.y).join(" ")}"/>`;
- pts.forEach(p=>{const fill=(selected==="H1"||selected===p.k)?"#C55A11":"#17365D";s+=`<circle cx="${p.x}" cy="${p.y}" r="6" fill="${fill}"/><text x="${p.x}" y="${H-17}" text-anchor="middle" class="axis-label">${p.k.slice(0,3)}</text><text x="${p.x}" y="${p.y-10}" text-anchor="middle" class="axis-label">${(p.v/1e6).toFixed(1)}</text>`;});return s+"</svg>";
+ s+=`<polyline fill="none" stroke="#224D8E" stroke-width="4" points="${pts.map(p=>p.x+","+p.y).join(" ")}"/>`;
+ pts.forEach(p=>{const fill=(selected==="H1"||selected===p.k)?"#E96C24":"#224D8E";s+=`<circle cx="${p.x}" cy="${p.y}" r="6" fill="${fill}"/><text x="${p.x}" y="${H-17}" text-anchor="middle" class="axis-label">${p.k.slice(0,3)}</text><text x="${p.x}" y="${p.y-10}" text-anchor="middle" class="axis-label">${(p.v/1e6).toFixed(1)}</text>`;});return s+"</svg>";
 }
 function renderCharts(){
  const sales=DATA.months.map(m=>({k:m,v:DATA.monthly[m].sales}));
