@@ -3,152 +3,522 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MARANELLO | Balance de Gestión H1 2026</title>
+<title>MARANELLO | Tablero Financiero Ejecutivo H1 2026 V3</title>
 <style>
 :root{
-  --navy:#17365D; --orange:#C55A11; --cream:#F5F1E8; --light:#EDF3F8;
-  --green:#2E7D32; --green-bg:#EAF4E7; --yellow:#8A6D00; --yellow-bg:#FFF4CE;
-  --red:#A61B1B; --red-bg:#FBE7E3; --blue-bg:#DCEAF7; --ink:#20252A; --muted:#687079;
-  --border:#D9DEE4; --shadow:0 8px 24px rgba(23,54,93,.08);
+ --navy:#17365D;--navy2:#244D7B;--orange:#C55A11;--ink:#20252A;--muted:#687079;
+ --bg:#F5F7FA;--card:#FFFFFF;--border:#D8DEE6;--light:#EDF3F8;
+ --green:#256D32;--green-bg:#E8F4EA;--yellow:#806000;--yellow-bg:#FFF4CE;
+ --red:#A61B1B;--red-bg:#FBE7E3;--blue-bg:#DCEAF7;--shadow:0 8px 24px rgba(23,54,93,.08)
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#F7F8FA;color:var(--ink)}
-header{background:var(--navy);color:#fff;padding:18px 24px;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,.12)}
-.header-row{max-width:1440px;margin:auto;display:flex;gap:18px;align-items:center;justify-content:space-between}
-.brand{font-size:25px;font-weight:800;letter-spacing:.08em}.subtitle{font-size:13px;opacity:.82;margin-top:4px}
-.actions{display:flex;gap:10px;align-items:center}.btn{border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;border-radius:8px;padding:9px 12px;font-weight:700;cursor:pointer}.btn:hover{background:rgba(255,255,255,.1)}
-nav{background:white;border-bottom:1px solid var(--border);position:sticky;top:76px;z-index:15}
-.nav-inner{max-width:1440px;margin:auto;display:flex;gap:4px;padding:8px 18px;overflow:auto}
-.nav-link{border:0;background:transparent;padding:9px 12px;border-radius:8px;cursor:pointer;font-weight:700;color:var(--navy);white-space:nowrap}.nav-link.active,.nav-link:hover{background:var(--light)}
-main{max-width:1440px;margin:0 auto;padding:22px}
-.notice{background:var(--yellow-bg);border:1px solid #E2CF82;color:#5F4C00;padding:13px 15px;border-radius:10px;font-weight:700;margin-bottom:18px}
-.grid{display:grid;gap:14px}.kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
-.card{background:white;border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
-.card h3{margin:0 0 8px;font-size:13px;color:var(--navy)}.kpi-value{font-size:28px;font-weight:800;letter-spacing:-.02em}.kpi-sub{font-size:12px;color:var(--muted);margin-top:6px}.status{display:inline-block;margin-top:9px;padding:4px 7px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.03em}
-.status.ok{background:var(--green-bg);color:var(--green)}.status.prov{background:var(--yellow-bg);color:var(--yellow)}.status.pending{background:var(--red-bg);color:var(--red)}.status.sens{background:var(--blue-bg);color:var(--navy)}
-.section{scroll-margin-top:145px;margin:26px 0}.section-title{display:flex;align-items:end;justify-content:space-between;margin:0 0 12px}.section-title h2{margin:0;color:var(--navy);font-size:22px}.section-title p{margin:0;color:var(--muted);font-size:12px}
-.two{grid-template-columns:1.25fr .75fr}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.four{grid-template-columns:repeat(4,minmax(0,1fr))}
-.chart{min-height:320px}.chart svg{width:100%;height:290px;display:block}.axis-label{fill:#66717B;font-size:11px}.chart-title{font-size:13px;font-weight:800;color:var(--navy);margin-bottom:8px}
-.bar-row{display:grid;grid-template-columns:180px 1fr 95px;gap:10px;align-items:center;margin:10px 0}.bar-track{height:12px;background:#EDF0F3;border-radius:999px;overflow:hidden}.bar-fill{height:100%;background:var(--navy);border-radius:999px}.bar-label{font-size:12px}.bar-val{text-align:right;font-size:12px;font-weight:800}
-.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th{background:var(--navy);color:white;text-align:left;padding:9px}.table td{padding:9px;border-bottom:1px solid var(--border);vertical-align:top}.table tr:last-child td{border-bottom:0}.num{text-align:right;font-variant-numeric:tabular-nums}
-.metric-row{display:grid;grid-template-columns:1fr auto;gap:15px;padding:11px 0;border-bottom:1px solid var(--border)}.metric-row:last-child{border-bottom:0}.metric-row b{color:var(--navy)}
-.callout{padding:14px;border-radius:10px;background:var(--light);border-left:5px solid var(--navy);font-size:13px;line-height:1.45}.callout.warning{background:var(--yellow-bg);border-left-color:#C99E00}.callout.danger{background:var(--red-bg);border-left-color:var(--red)}
-.scenario{border-top:5px solid var(--navy)}.scenario.negative{border-top-color:var(--red)}.scenario strong{font-size:25px}.scenario p{font-size:12px;color:var(--muted);line-height:1.45}
-.method-step{display:flex;gap:12px;align-items:flex-start}.step-num{flex:0 0 30px;height:30px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800}.method-step h4{margin:0 0 5px;color:var(--navy)}.method-step p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}
-.priority{font-weight:800}.priority.critical{color:var(--red)}.priority.high{color:#9A6500}.priority.medium{color:var(--navy)}
-footer{max-width:1440px;margin:0 auto;padding:10px 22px 34px;color:var(--muted);font-size:11px}
-@media(max-width:1150px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three,.four{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){header{position:static}nav{top:0}.kpis,.two,.three,.four{grid-template-columns:1fr}.header-row{align-items:flex-start}.actions{display:none}.bar-row{grid-template-columns:120px 1fr 80px}main{padding:14px}.section-title{align-items:flex-start;gap:6px;flex-direction:column}}
-@media print{header,nav,.actions{display:none!important}body{background:white}main{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}.section{break-inside:avoid;page-break-inside:avoid}.notice{break-inside:avoid}}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+button,select,input{font:inherit}
+header{background:var(--navy);color:#fff;padding:16px 22px;position:sticky;top:0;z-index:30;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.header-row{max-width:1480px;margin:auto;display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{font-size:24px;font-weight:900;letter-spacing:.08em} .subtitle{font-size:12px;opacity:.82;margin-top:4px}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid rgba(255,255,255,.45);background:transparent;color:#fff;padding:8px 11px;border-radius:8px;font-weight:700;cursor:pointer}
+.btn:hover{background:rgba(255,255,255,.1)}
+nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:71px;z-index:25}
+.nav-inner{max-width:1480px;margin:auto;display:flex;gap:4px;padding:8px 14px;overflow:auto}
+.nav-link{border:0;background:transparent;padding:9px 11px;border-radius:8px;cursor:pointer;font-weight:800;color:var(--navy);white-space:nowrap}
+.nav-link.active,.nav-link:hover{background:var(--light)}
+main{max-width:1480px;margin:auto;padding:18px}
+.controlbar{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:13px;padding:12px;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:14px}
+.field label{display:block;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 5px}
+.field select,.field input{width:100%;min-height:40px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:8px;color:var(--ink)}
+.mode-group{display:flex;gap:6px;align-items:center;min-height:40px}
+.mode-btn{border:1px solid var(--border);background:#fff;color:var(--navy);font-weight:800;border-radius:8px;padding:9px 11px;cursor:pointer}
+.mode-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.coverage{padding:11px 13px;border-radius:10px;background:var(--blue-bg);color:var(--navy);font-size:12px;line-height:1.4;margin-bottom:14px}
+.coverage.warn{background:var(--yellow-bg);color:#684F00}
+.notice{background:var(--yellow-bg);border:1px solid #E5D18A;color:#5F4C00;padding:12px 14px;border-radius:10px;font-weight:700;margin-bottom:14px;font-size:12px;line-height:1.45}
+.section{display:none} .section.active{display:block}
+.section-title{display:flex;justify-content:space-between;gap:15px;align-items:end;margin:6px 0 12px}
+.section-title h2{margin:0;color:var(--navy);font-size:22px} .section-title p{margin:0;color:var(--muted);font-size:12px}
+.grid{display:grid;gap:13px} .kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
+.two{grid-template-columns:1.2fr .8fr} .three{grid-template-columns:repeat(3,minmax(0,1fr))} .four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px;box-shadow:var(--shadow);min-width:0}
+.card.clickable{cursor:pointer;transition:transform .12s ease,border-color .12s ease}
+.card.clickable:hover{transform:translateY(-2px);border-color:#AAB6C3}
+.card h3{margin:0 0 7px;font-size:13px;color:var(--navy)} .kpi-value{font-size:27px;font-weight:900;letter-spacing:-.02em}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35}
+.status{display:inline-block;margin-top:8px;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
+.status.confirmado{background:var(--green-bg);color:var(--green)} .status.provisional{background:var(--yellow-bg);color:var(--yellow)}
+.status.pendiente{background:var(--red-bg);color:var(--red)} .status.sensibilidad{background:var(--blue-bg);color:var(--navy)}
+.metric-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px}
+.metric-row:last-child{border-bottom:0} .metric-row b{color:var(--navy)}
+.callout{padding:13px;border-radius:10px;background:var(--light);border-left:5px solid var(--navy);font-size:12px;line-height:1.45}
+.callout.danger{background:var(--red-bg);border-left-color:var(--red)} .callout.warning{background:var(--yellow-bg);border-left-color:#C99E00}
+.table-wrap{overflow:auto} table{width:100%;border-collapse:collapse;font-size:11px} th{background:var(--navy);color:#fff;text-align:left;padding:8px;white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top} tr:last-child td{border-bottom:0} .num{text-align:right;font-variant-numeric:tabular-nums}
+.chart{min-height:300px} .chart-title{font-size:12px;font-weight:900;color:var(--navy);margin-bottom:8px}
+svg{display:block;width:100%;height:auto} .axis-label{fill:#66717B;font-size:10px} .bar-label{font-size:10px;fill:#334}
+.category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.category-btn{border:1px solid var(--border);background:#fff;border-radius:11px;padding:13px;text-align:left;cursor:pointer;min-height:110px}
+.category-btn:hover,.category-btn.active{border-color:var(--navy);background:var(--light)} .category-btn b{display:block;color:var(--navy);font-size:12px;line-height:1.3}
+.category-btn strong{display:block;font-size:22px;margin-top:8px;color:var(--ink)} .category-btn small{display:block;margin-top:5px;color:var(--muted)}
+.detail-panel{margin-top:10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
+.pill-row{display:flex;gap:6px;flex-wrap:wrap} .filter-pill{border:1px solid var(--border);background:#fff;color:var(--navy);padding:7px 10px;border-radius:999px;font-size:10px;font-weight:800;cursor:pointer}
+.filter-pill.active{background:var(--navy);color:#fff}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:12px}
+.delta.negative{color:var(--red);font-weight:900} .delta.positive{color:var(--green);font-weight:900}
+.sim-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px} .sim-output{background:var(--light);border-radius:10px;padding:12px}
+.sim-output span{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:800} .sim-output strong{display:block;margin-top:5px;font-size:20px;color:var(--navy)}
+.gauge-row{display:grid;grid-template-columns:170px 1fr 100px;gap:10px;align-items:center;margin:9px 0;font-size:11px}
+.gauge-track{height:10px;border-radius:999px;background:#E9EDF1;overflow:hidden} .gauge-fill{height:100%;border-radius:999px;background:var(--navy)}
+.traffic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px} .traffic-item{border:1px solid var(--border);border-radius:10px;background:#fff;padding:11px}
+.traffic-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px} .traffic-dot.red{background:#B52B2B} .traffic-dot.yellow{background:#C89A00} .traffic-dot.green{background:#2E7D32}
+.traffic-item b{display:block;color:var(--navy);font-size:12px;margin-top:6px} .traffic-item small{display:block;color:var(--muted);margin-top:4px;line-height:1.35}
+.report-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:20px;box-shadow:var(--shadow)} .report-hero h3{margin:0 0 8px;font-size:20px} .report-hero p{margin:0;font-size:12px;line-height:1.55}
+.tech-only{display:none} body.tech-mode .tech-only{display:block}
+body.tech-mode .exec-only{display:none}
+dialog{border:0;border-radius:14px;max-width:820px;width:calc(100% - 28px);padding:0;box-shadow:0 20px 70px rgba(0,0,0,.25)} dialog::backdrop{background:rgba(17,29,43,.55)}
+.modal-head{background:var(--navy);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;gap:10px;align-items:center} .modal-head h3{margin:0;font-size:15px}
+.modal-close{border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;border-radius:8px;padding:6px 9px;cursor:pointer} .modal-body{padding:16px;max-height:70vh;overflow:auto}
+.empty{color:var(--muted);font-size:12px;padding:18px;text-align:center}
+footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);font-size:10px}
+@media(max-width:1150px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three,.four{grid-template-columns:1fr 1fr}.category-grid{grid-template-columns:1fr 1fr}.traffic{grid-template-columns:repeat(3,1fr)}.controlbar{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){header{position:static}nav{top:0}main{padding:12px}.kpis,.two,.three,.four,.category-grid,.traffic,.sim-grid,.controlbar,.compare-grid{grid-template-columns:1fr}.header-row{align-items:flex-start}.header-actions{display:none}.gauge-row{grid-template-columns:120px 1fr 80px}}
+@media print{header,nav,.controlbar,.header-actions,dialog{display:none!important}body{background:#fff}.section{display:block!important;page-break-inside:auto}.card{box-shadow:none;break-inside:avoid}}
 </style>
 </head>
 <body>
-<header><div class="header-row"><div><div class="brand">MARANELLO</div><div class="subtitle">Balance de Gestión | Enero - junio 2026 | Corte 30-jun-2026</div></div><div class="actions"><button class="btn" onclick="window.print()">Imprimir / PDF</button></div></div></header>
-<nav><div class="nav-inner">
-<button class="nav-link active" data-target="resumen">Resumen</button><button class="nav-link" data-target="ventas">Ventas</button><button class="nav-link" data-target="costos">Costos y gastos</button><button class="nav-link" data-target="caja">Caja</button><button class="nav-link" data-target="balance">Balance parcial</button><button class="nav-link" data-target="resultado">Resultado</button><button class="nav-link" data-target="metodologia">Metodología</button><button class="nav-link" data-target="pendientes">Pendientes</button>
+<header>
+ <div class="header-row">
+  <div><div class="brand">MARANELLO</div><div class="subtitle">Tablero Financiero Ejecutivo V3 | H1 2026 | Corte 30-jun-2026</div></div>
+  <div class="header-actions"><button class="btn" id="resetBtn">Restablecer</button><button class="btn" onclick="window.print()">Imprimir / PDF</button></div>
+ </div>
+</header>
+<nav><div class="nav-inner" id="nav">
+ <button class="nav-link active" data-tab="resumen">Resumen</button>
+ <button class="nav-link" data-tab="ventas">Ventas</button>
+ <button class="nav-link" data-tab="costos">Costos y gastos</button>
+ <button class="nav-link" data-tab="nomina">Nómina</button>
+ <button class="nav-link" data-tab="caja">Caja</button>
+ <button class="nav-link" data-tab="balance">Balance parcial</button>
+ <button class="nav-link" data-tab="resultado">Resultado</button>
+ <button class="nav-link" data-tab="metodologia">Metodología</button>
+ <button class="nav-link" data-tab="pendientes">Pendientes</button>
+ <button class="nav-link" data-tab="diagnostico">Diagnóstico</button>
 </div></nav>
+
 <main>
-<div class="notice">Resultado definitivo: PENDIENTE. La utilidad real depende principalmente del inventario inicial/final y de la depuración laboral. Las cifras de resultado negativo que aparecen abajo son sensibilidades de gestión, no estados financieros certificados.</div>
+ <div class="controlbar">
+  <div class="field"><label>Periodo</label><select id="periodSelect"><option value="H1">H1 Ene-Jun</option></select></div>
+  <div class="field"><label>Sede</label><select id="siteSelect"><option value="CONSOLIDADO">Consolidado</option><option value="JP">Jardín Plaza</option><option value="PP">Parque del Perro / Patio 34</option></select></div>
+  <div class="field"><label>Nivel de certeza</label><select id="statusSelect"><option value="todos">Todos</option><option value="confirmado">Confirmado</option><option value="provisional">Provisional</option><option value="pendiente">Pendiente</option><option value="sensibilidad">Sensibilidad</option></select></div>
+  <div><label style="display:block;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;margin-bottom:5px">Vista</label><div class="mode-group"><button class="mode-btn active" data-mode="exec">Ejecutiva</button><button class="mode-btn" data-mode="tech">Técnica</button></div></div>
+ </div>
+ <div id="coverageBanner" class="coverage"></div>
+ <div class="notice">Metodología: fuente → depuración → anti-duplicación → clasificación → causación vs caja → conciliación → nivel de certeza. El tablero no convierte compras en COGS ni pagos en gasto sin soporte metodológico.</div>
 
-<section id="resumen" class="section">
-<div class="section-title"><h2>Resumen ejecutivo</h2><p>Lectura en 20 segundos</p></div>
-<div class="grid kpis">
-<div class="card"><h3>Ventas netas H1</h3><div class="kpi-value">$376,38 M</div><div class="kpi-sub">Promedio: $62,73 M/mes</div><span class="status ok">CONFIRMADO</span></div>
-<div class="card"><h3>Variación ene-jun</h3><div class="kpi-value">-36,3 %</div><div class="kpi-sub">Junio vs enero</div><span class="status pending">ALERTA</span></div>
-<div class="card"><h3>Gastos operativos</h3><div class="kpi-value">$119,92 M</div><div class="kpi-sub">31,9 % de ventas</div><span class="status prov">PROVISIONAL</span></div>
-<div class="card"><h3>Nómina fuente</h3><div class="kpi-value">$157,52 M</div><div class="kpi-sub">41,9 % de ventas</div><span class="status prov">PROVISIONAL</span></div>
-<div class="card"><h3>Compras inventariables</h3><div class="kpi-value">$121,36 M</div><div class="kpi-sub">No es COGS definitivo</div><span class="status pending">PENDIENTE</span></div>
-<div class="card"><h3>Caja empresa 30-jun</h3><div class="kpi-value">$1,85 M</div><div class="kpi-sub">-93,0 % vs saldo inicial</div><span class="status ok">CONFIRMADO</span></div>
-</div>
-<div class="grid two" style="margin-top:14px">
-<div class="card"><div class="chart-title">Lectura central</div><div class="callout danger"><b>La operación muestra presión comercial y financiera.</b><br>Las ventas caen durante el semestre, mientras la estructura laboral y operativa conserva un peso alto. La cuenta empresarial pierde la mayor parte de su saldo inicial y en mayo se incorpora financiación bancaria.</div></div>
-<div class="card"><div class="chart-title">Estados de la información</div><div class="metric-row"><span><span class="status ok">CONFIRMADO</span></span><span>Soportado y conciliado</span></div><div class="metric-row"><span><span class="status prov">PROVISIONAL</span></span><span>Soportado; requiere ajuste</span></div><div class="metric-row"><span><span class="status pending">PENDIENTE</span></span><span>Falta dato o política</span></div><div class="metric-row"><span><span class="status sens">SENSIBILIDAD</span></span><span>Escenario, no cifra contable</span></div></div>
-</div>
-</section>
+ <section id="resumen" class="section active">
+  <div class="section-title"><h2>Resumen ejecutivo</h2><p id="periodLabel">H1 enero-junio 2026</p></div>
+  <div class="grid kpis" id="kpiGrid">
+   <div class="card clickable" data-kpi="sales" data-status="confirmado"><h3>Ventas netas</h3><div class="kpi-value" id="kSales">—</div><div class="kpi-sub" id="kSalesSub"></div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card clickable" data-kpi="trend" data-status="confirmado"><h3>Tendencia comercial</h3><div class="kpi-value" id="kTrend">—</div><div class="kpi-sub">Variación enero → junio</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card clickable" data-kpi="opex" data-status="provisional"><h3>Gastos operativos</h3><div class="kpi-value" id="kOpex">—</div><div class="kpi-sub" id="kOpexSub"></div><span class="status provisional">PROVISIONAL</span></div>
+   <div class="card clickable" data-kpi="payroll" data-status="provisional"><h3>Nómina fuente</h3><div class="kpi-value" id="kPayroll">—</div><div class="kpi-sub" id="kPayrollSub"></div><span class="status provisional">PROVISIONAL</span></div>
+   <div class="card clickable" data-kpi="inventory" data-status="pendiente"><h3>Compras inventariables</h3><div class="kpi-value" id="kInventory">—</div><div class="kpi-sub">No es COGS definitivo</div><span class="status pendiente">PENDIENTE</span></div>
+   <div class="card clickable" data-kpi="cash" data-status="confirmado"><h3>Caja empresa</h3><div class="kpi-value" id="kCash">—</div><div class="kpi-sub" id="kCashSub"></div><span class="status confirmado">CONFIRMADO</span></div>
+  </div>
 
-<section id="ventas" class="section">
-<div class="section-title"><h2>Ventas</h2><p>Ventas netas sin impuestos</p></div>
-<div class="grid two">
-<div class="card chart"><div class="chart-title">Ventas netas mensuales (millones COP)</div><svg id="salesChart" viewBox="0 0 760 290" aria-label="Ventas mensuales"></svg></div>
-<div class="card"><h3>Indicadores comerciales</h3><div class="metric-row"><span>Ventas H1</span><b>$376,38 M</b></div><div class="metric-row"><span>Promedio mensual</span><b>$62,73 M</b></div><div class="metric-row"><span>Enero</span><b>$75,41 M</b></div><div class="metric-row"><span>Junio</span><b>$48,07 M</b></div><div class="metric-row"><span>Caída enero → junio</span><b>-36,3 %</b></div><div class="metric-row"><span>Facturas H1</span><b>9.341</b></div><div class="callout warning" style="margin-top:12px">La caída comercial incrementa la presión sobre costos fijos y laborales que no se reducen en la misma proporción.</div></div>
-</div>
-</section>
+  <div class="card" style="margin-top:13px">
+   <h3>Semáforo gerencial</h3>
+   <div class="traffic">
+    <div class="traffic-item"><span class="traffic-dot red"></span>Ventas<b>Deterioro</b><small>Junio 36,3 % por debajo de enero.</small></div>
+    <div class="traffic-item"><span class="traffic-dot red"></span>Nómina<b>Alta</b><small>41,9 % de ventas antes de depuración.</small></div>
+    <div class="traffic-item"><span class="traffic-dot yellow"></span>Insumos<b>Por cerrar</b><small>Faltan inventarios para COGS real.</small></div>
+    <div class="traffic-item"><span class="traffic-dot red"></span>Liquidez<b>Tensionada</b><small>Cuenta empresa termina en $1,85 M.</small></div>
+    <div class="traffic-item"><span class="traffic-dot green"></span>Impuestos<b>Controlados</b><small>Pasivos y anticipos identificados.</small></div>
+    <div class="traffic-item"><span class="traffic-dot yellow"></span>Financiación<b>En aumento</b><small>Crédito bancario y APE presionan estructura financiera.</small></div>
+   </div>
+  </div>
 
-<section id="costos" class="section">
-<div class="section-title"><h2>Costos y gastos</h2><p>No mezclar inventario, gasto y nómina</p></div>
-<div class="grid two">
-<div class="card"><div class="chart-title">Peso frente a ventas</div>
-<div class="bar-row"><div class="bar-label">Nómina fuente</div><div class="bar-track"><div class="bar-fill" style="width:41.9%"></div></div><div class="bar-val">41,9 %</div></div>
-<div class="bar-row"><div class="bar-label">Compras inventariables</div><div class="bar-track"><div class="bar-fill" style="width:32.2%"></div></div><div class="bar-val">32,2 %</div></div>
-<div class="bar-row"><div class="bar-label">Gastos operativos</div><div class="bar-track"><div class="bar-fill" style="width:31.9%"></div></div><div class="bar-val">31,9 %</div></div>
-<div class="bar-row"><div class="bar-label">Costos financieros conocidos</div><div class="bar-track"><div class="bar-fill" style="width:1.6%"></div></div><div class="bar-val">1,6 %</div></div>
-<div class="callout warning" style="margin-top:14px"><b>Compras inventariables ≠ costo de ventas.</b> El COGS real requiere inventario inicial + compras - inventario final.</div></div>
-<div class="card"><h3>Control laboral</h3><div class="metric-row"><span>Universo hoja nómina H1</span><b>$157,52 M</b></div><div class="metric-row"><span>Personas con pagos por mes</span><b>13-15</b></div><div class="metric-row"><span>Empleados PILA</span><b>7</b></div><div class="callout danger" style="margin-top:12px"><b>Prioridad:</b> depurar empleado formal, turnero, ocasional, reembolso u otro concepto antes de cerrar el gasto laboral definitivo.</div></div>
-</div>
-</section>
+  <div class="grid two" style="margin-top:13px">
+   <div class="card chart"><div class="chart-title">Ventas mensuales</div><div id="salesChart"></div></div>
+   <div class="card">
+    <h3>Lectura rápida</h3>
+    <div class="metric-row"><span>Promedio mensual de ventas H1</span><b>$62,73 M</b></div>
+    <div class="metric-row"><span>Punto de equilibrio operativo estimado</span><b>≈ $68,2 M/mes</b></div>
+    <div class="metric-row"><span>Con costos financieros conocidos</span><b>≈ $69,7 M/mes</b></div>
+    <div class="metric-row"><span>Brecha de junio vs equilibrio operativo</span><b>≈ $20,2 M</b></div>
+    <div class="callout danger" style="margin-top:10px"><b>Señal:</b> mantener ventas cercanas a junio sin ajuste de costos implica continuar consumiendo liquidez.</div>
+   </div>
+  </div>
+ </section>
 
-<section id="caja" class="section">
-<div class="section-title"><h2>Caja y liquidez</h2><p>Cuenta empresarial principal</p></div>
-<div class="grid two">
-<div class="card chart"><div class="chart-title">Saldo final mensual (millones COP)</div><svg id="cashChart" viewBox="0 0 760 290" aria-label="Saldo bancario mensual"></svg></div>
-<div class="card"><h3>Cuenta empresarial</h3><div class="metric-row"><span>Saldo inicial</span><b>$26,59 M</b></div><div class="metric-row"><span>Abonos H1</span><b>$283,46 M</b></div><div class="metric-row"><span>Cargos H1</span><b>$308,20 M</b></div><div class="metric-row"><span>Saldo 30-jun</span><b>$1,85 M</b></div><div class="metric-row"><span>Variación saldo</span><b>-93,0 %</b></div><div class="callout danger" style="margin-top:12px">La presión de caja es real. Sin embargo, el flujo consolidado total sigue parcial porque existen movimientos empresariales en cuentas relacionadas.</div></div>
-</div>
-</section>
+ <section id="ventas" class="section">
+  <div class="section-title"><h2>Ventas y comparación de períodos</h2><p>Comparador dinámico</p></div>
+  <div class="card">
+   <div class="compare-grid">
+    <div class="field"><label>Periodo A</label><select id="compareA"></select></div>
+    <div class="field"><label>Periodo B</label><select id="compareB"></select></div>
+    <button class="mode-btn" id="swapCompare">Intercambiar</button>
+   </div>
+   <div id="compareTable"></div>
+  </div>
+  <div class="grid two" style="margin-top:13px">
+   <div class="card chart"><div class="chart-title">Ventas netas por mes</div><div id="salesChart2"></div></div>
+   <div class="card">
+    <h3>Indicadores comerciales</h3>
+    <div class="metric-row"><span>Ventas netas H1</span><b>$376,38 M</b></div>
+    <div class="metric-row"><span>Documentos de venta H1</span><b>$401,43 M</b></div>
+    <div class="metric-row"><span>Facturas</span><b>9.341</b></div>
+    <div class="metric-row"><span>Control “Por Pagar” fuente</span><b>$3,81 M</b></div>
+    <div class="callout warning" style="margin-top:10px">Los $3,81 M son un control comercial; no se reconocen automáticamente como cuenta por cobrar hasta conciliarlos con caja/bancos.</div>
+   </div>
+  </div>
+ </section>
 
-<section id="balance" class="section">
-<div class="section-title"><h2>Balance parcial al 30 de junio</h2><p>Solo partidas confirmadas o claramente identificadas</p></div>
-<div class="grid two">
-<div class="card"><h3>Activos conocidos</h3><div class="metric-row"><span>Caja Bancolombia empresa</span><b>$1,85 M</b></div><div class="metric-row"><span>Anticipos tributarios</span><b>$4,47 M</b></div><div class="metric-row"><span>Subtotal conocido</span><b>$6,32 M</b></div><div class="callout warning">No incluye inventario, caja/cuentas relacionadas ni posibles cuentas por cobrar todavía no conciliadas.</div></div>
-<div class="card"><h3>Pasivos conocidos</h3><div class="metric-row"><span>Pasivos tributarios</span><b>$9,63 M</b></div><div class="metric-row"><span>Crédito Bancolombia - capital</span><b>$26,27 M</b></div><div class="metric-row"><span>Subtotal conocido</span><b>$35,90 M</b></div><div class="callout warning">No incluye clasificación definitiva del instrumento APE ni cuentas por pagar completas. Este subtotal NO representa patrimonio.</div></div>
-</div>
-<div class="card" style="margin-top:14px"><div class="table-wrap"><table class="table"><thead><tr><th>Partida pendiente de balance</th><th>Valor / estado</th><th>Lectura</th></tr></thead><tbody><tr><td>Inventario final 30-jun</td><td><span class="status pending">CRÍTICO</span></td><td>Necesario para COGS y activo corriente.</td></tr><tr><td>Instrumento APE inversionistas</td><td>$132,09 M</td><td>Saldo económico; clasificación pasivo/patrimonio pendiente.</td></tr><tr><td>Ventas marcadas “Por Pagar”</td><td>$3,81 M</td><td>No reconocer CxC hasta conciliación de recaudo.</td></tr><tr><td>Activos/software en política</td><td>$2,02 M</td><td>Definir gasto vs capitalización.</td></tr></tbody></table></div></div>
-</section>
+ <section id="costos" class="section">
+  <div class="section-title"><h2>Costos y gastos</h2><p>Clic en una categoría para desplegar detalle</p></div>
+  <div id="categoryGrid" class="category-grid"></div>
+  <div id="categoryDetail" class="detail-panel"></div>
+  <div class="card tech-only" style="margin-top:13px">
+   <h3>Principales proveedores / contrapartes documentales</h3><div id="providerTable"></div>
+  </div>
+ </section>
 
-<section id="resultado" class="section">
-<div class="section-title"><h2>Resultado provisional</h2><p>Sensibilidades de gestión</p></div>
-<div class="grid three">
-<div class="card scenario negative"><h3>Escenario base</h3><strong>-$28,39 M</strong><p>Inventario inicial = inventario final y sin reconocer interés APE. Margen aproximado: -7,5 %.</p><span class="status sens">SENSIBILIDAD</span></div>
-<div class="card scenario negative"><h3>Con interés APE candidato</h3><strong>-$33,75 M</strong><p>Mismo supuesto de inventario, incorporando $5,36 M del componente financiero APE ene-abr. Margen: -9,0 %.</p><span class="status sens">SENSIBILIDAD</span></div>
-<div class="card scenario"><h3>Inventario para equilibrio</h3><strong>+$28,39 M</strong><p>El inventario final tendría que superar al inicial en aproximadamente este valor para llevar el escenario base a cero.</p><span class="status sens">SENSIBILIDAD</span></div>
-</div>
-<div class="callout warning" style="margin-top:14px"><b>Resultado definitivo: PENDIENTE.</b> El inventario real y la depuración de nómina pueden cambiar materialmente estas cifras.</div>
-</section>
+ <section id="nomina" class="section">
+  <div class="section-title"><h2>Nómina y carga laboral</h2><p>Detalle agregado, sin exponer datos personales</p></div>
+  <div class="grid four">
+   <div class="card"><h3>Nómina fuente H1</h3><div class="kpi-value">$157,52 M</div><div class="kpi-sub">41,9 % de ventas</div><span class="status provisional">PROVISIONAL</span></div>
+   <div class="card"><h3>PILA periodos H1</h3><div class="kpi-value">$17,85 M</div><div class="kpi-sub">No sumar íntegramente sobre nómina</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card"><h3>Personas con pago</h3><div class="kpi-value">13–15</div><div class="kpi-sub">Según mes</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card"><h3>Empleados PILA</h3><div class="kpi-value">7</div><div class="kpi-sub">Control de vinculación formal</div><span class="status confirmado">CONFIRMADO</span></div>
+  </div>
+  <div class="grid two" style="margin-top:13px">
+   <div class="card"><h3>Nómina mensual</h3><div id="payrollTable"></div></div>
+   <div class="card"><h3>Patrón de pagos H1</h3><div id="payrollPattern"></div><div class="callout warning" style="margin-top:10px">Frecuencia de pago no equivale a clasificación jurídica. El objetivo es identificar el costo laboral real del H1 sin duplicaciones.</div></div>
+  </div>
+ </section>
 
-<section id="metodologia" class="section">
-<div class="section-title"><h2>Metodología</h2><p>La misma lógica utilizada en las Fases 1-9</p></div>
-<div class="grid three">
-<div class="card method-step"><div class="step-num">1</div><div><h4>Fuentes originales</h4><p>Ventas, UBL, correo, WhatsApp, nómina, PILA, bancos, impuestos, inversionistas y crédito.</p></div></div>
-<div class="card method-step"><div class="step-num">2</div><div><h4>Depuración</h4><p>Duplicados, notas crédito, comprobantes, periodos anteriores y transferencias se separan.</p></div></div>
-<div class="card method-step"><div class="step-num">3</div><div><h4>Clasificación</h4><p>Ingreso, inventario, gasto, nómina, activo/pasivo tributario, financiación o pendiente.</p></div></div>
-<div class="card method-step"><div class="step-num">4</div><div><h4>Causación vs caja</h4><p>El periodo económico se distingue de la fecha real de pago.</p></div></div>
-<div class="card method-step"><div class="step-num">5</div><div><h4>Conciliación</h4><p>Banco valida caja; no crea un gasto duplicado si la obligación ya existe.</p></div></div>
-<div class="card method-step"><div class="step-num">6</div><div><h4>Nivel de certeza</h4><p>Confirmado, Provisional, Pendiente o Sensibilidad.</p></div></div>
-</div>
-</section>
+ <section id="caja" class="section">
+  <div class="section-title"><h2>Caja y liquidez</h2><p>Cuenta empresarial completa; relacionadas parciales</p></div>
+  <div class="grid kpis">
+   <div class="card" data-status="confirmado"><h3>Saldo inicial</h3><div class="kpi-value">$26,59 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Abonos H1</h3><div class="kpi-value">$283,46 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Cargos H1</h3><div class="kpi-value">$308,20 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Saldo 30-jun</h3><div class="kpi-value">$1,85 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Crédito neto recibido</h3><div class="kpi-value">$25,40 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="pendiente"><h3>Cuentas relacionadas</h3><div class="kpi-value">Parcial</div><span class="status pendiente">PENDIENTE</span></div>
+  </div>
+  <div class="card chart" style="margin-top:13px"><div class="chart-title">Saldo final de la cuenta empresarial</div><div id="cashChart"></div></div>
+ </section>
 
-<section id="pendientes" class="section">
-<div class="section-title"><h2>Pendientes críticos</h2><p>Ruta para cerrar la utilidad real</p></div>
-<div class="card"><div class="table-wrap"><table class="table"><thead><tr><th>Prioridad</th><th>Pendiente</th><th>Impacto</th><th>Acción</th></tr></thead><tbody>
-<tr><td class="priority critical">CRÍTICO</td><td>Inventario inicial 01-ene-2026</td><td>COGS / utilidad bruta</td><td>Obtener inventario valorizado.</td></tr>
-<tr><td class="priority critical">CRÍTICO</td><td>Inventario final 30-jun-2026</td><td>COGS / balance</td><td>Obtener inventario valorizado.</td></tr>
-<tr><td class="priority high">ALTO</td><td>Depuración laboral</td><td>PyG laboral</td><td>Clasificar pagos por persona/concepto.</td></tr>
-<tr><td class="priority high">ALTO</td><td>Tratamiento APE</td><td>Financiación / balance / PyG</td><td>Definir instrumento y componente financiero.</td></tr>
-<tr><td class="priority high">ALTO</td><td>$7,79 M partidas mixtas</td><td>PyG / COGS / activo</td><td>Revisión documental.</td></tr>
-<tr><td class="priority high">ALTO</td><td>$2,02 M activos/política</td><td>PyG / activo</td><td>Definir gasto vs capitalización.</td></tr>
-<tr><td class="priority medium">MEDIO</td><td>IVA descontable</td><td>PyG / activo tributario</td><td>Reconstruir saldo recuperable.</td></tr>
-<tr><td class="priority medium">MEDIO</td><td>Cuentas relacionadas Q1 / tarjetas</td><td>Flujo de caja</td><td>Completar saldos y movimientos empresariales.</td></tr>
-</tbody></table></div></div>
-</section>
+ <section id="balance" class="section">
+  <div class="section-title"><h2>Posición financiera parcial</h2><p>No es balance general certificado</p></div>
+  <div class="grid two">
+   <div class="card">
+    <h3>Activos conocidos</h3>
+    <div class="metric-row"><span>Caja Bancolombia empresa</span><b>$1,85 M</b></div>
+    <div class="metric-row"><span>Anticipos tributarios</span><b>$4,47 M</b></div>
+    <div class="metric-row"><span>Inventario 30-jun</span><b>PENDIENTE</b></div>
+    <div class="metric-row"><span>Ventas “Por Pagar”</span><b>$3,81 M control</b></div>
+   </div>
+   <div class="card">
+    <h3>Pasivos / financiación conocidos</h3>
+    <div class="metric-row"><span>Pasivos tributarios</span><b>$9,63 M</b></div>
+    <div class="metric-row"><span>Crédito Bancolombia capital</span><b>$26,27 M</b></div>
+    <div class="metric-row"><span>Saldo económico APE</span><b>$132,09 M</b></div>
+    <div class="metric-row"><span>Cuotas APE may-jun programadas</span><b>$9,88 M</b></div>
+   </div>
+  </div>
+  <div class="callout warning" style="margin-top:13px">El instrumento APE no se clasifica definitivamente como pasivo o patrimonio en este tablero. Las cuotas mayo-junio son subconjunto del plan y no se suman nuevamente al saldo económico.</div>
+ </section>
+
+ <section id="resultado" class="section">
+  <div class="section-title"><h2>Resultado y simulador de inventario</h2><p>Herramienta de sensibilidad gerencial</p></div>
+  <div class="card">
+   <h3>Simulador</h3>
+   <div class="sim-grid">
+    <div class="field"><label>Inventario inicial</label><input type="number" id="invInitial" min="0" step="100000" placeholder="Ej. 10000000"></div>
+    <div class="field"><label>Inventario final</label><input type="number" id="invFinal" min="0" step="100000" placeholder="Ej. 20000000"></div>
+    <div class="field"><label>Reconocer interés APE</label><select id="apeToggle"><option value="0">No</option><option value="1">Sí, $5,36 M candidato</option></select></div>
+    <button class="mode-btn" id="simReset">Limpiar simulador</button>
+   </div>
+   <div class="sim-grid" style="margin-top:11px">
+    <div class="sim-output"><span>Costo de ventas calculado</span><strong id="simCogs">Pendiente</strong></div>
+    <div class="sim-output"><span>Margen bruto</span><strong id="simGross">Pendiente</strong></div>
+    <div class="sim-output"><span>Resultado antes renta</span><strong id="simResult">Pendiente</strong></div>
+    <div class="sim-output"><span>Margen resultado</span><strong id="simMargin">Pendiente</strong></div>
+   </div>
+   <div id="simMessage" class="callout warning" style="margin-top:11px">Ingrese inventario inicial y final. Fórmula: COGS = inventario inicial + compras inventariables − inventario final.</div>
+  </div>
+  <div class="grid three" style="margin-top:13px">
+   <div class="card" data-status="sensibilidad"><h3>Inventario inicial = final</h3><div class="kpi-value" style="color:var(--red)">-$28,39 M</div><div class="kpi-sub">Sin interés APE</div><span class="status sensibilidad">SENSIBILIDAD</span></div>
+   <div class="card" data-status="sensibilidad"><h3>Con interés APE candidato</h3><div class="kpi-value" style="color:var(--red)">-$33,75 M</div><div class="kpi-sub">Escenario más exigente</div><span class="status sensibilidad">SENSIBILIDAD</span></div>
+   <div class="card" data-status="sensibilidad"><h3>Δ inventario para equilibrio</h3><div class="kpi-value">+$28,39 M</div><div class="kpi-sub">Sin interés APE</div><span class="status sensibilidad">SENSIBILIDAD</span></div>
+  </div>
+ </section>
+
+ <section id="metodologia" class="section">
+  <div class="section-title"><h2>Metodología y certeza</h2><p>Cómo leer el tablero</p></div>
+  <div class="grid four">
+   <div class="card"><h3>CONFIRMADO</h3><p class="kpi-sub">Soportado y conciliado con fuente suficiente.</p><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card"><h3>PROVISIONAL</h3><p class="kpi-sub">Soportado, pero requiere ajuste o clasificación contable.</p><span class="status provisional">PROVISIONAL</span></div>
+   <div class="card"><h3>PENDIENTE</h3><p class="kpi-sub">Falta información o una decisión crítica.</p><span class="status pendiente">PENDIENTE</span></div>
+   <div class="card"><h3>SENSIBILIDAD</h3><p class="kpi-sub">Escenario de gestión; no cifra contable certificada.</p><span class="status sensibilidad">SENSIBILIDAD</span></div>
+  </div>
+  <div class="card tech-only" style="margin-top:13px">
+   <h3>Flujo metodológico</h3>
+   <div class="metric-row"><span>1. Fuentes originales</span><b>Ventas, UBL, correo, WhatsApp, nómina, bancos, impuestos, inversión</b></div>
+   <div class="metric-row"><span>2. Depuración</span><b>Duplicados, NC, pagos vs facturas, continuidad</b></div>
+   <div class="metric-row"><span>3. Clasificación</span><b>PyG / caja / activo / pasivo / financiación</b></div>
+   <div class="metric-row"><span>4. Conciliación</span><b>Causación vs fecha de pago</b></div>
+   <div class="metric-row"><span>5. Cierre</span><b>Estados de gestión + pendientes explícitos</b></div>
+  </div>
+ </section>
+
+ <section id="pendientes" class="section">
+  <div class="section-title"><h2>Pendientes del cierre</h2><p>Priorizados por impacto</p></div>
+  <div class="card"><div class="table-wrap"><table>
+   <thead><tr><th>Prioridad</th><th>Pendiente</th><th>Afecta</th><th>Acción</th></tr></thead>
+   <tbody>
+    <tr data-status="pendiente"><td><span class="status pendiente">CRÍTICO</span></td><td>Inventario inicial valorizado</td><td>COGS / PyG</td><td>Obtener inventario 01-ene-2026.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">CRÍTICO</span></td><td>Inventario final valorizado</td><td>COGS / balance</td><td>Obtener inventario 30-jun-2026.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>Depuración laboral</td><td>PyG</td><td>Separar empleado formal, turnos, ocasionales y otros conceptos.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>Instrumento APE</td><td>Financiación / PyG</td><td>Definir clasificación y tratamiento del componente financiero.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>$7,79 M mixtos</td><td>PyG / COGS / activo</td><td>Validar uso y naturaleza documental.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>$2,02 M activos/política</td><td>PyG / activo</td><td>Definir gasto vs capitalización.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">MEDIO</span></td><td>Cuentas relacionadas Q1 / tarjetas</td><td>Flujo caja</td><td>Completar saldos y movimientos empresariales.</td></tr>
+    <tr data-status="pendiente"><td><span class="status pendiente">MEDIO</span></td><td>Ventas “Por Pagar” $3,81 M</td><td>CxC</td><td>Conciliar antes de reconocer cuenta por cobrar.</td></tr>
+   </tbody></table></div></div>
+ </section>
+
+ <section id="diagnostico" class="section">
+  <div class="section-title"><h2>Diagnóstico financiero concluyente</h2><p>Lectura gerencial H1 2026</p></div>
+  <div class="report-hero"><h3>Conclusión central</h3><p><b>MARANELLO está operando bajo una estructura financieramente tensionada y, con la información disponible, probablemente por debajo de su punto de equilibrio.</b> La señal se explica por la combinación de caída de ventas, carga laboral y operativa elevada, compras relevantes de insumos, deterioro de caja y mayor dependencia de financiación.</p></div>
+  <div class="grid four" style="margin-top:13px">
+   <div class="card"><h3>Ventas H1</h3><div class="kpi-value">$376,38 M</div><div class="kpi-sub">Existe capacidad comercial.</div></div>
+   <div class="card"><h3>Ventas junio</h3><div class="kpi-value">$48,07 M</div><div class="kpi-sub">-36,3 % vs enero.</div></div>
+   <div class="card"><h3>Equilibrio operativo</h3><div class="kpi-value">≈ $68,2 M</div><div class="kpi-sub">Referencia mensual provisional.</div></div>
+   <div class="card"><h3>Liquidez</h3><div class="kpi-value">$1,85 M</div><div class="kpi-sub">Saldo empresarial al 30-jun.</div></div>
+  </div>
+  <div class="grid two" style="margin-top:13px">
+   <div class="card"><h3>Qué está ocurriendo</h3>
+    <div class="metric-row"><span>Ventas</span><b>Deteriorándose</b></div>
+    <div class="metric-row"><span>Estructura laboral</span><b>Alta / por depurar</b></div>
+    <div class="metric-row"><span>Gastos operativos</span><b>Elevados</b></div>
+    <div class="metric-row"><span>Rentabilidad</span><b>Probablemente negativa</b></div>
+    <div class="metric-row"><span>Liquidez</span><b>Tensionada</b></div>
+    <div class="metric-row"><span>Endeudamiento</span><b>En aumento</b></div>
+   </div>
+   <div class="card"><h3>Prioridades de intervención</h3>
+    <div class="metric-row"><span>1. Recuperar ventas</span><b>≥ $68 M/mes</b></div>
+    <div class="metric-row"><span>2. Depurar nómina</span><b>Costo laboral real</b></div>
+    <div class="metric-row"><span>3. Cerrar food cost</span><b>Inventarios</b></div>
+    <div class="metric-row"><span>4. Proteger liquidez</span><b>Caja mínima</b></div>
+    <div class="metric-row"><span>5. Control mensual</span><b>Ventas + COGS + nómina + caja</b></div>
+   </div>
+  </div>
+  <div class="callout danger" style="margin-top:13px"><b>Conclusión gerencial:</b> MARANELLO no parece un negocio sin mercado; la estructura actual parece dimensionada para un nivel de ventas superior al observado de abril a junio. Mantener ventas cercanas a junio sin correcciones implicaría seguir consumiendo caja.</div>
+ </section>
 </main>
-<footer>MARANELLO - Tablero de gestión financiera H1 2026. Documento de gestión; no sustituye estados financieros certificados ni la validación del contador responsable.</footer>
+
+<footer>MARANELLO · Tablero Financiero Ejecutivo V3 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
+
+<dialog id="detailDialog">
+ <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
+ <div class="modal-body" id="modalBody"></div>
+</dialog>
+
 <script>
-const salesData=[['Ene',75.414443],['Feb',64.315666],['Mar',74.210185],['Abr',55.861241],['May',58.511537],['Jun',48.068769]];
-const cashData=[['Ene',17.221019],['Feb',7.444605],['Mar',7.884418],['Abr',8.608184],['May',8.385863],['Jun',1.848018]];
-function barChart(svgId,data){const svg=document.getElementById(svgId),W=760,H=290,m={l:48,r:16,t:20,b:42}; const max=Math.max(...data.map(d=>d[1]))*1.12; let out=''; for(let i=0;i<=4;i++){let y=m.t+(H-m.t-m.b)*i/4; let v=max*(1-i/4); out+=`<line x1="${m.l}" y1="${y}" x2="${W-m.r}" y2="${y}" stroke="#E5E9ED"/><text x="${m.l-8}" y="${y+4}" text-anchor="end" class="axis-label">${v.toFixed(0)}</text>`;} let bw=(W-m.l-m.r)/data.length*0.62; data.forEach((d,i)=>{let slot=(W-m.l-m.r)/data.length,x=m.l+i*slot+(slot-bw)/2,h=(H-m.t-m.b)*d[1]/max,y=H-m.b-h; out+=`<rect x="${x}" y="${y}" width="${bw}" height="${h}" rx="4" fill="#17365D"/><text x="${x+bw/2}" y="${H-15}" text-anchor="middle" class="axis-label">${d[0]}</text><text x="${x+bw/2}" y="${Math.max(y-6,12)}" text-anchor="middle" class="axis-label">${d[1].toFixed(1)}</text>`;}); svg.innerHTML=out;}
-function lineChart(svgId,data){const svg=document.getElementById(svgId),W=760,H=290,m={l:48,r:16,t:20,b:42}; const max=Math.max(...data.map(d=>d[1]))*1.12; let pts=[]; let out=''; for(let i=0;i<=4;i++){let y=m.t+(H-m.t-m.b)*i/4; let v=max*(1-i/4); out+=`<line x1="${m.l}" y1="${y}" x2="${W-m.r}" y2="${y}" stroke="#E5E9ED"/><text x="${m.l-8}" y="${y+4}" text-anchor="end" class="axis-label">${v.toFixed(0)}</text>`;} data.forEach((d,i)=>{let x=m.l+(W-m.l-m.r)*i/(data.length-1),y=H-m.b-(H-m.t-m.b)*d[1]/max; pts.push(`${x},${y}`); out+=`<circle cx="${x}" cy="${y}" r="5" fill="#C55A11"/><text x="${x}" y="${H-15}" text-anchor="middle" class="axis-label">${d[0]}</text><text x="${x}" y="${Math.max(y-9,12)}" text-anchor="middle" class="axis-label">${d[1].toFixed(1)}</text>`;}); out=`<polyline points="${pts.join(' ')}" fill="none" stroke="#17365D" stroke-width="3"/>`+out; svg.innerHTML=out;}
-barChart('salesChart',salesData); lineChart('cashChart',cashData);
-document.querySelectorAll('.nav-link').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));btn.classList.add('active');document.getElementById(btn.dataset.target).scrollIntoView({behavior:'smooth',block:'start'});}));
-const secs=[...document.querySelectorAll('.section')]; const nav=[...document.querySelectorAll('.nav-link')]; const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){nav.forEach(n=>n.classList.toggle('active',n.dataset.target===e.target.id));}})},{rootMargin:'-25% 0px -65% 0px'});secs.forEach(s=>obs.observe(s));
+const DATA = {"months": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO"], "monthly": {"ENERO": {"sales": 75414443.0, "opex": 21222535.03, "payroll": 23769805.84168561, "inventory": 22597008.29, "bank": 17221018.9, "people": 15, "pila_people": 7}, "FEBRERO": {"sales": 64315666.0, "opex": 20041737.2, "payroll": 26383014.20475379, "inventory": 19382474.26, "bank": 7444605.03, "people": 15, "pila_people": 7}, "MARZO": {"sales": 74210185.0, "opex": 21056144.04, "payroll": 26763268.143390153, "inventory": 25267486.21, "bank": 7884417.51, "people": 15, "pila_people": 7}, "ABRIL": {"sales": 55861241.0, "opex": 22682458.27, "payroll": 26677468.963068187, "inventory": 18977246.8, "bank": 8608183.57, "people": 15, "pila_people": 7}, "MAYO": {"sales": 58511536.71, "opex": 17813551.02, "payroll": 27526508.5582197, "inventory": 16711397.51, "bank": 8385862.98, "people": 13, "pila_people": 7}, "JUNIO": {"sales": 48068769.34, "opex": 16098737.24, "payroll": 26401717.584356066, "inventory": 18426892.12, "bank": 1848018.15, "people": 14, "pila_people": 7}}, "h1": {"sales": 376381841.05, "gross_docs": 401428753.0, "opex": 119915162.8, "payroll": 157521783.29547352, "inventory": 121362505.19, "bank_open": 26590532.07, "bank_close": 1848018.15, "bank_credits": 283460830.68, "bank_debits": 308203344.6, "tax_liability": 9632000.0, "tax_assets": 4472997.85, "credit_principal": 26269252.38, "investor_balance": 132088326.57675348, "investor_pending_may_jun": 9876623.162634695, "known_finance": 5971297.55, "ape_interest_candidate": 5356565.543340213, "mixed": 7789801.47, "assets_policy": 2024100.0, "sales_pending": 3808014.0, "pila_period": 17849800.0, "pila_cash": 20068238.0, "tax_cash": 23326000.0, "credit_net_inflow": 25396275.0}, "categories": [{"group": "COSTO / INVENTARIO PENDIENTE", "status": "pendiente", "value": 121362505.19, "desc": "Compras candidatas a inventario. No equivalen todavía al COGS real.", "items": [["Insumos y mercancías", 91545376.85], ["Bebidas y mercancías", 16408791.0], ["Empaques y consumibles", 7537987.34], ["Insumos y empaques", 5870350.0]]}, {"group": "GASTOS OPERATIVOS", "status": "provisional", "value": 119915162.8, "desc": "Gastos documentales operativos; pueden requerir depuración de IVA/política contable.", "items": [["Ocupación", 88456372.0], ["Comisiones y plataformas", 6961034.87], ["Servicios públicos", 6683295.0], ["Marketing", 4720000.0], ["Servicios profesionales", 2600000.0], ["Movilidad", 2250946.0], ["Mantenimiento y adecuaciones", 1880200.0], ["Administración", 1850800.0], ["Tecnología", 1369431.0], ["Telecomunicaciones", 955165.0], ["Comisiones y medios de pago", 705674.39], ["Mantenimiento", 494500.0], ["Higiene y SST", 469600.0], ["Mantenimiento / adecuación", 180000.0], ["Seguridad y SST", 140000.0], ["Suministros operativos", 104000.0], ["Aseo y suministros", 47700.03], ["Seguros", 46444.51]]}, {"group": "ACTIVOS / POLÍTICA PENDIENTE", "status": "pendiente", "value": 2024100.0, "desc": "Partidas que no deben llevarse automáticamente al PyG.", "items": [["Mantenimiento / activos menores", 1024100.0], ["Tecnología / implementación", 1000000.0]]}, {"group": "REVISAR / MIXTO", "status": "pendiente", "value": 7789801.47, "desc": "Documentos cuyo uso o naturaleza requiere validación adicional.", "items": [["Concepto por validar", 3955985.47], ["Suministros mixtos", 1282500.0], ["Retail mixto", 1126380.0], ["Uso empresarial por validar", 931367.0], ["Retail por validar", 493569.0]]}], "providers": [["CENTRAL CONTROL S.A.S.", 73256372.0, "GASTOS OPERATIVOS", "Ocupación"], ["QUESERA Y SALSAMENTARIA SAN FERNANDO S.A.S.", 37447101.68, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["INDUSTRIA NACIONAL DE GASEOSAS S.A.S.", 16408791.0, "COSTO / INVENTARIO PENDIENTE", "Bebidas y mercancías"], ["MERCAMIO S.A.", 13150872.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["JEPRI DISTRIBUIDORA DE ALIMENTOS", 12498783.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["BONNIPLAST S.A.S.", 7537987.34, "COSTO / INVENTARIO PENDIENTE", "Empaques y consumibles"], ["MERCAFAMILIAR LAS PALMAS S.A.S.", 7217600.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["D1 S.A.S.", 7062220.03, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["RAPPI S.A.S.", 6961034.87, "GASTOS OPERATIVOS", "Comisiones y plataformas"], ["GRUPO SANTIAGO EXPRESS S.A.S.", 5870350.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y empaques"]], "payroll_patterns": [["RECURRENTE", 10, 138131965.81], ["FRECUENTE", 4, 12895962.49], ["OCASIONAL", 10, 6493855.0]], "site": {"CONSOLIDADO": {"coverage": "completa", "known_docs": 251091569.46, "opex_site": 119915162.8}, "JP": {"coverage": "parcial", "known_docs": 619898.0, "opex_site": 619898.0, "note": "Solo existen registros con sede explícita JP/JP-R47A por $619.898. La mayor parte de UBL no identifica sede."}, "PP": {"coverage": "parcial", "known_docs": 21862397.0, "opex_site": 21862397.0, "note": "Solo existen registros con sede explícita PP/Patio 34 por $21,86 M. La mayor parte de UBL no identifica sede."}}};
+const money = v => v===null || v===undefined || Number.isNaN(Number(v)) ? "N/D" : new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Number(v));
+const compact = v => v===null || v===undefined || Number.isNaN(Number(v)) ? "N/D" : "$" + (Number(v)/1e6).toLocaleString("es-CO",{minimumFractionDigits:2,maximumFractionDigits:2}) + " M";
+const pct = v => Number.isFinite(v) ? (v*100).toLocaleString("es-CO",{minimumFractionDigits:1,maximumFractionDigits:1})+" %" : "N/D";
+const esc = s => String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+const state = {period:"H1",site:"CONSOLIDADO",status:"todos",mode:"exec",tab:"resumen",category:1};
+
+function initSelectors(){
+ const p=document.getElementById("periodSelect");
+ DATA.months.forEach(m=>{const o=document.createElement("option");o.value=m;o.textContent=m[0]+m.slice(1).toLowerCase();p.appendChild(o);});
+ ["compareA","compareB"].forEach((id,idx)=>{
+   const el=document.getElementById(id);
+   DATA.months.forEach(m=>{const o=document.createElement("option");o.value=m;o.textContent=m[0]+m.slice(1).toLowerCase();el.appendChild(o);});
+   el.value=idx===0?"ENERO":"JUNIO";
+ });
+}
+
+function selectedData(){
+ if(state.period==="H1") return DATA.h1;
+ return DATA.monthly[state.period];
+}
+
+function renderCoverage(){
+ const b=document.getElementById("coverageBanner");
+ const s=DATA.site[state.site];
+ if(state.site==="CONSOLIDADO"){
+   b.className="coverage";
+   b.innerHTML="<b>Cobertura:</b> consolidado H1. Ventas, nómina, banco y clasificación gerencial disponibles a nivel global.";
+ } else {
+   b.className="coverage warn";
+   b.innerHTML="<b>Cobertura parcial por sede:</b> "+esc(s.note)+" Ventas, nómina y caja no están separadas de forma confiable por sede en las fuentes procesadas; esos KPI se muestran como N/D cuando aplica.";
+ }
+}
+
+function renderKPIs(){
+ const d=selectedData();
+ const sitePartial=state.site!=="CONSOLIDADO";
+ const isH1=state.period==="H1";
+ const sales=sitePartial?null:d.sales;
+ const payroll=sitePartial?null:d.payroll;
+ const inv=sitePartial?null:d.inventory;
+ let opex=sitePartial ? DATA.site[state.site].opex_site : d.opex;
+ let cash=sitePartial?null:(isH1?DATA.h1.bank_close:d.bank);
+
+ document.getElementById("kSales").textContent=compact(sales);
+ document.getElementById("kSalesSub").textContent=sales ? (isH1?"Promedio: "+compact(DATA.h1.sales/6)+"/mes":"Periodo seleccionado") : "No disponible por sede";
+ document.getElementById("kOpex").textContent=compact(opex);
+ document.getElementById("kOpexSub").textContent=sitePartial?"Solo registros con sede explícita":(sales?pct(opex/sales)+" de ventas":"");
+ document.getElementById("kPayroll").textContent=compact(payroll);
+ document.getElementById("kPayrollSub").textContent=payroll&&sales?pct(payroll/sales)+" de ventas":"No disponible por sede";
+ document.getElementById("kInventory").textContent=compact(inv);
+ document.getElementById("kCash").textContent=compact(cash);
+ document.getElementById("kCashSub").textContent=sitePartial?"No disponible por sede":(isH1?"Saldo al 30-jun":"Saldo final del mes");
+ document.getElementById("kTrend").textContent="-36,3 %";
+ document.getElementById("periodLabel").textContent=isH1?"H1 enero-junio 2026":state.period[0]+state.period.slice(1).toLowerCase()+" 2026";
+ applyStatusFilter();
+}
+
+function svgBarChart(values, selected){
+ const max=Math.max(...values.map(x=>x.v),1), W=760,H=260, pad=42, gap=18;
+ const bw=(W-pad*2-gap*(values.length-1))/values.length;
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de barras">`;
+ s+=`<line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
+ values.forEach((x,i)=>{
+   const bh=(x.v/max)*(H-85), xx=pad+i*(bw+gap), yy=H-35-bh;
+   const fill=(selected==="H1"||selected===x.k)?"#17365D":"#B8C4D0";
+   s+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${fill}"/>`;
+   s+=`<text x="${xx+bw/2}" y="${H-17}" text-anchor="middle" class="axis-label">${x.k.slice(0,3)}</text>`;
+   s+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-6)}" text-anchor="middle" class="axis-label">${(x.v/1e6).toFixed(1)}</text>`;
+ });
+ s+="</svg>"; return s;
+}
+function svgLineChart(values, selected){
+ const W=760,H=260,pad=42,max=Math.max(...values.map(x=>x.v),1),min=Math.min(...values.map(x=>x.v),0),span=Math.max(max-min,1);
+ const pts=values.map((x,i)=>{const xx=pad+i*((W-pad*2)/(values.length-1));const yy=25+(max-x.v)/span*(H-75);return {...x,x:xx,y:yy};});
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de línea"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
+ s+=`<polyline fill="none" stroke="#17365D" stroke-width="4" points="${pts.map(p=>p.x+","+p.y).join(" ")}"/>`;
+ pts.forEach(p=>{const fill=(selected==="H1"||selected===p.k)?"#C55A11":"#17365D";s+=`<circle cx="${p.x}" cy="${p.y}" r="6" fill="${fill}"/><text x="${p.x}" y="${H-17}" text-anchor="middle" class="axis-label">${p.k.slice(0,3)}</text><text x="${p.x}" y="${p.y-10}" text-anchor="middle" class="axis-label">${(p.v/1e6).toFixed(1)}</text>`;});return s+"</svg>";
+}
+function renderCharts(){
+ const sales=DATA.months.map(m=>({k:m,v:DATA.monthly[m].sales}));
+ const cash=DATA.months.map(m=>({k:m,v:DATA.monthly[m].bank}));
+ document.getElementById("salesChart").innerHTML=svgBarChart(sales,state.period);
+ document.getElementById("salesChart2").innerHTML=svgBarChart(sales,state.period);
+ document.getElementById("cashChart").innerHTML=svgLineChart(cash,state.period);
+}
+
+function renderCompare(){
+ const a=document.getElementById("compareA").value,b=document.getElementById("compareB").value, A=DATA.monthly[a],B=DATA.monthly[b];
+ const metrics=[["Ventas netas","sales"],["Gastos operativos","opex"],["Nómina fuente","payroll"],["Compras inventariables","inventory"],["Caja final","bank"]];
+ let h='<div class="table-wrap"><table><thead><tr><th>Indicador</th><th>'+esc(a)+'</th><th>'+esc(b)+'</th><th>Variación</th><th>%</th></tr></thead><tbody>';
+ metrics.forEach(([label,k])=>{const da=B[k]-A[k],dp=A[k]!==0?da/A[k]:NaN;h+=`<tr><td>${label}</td><td class="num">${money(A[k])}</td><td class="num">${money(B[k])}</td><td class="num ${da<0?"delta negative":"delta positive"}">${money(da)}</td><td class="num ${dp<0?"delta negative":"delta positive"}">${pct(dp)}</td></tr>`;});
+ h+='</tbody></table></div>';document.getElementById("compareTable").innerHTML=h;
+}
+
+function renderCategories(){
+ const grid=document.getElementById("categoryGrid");
+ grid.innerHTML=DATA.categories.map((c,i)=>`<button class="category-btn ${i===state.category?"active":""}" data-cat="${i}" data-status="${c.status}"><b>${esc(c.group)}</b><strong>${compact(c.value)}</strong><small>${pct(c.value/251091569.46)} del universo documental</small></button>`).join("");
+ grid.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{state.category=Number(b.dataset.cat);renderCategories();}));
+ const c=DATA.categories[state.category];
+ const total=c.items.reduce((a,x)=>a+x[1],0);
+ let h=`<h3>${esc(c.group)}</h3><p class="kpi-sub">${esc(c.desc)}</p><div class="table-wrap"><table><thead><tr><th>Subcategoría</th><th class="num">Valor</th><th class="num">% grupo</th></tr></thead><tbody>`;
+ c.items.slice().sort((a,b)=>b[1]-a[1]).forEach(x=>{h+=`<tr><td>${esc(x[0])}</td><td class="num">${money(x[1])}</td><td class="num">${pct(x[1]/c.value)}</td></tr>`;});
+ h+='</tbody></table></div>';document.getElementById("categoryDetail").innerHTML=h;
+ applyStatusFilter();
+}
+
+function renderProviders(){
+ let h='<div class="table-wrap"><table><thead><tr><th>Proveedor</th><th>Grupo</th><th>Categoría</th><th class="num">Valor</th></tr></thead><tbody>';
+ DATA.providers.forEach(x=>{h+=`<tr><td>${esc(x[0])}</td><td>${esc(x[2])}</td><td>${esc(x[3])}</td><td class="num">${money(x[1])}</td></tr>`;});
+ h+='</tbody></table></div>';document.getElementById("providerTable").innerHTML=h;
+}
+
+function renderPayroll(){
+ let h='<div class="table-wrap"><table><thead><tr><th>Mes</th><th class="num">Nómina fuente</th><th class="num">Personas con pago</th><th class="num">PILA empleados</th></tr></thead><tbody>';
+ DATA.months.forEach(m=>{const d=DATA.monthly[m];h+=`<tr><td>${m}</td><td class="num">${money(d.payroll)}</td><td class="num">${d.people}</td><td class="num">${d.pila_people}</td></tr>`;});
+ h+='</tbody></table></div>';document.getElementById("payrollTable").innerHTML=h;
+ const max=Math.max(...DATA.payroll_patterns.map(x=>x[2]));
+ document.getElementById("payrollPattern").innerHTML=DATA.payroll_patterns.map(x=>`<div class="gauge-row"><span>${x[0]} · ${x[1]} registros/personas etiqueta</span><div class="gauge-track"><div class="gauge-fill" style="width:${(x[2]/max*100).toFixed(1)}%"></div></div><b>${compact(x[2])}</b></div>`).join("");
+}
+
+function simulate(){
+ const i=Number(document.getElementById("invInitial").value), f=Number(document.getElementById("invFinal").value);
+ if(!Number.isFinite(i)||!Number.isFinite(f)||document.getElementById("invInitial").value===""||document.getElementById("invFinal").value===""){
+  ["simCogs","simGross","simResult","simMargin"].forEach(id=>document.getElementById(id).textContent="Pendiente");
+  document.getElementById("simMessage").className="callout warning";
+  document.getElementById("simMessage").textContent="Ingrese inventario inicial y final. Fórmula: COGS = inventario inicial + compras inventariables − inventario final."; return;
+ }
+ const cogs=i+DATA.h1.inventory-f;
+ const gross=DATA.h1.sales-cogs;
+ const ape=document.getElementById("apeToggle").value==="1"?DATA.h1.ape_interest_candidate:0;
+ const result=DATA.h1.sales-cogs-DATA.h1.opex-DATA.h1.payroll-DATA.h1.known_finance-ape;
+ document.getElementById("simCogs").textContent=money(cogs);
+ document.getElementById("simGross").textContent=money(gross);
+ document.getElementById("simResult").textContent=money(result);
+ document.getElementById("simMargin").textContent=pct(result/DATA.h1.sales);
+ const msg=document.getElementById("simMessage");msg.className=result>=0?"callout":"callout danger";
+ msg.innerHTML=result>=0?"<b>Escenario positivo:</b> bajo estos inventarios el modelo provisional supera el punto de equilibrio.":"<b>Escenario negativo:</b> bajo estos inventarios el modelo provisional permanece por debajo del equilibrio.";
+}
+
+function applyStatusFilter(){
+ const v=state.status;
+ document.querySelectorAll("[data-status]").forEach(el=>{el.style.display=(v==="todos"||el.dataset.status===v)?"":"none";});
+}
+
+function openKpi(k){
+ const title=document.getElementById("modalTitle"),body=document.getElementById("modalBody"),dlg=document.getElementById("detailDialog");
+ const map={
+  sales:["Ventas netas","9.341 facturas en H1. Ventas netas sin impuestos: $376,38 M. Enero: $75,41 M; junio: $48,07 M. El control de ventas “Por Pagar” suma $3,81 M y no se reconoce automáticamente como CxC."],
+  trend:["Tendencia comercial","La variación enero → junio es -36,3 %. Los meses con mayor nivel fueron enero y marzo; abril-junio operan en un escalón comercial menor."],
+  opex:["Gastos operativos","Valor documental H1: $119,92 M. La categoría dominante es Ocupación ($88,46 M), seguida por comisiones/plataformas, servicios públicos y marketing. Clic en Costos y gastos para abrir categorías."],
+  payroll:["Nómina fuente","La hoja de nómina registra $157,52 M. Cada mes aparecen 13–15 personas con pago frente a 7 empleados PILA. Por ello la cifra está marcada PROVISIONAL hasta depurar vínculo y concepto."],
+  inventory:["Compras inventariables","$121,36 M. No equivalen a costo de ventas. El COGS real depende de inventario inicial + compras − inventario final. Use el simulador en Resultado."],
+  cash:["Caja empresa","Saldo inicial $26,59 M; abonos $283,46 M; cargos $308,20 M; saldo final $1,85 M. La cuenta relacionada recibió además el desembolso neto de crédito por $25,40 M."]
+ };
+ const x=map[k]||["Detalle","Sin detalle adicional."];title.textContent=x[0];body.innerHTML=`<div class="callout">${esc(x[1])}</div>`;dlg.showModal();
+}
+
+function showTab(tab){
+ state.tab=tab;document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===tab));
+ document.querySelectorAll(".nav-link").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function resetAll(){
+ state.period="H1";state.site="CONSOLIDADO";state.status="todos";state.mode="exec";state.category=1;
+ document.getElementById("periodSelect").value="H1";document.getElementById("siteSelect").value="CONSOLIDADO";document.getElementById("statusSelect").value="todos";
+ document.body.classList.remove("tech-mode");document.querySelectorAll(".mode-btn[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode==="exec"));
+ document.getElementById("compareA").value="ENERO";document.getElementById("compareB").value="JUNIO";
+ document.getElementById("invInitial").value="";document.getElementById("invFinal").value="";document.getElementById("apeToggle").value="0";
+ renderAll();simulate();showTab("resumen");
+}
+
+function renderAll(){renderCoverage();renderKPIs();renderCharts();renderCompare();renderCategories();renderProviders();renderPayroll();applyStatusFilter();}
+
+function bind(){
+ document.querySelectorAll(".nav-link").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+ document.getElementById("periodSelect").addEventListener("change",e=>{state.period=e.target.value;renderKPIs();renderCharts();});
+ document.getElementById("siteSelect").addEventListener("change",e=>{state.site=e.target.value;renderCoverage();renderKPIs();});
+ document.getElementById("statusSelect").addEventListener("change",e=>{state.status=e.target.value;applyStatusFilter();});
+ document.querySelectorAll(".mode-btn[data-mode]").forEach(b=>b.addEventListener("click",()=>{state.mode=b.dataset.mode;document.body.classList.toggle("tech-mode",state.mode==="tech");document.querySelectorAll(".mode-btn[data-mode]").forEach(x=>x.classList.toggle("active",x===b));}));
+ document.getElementById("compareA").addEventListener("change",renderCompare);document.getElementById("compareB").addEventListener("change",renderCompare);
+ document.getElementById("swapCompare").addEventListener("click",()=>{const a=document.getElementById("compareA"),b=document.getElementById("compareB"),t=a.value;a.value=b.value;b.value=t;renderCompare();});
+ ["invInitial","invFinal","apeToggle"].forEach(id=>document.getElementById(id).addEventListener("input",simulate));
+ document.getElementById("simReset").addEventListener("click",()=>{document.getElementById("invInitial").value="";document.getElementById("invFinal").value="";document.getElementById("apeToggle").value="0";simulate();});
+ document.getElementById("resetBtn").addEventListener("click",resetAll);
+ document.querySelectorAll("[data-kpi]").forEach(c=>c.addEventListener("click",()=>openKpi(c.dataset.kpi)));
+ document.getElementById("modalClose").addEventListener("click",()=>document.getElementById("detailDialog").close());
+ document.getElementById("detailDialog").addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
+}
+
+initSelectors();bind();renderAll();simulate();
 </script>
-</body>
-</html>
+</body></html>
