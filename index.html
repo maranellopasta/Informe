@@ -105,6 +105,16 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 .diag-actions .diag-block{height:100%}
 @media(max-width:900px){.diag-actions{grid-template-columns:1fr}}
 
+
+.controlbar{display:none !important;}
+.local-control{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin:0 0 13px}
+.local-control .field{min-width:220px;max-width:320px}
+.local-control-note{font-size:11px;color:var(--muted);line-height:1.4;padding:9px 11px;background:#F7F9FB;border:1px solid var(--border);border-radius:9px}
+.site-coverage-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.site-coverage-card{border:1px solid var(--border);border-radius:10px;padding:13px;background:#fff}
+.site-coverage-card strong{display:block;font-size:22px;color:var(--navy);margin-top:5px}
+.site-coverage-card small{display:block;color:var(--muted);margin-top:5px;line-height:1.4}
+@media(max-width:720px){.site-coverage-grid{grid-template-columns:1fr}.local-control .field{min-width:100%;max-width:none}}
 </style>
 </head>
 <body>
@@ -112,10 +122,10 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
  <div class="header-row">
   <div>
   <div class="brand"><img class="brand-logo" src="assets/logo_maranello_horizontal.png" alt="MARANELLO buona & fresca"></div>
-  <div class="subtitle">Tablero Financiero Ejecutivo V5 · H1 2026 · Corte 30-jun-2026</div>
+  <div class="subtitle">Tablero Financiero Ejecutivo V6 · H1 2026 · Corte 30-jun-2026</div>
   <div class="brand-stripe"></div>
  </div>
-  <div class="header-actions"><button class="btn" id="resetBtn">Restablecer</button><button class="btn" onclick="window.print()">Imprimir / PDF</button></div>
+  <div class="header-actions"><button class="btn" id="techToggleHeader">Mostrar detalle técnico</button><button class="btn" id="resetBtn">Restablecer</button><button class="btn" onclick="window.print()">Imprimir / PDF</button></div>
  </div>
 </header>
 <nav><div class="nav-inner" id="nav">
@@ -143,6 +153,19 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 
  <section id="resumen" class="section active">
   <div class="section-title"><h2>Resumen ejecutivo</h2><p id="periodLabel">H1 enero-junio 2026</p></div>
+  <div class="local-control">
+    <div class="field">
+      <label>Periodo del resumen</label>
+      <select id="summaryPeriod">
+        <option value="H1">H1 Ene-Jun</option>
+        <option value="ENERO">Enero</option><option value="FEBRERO">Febrero</option>
+        <option value="MARZO">Marzo</option><option value="ABRIL">Abril</option>
+        <option value="MAYO">Mayo</option><option value="JUNIO">Junio</option>
+      </select>
+    </div>
+    <div class="local-control-note">Este selector actualiza únicamente indicadores y gráficos que tienen información mensual confiable.</div>
+  </div>
+
   <div class="grid kpis" id="kpiGrid">
    <div class="card clickable" data-kpi="sales" data-status="confirmado"><h3>Ventas netas</h3><div class="kpi-value" id="kSales">—</div><div class="kpi-sub" id="kSalesSub"></div><span class="status confirmado">CONFIRMADO</span></div>
    <div class="card clickable" data-kpi="trend" data-status="confirmado"><h3>Tendencia comercial</h3><div class="kpi-value" id="kTrend">—</div><div class="kpi-sub">Variación enero → junio</div><span class="status confirmado">CONFIRMADO</span></div>
@@ -202,6 +225,25 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 
  <section id="costos" class="section">
   <div class="section-title"><h2>Costos y gastos</h2><p>Clic en una categoría para desplegar detalle</p></div>
+  <div class="card" style="margin-bottom:13px">
+    <h3>Cobertura documental por sede</h3>
+    <div class="site-coverage-grid">
+      <div class="site-coverage-card">
+        <span>Jardín Plaza</span><strong>$0,62 M</strong>
+        <small>Solo documentos con sede JP explícitamente identificada.</small>
+      </div>
+      <div class="site-coverage-card">
+        <span>Parque del Perro / Patio 34</span><strong>$21,86 M</strong>
+        <small>Solo documentos con sede PP explícitamente identificada.</small>
+      </div>
+      <div class="site-coverage-card">
+        <span>Sin sede explícita</span><strong>$228,61 M</strong>
+        <small>Aproximadamente 91 % del universo documental no permite una asignación confiable por sede.</small>
+      </div>
+    </div>
+    <div class="callout warning" style="margin-top:10px"><b>Decisión metodológica:</b> se retiró el selector global de sede porque habría generado una lectura incompleta o engañosa. Cuando tengamos una asignación robusta por sede, se reincorporará.</div>
+  </div>
+
   <div id="categoryGrid" class="category-grid"></div>
   <div id="categoryDetail" class="detail-panel"></div>
   <div class="card tech-only" style="margin-top:13px">
@@ -211,11 +253,24 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 
  <section id="nomina" class="section">
   <div class="section-title"><h2>Nómina y carga laboral</h2><p>Detalle agregado, sin exponer datos personales</p></div>
+  <div class="local-control">
+    <div class="field">
+      <label>Periodo de nómina</label>
+      <select id="payrollPeriod">
+        <option value="H1">H1 Ene-Jun</option>
+        <option value="ENERO">Enero</option><option value="FEBRERO">Febrero</option>
+        <option value="MARZO">Marzo</option><option value="ABRIL">Abril</option>
+        <option value="MAYO">Mayo</option><option value="JUNIO">Junio</option>
+      </select>
+    </div>
+    <div class="local-control-note">Actualiza los indicadores superiores de nómina con el mes seleccionado.</div>
+  </div>
+
   <div class="grid four">
-   <div class="card"><h3>Nómina fuente H1</h3><div class="kpi-value">$157,52 M</div><div class="kpi-sub">41,9 % de ventas</div><span class="status provisional">PROVISIONAL</span></div>
-   <div class="card"><h3>PILA periodos H1</h3><div class="kpi-value">$17,85 M</div><div class="kpi-sub">No sumar íntegramente sobre nómina</div><span class="status confirmado">CONFIRMADO</span></div>
-   <div class="card"><h3>Personas con pago</h3><div class="kpi-value">13–15</div><div class="kpi-sub">Según mes</div><span class="status confirmado">CONFIRMADO</span></div>
-   <div class="card"><h3>Empleados PILA</h3><div class="kpi-value">7</div><div class="kpi-sub">Control de vinculación formal</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card"><h3>Nómina fuente H1</h3><div class="kpi-value" id="nomPayroll">$157,52 M</div><div class="kpi-sub" id="nomPayrollSub">41,9 % de ventas</div><span class="status provisional">PROVISIONAL</span></div>
+   <div class="card"><h3>PILA periodos H1</h3><div class="kpi-value" id="nomPila">$17,85 M</div><div class="kpi-sub">No sumar íntegramente sobre nómina</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card"><h3>Personas con pago</h3><div class="kpi-value" id="nomPeople">13–15</div><div class="kpi-sub" id="nomPeopleSub">Según mes</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card"><h3>Empleados PILA</h3><div class="kpi-value" id="nomPilaPeople">7</div><div class="kpi-sub">Control de vinculación formal</div><span class="status confirmado">CONFIRMADO</span></div>
   </div>
   <div class="grid two" style="margin-top:13px">
    <div class="card"><h3>Nómina mensual</h3><div id="payrollTable"></div></div>
@@ -225,11 +280,24 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 
  <section id="caja" class="section">
   <div class="section-title"><h2>Caja y liquidez</h2><p>Cuenta empresarial completa; relacionadas parciales</p></div>
+  <div class="local-control">
+    <div class="field">
+      <label>Periodo de caja</label>
+      <select id="cashPeriod">
+        <option value="H1">H1 Ene-Jun</option>
+        <option value="ENERO">Enero</option><option value="FEBRERO">Febrero</option>
+        <option value="MARZO">Marzo</option><option value="ABRIL">Abril</option>
+        <option value="MAYO">Mayo</option><option value="JUNIO">Junio</option>
+      </select>
+    </div>
+    <div class="local-control-note">La cuenta empresarial sí está conciliada mensualmente; este selector muestra apertura, entradas, salidas y cierre del periodo.</div>
+  </div>
+
   <div class="grid kpis">
-   <div class="card" data-status="confirmado"><h3>Saldo inicial</h3><div class="kpi-value">$26,59 M</div><span class="status confirmado">CONFIRMADO</span></div>
-   <div class="card" data-status="confirmado"><h3>Abonos H1</h3><div class="kpi-value">$283,46 M</div><span class="status confirmado">CONFIRMADO</span></div>
-   <div class="card" data-status="confirmado"><h3>Cargos H1</h3><div class="kpi-value">$308,20 M</div><span class="status confirmado">CONFIRMADO</span></div>
-   <div class="card" data-status="confirmado"><h3>Saldo 30-jun</h3><div class="kpi-value">$1,85 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Saldo inicial</h3><div class="kpi-value" id="cashOpen">$26,59 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Abonos H1</h3><div class="kpi-value" id="cashCredits">$283,46 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Cargos H1</h3><div class="kpi-value" id="cashDebits">$308,20 M</div><span class="status confirmado">CONFIRMADO</span></div>
+   <div class="card" data-status="confirmado"><h3>Saldo 30-jun</h3><div class="kpi-value" id="cashClose">$1,85 M</div><span class="status confirmado">CONFIRMADO</span></div>
    <div class="card" data-status="confirmado"><h3>Crédito neto recibido</h3><div class="kpi-value">$25,40 M</div><span class="status confirmado">CONFIRMADO</span></div>
    <div class="card" data-status="pendiente"><h3>Cuentas relacionadas</h3><div class="kpi-value">Parcial</div><span class="status pendiente">PENDIENTE</span></div>
   </div>
@@ -237,7 +305,7 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
  </section>
 
  <section id="balance" class="section">
-  <div class="section-title"><h2>Posición financiera parcial</h2><p>No es balance general certificado</p></div>
+  <div class="section-title"><h2>Posición financiera parcial</h2><p>Corte fijo: 30 de junio de 2026</p></div>
   <div class="grid two">
    <div class="card">
     <h3>Activos conocidos</h3>
@@ -258,7 +326,7 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
  </section>
 
  <section id="resultado" class="section">
-  <div class="section-title"><h2>Resultado y simulador de inventario</h2><p>Herramienta de sensibilidad gerencial</p></div>
+  <div class="section-title"><h2>Resultado y simulador de inventario</h2><p>Modelo H1 completo; no se filtra por mes</p></div>
   <div class="card">
    <h3>Simulador</h3>
    <div class="sim-grid">
@@ -403,7 +471,7 @@ footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);fon
 
 </main>
 
-<footer>MARANELLO · Tablero Financiero Ejecutivo V5 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
+<footer>MARANELLO · Tablero Financiero Ejecutivo V6 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
 
 <dialog id="detailDialog">
  <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
@@ -582,10 +650,90 @@ function resetAll(){
  document.body.classList.remove("tech-mode");document.querySelectorAll(".mode-btn[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode==="exec"));
  document.getElementById("compareA").value="ENERO";document.getElementById("compareB").value="JUNIO";
  document.getElementById("invInitial").value="";document.getElementById("invFinal").value="";document.getElementById("apeToggle").value="0";
+ if(document.getElementById("summaryPeriod")) document.getElementById("summaryPeriod").value="H1";
+ if(document.getElementById("payrollPeriod")) document.getElementById("payrollPeriod").value="H1";
+ if(document.getElementById("cashPeriod")) document.getElementById("cashPeriod").value="H1";
+ if(document.getElementById("techToggleHeader")) document.getElementById("techToggleHeader").textContent="Mostrar detalle técnico";
  renderAll();simulate();showTab("resumen");
 }
 
 function renderAll(){renderCoverage();renderKPIs();renderCharts();renderCompare();renderCategories();renderProviders();renderPayroll();applyStatusFilter();}
+
+
+const PILA_MONTH = {
+ ENERO:3087100,FEBRERO:2701400,MARZO:2867500,ABRIL:3134700,MAYO:3180800,JUNIO:2878300
+};
+const BANK_MONTH = {
+ ENERO:{open:26590532.07,credits:46625904.53,debits:55995417.70,close:17221018.90},
+ FEBRERO:{open:17221018.90,credits:38845419.55,debits:48621833.42,close:7444605.03},
+ MARZO:{open:7444605.03,credits:52248686.57,debits:51808874.09,close:7884417.51},
+ ABRIL:{open:7884417.51,credits:58430512.26,debits:57706746.20,close:8608183.57},
+ MAYO:{open:8608183.57,credits:37150174.26,debits:37372494.85,close:8385862.98},
+ JUNIO:{open:8385862.98,credits:50160133.51,debits:56697978.34,close:1848018.15}
+};
+
+function renderPayrollLocal(){
+ const p=document.getElementById("payrollPeriod");
+ if(!p) return;
+ const v=p.value;
+ if(v==="H1"){
+   document.getElementById("nomPayroll").textContent=compact(DATA.h1.payroll);
+   document.getElementById("nomPayrollSub").textContent=pct(DATA.h1.payroll/DATA.h1.sales)+" de ventas";
+   document.getElementById("nomPila").textContent=compact(DATA.h1.pila_period);
+   document.getElementById("nomPeople").textContent="13–15";
+   document.getElementById("nomPeopleSub").textContent="Rango mensual";
+   document.getElementById("nomPilaPeople").textContent="7";
+ } else {
+   const d=DATA.monthly[v];
+   document.getElementById("nomPayroll").textContent=compact(d.payroll);
+   document.getElementById("nomPayrollSub").textContent=pct(d.payroll/d.sales)+" de ventas del mes";
+   document.getElementById("nomPila").textContent=compact(PILA_MONTH[v]);
+   document.getElementById("nomPeople").textContent=String(d.people);
+   document.getElementById("nomPeopleSub").textContent="Personas con pago en "+v.toLowerCase();
+   document.getElementById("nomPilaPeople").textContent=String(d.pila_people);
+ }
+}
+
+function renderCashLocal(){
+ const p=document.getElementById("cashPeriod");
+ if(!p) return;
+ const v=p.value;
+ if(v==="H1"){
+   document.getElementById("cashOpen").textContent=compact(DATA.h1.bank_open);
+   document.getElementById("cashCredits").textContent=compact(DATA.h1.bank_credits);
+   document.getElementById("cashDebits").textContent=compact(DATA.h1.bank_debits);
+   document.getElementById("cashClose").textContent=compact(DATA.h1.bank_close);
+ } else {
+   const d=BANK_MONTH[v];
+   document.getElementById("cashOpen").textContent=compact(d.open);
+   document.getElementById("cashCredits").textContent=compact(d.credits);
+   document.getElementById("cashDebits").textContent=compact(d.debits);
+   document.getElementById("cashClose").textContent=compact(d.close);
+ }
+ const cash=DATA.months.map(m=>({k:m,v:DATA.monthly[m].bank}));
+ document.getElementById("cashChart").innerHTML=svgLineChart(cash,v);
+}
+
+function bindLocalControls(){
+ const s=document.getElementById("summaryPeriod");
+ if(s) s.addEventListener("change",()=>{
+   state.period=s.value;
+   const hidden=document.getElementById("periodSelect");
+   if(hidden) hidden.value=s.value;
+   renderKPIs(); renderCharts();
+ });
+ const p=document.getElementById("payrollPeriod");
+ if(p) p.addEventListener("change",renderPayrollLocal);
+ const c=document.getElementById("cashPeriod");
+ if(c) c.addEventListener("change",renderCashLocal);
+
+ const tech=document.getElementById("techToggleHeader");
+ if(tech) tech.addEventListener("click",()=>{
+   state.mode = state.mode==="tech" ? "exec" : "tech";
+   document.body.classList.toggle("tech-mode",state.mode==="tech");
+   tech.textContent = state.mode==="tech" ? "Ocultar detalle técnico" : "Mostrar detalle técnico";
+ });
+}
 
 function bind(){
  document.querySelectorAll(".nav-link").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
@@ -603,6 +751,6 @@ function bind(){
  document.getElementById("detailDialog").addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
 }
 
-initSelectors();bind();renderAll();simulate();
+initSelectors();bind();bindLocalControls();renderAll();renderPayrollLocal();renderCashLocal();simulate();
 </script>
 </body></html>
