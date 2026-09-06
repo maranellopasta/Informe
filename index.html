@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MARANELLO | Tablero Financiero Semestre 1 2026</title>
+<title>MARANELLO | Tablero Financiero semestre 2026 </title>
 <style>
 :root{
  --navy:#224D8E;--navy2:#183A6B;--turquoise:#6DC1CB;--yellow-brand:#FABF00;--orange:#E96C24;
@@ -135,6 +135,454 @@ body.locked>header,body.locked>nav,body.locked>main,body.locked>footer{visibilit
 .method-details summary{cursor:pointer;color:var(--navy);font-weight:900;font-size:12px}
 .method-details .method-body{margin-top:10px;color:var(--muted);font-size:11px;line-height:1.6}
 
+
+/* ============================================================
+   V8 - OPTIMIZACIÓN MÓVIL
+   ============================================================ */
+html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
+button,select,input{touch-action:manipulation}
+.nav-inner,.period-tabs,.table-wrap{-webkit-overflow-scrolling:touch}
+
+/* Mejor lectura y objetivos táctiles */
+.nav-link,.period-tab,.mode-btn,.category-btn,.access-submit{
+  min-height:44px;
+}
+input,select{font-size:16px;} /* Evita zoom automático en iPhone */
+
+/* Indicador visual de scroll en navegación */
+nav{position:sticky;z-index:40}
+.nav-inner{
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+.nav-inner::-webkit-scrollbar,.period-tabs::-webkit-scrollbar{display:none}
+.nav-link{scroll-snap-align:start}
+
+/* Evitar que palabras/números largos rompan tarjetas */
+.card,.diag-block,.traffic-item,.sim-output{overflow-wrap:anywhere}
+.kpi-value{font-variant-numeric:tabular-nums}
+
+/* Tablas: desplazamiento contenido, no de toda la página */
+.table-wrap{
+  width:100%;
+  max-width:100%;
+  overflow-x:auto;
+  border-radius:8px;
+}
+.table-wrap table{min-width:640px}
+
+/* Formularios */
+.field select,.field input{min-height:46px}
+
+/* Acceso */
+.access-card{max-height:calc(100dvh - 24px);overflow:auto}
+.access-submit{min-height:48px}
+
+/* MÓVIL */
+@media (max-width: 768px){
+  body{background:#fff}
+  header{
+    position:static;
+    padding:9px 12px 10px;
+    border-bottom-width:3px;
+  }
+  .header-row{
+    display:block;
+    max-width:none;
+  }
+  .brand{justify-content:flex-start}
+  .brand-logo{
+    height:auto;
+    width:min(210px,70vw);
+    max-height:52px;
+    object-fit:contain;
+    object-position:left center;
+  }
+  .subtitle{
+    margin-top:5px;
+    font-size:10.5px;
+    line-height:1.35;
+  }
+  .brand-stripe{margin-top:7px;height:4px}
+
+  nav{
+    top:0;
+    background:#fff;
+    box-shadow:0 3px 12px rgba(34,77,142,.08);
+  }
+  .nav-inner{
+    max-width:none;
+    padding:6px 8px;
+    gap:4px;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+  }
+  .nav-link{
+    flex:0 0 auto;
+    padding:9px 12px;
+    font-size:12px;
+    border-radius:9px;
+  }
+
+  main{
+    max-width:none;
+    padding:10px 10px 18px;
+  }
+
+  .section-title{
+    align-items:flex-start;
+    display:block;
+    margin:3px 0 10px;
+  }
+  .section-title h2{
+    font-size:19px;
+    line-height:1.2;
+  }
+  .section-title p{
+    margin-top:4px;
+    font-size:10.5px;
+    line-height:1.4;
+  }
+
+  /* Selector de periodo en una sola línea deslizable */
+  .period-tabs{
+    display:flex;
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    gap:5px;
+    padding:2px 0 8px;
+    margin-bottom:8px;
+    scrollbar-width:none;
+    scroll-snap-type:x proximity;
+  }
+  .period-tab{
+    flex:0 0 auto;
+    min-width:58px;
+    padding:8px 12px;
+    font-size:11px;
+    scroll-snap-align:start;
+  }
+  .period-tab:first-child{min-width:92px}
+
+  /* KPI: dos columnas en teléfonos normales */
+  .kpis,
+  #kpiGrid{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px;
+  }
+  #kpiGrid .card:last-child{
+    grid-column:1 / -1;
+  }
+  .card{
+    padding:12px;
+    border-radius:10px;
+    box-shadow:0 4px 16px rgba(34,77,142,.06);
+  }
+  .card h3{
+    font-size:11.5px;
+    line-height:1.3;
+    margin-bottom:5px;
+  }
+  .kpi-value{
+    font-size:21px;
+    line-height:1.1;
+  }
+  .kpi-sub{
+    font-size:10px;
+    line-height:1.35;
+  }
+
+  /* Semáforo como lista compacta */
+  .traffic{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+  .traffic-item{padding:10px}
+  .traffic-item b{font-size:11px}
+  .traffic-item small{font-size:9.5px}
+
+  /* Todas las grillas analíticas pasan a una columna */
+  .two,.three,.four,.diag-actions,.sim-grid,.compare-grid,.category-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  /* Categorías: tarjetas horizontales más compactas */
+  .category-grid{gap:7px}
+  .category-btn{
+    min-height:0;
+    padding:11px 12px;
+    display:grid;
+    grid-template-columns:1fr auto;
+    column-gap:10px;
+    align-items:center;
+  }
+  .category-btn b{font-size:11px}
+  .category-btn strong{
+    margin:0;
+    font-size:18px;
+    text-align:right;
+  }
+  .category-btn small{
+    grid-column:1 / -1;
+    font-size:9.5px;
+    margin-top:4px;
+  }
+
+  /* Gráficos: menos alto, siguen siendo SVG responsivos */
+  .chart{min-height:0}
+  .chart-title{font-size:11px}
+  .chart svg{max-height:245px}
+
+  /* Simulador */
+  .sim-grid{gap:8px}
+  .sim-output{padding:11px}
+  .sim-output strong{font-size:18px}
+  #simReset{width:100%;min-height:46px}
+
+  /* Métricas */
+  .metric-row{
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:8px;
+    padding:9px 0;
+    font-size:11px;
+  }
+  .metric-row b{text-align:right}
+
+  /* Diagnóstico narrativo */
+  .report-hero{
+    padding:15px;
+    border-radius:11px;
+    border-bottom-width:5px;
+  }
+  .report-hero h3{font-size:17px}
+  .report-hero p{font-size:11.5px;line-height:1.55}
+  .diag-narrative{gap:9px}
+  .diag-block{
+    padding:13px;
+    box-shadow:none;
+  }
+  .diag-block h3{font-size:14px}
+  .diag-block p{
+    font-size:11.5px;
+    line-height:1.58;
+  }
+
+  /* Cobertura por sede */
+  .site-coverage-grid{grid-template-columns:1fr !important}
+  .site-coverage-card strong{font-size:18px}
+
+  /* Gauge nómina: se convierte a bloque */
+  .gauge-row{
+    grid-template-columns:1fr;
+    gap:5px;
+    padding:8px 0;
+    border-bottom:1px solid var(--border);
+  }
+  .gauge-row b{text-align:right}
+
+  /* Modal móvil tipo hoja */
+  dialog{
+    width:calc(100% - 16px);
+    max-width:none;
+    max-height:92dvh;
+    border-radius:14px;
+  }
+  .modal-head{padding:12px}
+  .modal-body{padding:12px;max-height:78dvh}
+
+  /* Login */
+  #accessGate{padding:12px}
+  .access-card{
+    padding:20px 16px;
+    border-radius:15px;
+  }
+  .access-card img{width:min(230px,76vw)}
+  .access-card h1{font-size:20px}
+  .access-card p{font-size:11px}
+  .access-card input{min-height:48px}
+  .access-submit{font-size:14px}
+
+  footer{
+    padding:10px 12px 22px;
+    text-align:center;
+    font-size:9px;
+    line-height:1.45;
+  }
+}
+
+/* Teléfonos estrechos */
+@media (max-width: 390px){
+  #kpiGrid,.kpis{
+    grid-template-columns:1fr !important;
+  }
+  #kpiGrid .card:last-child{grid-column:auto}
+  .traffic{grid-template-columns:1fr}
+  .nav-link{font-size:11px;padding:8px 10px}
+  .kpi-value{font-size:22px}
+  .metric-row{
+    grid-template-columns:1fr;
+  }
+  .metric-row b{text-align:left}
+}
+
+/* Horizontal móvil */
+@media (max-height: 500px) and (orientation: landscape){
+  .access-card{max-height:94dvh;padding:14px 18px}
+  .access-card img{width:170px;margin-bottom:4px}
+  .access-card h1{margin:4px 0;font-size:18px}
+  .access-card p{margin-bottom:9px}
+  .access-note{display:none}
+}
+
+
+/* ============================================================
+   V9 - DIAGNÓSTICO EJECUTIVO NARRATIVO
+   ============================================================ */
+.diag-intro{
+  background:#fff;
+  border:1px solid var(--border);
+  border-left:6px solid var(--navy);
+  border-radius:12px;
+  padding:18px 20px;
+  box-shadow:var(--shadow);
+}
+.diag-intro p{
+  margin:0 0 11px;
+  font-size:13.5px;
+  line-height:1.7;
+  color:var(--ink);
+}
+.diag-intro p:last-child{margin-bottom:0}
+
+.diag-keyfigures{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;
+  margin:13px 0;
+}
+.diag-figure{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:14px;
+  text-align:center;
+}
+.diag-figure strong{
+  display:block;
+  color:var(--navy);
+  font-size:24px;
+  line-height:1.1;
+  margin-bottom:5px;
+  font-variant-numeric:tabular-nums;
+}
+.diag-figure span{
+  display:block;
+  color:var(--muted);
+  font-size:10.5px;
+  line-height:1.35;
+}
+.diag-story{
+  display:grid;
+  gap:11px;
+}
+.diag-story article{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px 20px;
+}
+.diag-story article h3{
+  margin:0 0 10px;
+  color:var(--navy);
+  font-size:16px;
+  line-height:1.3;
+}
+.diag-story article p{
+  margin:0 0 10px;
+  color:var(--ink);
+  font-size:13px;
+  line-height:1.68;
+}
+.diag-story article p:last-child{margin-bottom:0}
+.diag-story .diag-conclusion{
+  background:#F6FAFC;
+  border-left:6px solid var(--turquoise);
+}
+.diag-story .diag-liquidity{
+  background:#FFF9F3;
+  border-left:6px solid var(--orange);
+}
+
+.diag-details{
+  margin-top:12px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:11px;
+  overflow:hidden;
+}
+.diag-details summary{
+  list-style:none;
+  cursor:pointer;
+  padding:14px 16px;
+  color:var(--navy);
+  font-size:12.5px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  min-height:48px;
+}
+.diag-details summary::-webkit-details-marker{display:none}
+.diag-details summary::after{
+  content:"›";
+  font-size:22px;
+  line-height:1;
+  transform:rotate(90deg);
+  transition:transform .18s ease;
+  color:var(--navy);
+}
+.diag-details[open] summary::after{transform:rotate(-90deg)}
+.diag-details[open] summary{
+  border-bottom:1px solid var(--border);
+  background:#F8FAFC;
+}
+.diag-details-body{
+  padding:13px 16px 16px;
+  font-size:11.5px;
+  line-height:1.6;
+  color:var(--ink);
+}
+.diag-details-body p{margin:0 0 9px}
+.diag-details-body p:last-child{margin-bottom:0}
+.diag-details-body ul{
+  margin:4px 0 0 18px;
+  padding:0;
+}
+.diag-details-body li{margin:0 0 7px}
+
+@media(max-width:768px){
+  .diag-intro{padding:14px}
+  .diag-intro p{font-size:11.8px;line-height:1.62}
+  .diag-keyfigures{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:7px;
+  }
+  .diag-figure{padding:11px 8px}
+  .diag-figure strong{font-size:20px}
+  .diag-figure span{font-size:9.5px}
+  .diag-story{gap:8px}
+  .diag-story article{padding:14px}
+  .diag-story article h3{font-size:14px}
+  .diag-story article p{font-size:11.6px;line-height:1.6}
+  .diag-details summary{padding:12px;font-size:11.5px}
+  .diag-details-body{padding:11px 12px 14px;font-size:10.8px}
+}
+@media(max-width:390px){
+  .diag-keyfigures{grid-template-columns:1fr 1fr}
+  .diag-figure strong{font-size:19px}
+}
+
 </style>
 </head>
 <body class="locked">
@@ -157,13 +605,13 @@ body.locked>header,body.locked>nav,body.locked>main,body.locked>footer{visibilit
  <div class="header-row">
   <div>
   <div class="brand"><img class="brand-logo" src="assets/logo_maranello_horizontal.png" alt="MARANELLO buona & fresca"></div>
-  <div class="subtitle">Tablero Financiero Ejecutivo V7 · Semestre 2026 · Semestre enero–junio 2026 · Corte 30-jun-2026</div>
+  <div class="subtitle">Tablero Financiero Ejecutivo V9 · Semestre 2026 · Semestre enero–junio 2026 · Corte 30-jun-2026</div>
   <div class="brand-stripe"></div>
  </div>
   
  </div>
 </header>
-<nav><div class="nav-inner" id="nav">
+<nav aria-label="Navegación del tablero"><div class="nav-inner" id="nav">
  <button class="nav-link active" data-tab="resumen">Resumen</button>
  <button class="nav-link" data-tab="ventas">Ventas</button>
  <button class="nav-link" data-tab="costos">Costos</button>
@@ -380,103 +828,109 @@ body.locked>header,body.locked>nav,body.locked>main,body.locked>footer{visibilit
  
 
  
+
 <section id="diagnostico" class="section">
   <div class="section-title">
     <h2>Diagnóstico financiero</h2>
-    <p>Lectura ejecutiva y concluyente de la operación Semestre 2026</p>
+    <p>Lectura consolidada del semestre enero–junio de 2026</p>
   </div>
 
-  <div class="report-hero">
-    <h3>Conclusión central</h3>
-    <p><b>MARANELLO sí tiene capacidad comercial, pero actualmente está operando bajo una estructura financieramente tensionada y, con la información disponible, probablemente por debajo de su punto de equilibrio.</b> La señal general del semestre no apunta a una sola causa, sino a una combinación de menor nivel de ventas entre abril y junio, una estructura laboral y operativa pesada, compras importantes de insumos, caída de liquidez y necesidad creciente de financiación.</p>
+  <div class="diag-intro">
+    <p><b>Después de consolidar las ventas, compras, gastos, nómina, bancos, impuestos y financiación del semestre, ya tenemos una lectura mucho más clara de cómo está operando MARANELLO.</b></p>
+    <p>El negocio sí demuestra capacidad para generar ventas. El principal problema no parece estar en la ausencia de mercado, sino en que durante los últimos meses del semestre las ventas disminuyeron mientras buena parte de nuestra estructura de costos y gastos se mantuvo. Esta situación comenzó a reflejarse tanto en la rentabilidad estimada como en la disponibilidad de caja.</p>
+    <p>Las cifras que presentamos a continuación nos permiten entender dónde está la presión y cuáles son los frentes que debemos atender para recuperar equilibrio.</p>
   </div>
 
-  <div class="diag-narrative" style="margin-top:14px">
-    <div class="diag-block diag-highlight">
-      <h3>1. Qué muestran las ventas</h3>
-      <p>Durante el primer semestre de 2026, MARANELLO registró ventas netas por <b>$376,38 millones</b>, con un promedio mensual cercano a <b>$62,73 millones</b>. Esto confirma que el negocio sí tiene capacidad de venta y que existe demanda real por su operación.</p>
-      <p>Sin embargo, la tendencia del semestre es preocupante. En enero las ventas se ubicaron en aproximadamente <b>$75,41 millones</b> y en junio cerraron alrededor de <b>$48,07 millones</b>. Esto representa una reducción cercana al <b>36,3 %</b>. En otras palabras, el restaurante sí vende, pero perdió tracción comercial a medida que avanzó el semestre.</p>
-      <p>El hallazgo clave es que la estructura del negocio parece estar diseñada para operar cómodamente con ventas superiores a las observadas al cierre del semestre. Cuando las ventas estuvieron alrededor de <b>$74–75 millones</b>, la operación se acercó más a un nivel sostenible; cuando bajaron hacia el rango de <b>$48–58 millones</b>, la presión financiera se hizo evidente.</p>
+  <div class="diag-keyfigures">
+    <div class="diag-figure">
+      <strong>$376,38 M</strong>
+      <span>Ventas netas del semestre</span>
     </div>
-
-    <div class="diag-block">
-      <h3>2. Qué está absorbiendo la venta</h3>
-      <p>La principal conclusión del análisis es que una porción muy alta de la venta se consume antes de llegar a una utilidad real. Los <b>gastos operativos</b> documentados del semestre suman aproximadamente <b>$119,92 millones</b>, equivalentes a cerca del <b>31,9 %</b> de las ventas netas.</p>
-      <p>Además, el universo de <b>nómina, prestaciones y seguridad social</b> procesado asciende a aproximadamente <b>$157,52 millones</b>, lo que representa alrededor del <b>41,9 %</b> de las ventas. Solo entre estos dos bloques ya se estaría comprometiendo cerca del <b>73,7 %</b> de los ingresos del semestre.</p>
-      <p>Esto significa que, antes incluso de calcular plenamente el costo de los alimentos y bebidas vendidos, la empresa ya llega con una estructura muy cargada. Esa es la razón por la cual cualquier caída en ventas golpea de forma directa la liquidez y la rentabilidad.</p>
+    <div class="diag-figure">
+      <strong>-36,3 %</strong>
+      <span>Variación de ventas enero → junio</span>
     </div>
-
-    <div class="diag-block">
-      <h3>3. El costo de insumos sigue siendo decisivo</h3>
-      <p>Las compras clasificadas como candidatas a inventario suman aproximadamente <b>$121,36 millones</b>, equivalentes a cerca del <b>32,2 %</b> de las ventas. Aun así, metodológicamente estas compras <b>no pueden asumirse automáticamente como costo de ventas</b> porque todavía falta el cierre de inventario inicial y final.</p>
-      <p>El punto importante es que, aun sin cerrar completamente ese dato, el nivel de compras ya muestra que el negocio maneja una carga relevante de insumos. Si el inventario final no compensa materialmente estas compras, el resultado del semestre tiende a volverse negativo.</p>
-      <p>Por eso el inventario no es un detalle menor: es una de las piezas que puede ajustar el resultado final, pero no cambia por sí sola la señal estructural que deja el resto del análisis.</p>
+    <div class="diag-figure">
+      <strong>≈ $68 M/mes</strong>
+      <span>Referencia provisional de equilibrio</span>
     </div>
-
-    <div class="diag-block diag-warning">
-      <h3>4. La liquidez es la alerta más clara</h3>
-      <p>Más allá del análisis de resultados, la señal más fuerte aparece en caja. La cuenta empresarial pasó de un saldo inicial cercano a <b>$26,59 millones</b> a un saldo al cierre de junio de apenas <b>$1,85 millones</b>. Esto implica una reducción cercana al <b>93 %</b> del saldo disponible en la cuenta principal del negocio.</p>
-      <p>Adicionalmente, durante el semestre fue necesario incorporar un <b>crédito Bancolombia</b>, cuyo saldo de capital al cierre se ubica alrededor de <b>$26,27 millones</b>. También se evidenció presión asociada a los compromisos con inversionistas.</p>
-      <p>En términos gerenciales, esto significa que el problema no es únicamente contable o teórico. La operación sí está consumiendo liquidez y por eso la financiación empezó a jugar un papel más importante en la sostenibilidad del negocio.</p>
-    </div>
-
-    <div class="diag-block">
-      <h3>5. Qué conclusión deja el resultado del semestre</h3>
-      <p>Con la información disponible, MARANELLO <b>probablemente operó por debajo de su punto de equilibrio</b> en el primer semestre de 2026. La magnitud exacta del resultado todavía puede moverse cuando se cierre inventario y se depure totalmente la nómina, pero la señal general ya es suficientemente clara.</p>
-      <p>Las sensibilidades construidas indican que el negocio necesitaría vender aproximadamente en un rango cercano a <b>$67–68 millones mensuales</b> para sostener la estructura provisional actual. Frente a esa referencia, junio quedó significativamente por debajo, con una brecha aproximada de <b>$19–20 millones</b>.</p>
-      <p>En otras palabras, el negocio no parece estar sin mercado, pero sí muestra una estructura pesada para el nivel de ventas con el que terminó operando en el cierre del semestre.</p>
-    </div>
-
-    <div class="diag-actions">
-      <div class="diag-block">
-        <h3>6. Qué no explica por sí solo el problema</h3>
-        <p>Los <b>impuestos</b> están identificados y controlados, pero no son la causa principal del deterioro. De igual manera, los <b>inversionistas</b> y el componente financiero agregan presión, aunque no parecen ser el origen del desequilibrio operativo.</p>
-        <p>La raíz del problema está más bien en la combinación de <b>ventas decrecientes</b>, <b>estructura alta</b> y <b>presión sobre la caja</b>.</p>
-      </div>
-
-      <div class="diag-block">
-        <h3>7. Qué debería hacer MARANELLO</h3>
-        <p>La primera prioridad es recuperar un nivel de ventas mensual superior al actual, idealmente en el rango mínimo de equilibrio. La segunda es depurar con precisión la nómina para distinguir el costo laboral real de otros pagos o conceptos mezclados en la fuente.</p>
-        <p>La tercera es cerrar inventarios para calcular el food cost real. Sin esa cifra, la rentabilidad seguirá teniendo incertidumbre técnica, aunque la tendencia general ya esté clara.</p>
-      </div>
-
-      <div class="diag-block">
-        <h3>8. Mensaje final para gerencia e inversionistas</h3>
-        <p><b>MARANELLO no parece un negocio inviable, pero sí una operación que requiere intervención y control inmediato.</b> Existen señales positivas, como la capacidad comercial demostrada en algunos meses, pero la trayectoria reciente no debería mantenerse sin ajustes.</p>
-        <p>Si el negocio continúa operando con ventas cercanas a junio, sin mejorar margen ni reducir presión estructural, es probable que siga consumiendo caja y aumentando su dependencia de financiación. La situación es corregible, pero exige decisiones gerenciales y seguimiento disciplinado mes a mes.</p>
-      </div>
+    <div class="diag-figure">
+      <strong>$1,85 M</strong>
+      <span>Caja empresarial al cierre</span>
     </div>
   </div>
 
+  <div class="diag-story">
 
-  <div class="section-title" style="margin-top:22px"><h2>Prioridades para cerrar la información</h2><p>Pendientes que pueden modificar el resultado final</p></div>
-  <div class="card"><div class="table-wrap"><table>
-   <thead><tr><th>Prioridad</th><th>Pendiente</th><th>Afecta</th><th>Acción</th></tr></thead>
-   <tbody>
-    <tr data-status="pendiente"><td><span class="status pendiente">CRÍTICO</span></td><td>Inventario inicial valorizado</td><td>COGS / PyG</td><td>Obtener inventario 01-ene-2026.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">CRÍTICO</span></td><td>Inventario final valorizado</td><td>COGS / balance</td><td>Obtener inventario 30-jun-2026.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>Depuración laboral</td><td>PyG</td><td>Separar empleado formal, turnos, ocasionales y otros conceptos.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>Instrumento APE</td><td>Financiación / PyG</td><td>Definir clasificación y tratamiento del componente financiero.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>$7,79 M mixtos</td><td>PyG / COGS / activo</td><td>Validar uso y naturaleza documental.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">ALTO</span></td><td>$2,02 M activos/política</td><td>PyG / activo</td><td>Definir gasto vs capitalización.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">MEDIO</span></td><td>Cuentas relacionadas Q1 / tarjetas</td><td>Flujo caja</td><td>Completar saldos y movimientos empresariales.</td></tr>
-    <tr data-status="pendiente"><td><span class="status pendiente">MEDIO</span></td><td>Ventas “Por Pagar” $3,81 M</td><td>CxC</td><td>Conciliar antes de reconocer cuenta por cobrar.</td></tr>
-   </tbody></table></div></div>
- 
+    <article>
+      <h3>1. Comportamiento de las ventas</h3>
+      <p>Durante el semestre registramos ventas netas por <b>$376,38 millones</b>, equivalentes a un promedio mensual cercano a <b>$62,73 millones</b>.</p>
+      <p>El comportamiento no fue uniforme. Enero y marzo estuvieron alrededor de $74–75 millones, mientras que abril, mayo y junio se ubicaron en un nivel inferior. Junio cerró en <b>$48,07 millones</b>, aproximadamente <b>36,3 % por debajo de enero</b>.</p>
+      <p><b>Esto nos muestra que MARANELLO tiene capacidad para alcanzar niveles de venta superiores a $70 millones mensuales, pero durante el cierre del semestre no logramos sostener ese ritmo.</b> Esta reducción es especialmente importante porque varios de nuestros costos no disminuyen automáticamente cuando bajan las ventas.</p>
+    </article>
 
-<details class="method-details">
- <summary>Notas metodológicas y fuentes</summary>
- <div class="method-body">
-  <p><b>Metodología:</b> fuente original → depuración → anti-duplicación → clasificación → causación vs. caja → conciliación → nivel de certeza.</p>
-  <p>Las compras inventariables no se convierten automáticamente en costo de ventas. Los movimientos bancarios no se convierten automáticamente en gastos. El principal de impuestos y financiación se separa del resultado operativo. Las sensibilidades no sustituyen cifras contables definitivas.</p>
-  <p>Fuentes consolidadas: ventas, UBL/compras, correo, WhatsApp, nómina y PILA, bancos, impuestos e inversionistas.</p>
- </div>
-</details>
+    <article>
+      <h3>2. Estructura de costos y operación</h3>
+      <p>Al revisar cómo se distribuyen nuestros ingresos, encontramos una estructura exigente. Los gastos operativos documentados suman aproximadamente <b>$119,92 millones</b>, mientras que el universo de nómina procesado alcanza <b>$157,52 millones</b>.</p>
+      <p>En conjunto, estos dos bloques representan aproximadamente <b>73,7 % de las ventas del semestre</b>, antes de incorporar el costo real de los alimentos, bebidas y demás insumos vendidos.</p>
+      <p>Las compras clasificadas como inventariables alcanzaron <b>$121,36 millones</b>. Sin embargo, todavía no las estamos tratando como costo de ventas definitivo porque necesitamos incorporar correctamente el inventario inicial y final.</p>
+      <p><b>Esta combinación explica por qué una reducción de ventas tiene un impacto rápido sobre el resultado y la caja.</b></p>
+    </article>
+
+    <article>
+      <h3>3. Rentabilidad y punto de equilibrio</h3>
+      <p><b>Todavía no tenemos una utilidad contable definitiva</b>, principalmente porque necesitamos cerrar los inventarios y depurar algunos componentes de la nómina.</p>
+      <p>Aun así, los escenarios construidos nos permiten entender el orden de magnitud del problema. Si asumimos únicamente como referencia que el inventario inicial y final fueran iguales, el resultado estimado del semestre sería cercano a <b>-$28,39 millones</b>. Si además incorporáramos el componente financiero candidato de los inversionistas, el resultado podría aproximarse a <b>-$33,75 millones</b>.</p>
+      <p>Estas cifras no deben interpretarse como una pérdida certificada, sino como una <b>señal gerencial</b>. Con la estructura actual, estimamos que MARANELLO necesita ventas mensuales cercanas a <b>$67–68 millones</b> para aproximarse al punto de equilibrio. Junio, con $48,07 millones, quedó alrededor de $19–20 millones por debajo de esa referencia.</p>
+    </article>
+
+    <article class="diag-liquidity">
+      <h3>4. Liquidez y financiación</h3>
+      <p><b>Uno de los aspectos que más nos preocupa es la evolución de la caja.</b> La cuenta empresarial inició el semestre con aproximadamente <b>$26,59 millones</b> y terminó junio con <b>$1,85 millones</b>.</p>
+      <p>Durante este mismo período fue necesario incorporar financiación bancaria mediante un crédito de $26,5 millones. Esto confirma que la presión que estamos identificando no es únicamente un resultado contable: <b>también se está reflejando directamente en la liquidez disponible para operar.</b></p>
+      <p>Los compromisos con inversionistas agregan presión sobre la caja, aunque el análisis muestra que no son la causa principal del desequilibrio operativo.</p>
+    </article>
+
+    <article class="diag-conclusion">
+      <h3>5. Nuestra lectura de la situación</h3>
+      <p><b>Con la información analizada, consideramos que MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable.</b></p>
+      <p>El principal problema es que actualmente tenemos una estructura diseñada para un nivel de ventas superior al observado durante los últimos meses del semestre. Cuando alcanzamos ventas cercanas a $74–75 millones mensuales, la operación se aproxima mucho más a una estructura sostenible. Cuando las ventas caen hacia $48–58 millones, los costos laborales, ocupación, servicios y demás gastos mantienen una presión considerable.</p>
+      <p>Por esta razón, nuestro enfoque para los próximos meses debe concentrarse en tres frentes: <b>recuperar ventas, ajustar y entender mejor la estructura laboral y determinar el costo real de alimentos mediante inventarios.</b></p>
+      <p>La situación requiere intervención y seguimiento, pero ahora contamos con una base financiera mucho más organizada para tomar decisiones con información y no únicamente con percepciones.</p>
+    </article>
+
+  </div>
+
+  <details class="diag-details">
+    <summary>Prioridades para cerrar la información</summary>
+    <div class="diag-details-body">
+      <ul>
+        <li><b>Inventario inicial valorizado:</b> necesario para calcular correctamente el costo de ventas.</li>
+        <li><b>Inventario final valorizado:</b> necesario para cerrar COGS y margen bruto.</li>
+        <li><b>Depuración laboral:</b> separar empleados formales, turnos, ocasionales y otros conceptos incluidos en la hoja de pagos.</li>
+        <li><b>Tratamiento del instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
+        <li><b>Partidas mixtas y activos pendientes:</b> terminar su clasificación entre gasto, costo y activo.</li>
+        <li><b>Cuentas relacionadas:</b> completar los movimientos empresariales faltantes para cerrar el flujo de caja consolidado.</li>
+        <li><b>Ventas marcadas “Por Pagar”:</b> conciliarlas con bancos/caja antes de reconocerlas como cuenta por cobrar.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="diag-details">
+    <summary>Notas metodológicas y fuentes</summary>
+    <div class="diag-details-body">
+      <p><b>Metodología aplicada:</b> fuente original → depuración → anti-duplicación → clasificación → causación vs. caja → conciliación → nivel de certeza.</p>
+      <p>Las compras inventariables no se convierten automáticamente en costo de ventas. Los movimientos bancarios no se convierten automáticamente en gastos. El principal de impuestos y financiación se separa del resultado operativo, y los escenarios de sensibilidad no sustituyen cifras contables definitivas.</p>
+      <p>La reconstrucción del semestre utiliza ventas, documentos UBL y compras, correo, WhatsApp, nómina y PILA, bancos, impuestos e información de financiación e inversionistas.</p>
+    </div>
+  </details>
+
 </section>
+
 
 </main>
 
-<footer>MARANELLO · Tablero Financiero Ejecutivo V7 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
+<footer>MARANELLO · Tablero Financiero Ejecutivo V9 · Las cifras se presentan con nivel de certeza explícito. Elaborado a partir del cierre reconstruido enero–junio 2026.</footer>
 
 <dialog id="detailDialog">
  <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
@@ -594,7 +1048,7 @@ function renderCharts(){
 function renderCompare(){
  const a=document.getElementById("compareA").value,b=document.getElementById("compareB").value, A=DATA.monthly[a],B=DATA.monthly[b];
  const metrics=[["Ventas netas","sales"],["Gastos operativos","opex"],["Nómina fuente","payroll"],["Compras inventariables","inventory"],["Caja final","bank"]];
- let h='<div class="table-wrap"><table><thead><tr><th>Indicador</th><th>'+esc(a)+'</th><th>'+esc(b)+'</th><th>Variación</th><th>%</th></tr></thead><tbody>';
+ let h='<div class="table-wrap" role="region" aria-label="Tabla desplazable" tabindex="0"><table><thead><tr><th>Indicador</th><th>'+esc(a)+'</th><th>'+esc(b)+'</th><th>Variación</th><th>%</th></tr></thead><tbody>';
  metrics.forEach(([label,k])=>{const da=B[k]-A[k],dp=A[k]!==0?da/A[k]:NaN;h+=`<tr><td>${label}</td><td class="num">${money(A[k])}</td><td class="num">${money(B[k])}</td><td class="num ${da<0?"delta negative":"delta positive"}">${money(da)}</td><td class="num ${dp<0?"delta negative":"delta positive"}">${pct(dp)}</td></tr>`;});
  h+='</tbody></table></div>';document.getElementById("compareTable").innerHTML=h;
 }
@@ -605,20 +1059,20 @@ function renderCategories(){
  grid.querySelectorAll("[data-cat]").forEach(b=>b.addEventListener("click",()=>{state.category=Number(b.dataset.cat);renderCategories();}));
  const c=DATA.categories[state.category];
  const total=c.items.reduce((a,x)=>a+x[1],0);
- let h=`<h3>${esc(c.group)}</h3><p class="kpi-sub">${esc(c.desc)}</p><div class="table-wrap"><table><thead><tr><th>Subcategoría</th><th class="num">Valor</th><th class="num">% grupo</th></tr></thead><tbody>`;
+ let h=`<h3>${esc(c.group)}</h3><p class="kpi-sub">${esc(c.desc)}</p><div class="table-wrap" role="region" aria-label="Tabla desplazable" tabindex="0"><table><thead><tr><th>Subcategoría</th><th class="num">Valor</th><th class="num">% grupo</th></tr></thead><tbody>`;
  c.items.slice().sort((a,b)=>b[1]-a[1]).forEach(x=>{h+=`<tr><td>${esc(x[0])}</td><td class="num">${money(x[1])}</td><td class="num">${pct(x[1]/c.value)}</td></tr>`;});
  h+='</tbody></table></div>';document.getElementById("categoryDetail").innerHTML=h;
  applyStatusFilter();
 }
 
 function renderProviders(){
- let h='<div class="table-wrap"><table><thead><tr><th>Proveedor</th><th>Grupo</th><th>Categoría</th><th class="num">Valor</th></tr></thead><tbody>';
+ let h='<div class="table-wrap" role="region" aria-label="Tabla desplazable" tabindex="0"><table><thead><tr><th>Proveedor</th><th>Grupo</th><th>Categoría</th><th class="num">Valor</th></tr></thead><tbody>';
  DATA.providers.forEach(x=>{h+=`<tr><td>${esc(x[0])}</td><td>${esc(x[2])}</td><td>${esc(x[3])}</td><td class="num">${money(x[1])}</td></tr>`;});
  h+='</tbody></table></div>';document.getElementById("providerTable").innerHTML=h;
 }
 
 function renderPayroll(){
- let h='<div class="table-wrap"><table><thead><tr><th>Mes</th><th class="num">Nómina fuente</th><th class="num">Personas con pago</th><th class="num">PILA empleados</th></tr></thead><tbody>';
+ let h='<div class="table-wrap" role="region" aria-label="Tabla desplazable" tabindex="0"><table><thead><tr><th>Mes</th><th class="num">Nómina fuente</th><th class="num">Personas con pago</th><th class="num">PILA empleados</th></tr></thead><tbody>';
  DATA.months.forEach(m=>{const d=DATA.monthly[m];h+=`<tr><td>${m}</td><td class="num">${money(d.payroll)}</td><td class="num">${d.people}</td><td class="num">${d.pila_people}</td></tr>`;});
  h+='</tbody></table></div>';document.getElementById("payrollTable").innerHTML=h;
  const max=Math.max(...DATA.payroll_patterns.map(x=>x[2]));
