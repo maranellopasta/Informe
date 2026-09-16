@@ -117,6 +117,9 @@ svg .dim{opacity:.35}
 .hb-fill{height:100%;background:var(--teal);border-radius:3px}
 .hb-row.hl .hb-fill{background:var(--orange)} .hb-row.hl .hb-name{font-weight:700}
 .hb-row.nav .hb-fill{background:var(--navy)}
+.hb-row.two{grid-template-columns:minmax(0,11rem) minmax(0,1fr) 7.2rem}
+.s-gap{margin-top:12px;padding:9px 12px;border-left:4px solid var(--orange);background:var(--bad-bg);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.88rem}
+.s-gap b{font-family:var(--f-num);font-size:1.05rem}
 .hb-num{text-align:right;font-family:var(--f-num);font-weight:600;font-size:.95rem;font-variant-numeric:tabular-nums;line-height:1.1}
 .hb-num small{display:block;font-family:var(--f-body);font-size:.68rem;color:var(--muted);font-weight:500}
 
@@ -231,6 +234,7 @@ html.present .method{display:none!important}
   .panel.fill{display:flex;flex-direction:column}
   .fill>.panel,.fill>.col>.panel.grow{display:flex;flex-direction:column;min-height:0}
   .fill>.col{min-height:0;overflow-y:auto;scrollbar-width:thin}
+  .fill>.panel{overflow-y:auto;scrollbar-width:thin}
   #scenarios .kpi .val{font-size:1.6rem}
   .grow{flex:1;min-height:0}
   .chart{flex:1;min-height:0;position:relative}
@@ -392,7 +396,7 @@ html.present .method{display:none!important}
       <p class="note method" id="opexRecon"></p>
     </div>
     <div class="panel">
-      <div class="p-head"><div><h3>En qué se va el gasto</h3><p class="hint" id="opexCompNote"></p></div></div>
+      <div class="p-head"><div><h3>En qué se va el gasto operativo</h3><p class="hint" id="opexCompNote"></p></div></div>
       <div class="hb" id="hbOpexCat"></div>
     </div>
   </div>
@@ -671,9 +675,9 @@ function lineChart(b,data,label,noSel){
     s+=`<text x="${x(i)}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${p.tick||SHORT[p.k]}</text>`;});
   return s+"</svg>";
 }
-function hbars(items,{total,hl=[],cls=""}={}){
+function hbars(items,{total,totalLabel="",second,secondLabel="",hl=[],cls=""}={}){
   const max=Math.max(...items.map(x=>x[1]));
-  return items.map(x=>`<div class="hb-row ${cls}${hl.includes(x[0])?' hl':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)}</small>`:""}</span></div>`).join("");
+  return items.map(x=>`<div class="hb-row ${cls}${hl.includes(x[0])?' hl':''}${second?' two':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)}${totalLabel?" "+totalLabel:""}</small>`:""}${second?`<small>${pct(x[1]/second)}${secondLabel?" "+secondLabel:""}</small>`:""}</span></div>`).join("");
 }
 const setHTML=(id,h)=>document.getElementById(id).innerHTML=h;
 function topWithOthers(items,k){const s=items.slice().sort((a,b)=>b[1]-a[1]);if(s.length<=k)return s;const rest=s.slice(k).reduce((a,x)=>a+x[1],0);return [...s.slice(0,k),[`Otros (${s.length-k} conceptos)`,rest]];}
@@ -748,8 +752,8 @@ function renderGastos(){
     kpi("Pendiente de clasificar",fM(H1.assets_policy+H1.mixed),`Activos ${fM(H1.assets_policy)} y mixtas ${fM(H1.mixed)}`));
   const b=box("chOpex",270);
   b.el.innerHTML=barChart({box:b,label:"Gastos operativos por mes",data:MONTHS.map(m=>({k:m,v:M[m].opex})),color:"var(--yellow)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
-  setHTML("hbOpexCat",hbars(topWithOthers(CATEGORIES.opex,7),{total:H1.opex,hl:["Ocupación"]}));
-  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Jun. ":`Acumulado Ene–Jun; aún no hay detalle de ${d.name}. `)+`${central[0].replace(" S.A.S.","")} concentra ${pct(central[1]/H1.opex,0)} del gasto.`;
+  setHTML("hbOpexCat",hbars(topWithOthers(CATEGORIES.opex,7),{total:H1.opex,totalLabel:"del gasto",second:T.sales,secondLabel:"de ventas",hl:["Ocupación"]}));
+  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Jun. ":`Acumulado Ene–Jun; aún no hay detalle de ${d.name}. `)+`Cada concepto muestra su peso sobre el gasto operativo (${fM(H1.opex)}) y sobre las ventas (${fM(T.sales)}). ${central[0].replace(" S.A.S.","")} concentra ${pct(central[1]/H1.opex,0)} del gasto operativo.`;
   document.getElementById("opexRecon").textContent=`Conciliación pendiente: los meses suman ${fM(T.opexMonths)} y el consolidado validado es ${fM(H1.opex)}; la diferencia de ${fM(H1.opex-T.opexMonths)} no se reparte entre meses.`;
   TABLES.opex=["Gastos operativos por mes",monthTable([{h:"Gastos operativos",f:m=>M[m].opex,fmt:money},{h:"% ventas",f:m=>M[m].opex/M[m].sales,fmt:v=>pct(v)},varCol("opex")],{label:"Suma de meses",cells:[money(T.opexMonths),pct(T.opexMonths/T.sales),""]})];
 }
@@ -823,8 +827,9 @@ function renderDiag(){
   const bestTwo=over.length?over.reduce((a,m)=>a+M[m].sales,0)/over.length:Math.max(...MONTHS.map(m=>M[m].sales));
   const iso=document.getElementById("isoLogo").src;
   const otherOpex=H1.opex-OCCUPANCY;
-  const structure=[["Nómina",T.payroll],["Compras",T.inventory],["Ocupación",OCCUPANCY],["Otros gastos operativos",otherOpex]].map(x=>[x[0],x[1]/T.sales]);
-  const structTotal=structure.reduce((a,x)=>a+x[1],0);
+  const COSTS=T.payroll+T.inventory+H1.opex, COST_GAP=COSTS-T.sales;
+  const structure=[["Nómina",T.payroll],["Compras",T.inventory],["Ocupación",OCCUPANCY],["Otros gastos operativos",otherOpex]].map(x=>[x[0],x[1]/COSTS,x[1]]);
+  const per100=v=>"$"+nf(v*100,1);
   const cases=[["Nivel de junio",M.JUNIO.sales],["Promedio del semestre",avg],["Equilibrio",BE],[`Promedio ${list(over.map(LOW))}`,bestTwo]].map(c=>[c[0],c[1],resultAt(c[1])]);
   const maxAbs=Math.max(...cases.map(c=>Math.abs(c[2])))||1;
   const onePoint=avg*0.01;
@@ -858,11 +863,12 @@ function renderDiag(){
   <div class="chapter">
     <div class="ch-text">
       <h3>La estructura quedó grande para las ventas actuales</h3>
-      <p>Por cada peso vendido en el semestre, la nómina se llevó ${pct(structure[0][1],0)}, las compras ${pct(structure[1][1],0)} y la ocupación del local ${pct(structure[2][1],0)}. Sumando el resto de gastos operativos, los costos registrados equivalen al <b>${pct(structTotal)}</b> de las ventas.</p>
-      <p>Nómina y ocupación son costos que no bajan cuando bajan las ventas. Por eso cada mes flojo pesa tanto en el resultado.</p>
-      <p>Para dimensionarlo: al nivel de ventas promedio, cada punto porcentual de costo fijo sobre ventas equivale a unos <b>${fM(onePoint)} al mes</b>.</p>
+      <p>De cada $100 de costo del semestre, ${per100(structure[0][1])} fueron nómina, ${per100(structure[1][1])} compras, ${per100(structure[2][1])} ocupación del local y ${per100(structure[3][1])} el resto de gastos operativos.</p>
+      <p>El problema es el tamaño: esos costos sumaron <b>${fM(COSTS)}</b> frente a ventas de ${fM(T.sales)}, es decir, <b>gastamos $${nf(COSTS/T.sales*100,0)} por cada $100 vendidos</b>.</p>
+      <p>Nómina y ocupación no bajan cuando bajan las ventas, por eso cada mes flojo pesa tanto. Al nivel de ventas promedio, cada punto porcentual de costo fijo sobre ventas equivale a unos <b>${fM(onePoint)} al mes</b>.</p>
     </div>
-    <div class="ch-visual"><p class="cap">Costos del semestre como porcentaje de las ventas</p><div class="hb">${structure.map(x=>`<div class="hb-row${x[0]==="Ocupación"?' hl':''}"><span class="hb-name">${x[0]}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/structure[0][1]*100).toFixed(1)}%"></div></div><span class="hb-num">${pct(x[1])}</span></div>`).join("")}<div class="hb-row"><span class="hb-name"><b>Total</b></span><span></span><span class="hb-num"><b>${pct(structTotal)}</b></span></div></div></div>
+    <div class="ch-visual"><p class="cap">Cómo se reparten los costos del semestre</p><div class="hb">${structure.map(x=>`<div class="hb-row two${x[0]==="Ocupación"?' hl':''}"><span class="hb-name">${x[0]}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/structure[0][1]*100).toFixed(1)}%"></div></div><span class="hb-num">${pct(x[1])}<small>${fM(x[2])}</small></span></div>`).join("")}<div class="hb-row two"><span class="hb-name"><b>Total costos</b></span><span></span><span class="hb-num"><b>100,0 %</b><small>${fM(COSTS)}</small></span></div></div>
+      <div class="s-gap">Los costos superaron las ventas en <b>${fM(COST_GAP)}</b> (${pct(COST_GAP/T.sales)} de las ventas).</div></div>
   </div>
 
   <div class="chapter">
