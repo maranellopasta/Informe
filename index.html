@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MARANELLO | Tablero financiero enero–junio 2026</title>
+<title>MARANELLO | Tablero financiero enero–agosto 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
@@ -118,6 +118,9 @@ svg .dim{opacity:.35}
 .hb-row.hl .hb-fill{background:var(--orange)} .hb-row.hl .hb-name{font-weight:700}
 .hb-row.nav .hb-fill{background:var(--navy)}
 .hb-row.two{grid-template-columns:minmax(0,11rem) minmax(0,1fr) 7.2rem}
+.rows .r.cmp3{grid-template-columns:minmax(0,1fr) 5.6rem 6.6rem;gap:8px}
+.rows .r.cmp3 b{text-align:right}
+.rows .r.cmp3.head span{font-size:.72rem;color:var(--muted);font-weight:600;text-align:right}
 .s-gap{margin-top:12px;padding:9px 12px;border-left:4px solid var(--orange);background:var(--bad-bg);border-radius:0 var(--r-sm) var(--r-sm) 0;font-size:.88rem}
 .s-gap b{font-family:var(--f-num);font-size:1.05rem}
 .hb-num{text-align:right;font-family:var(--f-num);font-weight:600;font-size:.95rem;font-variant-numeric:tabular-nums;line-height:1.1}
@@ -235,7 +238,10 @@ html.present .method{display:none!important}
   .fill>.panel,.fill>.col>.panel.grow{display:flex;flex-direction:column;min-height:0}
   .fill>.col{min-height:0;overflow-y:auto;scrollbar-width:thin}
   .fill>.panel{overflow-y:auto;scrollbar-width:thin}
-  #scenarios .kpi .val{font-size:1.6rem}
+  #scenarios .kpi{padding:8px 12px}
+  #scenarios .kpi .val{font-size:1.45rem}
+  #resultado .rows .r{padding:4px 0;font-size:.8rem}
+  #resultado .rows .r b{font-size:.95rem}
   .grow{flex:1;min-height:0}
   .chart{flex:1;min-height:0;position:relative}
   .chart svg{position:absolute;inset:0;width:100%;height:100%}
@@ -304,7 +310,7 @@ html.present .method{display:none!important}
 <header class="top">
   <div class="top-row">
     <div class="brand"><img src="data:image/png;base64,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" alt="MARANELLO buona &amp; fresca"></div>
-    <div class="brand-meta"><b>Tablero financiero</b><span>Enero a junio de 2026, corte al 30 de junio</span></div>
+    <div class="brand-meta"><b>Tablero financiero</b><span>Enero a agosto de 2026, corte al 31 de agosto</span></div>
     <div class="top-actions">
       <button class="btn" id="btnPresent" type="button" aria-pressed="false">Presentar</button>
       <button class="btn" id="btnPrint" type="button">Imprimir</button>
@@ -323,7 +329,7 @@ html.present .method{display:none!important}
     </nav>
     <div class="period" id="period" role="group" aria-label="Periodo">
       <span class="period-label">Periodo</span>
-      <span class="period-fixed">Semestre completo</span>
+      <span class="period-fixed">Enero–agosto</span>
     </div>
   </div>
 </header>
@@ -372,14 +378,14 @@ html.present .method{display:none!important}
 <!-- ================= COMPRAS ================= -->
 <section id="compras" class="section">
   <div class="sec-head"><h2>Compras inventariables</h2><p>Aún no son costo de ventas: falta valorizar inventarios.</p></div>
-  <div class="grid g3" id="invKpis"></div>
+  <div class="grid g4" id="invKpis"></div>
   <div class="grid g-wide fill">
     <div class="panel">
       <div class="p-head"><div><h3>Compras por mes</h3><p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p></div><button class="link-btn" data-table="inv">Ver tabla mensual</button></div>
       <div class="chart" id="chInv"></div>
     </div>
     <div class="col">
-      <div class="panel"><div class="p-head"><div><h3>Principales proveedores</h3><p class="hint">Acumulado Ene–Jun.</p></div></div><div class="hb" id="hbInvProv"></div></div>
+      <div class="panel"><div class="p-head"><div><h3>Principales proveedores</h3><p class="hint">Acumulado Ene–Ago.</p></div></div><div class="hb" id="hbInvProv"></div></div>
       <div class="panel"><div class="p-head"><div><h3>Composición</h3><p class="hint" id="invCompNote"></p></div></div><div class="hb" id="hbInvCat"></div></div>
     </div>
   </div>
@@ -413,12 +419,12 @@ html.present .method{display:none!important}
         <div class="chart" id="chPay"></div>
       </div>
       <div class="panel">
-        <div class="p-head"><div><h3>Patrón de pagos del semestre</h3><p class="hint">Según la frecuencia en la hoja de pagos; no define el tipo de vinculación.</p></div></div>
+        <div class="p-head"><div><h3>Patrón de pagos del semestre</h3><p class="hint">Enero–junio, según la frecuencia en la hoja de pagos; no define el tipo de vinculación.</p></div></div>
         <div class="hb" id="hbPattern"></div>
       </div>
     </div>
     <div class="panel">
-      <div class="p-head"><div><h3>Quién trabajó cada mes</h3><p class="hint">Celda marcada: mes con pagos registrados para esa persona.</p></div></div>
+      <div class="p-head"><div><h3>Quién trabajó cada mes</h3><p class="hint">Celda marcada: mes con pagos. Julio y agosto solo desprendibles; “Adriana” no distingue entre Adriana T y Adriana Z.</p></div></div>
       <div class="tw scroll-y" id="roster"></div>
     </div>
   </div>
@@ -426,7 +432,7 @@ html.present .method{display:none!important}
 
 <!-- ================= CAJA ================= -->
 <section id="caja" class="section">
-  <div class="sec-head"><h2>Caja y liquidez</h2><p>Cuenta empresarial conciliada mes a mes.</p></div>
+  <div class="sec-head"><h2>Caja y liquidez</h2><p>Cuenta empresarial conciliada; julio sin extracto propio.</p></div>
   <div class="grid g4" id="cashKpis"></div>
   <div class="grid g-wide fill">
     <div class="panel">
@@ -436,28 +442,28 @@ html.present .method{display:none!important}
     <div class="panel">
       <div class="p-head"><div><h3>Financiación y ritmo de caja</h3></div></div>
       <div class="rows" id="cashFin"></div>
-      <p class="note method">Cuentas relacionadas: información parcial; faltan movimientos empresariales para cerrar el flujo consolidado.</p>
+      <p class="note method">Julio sin extracto propio: su cierre sale del saldo anterior del extracto de agosto. Agosto conciliado.</p>
     </div>
   </div>
 </section>
 
 <!-- ================= RESULTADO ================= -->
 <section id="resultado" class="section">
-  <div class="sec-head"><h2>Resultado</h2><p>Semestre completo; no es utilidad contable definitiva.</p></div>
+  <div class="sec-head"><h2>Resultado</h2><p>Enero–agosto; julio y agosto provisionales. No es utilidad contable.</p></div>
   <div class="grid g-wide fill">
     <div class="panel">
-      <div class="p-head"><div><h3>Resultado operativo aproximado por mes</h3><p class="hint">Ventas menos compras, nómina y gastos operativos, sin gastos financieros.</p></div></div>
+      <div class="p-head"><div><h3>Resultado operativo aproximado por mes</h3><p class="hint">Ventas menos compras, nómina y gastos operativos. Barras punteadas: meses provisionales.</p></div></div>
       <div class="chart" id="chResult"></div>
       <p class="note method" id="resultNote"></p>
     </div>
     <div class="col" id="scenarios"></div>
   </div>
   <div class="grid g2">
-    <div class="panel"><div class="p-head"><h3>Activos conocidos al 30 de junio</h3></div><div class="rows" id="posAssets"></div></div>
-    <div class="panel"><div class="p-head"><h3>Pasivos y financiación conocidos</h3></div><div class="rows" id="posLiab"></div></div>
+    <div class="panel"><div class="p-head"><h3>Posición conocida</h3></div><div class="grid g2" style="gap:18px"><div class="rows" id="posAssets"></div><div class="rows" id="posLiab"></div></div></div>
+    <div class="panel"><div class="p-head"><h3>Julio–agosto frente a enero–junio</h3></div><div class="rows" id="posComp"></div></div>
   </div>
   <details class="fold" id="simFold">
-    <summary><b>Simulador con inventarios</b><span>Calcula costo de ventas, margen bruto y resultado con inventarios valorizados.</span></summary>
+    <summary><b>Simulador con inventarios</b><span>Enero–junio validado: costo de ventas, margen bruto y resultado con inventarios valorizados.</span></summary>
     <div class="fold-body">
       <div class="fields">
         <div class="field"><label for="invIni">Inventario inicial (1-ene)</label><input type="number" id="invIni" min="0" step="100000" placeholder="Ej. 10000000"></div>
@@ -477,7 +483,7 @@ html.present .method{display:none!important}
 </section>
 
 </main>
-<footer>MARANELLO · Tablero financiero V12 · Base operativa enero–junio 2026. Todas las cifras se calculan desde el bloque de datos del código.</footer>
+<footer>MARANELLO · Tablero financiero V12 · Enero–junio validado y julio–agosto provisional, 2026. Todas las cifras se calculan desde el bloque de datos del código.</footer>
 </div>
 
 <dialog id="dlg" aria-labelledby="dlgTitle">
@@ -498,76 +504,71 @@ document.getElementById("gateForm").addEventListener("submit",e=>{
 });
 
 /* ============================================================
-   DATOS — única fuente de verdad
+   DATOS — única fuente de verdad (enero–junio validado V11.3; julio–agosto V12 STAGING)
    ============================================================ */
-const MONTHS=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO"];
-const M={
-  ENERO:  {sales:75414443.00, inventory:22597008.29, opex:21222535.03, payroll:23769805.84168561, pila:3087100, pilaPeople:7,
-           bank:{open:26590532.07,credits:46625904.53,debits:55995417.70,close:17221018.90},
-           people:["Diana","Camilo","Sofia","Adriana T","Martha","Liliana","Adriana Z","Thalia","Leydi","Nathalie","Lina Garcia","Viviana","Rubi","Jhon","Joshua"]},
-  FEBRERO:{sales:64315666.00, inventory:19382474.26, opex:20041737.20, payroll:26383014.20475379, pila:2701400, pilaPeople:7,
-           bank:{open:17221018.90,credits:38845419.55,debits:48621833.42,close:7444605.03},
-           people:["Diana","Valentina","Camilo","Sofia","Adriana T","Martha","Liliana","Adriana Z","Luisa","Thalia","Leydi","Nathalie","Julián","Viviana","Jhon"]},
-  MARZO:  {sales:74210185.00, inventory:25267486.21, opex:21056144.04, payroll:26763268.143390153, pila:2867500, pilaPeople:7,
-           bank:{open:7444605.03,credits:52248686.57,debits:51808874.09,close:7884417.51},
-           people:["Diana","Valentina","Camilo","Sofia","Adriana T","Martha","Liliana","Adriana Z","Luisa","Catalina","Leydi","Nathalie","Isabel","Thalia","Viviana"]},
-  ABRIL:  {sales:55861241.00, inventory:18977246.80, opex:22682458.27, payroll:26677468.963068187, pila:3134700, pilaPeople:7,
-           bank:{open:7884417.51,credits:58430512.26,debits:57706746.20,close:8608183.57},
-           people:["Diana","Valentina","Camilo","Adriana T","Martha","Liliana","Adriana Z","Luisa","Thalia","Leydi","Nathalie","Julián","Isabel","Viviana"]},
-  MAYO:   {sales:58511536.71, inventory:16711397.51, opex:17813551.02, payroll:27526508.5582197, pila:3180800, pilaPeople:7,
-           bank:{open:8608183.57,credits:37150174.26,debits:37372494.85,close:8385862.98},
-           people:["Diana","Valentina","Camilo","Adriana T","Martha","Liliana","Adriana Z","Luisa","Leydi","Nathalie","Álvaro","Julián"]},
-  JUNIO:  {sales:48068769.34, inventory:18426892.12, opex:16098737.24, payroll:26401717.584356066, pila:2878300, pilaPeople:7,
-           bank:{open:8385862.98,credits:50160133.51,debits:56697978.34,close:1848018.15},
-           people:["Diana","Valentina","Camilo","Adriana T","Martha","Liliana","Adriana Z","Luisa","Brandon","Leydi","Nathalie","Álvaro","Sebastián"]}
-};
-/* Totales validados del semestre (el gasto operativo consolidado supera en $1,00 M la suma mensual) */
+const MONTHS=["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO", "JULIO", "AGOSTO"];
+const M={"ENERO": {"status": "validado", "sales": 75414443.0, "inventory": 22597008.29, "opex": 21222535.03, "payroll": 23769805.84168561, "pila": 3087100, "pilaPeople": 7, "pending": 0, "bank": {"open": 26590532.07, "credits": 46625904.53, "debits": 55995417.7, "close": 17221018.9}, "people": ["Diana", "Camilo", "Sofia", "Adriana T", "Martha", "Liliana", "Adriana Z", "Thalia", "Leydi", "Nathalie", "Lina Garcia", "Viviana", "Rubi", "Jhon", "Joshua"], "opexCat": {"Ocupación": 15006037.0, "Servicios públicos": 1432961.0, "Marketing": 1360000.0, "Comisiones y plataformas": 1195503.75, "Movilidad": 996822.0, "Servicios profesionales": 600000.0, "Comisiones y medios de pago": 196807.77, "Telecomunicaciones": 183959.0, "Suministros operativos": 104000.0, "Mantenimiento": 100000.0, "Seguros": 46444.51}, "invCat": {"Insumos y mercancías": 15164581.09, "Bebidas y mercancías": 3359690.0, "Empaques y consumibles": 2629237.2, "Insumos y empaques": 1443500.0}}, "FEBRERO": {"status": "validado", "sales": 64315666.0, "inventory": 19382474.26, "opex": 20041737.2, "payroll": 26383014.20475379, "pila": 2701400, "pilaPeople": 7, "pending": 0, "bank": {"open": 17221018.9, "credits": 38845419.55, "debits": 48621833.42, "close": 7444605.03}, "people": ["Diana", "Valentina", "Camilo", "Sofia", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Thalia", "Leydi", "Nathalie", "Julián", "Viviana", "Jhon"], "opexCat": {"Ocupación": 15014922.0, "Comisiones y plataformas": 1373505.14, "Servicios públicos": 1183858.0, "Marketing": 1000000.0, "Servicios profesionales": 500000.0, "Movilidad": 223088.0, "Higiene y SST": 169600.0, "Telecomunicaciones": 153801.0, "Seguridad y SST": 140000.0, "Mantenimiento / adecuación": 130000.0, "Comisiones y medios de pago": 105263.03, "Aseo y suministros": 47700.03}, "invCat": {"Insumos y mercancías": 14534846.96, "Bebidas y mercancías": 1855936.0, "Insumos y empaques": 1548475.0, "Empaques y consumibles": 1443216.3}}, "MARZO": {"status": "validado", "sales": 74210185.0, "inventory": 25267486.21, "opex": 21056144.04, "payroll": 26763268.143390153, "pila": 2867500, "pilaPeople": 7, "pending": 0, "bank": {"open": 7444605.03, "credits": 52248686.57, "debits": 51808874.09, "close": 7884417.51}, "people": ["Diana", "Valentina", "Camilo", "Sofia", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Catalina", "Leydi", "Nathalie", "Isabel", "Thalia", "Viviana"], "opexCat": {"Ocupación": 15014137.0, "Administración": 1611900.0, "Servicios públicos": 1266874.0, "Comisiones y plataformas": 1263501.54, "Servicios profesionales": 500000.0, "Marketing": 360000.0, "Movilidad": 299926.0, "Tecnología": 254960.0, "Mantenimiento": 159500.0, "Telecomunicaciones": 153801.0, "Comisiones y medios de pago": 121544.5, "Mantenimiento / adecuación": 50000.0}, "invCat": {"Insumos y mercancías": 19692151.04, "Bebidas y mercancías": 3110034.0, "Insumos y empaques": 1955475.0, "Empaques y consumibles": 509826.17}}, "ABRIL": {"status": "validado", "sales": 55861241.0, "inventory": 18977246.8, "opex": 22682458.27, "payroll": 26677468.963068187, "pila": 3134700, "pilaPeople": 7, "pending": 0, "bank": {"open": 7884417.51, "credits": 58430512.26, "debits": 57706746.2, "close": 8608183.57}, "people": ["Diana", "Valentina", "Camilo", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Thalia", "Leydi", "Nathalie", "Julián", "Isabel", "Viviana"], "opexCat": {"Ocupación": 15009202.0, "Comisiones y plataformas": 2344152.44, "Mantenimiento y adecuaciones": 1880200.0, "Servicios públicos": 1393715.0, "Servicios profesionales": 1000000.0, "Tecnología": 394955.0, "Administración": 226800.0, "Telecomunicaciones": 153801.0, "Comisiones y medios de pago": 124928.83, "Mantenimiento": 80000.0, "Movilidad": 74704.0}, "invCat": {"Insumos y mercancías": 14595913.6, "Bebidas y mercancías": 2866901.0, "Insumos y empaques": 922900.0, "Empaques y consumibles": 591532.2}}, "MAYO": {"status": "validado", "sales": 58511536.71, "inventory": 16711397.51, "opex": 17813551.02, "payroll": 27526508.5582197, "pila": 3180800, "pilaPeople": 7, "pending": 0, "bank": {"open": 8608183.57, "credits": 37150174.26, "debits": 37372494.85, "close": 8385862.98}, "people": ["Diana", "Valentina", "Camilo", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Leydi", "Nathalie", "Álvaro", "Julián"], "opexCat": {"Ocupación": 14206037.0, "Servicios públicos": 1405887.0, "Marketing": 1000000.0, "Higiene y SST": 300000.0, "Tecnología": 286545.0, "Movilidad": 232049.0, "Mantenimiento": 155000.0, "Telecomunicaciones": 153801.0, "Comisiones y medios de pago": 74232.02}, "invCat": {"Insumos y mercancías": 12910356.54, "Bebidas y mercancías": 2714359.0, "Empaques y consumibles": 1086681.97}}, "JUNIO": {"status": "validado", "sales": 48068769.34, "inventory": 18426892.12, "opex": 16098737.24, "payroll": 26401717.584356066, "pila": 2878300, "pilaPeople": 7, "pending": 0, "bank": {"open": 8385862.98, "credits": 50160133.51, "debits": 56697978.34, "close": 1848018.15}, "people": ["Diana", "Valentina", "Camilo", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Brandon", "Leydi", "Nathalie", "Álvaro", "Sebastián"], "opexCat": {"Ocupación": 14206037.0, "Comisiones y plataformas": 784372.0, "Tecnología": 432971.0, "Movilidad": 424357.0, "Telecomunicaciones": 156002.0, "Comisiones y medios de pago": 82898.24, "Administración": 12100.0}, "invCat": {"Insumos y mercancías": 14647527.62, "Bebidas y mercancías": 2501871.0, "Empaques y consumibles": 1277493.5}}, "JULIO": {"status": "provisional", "sales": 45784504.63, "inventory": 7836862.21, "opex": 11745622.45, "payroll": 12931549, "pila": 2740800, "pilaPeople": 6, "pending": 4890695.23, "bank": {"open": 1848018.15, "credits": null, "debits": null, "close": 4650871.44, "status": "DERIVADO"}, "people": ["Adriana", "Brandon", "Camilo", "Diana", "Liliana", "Martha"], "opexCat": {"Telecomunicaciones": 129242.0, "Ocupación": 10257174.0, "Movilidad": 239618.0, "Comisiones y plataformas": 1088496.01, "Otros gastos operativos": 31092.44}, "invCat": {"Insumos y mercancías": 5578487.19, "Empaques y consumibles": 486134.02, "Bebidas y mercancías": 1772241.0}, "payslipPeople": 6, "payrollStatus": "CONFIRMADO", "cards": 40893300, "interest": 716527}, "AGOSTO": {"status": "provisional", "sales": 42681018.52, "inventory": 8657377.83, "opex": 11894275.1, "payroll": 11360959, "pila": 1855600, "pilaPeople": 4, "pending": 5605369.89, "bank": {"open": 4650871.44, "credits": 37507169.62, "debits": 31564896.37, "close": 10593144.69, "status": "CONFIRMADO"}, "people": ["Adriana", "Brandon", "Diana", "Liliana", "Martha"], "opexCat": {"Telecomunicaciones": 65462.0, "Comisiones y plataformas": 1280490.0, "Ocupación": 10257174.0, "Movilidad": 280897.0, "Otros gastos operativos": 10252.1}, "invCat": {"Insumos y mercancías": 6926080.82, "Bebidas y mercancías": 1493062.0, "Empaques y consumibles": 238235.01}, "payslipPeople": 5, "payrollStatus": "PROVISIONAL", "cards": 42414364, "interest": 962385}};
+/* Totales validados del semestre enero–junio (V11.3). Son la base de la estructura de costos y del equilibrio. */
+const H1_MONTHS=MONTHS.slice(0,6);
 const H1={
-  opex:119915162.80, gross_docs:401428753.00,
-  known_finance:5971297.55, ape_interest:5356565.543340213,
+  opex:119915162.80, known_finance:5971297.55, ape_interest:5356565.543340213,
   mixed:7789801.47, assets_policy:2024100.00, sales_pending:3808014.00,
   pila_cash:20068238.00, tax_cash:23326000.00, tax_liability:9632000.00, tax_assets:4472997.85,
   credit_principal:26269252.38, credit_net_inflow:25396275.00,
   investor_balance:132088326.57675348, investor_pending_may_jun:9876623.162634695
 };
-const CATEGORIES={
-  inventory:[["Insumos y mercancías",91545376.85],["Bebidas y mercancías",16408791.00],["Empaques y consumibles",7537987.34],["Insumos y empaques",5870350.00]],
-  opex:[["Ocupación",88456372.00],["Comisiones y plataformas",6961034.87],["Servicios públicos",6683295.00],["Marketing",4720000.00],["Servicios profesionales",2600000.00],["Movilidad",2250946.00],["Mantenimiento y adecuaciones",1880200.00],["Administración",1850800.00],["Tecnología",1369431.00],["Telecomunicaciones",955165.00],["Comisiones y medios de pago",705674.39],["Mantenimiento",494500.00],["Higiene y SST",469600.00],["Mantenimiento / adecuación",180000.00],["Seguridad y SST",140000.00],["Suministros operativos",104000.00],["Aseo y suministros",47700.03],["Seguros",46444.51]],
-  assets:[["Mantenimiento / activos menores",1024100.00],["Tecnología / implementación",1000000.00]],
-  mixed:[["Concepto por validar",3955985.47],["Suministros mixtos",1282500.00],["Retail mixto",1126380.00],["Uso empresarial por validar",931367.00],["Retail por validar",493569.00]]
+/* Gasto sin mes asignado: solo entra en los acumulados */
+const UNASSIGNED_OPEX=[["Marketing",1000000,"Redes sociales sin periodo del servicio definido"]];
+/* Julio–agosto: obligaciones y financiación informadas en el cierre V12 STAGING */
+const JA={
+  taxesDueSep:[["INC bimestre 4",7099000],["IVA cuatrimestre 2",192000]], retefuenteAug:280000,
+  cardsJul:40893300, cardsAug:42414364, interestJul:716527, interestAug:962385, rentLateInterest:218443,
+  controls:[
+    ["Extracto bancario de julio","El archivo recibido es copia del de agosto; el cierre de julio se toma del saldo anterior del extracto de agosto."],
+    ["Nómina de agosto","Diana aparece en la primera quincena y no en la segunda."],
+    ["Compras sin clasificar","$10,50 M en líneas de factura electrónica sin cuenta; no entran al resultado."],
+    ["Retefuente de julio","Comprobantes escaneados sin valor legible."],
+    ["Crédito Bancolombia","El extracto de agosto no tiene texto legible; se usa el saldo de capital al 30 de junio."]
+  ]
 };
-const PROVIDERS=[
-  ["CENTRAL CONTROL S.A.S.",73256372.00,"opex","Ocupación"],
-  ["QUESERA Y SALSAMENTARIA SAN FERNANDO S.A.S.",37447101.68,"inventory","Insumos y mercancías"],
-  ["INDUSTRIA NACIONAL DE GASEOSAS S.A.S.",16408791.00,"inventory","Bebidas y mercancías"],
-  ["MERCAMIO S.A.",13150872.00,"inventory","Insumos y mercancías"],
-  ["JEPRI DISTRIBUIDORA DE ALIMENTOS",12498783.00,"inventory","Insumos y mercancías"],
-  ["BONNIPLAST S.A.S.",7537987.34,"inventory","Empaques y consumibles"],
-  ["MERCAFAMILIAR LAS PALMAS S.A.S.",7217600.00,"inventory","Insumos y mercancías"],
-  ["D1 S.A.S.",7062220.03,"inventory","Insumos y mercancías"],
-  ["RAPPI S.A.S.",6961034.87,"opex","Comisiones y plataformas"],
-  ["GRUPO SANTIAGO EXPRESS S.A.S.",5870350.00,"inventory","Insumos y empaques"]
+const PROVIDERS=[ // [nombre, total Ene–Jun, julio, agosto, tipo]
+  ["CENTRAL CONTROL",73256372.00,10257174,10257174,"opex"],
+  ["QUESERA Y SALSAMENTARIA SAN FERNANDO",37447101.68,2825250,3192110,"inventory"],
+  ["INDUSTRIA NACIONAL DE GASEOSAS",16408791.00,1820428,1548694,"inventory"],
+  ["JEPRI DISTRIBUIDORA DE ALIMENTOS",12498783.00,1217950,1448847,"inventory"],
+  ["MERCAMIO",13150872.00,281705,560544,"inventory"],
+  ["MERCAFAMILIAR LAS PALMAS",7217600.00,508739,865748,"inventory"],
+  ["BONNIPLAST",7537987.34,473529,197983,"inventory"],
+  ["D1",7062220.03,406175,354075,"inventory"],
+  ["RAPPI",6961034.87,1013455,1280490,"opex"],
+  ["GRUPO SANTIAGO EXPRESS",5870350.00,0,0,"inventory"]
 ];
 const PAY_PATTERNS=[["Recurrente",10,138131965.81],["Frecuente",4,12895962.49],["Ocasional",10,6493855.00]];
-/* Referencias orientativas usadas en Compras y Nómina (ajustables) */
 const REF={primeCost:{good:.65,warn:.70},labor:{good:.33,warn:.38}};
 
 /* ============================================================
    CÁLCULOS DERIVADOS
    ============================================================ */
-const sumM=(f,ms=MONTHS)=>ms.reduce((a,m)=>a+M[m][f],0);
-const T={sales:sumM("sales"),inventory:sumM("inventory"),payroll:sumM("payroll"),opexMonths:sumM("opex"),pila:sumM("pila"),
-  credits:MONTHS.reduce((a,m)=>a+M[m].bank.credits,0),debits:MONTHS.reduce((a,m)=>a+M[m].bank.debits,0),
+const isProv=m=>M[m]&&M[m].status==="provisional";
+const PROV=MONTHS.filter(isProv);
+const sumM=(f,ms=MONTHS)=>ms.reduce((a,m)=>a+(M[m][f]||0),0);
+const unassigned=UNASSIGNED_OPEX.reduce((a,x)=>a+x[1],0);
+const T={sales:sumM("sales"),inventory:sumM("inventory"),payroll:sumM("payroll"),opexMonths:sumM("opex"),pila:sumM("pila"),pending:sumM("pending"),
   open:M[MONTHS[0]].bank.open,close:M[MONTHS[MONTHS.length-1]].bank.close};
-const N=MONTHS.length;
-const OCCUPANCY=CATEGORIES.opex.find(c=>c[0]==="Ocupación")[1];
-const VAR_RATIO=T.inventory/T.sales;
-/* Equilibrio: (gastos operativos + nómina + gastos financieros conocidos) por mes / (1 − compras/ventas). Sin interés APE. */
-const FIXED_MONTH=(H1.opex+T.payroll+H1.known_finance)/N;
+T.opex=T.opexMonths+unassigned;
+const S={sales:sumM("sales",H1_MONTHS),inventory:sumM("inventory",H1_MONTHS),payroll:sumM("payroll",H1_MONTHS),close:M.JUNIO.bank.close}; // enero–junio validado
+const N=MONTHS.length, N6=H1_MONTHS.length;
+const catSum=(key,ms)=>{const o={};ms.forEach(m=>Object.entries(M[m][key]).forEach(([c,v])=>o[c]=(o[c]||0)+v));return o;};
+const OCC_H1=catSum("opexCat",H1_MONTHS)["Ocupación"];
+const VAR_RATIO=S.inventory/S.sales;
+/* Equilibrio con la estructura validada de enero–junio: (gastos operativos + nómina + gastos financieros conocidos) / (1 − compras/ventas). */
+const FIXED_MONTH=(H1.opex+S.payroll+H1.known_finance)/N6;
 const BE=FIXED_MONTH/(1-VAR_RATIO);
-const BE_APE=(FIXED_MONTH+H1.ape_interest/N)/(1-VAR_RATIO);
-const BURN=(T.open-T.close)/N;
+const BE_APE=(FIXED_MONTH+H1.ape_interest/N6)/(1-VAR_RATIO);
+const BURN=(M.ENERO.bank.open-S.close)/N6;
 const resultAt=s=>s*(1-VAR_RATIO)-FIXED_MONTH;
+const TAX_DUE=JA.taxesDueSep.reduce((a,x)=>a+x[1],0);
+const KNOWN_FIN_ALL=H1.known_finance+JA.interestJul+JA.interestAug;
 const ALL_PEOPLE=(()=>{const c={};MONTHS.forEach(m=>M[m].people.forEach(p=>c[p]=(c[p]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"es"));})();
 
 /* ============================================================
@@ -585,6 +586,7 @@ const SHORT={ENERO:"Ene",FEBRERO:"Feb",MARZO:"Mar",ABRIL:"Abr",MAYO:"May",JUNIO:
 const LOW=m=>m.toLowerCase();
 const CAP=m=>m[0]+m.slice(1).toLowerCase();
 const list=a=>a.length<=1?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1];
+const STATUS_TXT=m=>isProv(m)?"Provisional":"Validado";
 
 /* ============================================================
    ESTADO Y PERIODO
@@ -593,10 +595,18 @@ const state={period:"YTD",tab:"resumen"};
 const FIXED_TABS=["resultado","diagnostico"];
 function per(){
   const ytd=state.period==="YTD",ms=ytd?MONTHS:[state.period];
-  const d={ytd,ms,n:ms.length,name:ytd?"enero–junio":LOW(state.period),title:ytd?"Acumulado enero–junio 2026":CAP(state.period)+" 2026",
-    sales:sumM("sales",ms),inventory:sumM("inventory",ms),payroll:sumM("payroll",ms),opex:ytd?H1.opex:sumM("opex",ms),pila:sumM("pila",ms),
+  const withBank=ms.filter(m=>M[m].bank.credits!=null);
+  const d={ytd,ms,n:ms.length,prov:ms.some(isProv),
+    name:ytd?"enero–agosto":LOW(state.period),
+    title:ytd?"Acumulado enero–agosto 2026":CAP(state.period)+" 2026",
+    sales:sumM("sales",ms),inventory:sumM("inventory",ms),payroll:sumM("payroll",ms),opex:sumM("opex",ms)+(ytd?unassigned:0),
+    pila:sumM("pila",ms),pending:sumM("pending",ms),
     open:M[ms[0]].bank.open,close:M[ms[ms.length-1]].bank.close,
-    credits:ms.reduce((a,m)=>a+M[m].bank.credits,0),debits:ms.reduce((a,m)=>a+M[m].bank.debits,0)};
+    credits:withBank.length?withBank.reduce((a,m)=>a+M[m].bank.credits,0):null,
+    debits:withBank.length?withBank.reduce((a,m)=>a+M[m].bank.debits,0):null,
+    bankMissing:ms.filter(m=>M[m].bank.credits==null)};
+  d.scope=d.title+(ytd?"; julio y agosto provisionales":(isProv(state.period)?"; mes provisional":""));
+  d.occ=catSum("opexCat",ms)["Ocupación"]||0;
   d.result=d.sales-d.inventory-d.payroll-d.opex; d.be=BE*d.n;
   const i=MONTHS.indexOf(state.period); d.prev=ytd||i<1?null:MONTHS[i-1];
   return d;
@@ -608,30 +618,32 @@ function per(){
 const FIT_QUERY="(min-width:1080px) and (min-height:620px)";
 const FIT=()=>window.matchMedia(FIT_QUERY).matches;
 const MOBILE=()=>window.innerWidth<720;
-/* Tamaño del gráfico: en vista ajustada usa el espacio real disponible; si no, un lienzo proporcional */
 function box(id,defH){
   const el=document.getElementById(id);
   if(FIT()&&el.clientHeight>110&&el.clientWidth>200) return {el,W:Math.round(el.clientWidth),H:Math.round(el.clientHeight)};
   const W=MOBILE()?440:760; return {el,W,H:MOBILE()?Math.round(defH*1.1):defH};
 }
 const GUT=86;
+const tickTxt=k=>(SHORT[k]||k)+(isProv(k)?"*":"");
+const provNote=(data,W)=>data.some(x=>isProv(x.k))?`<text x="${W-14}" y="14" text-anchor="end" class="tick small">* Provisional</text>`:"";
 function kpi(label,value,sub,cls=""){return `<div class="kpi ${cls}"><span class="lbl">${label}</span><span class="val">${value}</span>${[].concat(sub||[]).filter(Boolean).map(s=>`<span class="sub">${s}</span>`).join("")}</div>`;}
 function refLine(r,x1,x2,yy,ly){ly=ly??yy;return `<line x1="${x1}" x2="${x2}" y1="${yy}" y2="${yy}" stroke="${r.color}" stroke-width="2" stroke-dasharray="7 5"/><text x="${x2+6}" y="${ly-3}" class="ref" fill="${r.color}">${esc(r.name)}</text><text x="${x2+6}" y="${ly+13}" class="ref" fill="${r.color}">${esc(r.value)}</text>`;}
+const provAttr=(k,fill)=>isProv(k)?` fill-opacity=".45" stroke="${fill}" stroke-width="1.5" stroke-dasharray="4 3"`:"";
 
 function barChart(o){
   const {W,H}=o.box,data=o.data,padX=14,top=30,bottom=o.sub?50:32,refs=o.refs||[],padR=refs.length?GUT:padX;
   const hi=Math.max(...data.map(x=>x.v),...refs.map(r=>r.v),0)*1.14||1;
   const lo=Math.min(...data.map(x=>x.v),0)*1.25;
   const y=v=>top+(hi-v)/(hi-lo)*(H-top-bottom);
-  const slot=(W-padX-padR)/data.length,bw=Math.min(slot*.58,74);
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label)}">`;
+  const slot=(W-padX-padR)/data.length,bw=Math.min(slot*.58,70);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label)}">${provNote(data,W)}`;
   data.forEach((x,i)=>{
     const cx=padX+slot*i+slot/2,y0=y(0),yv=y(x.v),yt=Math.min(y0,yv),h=Math.max(Math.abs(y0-yv),1);
     const sel=!o.noSel&&state.period===x.k,dim=!o.noSel&&state.period!=="YTD"&&!sel;
     const fill=typeof o.color==="function"?o.color(x):o.color;
-    s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw/2}" y="${yt}" width="${bw}" height="${h}" rx="3" fill="${fill}"><title>${CAP(x.k)}: ${money(x.v)}</title></rect>`;
+    s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw/2}" y="${yt}" width="${bw}" height="${h}" rx="3" fill="${fill}"${provAttr(x.k,fill)}><title>${CAP(x.k)}${isProv(x.k)?" (provisional)":""}: ${money(x.v)}</title></rect>`;
     s+=`<text x="${cx}" y="${x.v>=0?yt-8:yt+h+17}" text-anchor="middle" class="val${sel?' sel':''}">${fMs(x.v)}</text></g>`;
-    s+=`<text x="${cx}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[x.k]}</text>`;
+    s+=`<text x="${cx}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${tickTxt(x.k)}</text>`;
     if(o.sub) s+=`<text x="${cx}" y="${H-bottom+35}" text-anchor="middle" class="tick small">${esc(o.sub(x))}</text>`;
   });
   s+=`<line x1="${padX}" x2="${W-padR}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
@@ -641,21 +653,21 @@ function barChart(o){
   return s+"</svg>";
 }
 function salesCostChart(b){
-  const {W,H}=b,padX=14,padR=GUT,top=30,bottom=32,small=W<520;
-  const rows=MONTHS.map(m=>({k:m,s:M[m].sales,parts:[[M[m].inventory,"var(--teal)","Compras"],[M[m].payroll,"#8FA9CF","Nómina"],[M[m].opex,"var(--yellow)","Gastos"]]}));
+  const {W,H}=b,padX=14,padR=GUT,top=30,bottom=32,small=W<620;
+  const rows=MONTHS.map(m=>({k:m,s:M[m].sales,parts:[[M[m].inventory,"#6DC1CB","Compras"],[M[m].payroll,"#8FA9CF","Nómina"],[M[m].opex,"#FABF00","Gastos"]]}));
   rows.forEach(r=>r.c=r.parts.reduce((a,p)=>a+p[0],0));
   const hi=Math.max(...rows.map(r=>Math.max(r.s,r.c)),BE)*1.12;
   const y=v=>top+(hi-v)/hi*(H-top-bottom);
-  const slot=(W-padX-padR)/rows.length,bw=Math.min(slot*.32,46);
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Ventas frente a costos por mes">`;
+  const slot=(W-padX-padR)/rows.length,bw=Math.min(slot*.32,44);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Ventas frente a costos por mes">${provNote(rows,W)}`;
   rows.forEach((r,i)=>{
     const cx=padX+slot*i+slot/2,sel=state.period===r.k,dim=state.period!=="YTD"&&!sel;
-    s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw-3}" y="${y(r.s)}" width="${bw}" height="${y(0)-y(r.s)}" rx="3" fill="var(--navy)"><title>${CAP(r.k)} ventas: ${money(r.s)}</title></rect>`;
-    s+=`<text x="${cx-bw/2-3}" y="${y(r.s)-8}" text-anchor="middle" class="val"${small?' style="font-size:13px"':''}>${fMs(r.s)}</text>`;
+    s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw-3}" y="${y(r.s)}" width="${bw}" height="${y(0)-y(r.s)}" rx="3" fill="#224D8E"${provAttr(r.k,"#224D8E")}><title>${CAP(r.k)} ventas: ${money(r.s)}</title></rect>`;
+    s+=`<text x="${cx-bw/2-3}" y="${y(r.s)-8}" text-anchor="middle" class="val"${small?' style="font-size:12.5px"':''}>${fMs(r.s)}</text>`;
     let acc=0;
-    r.parts.forEach(p=>{const y1=y(acc+p[0]),y0=y(acc);s+=`<rect x="${cx+3}" y="${y1}" width="${bw}" height="${y0-y1}" fill="${p[1]}"><title>${CAP(r.k)} ${p[2]}: ${money(p[0])}</title></rect>`;acc+=p[0];});
+    r.parts.forEach(p=>{const y1=y(acc+p[0]),y0=y(acc);s+=`<rect x="${cx+3}" y="${y1}" width="${bw}" height="${y0-y1}" fill="${p[1]}"${provAttr(r.k,p[1])}><title>${CAP(r.k)} ${p[2]}: ${money(p[0])}</title></rect>`;acc+=p[0];});
     if(!small) s+=`<text x="${cx+bw/2+3}" y="${y(r.c)-8}" text-anchor="middle" class="val" style="fill:var(--muted)">${fMs(r.c)}</text>`;
-    s+=`</g><text x="${cx}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[r.k]}</text>`;
+    s+=`</g><text x="${cx}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${tickTxt(r.k)}</text>`;
   });
   s+=`<line x1="${padX}" x2="${W-padR}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
   s+=refLine({name:"Equilibrio",value:fMs(BE),color:"var(--orange)"},padX,W-padR,y(BE));
@@ -667,62 +679,61 @@ function lineChart(b,data,label,noSel){
   const y=v=>top+(hi-v)/hi*(H-top-bottom);
   const x=i=>padX+i*(W-padX*2)/(data.length-1);
   const pts=data.map((p,i)=>x(i)+","+y(p.v)).join(" ");
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}"><line x1="${padX-20}" x2="${W-padX+20}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">${provNote(data,W)}<line x1="${padX-20}" x2="${W-padX+20}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
   s+=`<polygon fill="rgba(34,77,142,.08)" points="${x(0)},${y(0)} ${pts} ${x(data.length-1)},${y(0)}"/><polyline fill="none" stroke="var(--navy)" stroke-width="3" points="${pts}"/>`;
   data.forEach((p,i)=>{const sel=!noSel&&state.period===p.k,last=i===data.length-1;
-    s+=`<circle cx="${x(i)}" cy="${y(p.v)}" r="${sel?7:5}" fill="${last?'var(--orange)':'#fff'}" stroke="${last?'var(--orange)':'var(--navy)'}" stroke-width="2.5"><title>${esc(p.label||CAP(p.k))}: ${money(p.v)}</title></circle>`;
+    s+=`<circle cx="${x(i)}" cy="${y(p.v)}" r="${sel?7:5}" fill="${last?'var(--orange)':'#fff'}" stroke="${last?'var(--orange)':'var(--navy)'}" stroke-width="2.5"${isProv(p.k)&&!last?' stroke-dasharray="3 2"':''}><title>${esc(p.label||CAP(p.k))}: ${money(p.v)}</title></circle>`;
     s+=`<text x="${x(i)}" y="${y(p.v)-13}" text-anchor="middle" class="val${sel?' sel':''}">${fMs(p.v)}</text>`;
-    s+=`<text x="${x(i)}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${p.tick||SHORT[p.k]}</text>`;});
+    s+=`<text x="${x(i)}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${p.tick||tickTxt(p.k)}</text>`;});
   return s+"</svg>";
 }
 function hbars(items,{total,totalLabel="",second,secondLabel="",hl=[],cls=""}={}){
-  const max=Math.max(...items.map(x=>x[1]));
-  return items.map(x=>`<div class="hb-row ${cls}${hl.includes(x[0])?' hl':''}${second?' two':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)}${totalLabel?" "+totalLabel:""}</small>`:""}${second?`<small>${pct(x[1]/second)}${secondLabel?" "+secondLabel:""}</small>`:""}</span></div>`).join("");
+  const max=Math.max(...items.map(x=>x[1]),1);
+  return items.map(x=>`<div class="hb-row ${cls}${hl.includes(x[0])?' hl':''}${second?' two':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${Math.max(0,x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)}${totalLabel?" "+totalLabel:""}</small>`:""}${second?`<small>${pct(x[1]/second)}${secondLabel?" "+secondLabel:""}</small>`:""}</span></div>`).join("");
 }
 const setHTML=(id,h)=>document.getElementById(id).innerHTML=h;
 function topWithOthers(items,k){const s=items.slice().sort((a,b)=>b[1]-a[1]);if(s.length<=k)return s;const rest=s.slice(k).reduce((a,x)=>a+x[1],0);return [...s.slice(0,k),[`Otros (${s.length-k} conceptos)`,rest]];}
-
-/* Tablas mensuales: se abren en un diálogo para no alargar la vista */
 const TABLES={};
 function monthTable(cols,totalRow){
-  let h=`<table><thead><tr><th>Mes</th>${cols.map(c=>`<th class="num">${c.h}</th>`).join("")}</tr></thead><tbody>`;
-  MONTHS.forEach((m,i)=>{h+=`<tr${state.period===m?' class="sel"':''}><td>${CAP(m)}</td>${cols.map(c=>{const v=c.f(m,i);return `<td class="num${c.cls?(' '+c.cls(v)):''}">${c.fmt(v)}</td>`;}).join("")}</tr>`;});
-  if(totalRow) h+=`<tr class="tot"><td>${totalRow.label}</td>${totalRow.cells.map(c=>`<td class="num">${c}</td>`).join("")}</tr>`;
+  let h=`<table><thead><tr><th>Mes</th>${cols.map(c=>`<th class="num">${c.h}</th>`).join("")}<th>Estado</th></tr></thead><tbody>`;
+  MONTHS.forEach((m,i)=>{h+=`<tr${state.period===m?' class="sel"':''}><td>${CAP(m)}</td>${cols.map(c=>{const v=c.f(m,i);return `<td class="num${c.cls&&typeof v==="number"?(' '+c.cls(v)):''}">${v==null?"Sin extracto":c.fmt(v)}</td>`;}).join("")}<td>${STATUS_TXT(m)}</td></tr>`;});
+  if(totalRow) h+=`<tr class="tot"><td>${totalRow.label}</td>${totalRow.cells.map(c=>`<td class="num">${c}</td>`).join("")}<td></td></tr>`;
   return h+"</tbody></table>";
 }
 const varCol=f=>({h:"Var. mes",f:(m,i)=>i>0?M[m][f]/M[MONTHS[i-1]][f]-1:NaN,fmt:v=>sPct(v),cls:v=>v<0?"neg":v>0?"pos":""});
+const counts=ms=>ms.map(m=>M[m].people.length);
 
 /* ============================================================
    SECCIONES
    ============================================================ */
 function renderResumen(){
-  const d=per(),cover=d.close/BURN,counts=MONTHS.map(m=>M[m].people.length);
-  const vsPrev=f=>d.prev?`${sPct(d[f]/M[d.prev][f]-1)} frente a ${LOW(d.prev)}`:"";
+  const d=per(),vsPrev=f=>d.prev?`${sPct(d[f]/M[d.prev][f]-1)} frente a ${LOW(d.prev)}`:"";
+  const lastM=d.ms[d.ms.length-1],c=counts(d.ms);
   const card=(tab,label,value,subs,cls="")=>`<button type="button" class="kpi ${cls}" data-go="${tab}"><span class="lbl"><span>${label}</span><span class="go">Ver módulo</span></span><span class="val">${value}</span>${subs.filter(Boolean).map(x=>`<span class="sub">${x}</span>`).join("")}</button>`;
   setHTML("sumKpis",
-    card("ventas","Ventas netas",fM(d.sales),[d.ytd?`Promedio ${fM(d.sales/N)} por mes`:vsPrev("sales"),`Equilibrio ${fM(d.be)}`])+
-    card("compras","Compras",fM(d.inventory),[`${pct(d.inventory/d.sales)} de las ventas`,d.ytd?"Aún no es costo de ventas":vsPrev("inventory")])+
-    card("gastos","Gastos operativos",fM(d.opex),[`${pct(d.opex/d.sales)} de las ventas`,d.ytd?`Ocupación ${pct(OCCUPANCY/T.sales)} de ventas`:vsPrev("opex")])+
-    card("nomina","Carga laboral",fM(d.payroll),[`${pct(d.payroll/d.sales)} de las ventas`,d.ytd?`${Math.min(...counts)} a ${Math.max(...counts)} personas por mes`:`${M[state.period].people.length} personas`])+
-    card("caja","Caja al cierre",fM(d.close),[`${sPct(d.close/d.open-1)} vs saldo inicial`,`Cubre ${nf(cover,1)} meses`],cover<1?"bad":"")+
-    card("resultado","Resultado operativo",fM(d.result),[`${pct(d.result/d.sales)} de las ventas`,d.ytd?`Con financieros ${fM(d.result-H1.known_finance)}`:"Sin gastos financieros"],d.result<0?"bad":"good"));
+    card("ventas","Ventas netas",fM(d.sales),[d.ytd?`Promedio ${fM(d.sales/d.n)} por mes`:vsPrev("sales"),`Equilibrio ${fM(d.be)}`])+
+    card("compras","Compras",fM(d.inventory),[`${pct(d.inventory/d.sales)} de las ventas`,d.pending?`Sin clasificar ${fM(d.pending)}`:(d.ytd?"":vsPrev("inventory"))])+
+    card("gastos","Gastos operativos",fM(d.opex),[`${pct(d.opex/d.sales)} de las ventas`,`Ocupación ${pct(d.occ/d.sales)} de ventas`])+
+    card("nomina","Carga laboral",fM(d.payroll),[`${pct(d.payroll/d.sales)} de las ventas`,d.ytd?`${Math.min(...c)} a ${Math.max(...c)} personas por mes`:`${c[0]} personas${d.prov?" con desprendible":""}`])+
+    card("caja","Caja al cierre",fM(d.close),[`${sPct(d.close/d.open-1)} vs saldo inicial`,lastM==="AGOSTO"?`Impuestos por pagar 17-sep: ${fM(TAX_DUE)}`:`Cubre ${nf(d.close/BURN,1)} meses al consumo Ene–Jun`],d.close<BURN?"bad":"")+
+    card("resultado","Resultado operativo",fM(d.result),[`${pct(d.result/d.sales)} de las ventas`,d.prov?`Con compras sin clasificar ${fM(d.result-d.pending)}`:"Sin gastos financieros ni PILA"],d.prov?"":(d.result<0?"bad":"good")));
   document.querySelectorAll("#sumKpis [data-go]").forEach(b=>b.onclick=()=>showTab(b.dataset.go));
   const b=box("chSalesCost",300); b.el.innerHTML=salesCostChart(b);
 }
 
 function renderVentas(){
-  const d=per(),avg=T.sales/N,best=MONTHS.reduce((a,m)=>M[m].sales>M[a].sales?m:a);
+  const d=per(),avg=T.sales/N,best=MONTHS.reduce((a,m)=>M[m].sales>M[a].sales?m:a),last=MONTHS[N-1];
   setHTML("salesKpis",
-    kpi(d.ytd?"Ventas del semestre":"Ventas del mes",fM(d.sales),d.ytd?`${pct(M.JUNIO.sales/M.ENERO.sales-1)} de enero a junio`:`${pct(d.sales/T.sales)} del semestre`)+
+    kpi(d.ytd?"Ventas enero–agosto":"Ventas del mes",fM(d.sales),d.ytd?`${pct(M[last].sales/M.ENERO.sales-1)} de enero a ${LOW(last)}`:`${pct(d.sales/T.sales)} del acumulado`)+
     (d.ytd?kpi("Promedio mensual",fM(avg),`Mejor mes: ${LOW(best)}, ${fM(M[best].sales)}`)
           :kpi("Frente al mes anterior",d.prev?sPct(d.sales/M[d.prev].sales-1):"—",d.prev?`${CAP(d.prev)}: ${fM(M[d.prev].sales)}`:"Enero es el primer mes",d.prev&&d.sales<M[d.prev].sales?"bad":""))+
-    kpi("Frente al promedio",d.ytd?`${MONTHS.filter(m=>M[m].sales>=avg).length} de ${N} meses`:sPct(d.sales/avg-1),d.ytd?"por encima del promedio":`Promedio ${fM(avg)}`)+
+    kpi("Frente al promedio",d.ytd?`${MONTHS.filter(m=>M[m].sales>=avg).length} de ${N} meses`:sPct(d.sales/avg-1),d.ytd?"por encima del promedio":`Promedio Ene–Ago ${fM(avg)}`)+
     kpi("Meses sobre equilibrio",`${MONTHS.filter(m=>M[m].sales>=BE).length} de ${N}`,`Equilibrio ${fM(BE)} por mes`));
   const b=box("chSales",270);
-  b.el.innerHTML=barChart({box:b,label:"Ventas netas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=BE?"var(--teal-dk)":"var(--navy)",
+  b.el.innerHTML=barChart({box:b,label:"Ventas netas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=BE?"#2F7479":"#224D8E",
     refs:[{v:BE,name:"Equilibrio",value:fMs(BE),color:"var(--orange)"},{v:avg,name:"Promedio",value:fMs(avg),color:"var(--muted)"}]});
   renderCompare();
-  TABLES.sales=["Ventas netas por mes",monthTable([{h:"Ventas netas",f:m=>M[m].sales,fmt:money},varCol("sales"),{h:"Frente al equilibrio",f:m=>M[m].sales-BE,fmt:money,cls:v=>v<0?"neg":"pos"}],{label:"Semestre",cells:[money(T.sales),"",money(T.sales-BE*N)]})];
+  TABLES.sales=["Ventas netas por mes",monthTable([{h:"Ventas netas",f:m=>M[m].sales,fmt:money},varCol("sales"),{h:"Frente al equilibrio",f:m=>M[m].sales-BE,fmt:money,cls:v=>v<0?"neg":"pos"}],{label:"Enero–agosto",cells:[money(T.sales),"",money(T.sales-BE*N)]})];
 }
 function renderCompare(){
   const a=document.getElementById("cmpA").value,b=document.getElementById("cmpB").value,A=M[a].sales,B=M[b].sales,dv=B-A,dp=B/A-1;
@@ -732,129 +743,157 @@ function renderCompare(){
 function renderCompras(){
   const d=per(),prime=(d.inventory+d.payroll)/d.sales;
   setHTML("invKpis",
-    kpi(d.ytd?"Compras del semestre":"Compras de "+d.name,fM(d.inventory),d.prev?`${sPct(d.inventory/M[d.prev].inventory-1)} frente a ${LOW(d.prev)}`:"")+
-    kpi("Peso sobre ventas",pct(d.inventory/d.sales),`Semestre: ${pct(T.inventory/T.sales)}`)+
-    kpi("Compras + nómina sobre ventas",pct(prime),`Referencia orientativa: hasta ${pct(REF.primeCost.good,0)}`,prime>REF.primeCost.warn?"bad":""));
+    kpi(d.ytd?"Compras enero–agosto":"Compras de "+d.name,fM(d.inventory),d.prev?`${sPct(d.inventory/M[d.prev].inventory-1)} frente a ${LOW(d.prev)}`:"Solo líneas clasificadas")+
+    kpi("Peso sobre ventas",pct(d.inventory/d.sales),`Enero–junio validado: ${pct(VAR_RATIO)}`)+
+    kpi("Compras + nómina sobre ventas",pct(prime),d.prov?"Julio y agosto con cobertura parcial":`Referencia orientativa: hasta ${pct(REF.primeCost.good,0)}`,!d.prov&&prime>REF.primeCost.warn?"bad":"")+
+    kpi("Compras sin clasificar",d.pending?fM(d.pending):"—",d.pending?"Facturas sin cuenta; fuera del resultado":"Cierre enero–junio validado",d.pending?"warnline":""));
   const b=box("chInv",270);
-  b.el.innerHTML=barChart({box:b,label:"Compras inventariables por mes",data:MONTHS.map(m=>({k:m,v:M[m].inventory})),color:"var(--teal)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
-  {const pv=PROVIDERS.filter(p=>p[2]==="inventory").map(p=>[p[0].replace(/ S\.A\.S\.| S\.A\./,""),p[1]]);const top=pv.slice(0,5),rest=T.inventory-top.reduce((a,x)=>a+x[1],0);setHTML("hbInvProv",hbars([...top,["Otros proveedores",rest]],{total:T.inventory}));}
-  setHTML("hbInvCat",hbars(CATEGORIES.inventory,{total:T.inventory}));
-  document.getElementById("invCompNote").textContent=d.ytd?"Acumulado Ene–Jun.":`Acumulado Ene–Jun; aún no hay detalle por concepto de ${d.name}.`;
-  TABLES.inv=["Compras inventariables por mes",monthTable([{h:"Compras",f:m=>M[m].inventory,fmt:money},{h:"% ventas",f:m=>M[m].inventory/M[m].sales,fmt:v=>pct(v)},varCol("inventory")],{label:"Semestre",cells:[money(T.inventory),pct(T.inventory/T.sales),""]})];
+  b.el.innerHTML=barChart({box:b,label:"Compras inventariables por mes",data:MONTHS.map(m=>({k:m,v:M[m].inventory})),color:"#6DC1CB",sub:x=>pct(x.v/M[x.k].sales,0)+" ventas"});
+  const inv=PROVIDERS.filter(p=>p[4]==="inventory").map(p=>[p[0],p[1]+p[2]+p[3]]).sort((a,b)=>b[1]-a[1]);
+  const top=inv.slice(0,5),rest=T.inventory-top.reduce((a,x)=>a+x[1],0);
+  setHTML("hbInvProv",hbars([...top,["Otros proveedores",rest]],{total:T.inventory}));
+  setHTML("hbInvCat",hbars(Object.entries(catSum("invCat",d.ms)).sort((a,b)=>b[1]-a[1]),{total:d.inventory}));
+  document.getElementById("invCompNote").textContent=d.ytd?"Acumulado Ene–Ago.":`Mes de ${d.name}.`;
+  TABLES.inv=["Compras inventariables por mes",monthTable([{h:"Compras",f:m=>M[m].inventory,fmt:money},{h:"% ventas",f:m=>M[m].inventory/M[m].sales,fmt:v=>pct(v)},varCol("inventory"),{h:"Sin clasificar",f:m=>M[m].pending,fmt:v=>v?money(v):"—"}],{label:"Enero–agosto",cells:[money(T.inventory),pct(T.inventory/T.sales),"",money(T.pending)]})];
 }
 
 function renderGastos(){
-  const d=per(),central=PROVIDERS.find(p=>p[3]==="Ocupación");
+  const d=per(),cats=catSum("opexCat",d.ms);
+  if(d.ytd) UNASSIGNED_OPEX.forEach(([c,v])=>cats[c]=(cats[c]||0)+v);
   setHTML("opexKpis",
-    kpi(d.ytd?"Gastos del semestre":"Gastos de "+d.name,fM(d.opex),d.prev?`${sPct(d.opex/M[d.prev].opex-1)} frente a ${LOW(d.prev)}`:(d.ytd?"Consolidado validado":""))+
-    kpi("Peso sobre ventas",pct(d.opex/d.sales),`Semestre: ${pct(H1.opex/T.sales)}`)+
-    kpi("Ocupación del semestre",fM(OCCUPANCY),`${pct(OCCUPANCY/T.sales)} de ventas; ${pct(OCCUPANCY/H1.opex,0)} del gasto operativo`,"warnline")+
-    kpi("Pendiente de clasificar",fM(H1.assets_policy+H1.mixed),`Activos ${fM(H1.assets_policy)} y mixtas ${fM(H1.mixed)}`));
+    kpi(d.ytd?"Gastos enero–agosto":"Gastos de "+d.name,fM(d.opex),d.prev?`${sPct(d.opex/M[d.prev].opex-1)} frente a ${LOW(d.prev)}`:"Incluye gasto sin mes asignado")+
+    kpi("Peso sobre ventas",pct(d.opex/d.sales),`Enero–junio validado: ${pct(H1.opex/S.sales)}`)+
+    kpi("Ocupación del periodo",fM(d.occ),`${pct(d.occ/d.sales)} de ventas; ${pct(d.occ/d.opex,0)} del gasto operativo`,"warnline")+
+    kpi("Activos y partidas mixtas",fM(H1.assets_policy+H1.mixed),"Enero–junio; fuera del resultado"));
   const b=box("chOpex",270);
-  b.el.innerHTML=barChart({box:b,label:"Gastos operativos por mes",data:MONTHS.map(m=>({k:m,v:M[m].opex})),color:"var(--yellow)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
-  setHTML("hbOpexCat",hbars(topWithOthers(CATEGORIES.opex,7),{total:H1.opex,totalLabel:"del gasto",second:T.sales,secondLabel:"de ventas",hl:["Ocupación"]}));
-  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Jun. ":`Acumulado Ene–Jun; aún no hay detalle de ${d.name}. `)+`Cada concepto muestra su peso sobre el gasto operativo (${fM(H1.opex)}) y sobre las ventas (${fM(T.sales)}). ${central[0].replace(" S.A.S.","")} concentra ${pct(central[1]/H1.opex,0)} del gasto operativo.`;
-  document.getElementById("opexRecon").textContent=`Conciliación pendiente: los meses suman ${fM(T.opexMonths)} y el consolidado validado es ${fM(H1.opex)}; la diferencia de ${fM(H1.opex-T.opexMonths)} no se reparte entre meses.`;
-  TABLES.opex=["Gastos operativos por mes",monthTable([{h:"Gastos operativos",f:m=>M[m].opex,fmt:money},{h:"% ventas",f:m=>M[m].opex/M[m].sales,fmt:v=>pct(v)},varCol("opex")],{label:"Suma de meses",cells:[money(T.opexMonths),pct(T.opexMonths/T.sales),""]})];
+  b.el.innerHTML=barChart({box:b,label:"Gastos operativos por mes",data:MONTHS.map(m=>({k:m,v:M[m].opex})),color:"#FABF00",sub:x=>pct(x.v/M[x.k].sales,0)+" ventas"});
+  setHTML("hbOpexCat",hbars(topWithOthers(Object.entries(cats),7),{total:d.opex,totalLabel:"del gasto",second:d.sales,secondLabel:"de ventas",hl:["Ocupación"]}));
+  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Ago. ":`Mes de ${d.name}. `)+`Peso de cada concepto sobre el gasto operativo (${fM(d.opex)}) y sobre las ventas (${fM(d.sales)}).`+(d.prov?" Julio y agosto: ocupación sin IVA y sin servicios públicos ni marketing registrados.":"");
+  document.getElementById("opexRecon").textContent=`Los acumulados incluyen ${fM(unassigned)} de marketing (redes sociales) sin mes asignado: la suma de los meses es ${fM(T.opexMonths)} y el total ${fM(T.opex)}.`;
+  TABLES.opex=["Gastos operativos por mes",monthTable([{h:"Gastos operativos",f:m=>M[m].opex,fmt:money},{h:"% ventas",f:m=>M[m].opex/M[m].sales,fmt:v=>pct(v)},varCol("opex"),{h:"Ocupación",f:m=>M[m].opexCat["Ocupación"]||0,fmt:money}],{label:"Suma de meses",cells:[money(T.opexMonths),pct(T.opexMonths/T.sales),"",money(catSum("opexCat",MONTHS)["Ocupación"])]})];
 }
 
 function renderNomina(){
-  const d=per(),counts=MONTHS.map(m=>M[m].people.length),all=ALL_PEOPLE.length,full=ALL_PEOPLE.filter(p=>p[1]===N).length;
+  const d=per(),c=counts(MONTHS),all=ALL_PEOPLE.length,full=ALL_PEOPLE.filter(p=>p[1]===N).length;
   setHTML("payKpis",
-    kpi(d.ytd?"Carga laboral del semestre":"Carga laboral de "+d.name,fM(d.payroll),d.prev?`${sPct(d.payroll/M[d.prev].payroll-1)} frente a ${LOW(d.prev)}`:"Provisional")+
-    kpi("Peso sobre ventas",pct(d.payroll/d.sales),`Semestre: ${pct(T.payroll/T.sales)}`,d.payroll/d.sales>REF.labor.warn?"bad":"")+
-    (d.ytd?kpi("Personas por mes",`${Math.min(...counts)} a ${Math.max(...counts)}`,`${all} distintas; ${full} trabajaron los ${N} meses`)
-          :kpi("Personas en "+d.name,String(M[state.period].people.length),`${M[state.period].pilaPeople} con PILA`))+
-    kpi(d.ytd?"PILA del semestre":"PILA de "+d.name,fM(d.pila),d.ytd?`Pagada en caja: ${fM(H1.pila_cash)}`:`${M[state.period].pilaPeople} empleados con aportes`));
+    kpi(d.ytd?"Carga laboral enero–agosto":"Carga laboral de "+d.name,fM(d.payroll),d.prev?`${sPct(d.payroll/M[d.prev].payroll-1)} frente a ${LOW(d.prev)}`:"Provisional")+
+    kpi("Peso sobre ventas",pct(d.payroll/d.sales),`Enero–junio validado: ${pct(S.payroll/S.sales)}`,!d.prov&&d.payroll/d.sales>REF.labor.warn?"bad":"")+
+    (d.ytd?kpi("Personas por mes",`${Math.min(...c)} a ${Math.max(...c)}`,`${all} nombres distintos; julio y agosto solo con desprendible`)
+          :kpi("Personas en "+d.name,String(M[state.period].people.length),isProv(state.period)?`Con desprendible; ${M[state.period].pilaPeople} en PILA`:`${M[state.period].pilaPeople} con PILA`))+
+    kpi(d.ytd?"PILA enero–agosto":"PILA de "+d.name,fM(d.pila),d.ytd?`Enero–junio pagada en caja: ${fM(H1.pila_cash)}`:`${M[state.period].pilaPeople} personas con aportes`));
   const b=box("chPay",270);
-  b.el.innerHTML=barChart({box:b,label:"Carga laboral por mes",data:MONTHS.map(m=>({k:m,v:M[m].payroll})),color:"#6F8FC0",sub:x=>M[x.k].people.length+" personas"});
+  b.el.innerHTML=barChart({box:b,label:"Carga laboral por mes",data:MONTHS.map(m=>({k:m,v:M[m].payroll})),color:"#6F8FC0",sub:x=>M[x.k].people.length+" pers."});
   const ci=MONTHS.indexOf(state.period);
-  let r=`<table class="roster"><thead><tr><th>Persona</th>${MONTHS.map((m,i)=>`<th class="${i===ci?'colsel':''}">${SHORT[m]}</th>`).join("")}<th>Meses</th></tr></thead><tbody>`;
-  ALL_PEOPLE.forEach(([p,c])=>{r+=`<tr><td>${esc(p)}</td>${MONTHS.map((m,i)=>{const on=M[m].people.includes(p);return `<td class="${i===ci?'colsel':''}"><span class="cell${on?' in':''}" title="${esc(p)} · ${CAP(m)}: ${on?'con pagos':'sin pagos'}"></span></td>`;}).join("")}<td>${c}</td></tr>`;});
+  let r=`<table class="roster"><thead><tr><th>Persona</th>${MONTHS.map((m,i)=>`<th class="${i===ci?'colsel':''}">${tickTxt(m)}</th>`).join("")}<th>Meses</th></tr></thead><tbody>`;
+  ALL_PEOPLE.forEach(([p,n])=>{r+=`<tr><td>${esc(p)}</td>${MONTHS.map((m,i)=>{const on=M[m].people.includes(p);return `<td class="${i===ci?'colsel':''}"><span class="cell${on?' in':''}" title="${esc(p)}, ${LOW(m)}: ${on?'con pagos':'sin pagos'}"></span></td>`;}).join("")}<td>${n}</td></tr>`;});
   r+=`</tbody><tfoot><tr><td>Personas</td>${MONTHS.map((m,i)=>`<td class="${i===ci?'colsel':''}">${M[m].people.length}</td>`).join("")}<td>${all}</td></tr></tfoot></table>`;
   setHTML("roster",r);
-  setHTML("hbPattern",hbars(PAY_PATTERNS.map(x=>[`${x[0]} (${x[1]})`,x[2]]),{total:T.payroll,cls:"nav"}));
-  TABLES.pay=["Carga laboral por mes",monthTable([{h:"Carga laboral",f:m=>M[m].payroll,fmt:money},{h:"% ventas",f:m=>M[m].payroll/M[m].sales,fmt:v=>pct(v)},varCol("payroll"),{h:"Personas",f:m=>M[m].people.length,fmt:String},{h:"PILA",f:m=>M[m].pila,fmt:money}],{label:"Semestre",cells:[money(T.payroll),pct(T.payroll/T.sales),"",`${all} distintas`,money(T.pila)]})];
+  setHTML("hbPattern",hbars(PAY_PATTERNS.map(x=>[`${x[0]} (${x[1]})`,x[2]]),{total:S.payroll,cls:"nav"}));
+  TABLES.pay=["Carga laboral por mes",monthTable([{h:"Carga laboral",f:m=>M[m].payroll,fmt:money},{h:"% ventas",f:m=>M[m].payroll/M[m].sales,fmt:v=>pct(v)},varCol("payroll"),{h:"Personas",f:m=>M[m].people.length,fmt:String},{h:"PILA",f:m=>M[m].pila,fmt:money}],{label:"Enero–agosto",cells:[money(T.payroll),pct(T.payroll/T.sales),"",`${all} nombres`,money(T.pila)]})];
 }
 
 function renderCaja(){
-  const d=per();
+  const d=per(),miss=d.bankMissing.length?`Sin ${list(d.bankMissing.map(LOW))}: extracto pendiente`:"";
   setHTML("cashKpis",
     kpi("Saldo inicial",fM(d.open),d.ytd?"1 de enero":"Inicio de "+d.name)+
-    kpi(d.ytd?"Abonos del semestre":"Abonos del mes",fM(d.credits))+
-    kpi(d.ytd?"Cargos del semestre":"Cargos del mes",fM(d.debits))+
+    kpi(d.ytd?"Abonos enero–agosto":"Abonos del mes",d.credits==null?"Sin extracto":fM(d.credits),miss)+
+    kpi(d.ytd?"Cargos enero–agosto":"Cargos del mes",d.debits==null?"Sin extracto":fM(d.debits),miss)+
     kpi("Saldo final",fM(d.close),`${sPct(d.close/d.open-1)} frente al saldo inicial`,d.close<d.open?"bad":"good"));
   const b=box("chCash",260);
-  b.el.innerHTML=lineChart(b,[{k:"INICIO",v:T.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo al cierre de cada mes");
-  setHTML("cashFin",[["Consumo promedio de caja",fM(BURN)+" por mes"],["Cobertura del saldo al 30-jun",nf(T.close/BURN,1)+" meses"],["Desembolso neto del crédito",fM(H1.credit_net_inflow)],["Saldo de capital del crédito al 30-jun",fM(H1.credit_principal)],["Impuestos pagados en el semestre",fM(H1.tax_cash)],["PILA pagada en caja",fM(H1.pila_cash)]].map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join(""));
-  TABLES.cash=["Movimiento mensual de caja",monthTable([{h:"Inicial",f:m=>M[m].bank.open,fmt:money},{h:"Abonos",f:m=>M[m].bank.credits,fmt:money},{h:"Cargos",f:m=>M[m].bank.debits,fmt:money},{h:"Final",f:m=>M[m].bank.close,fmt:money},{h:"Variación",f:m=>M[m].bank.close-M[m].bank.open,fmt:money,cls:v=>v<0?"neg":"pos"}],{label:"Semestre",cells:[money(T.open),money(T.credits),money(T.debits),money(T.close),money(T.close-T.open)]})];
+  b.el.innerHTML=lineChart(b,[{k:"INICIO",v:M.ENERO.bank.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo al cierre de cada mes");
+  setHTML("cashFin",[
+    ["Saldo al 31 de agosto",fM(T.close)],
+    ["INC e IVA por pagar el 17 de septiembre",fM(TAX_DUE)],
+    ["Caja después de esos impuestos",fM(T.close-TAX_DUE)],
+    ["Tarjetas de crédito al 31 de agosto",`${fM(JA.cardsAug)} (${sPct(JA.cardsAug/JA.cardsJul-1)} vs julio)`],
+    ["Intereses financieros conocidos jul–ago",fM(JA.interestJul+JA.interestAug)],
+    ["Crédito bancario, capital al 30 de junio",fM(H1.credit_principal)],
+    ["Consumo promedio de caja enero–junio",fM(BURN)+" por mes"]
+  ].map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join(""));
+  TABLES.cash=["Movimiento mensual de caja",monthTable([{h:"Inicial",f:m=>M[m].bank.open,fmt:money},{h:"Abonos",f:m=>M[m].bank.credits,fmt:money},{h:"Cargos",f:m=>M[m].bank.debits,fmt:money},{h:"Final",f:m=>M[m].bank.close,fmt:money},{h:"Variación",f:m=>M[m].bank.close-M[m].bank.open,fmt:money,cls:v=>v<0?"neg":"pos"}],{label:"Enero–agosto",cells:[money(T.open),"","",money(T.close),money(T.close-T.open)]})];
 }
 
 function renderResultado(){
-  const res=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex})),sumRes=res.reduce((a,x)=>a+x.v,0);
+  const res=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex}));
+  const sH1=res.filter(x=>!isProv(x.k)).reduce((a,x)=>a+x.v,0),sJA=res.filter(x=>isProv(x.k)).reduce((a,x)=>a+x.v,0);
   const b=box("chResult",250);
-  b.el.innerHTML=barChart({box:b,label:"Resultado operativo aproximado por mes",data:res,color:x=>x.v<0?"var(--orange)":"var(--teal-dk)",noSel:true});
-  document.getElementById("resultNote").textContent=`Suma de los meses ${fM(sumRes)}; con el consolidado validado de gastos operativos el semestre queda en ${fM(T.sales-T.inventory-T.payroll-H1.opex)}. Las compras hacen de costo de alimentos mientras no haya inventarios.`;
-  const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance;
+  b.el.innerHTML=barChart({box:b,label:"Resultado operativo aproximado por mes",data:res,color:x=>x.v<0?"#E96C24":"#2F7479",noSel:true});
+  document.getElementById("resultNote").textContent=`Enero–junio: ${fM(sH1)}; julio y agosto: ${fM(sJA)} con costos y nómina parciales. Sin gastos financieros ni PILA; las compras hacen de costo de alimentos.`;
+  const baseH1=S.sales-S.inventory-S.payroll-H1.opex-H1.known_finance;
+  const baseAll=T.sales-T.inventory-T.payroll-T.opex-KNOWN_FIN_ALL;
   setHTML("scenarios",
-    kpi("Si inventario inicial = final",fM(base),"Con gastos financieros conocidos, sin interés APE",base<0?"bad":"good")+
-    kpi("Con interés APE candidato",fM(base-H1.ape_interest),"Escenario más exigente",base-H1.ape_interest<0?"bad":"good")+
-    kpi("Aumento de inventario para llegar a cero",fM(Math.max(0,-base)),"Inventario final menos inicial, sin APE"));
+    kpi("Enero–junio validado",fM(baseH1),`Inventario inicial = final. Con interés APE: ${fM(baseH1-H1.ape_interest)}`,baseH1<0?"bad":"good")+
+    kpi("Enero–agosto provisional",fM(baseAll),"Con gastos financieros; julio y agosto incompletos")+
+    kpi("Enero–agosto con compras sin clasificar",fM(baseAll-T.pending),`Si los ${fM(T.pending)} pendientes son costo`,baseAll-T.pending<0?"bad":""));
   simulate();
   const rows=(id,a)=>setHTML(id,a.map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join(""));
-  rows("posAssets",[["Caja cuenta empresarial",fM(T.close)],["Anticipos tributarios",fM(H1.tax_assets)],["Ventas registradas “por pagar” (en control)",fM(H1.sales_pending)],["Inventario al 30-jun","Pendiente"]]);
-  rows("posLiab",[["Pasivos tributarios",fM(H1.tax_liability)],["Crédito bancario, saldo de capital",fM(H1.credit_principal)],["Saldo económico APE (clasificación pendiente)",fM(H1.investor_balance)],["Cuotas APE may–jun, incluidas en el saldo",fM(H1.investor_pending_may_jun)]]);
+  rows("posAssets",[["Caja cuenta empresarial, 31-ago",fM(T.close)],["Anticipos tributarios, 30-jun",fM(H1.tax_assets)],["Ventas “por pagar” en control, Ene–Jun",fM(H1.sales_pending)],["Inventario","Pendiente"]]);
+  rows("posLiab",[["INC e IVA por pagar, 17-sep",fM(TAX_DUE)],["Tarjetas de crédito, 31-ago",fM(JA.cardsAug)],["Crédito bancario, capital 30-jun",fM(H1.credit_principal)],["Saldo económico APE, 30-jun",fM(H1.investor_balance)]]);
+  const h1c=counts(H1_MONTHS),avg=(f,ms)=>sumM(f,ms)/ms.length,catAvg=(c,ms)=>ms.reduce((a,m)=>a+(M[m].opexCat[c]||0),0)/ms.length;
+  const su=ms=>catAvg("Servicios públicos",ms)+catAvg("Marketing",ms);
+  setHTML("posComp",`<div class="r cmp3 head"><span></span><span>Ene–Jun</span><span>Jul–Ago</span></div>`+[
+    ["Personas con pagos por mes",`${Math.min(...h1c)} a ${Math.max(...h1c)}`,list(PROV.map(m=>String(M[m].people.length)))],
+    ["Nómina promedio por mes",fM(avg("payroll",H1_MONTHS)),fM(avg("payroll",PROV))],
+    ["Ocupación por mes (Jul–Ago sin IVA)",fM(catAvg("Ocupación",H1_MONTHS)),fM(catAvg("Ocupación",PROV))],
+    ["Servicios públicos y marketing",fM(su(H1_MONTHS)),fM(su(PROV))],
+    ["Compras sin clasificar por mes","—",fM(avg("pending",PROV))]
+  ].map(r=>`<div class="r cmp3"><span>${r[0]}</span><b>${r[1]}</b><b>${r[2]}</b></div>`).join(""));
 }
 function simulate(){
   const ii=document.getElementById("invIni"),ff=document.getElementById("invFin"),msg=document.getElementById("simMsg");
   if(ii.value===""||ff.value===""){
     setHTML("simOut",["Costo de ventas","Margen bruto","Resultado antes de renta","Margen del resultado"].map(t=>`<div class="mini"><span>${t}</span><b style="color:var(--muted)">—</b></div>`).join(""));
-    msg.className="callout warn";msg.textContent="Ingresa el inventario inicial y final valorizados para calcular el costo de ventas real.";return;
+    msg.className="callout warn";msg.textContent="Ingresa el inventario inicial (1-ene) y final (30-jun) valorizados para calcular el costo de ventas del semestre validado.";return;
   }
-  const cogs=Number(ii.value)+T.inventory-Number(ff.value),gross=T.sales-cogs,ape=document.getElementById("apeT").value==="1"?H1.ape_interest:0;
-  const r=gross-H1.opex-T.payroll-H1.known_finance-ape;
-  setHTML("simOut",`<div class="mini"><span>Costo de ventas</span><b>${fM(cogs)}</b></div><div class="mini"><span>Margen bruto (${pct(gross/T.sales)})</span><b>${fM(gross)}</b></div><div class="mini"><span>Resultado antes de renta</span><b class="${r<0?'neg':'pos'}">${fM(r)}</b></div><div class="mini"><span>Margen del resultado</span><b class="${r<0?'neg':'pos'}">${pct(r/T.sales)}</b></div>`);
+  const cogs=Number(ii.value)+S.inventory-Number(ff.value),gross=S.sales-cogs,ape=document.getElementById("apeT").value==="1"?H1.ape_interest:0;
+  const r=gross-H1.opex-S.payroll-H1.known_finance-ape;
+  setHTML("simOut",`<div class="mini"><span>Costo de ventas</span><b>${fM(cogs)}</b></div><div class="mini"><span>Margen bruto (${pct(gross/S.sales)})</span><b>${fM(gross)}</b></div><div class="mini"><span>Resultado antes de renta</span><b class="${r<0?'neg':'pos'}">${fM(r)}</b></div><div class="mini"><span>Margen del resultado</span><b class="${r<0?'neg':'pos'}">${pct(r/S.sales)}</b></div>`);
   msg.className="callout "+(r>=0?"":"bad");
   msg.innerHTML=r>=0?"<b>Resultado positivo</b> con estos inventarios.":`<b>Resultado negativo</b> con estos inventarios: faltan ${fM(-r)} para llegar a cero.`;
 }
 
 /* ---------- Diagnóstico: relato para socios e inversionistas ---------- */
 function renderDiag(){
-  const avg=T.sales/N,drop=M.JUNIO.sales/M.ENERO.sales-1,over=MONTHS.filter(m=>M[m].sales>=BE),under=MONTHS.filter(m=>M[m].sales<BE);
-  const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance;
+  const last=MONTHS[N-1],avg=T.sales/N,drop=M[last].sales/M.ENERO.sales-1;
+  const over=MONTHS.filter(m=>M[m].sales>=BE);
+  let st=N; for(let i=N-1;i>=0&&M[MONTHS[i]].sales<BE;i--) st=i;
+  const underTail=MONTHS.slice(st), lowest=MONTHS.reduce((a,m)=>M[m].sales<M[a].sales?m:a);
   const monthRes=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex}));
-  let streak=MONTHS.length; for(let i=MONTHS.length-1;i>=0&&monthRes[i].v<0;i--) streak=i;
-  const bestTwo=over.length?over.reduce((a,m)=>a+M[m].sales,0)/over.length:Math.max(...MONTHS.map(m=>M[m].sales));
+  const sH1=monthRes.filter(x=>!isProv(x.k)).reduce((a,x)=>a+x.v,0);
+  const baseH1=S.sales-S.inventory-S.payroll-H1.opex-H1.known_finance;
+  const bestAvg=over.length?over.reduce((a,m)=>a+M[m].sales,0)/over.length:Math.max(...MONTHS.map(m=>M[m].sales));
   const iso=document.getElementById("isoLogo").src;
-  const otherOpex=H1.opex-OCCUPANCY;
-  const COSTS=T.payroll+T.inventory+H1.opex, COST_GAP=COSTS-T.sales;
-  const structure=[["Nómina",T.payroll],["Compras",T.inventory],["Ocupación",OCCUPANCY],["Otros gastos operativos",otherOpex]].map(x=>[x[0],x[1]/COSTS,x[1]]);
+  const COSTS=S.payroll+S.inventory+H1.opex, COST_GAP=COSTS-S.sales;
+  const structure=[["Nómina",S.payroll],["Compras",S.inventory],["Ocupación",OCC_H1],["Otros gastos operativos",H1.opex-OCC_H1]].map(x=>[x[0],x[1]/COSTS,x[1]]);
   const per100=v=>"$"+nf(v*100,1);
-  const cases=[["Nivel de junio",M.JUNIO.sales],["Promedio del semestre",avg],["Equilibrio",BE],[`Promedio ${list(over.map(LOW))}`,bestTwo]].map(c=>[c[0],c[1],resultAt(c[1])]);
+  const cases=[[`Nivel de ${LOW(last)}`,M[last].sales],["Promedio enero–agosto",avg],["Equilibrio",BE],[`Promedio ${list(over.map(LOW))}`,bestAvg]].map(c=>[c[0],c[1],resultAt(c[1])]);
   const maxAbs=Math.max(...cases.map(c=>Math.abs(c[2])))||1;
-  const onePoint=avg*0.01;
+  const h1c=counts(H1_MONTHS),payH1=S.payroll/N6,payJA=sumM("payroll",PROV)/PROV.length;
+  const worst=monthRes.filter(x=>!isProv(x.k)).sort((a,b)=>a.v-b.v).slice(0,2).sort((a,b)=>MONTHS.indexOf(a.k)-MONTHS.indexOf(b.k));
+  const underVals=MONTHS.filter(m=>M[m].sales<BE).map(m=>M[m].sales);
+  const staging=T.sales-T.inventory-T.opexMonths-T.payroll-T.pila;
 
   setHTML("story",`
   <div class="s-hero">
     <div>
       <h3>MARANELLO sabe vender. Hoy su estructura cuesta más de lo que estamos vendiendo.</h3>
-      <p>En el primer semestre de 2026 consolidamos ventas, compras, gastos, nómina, bancos, impuestos y financiación. Por primera vez tenemos una lectura completa del negocio: el mercado existe, pero desde abril las ventas bajaron y los costos no. Esta es la situación, lo que significa y lo que proponemos hacer.</p>
+      <p>Consolidamos enero a agosto de 2026: seis meses con cierre validado y dos, julio y agosto, todavía provisionales. El mercado existe, pero desde ${LOW(MONTHS[st])} las ventas están por debajo de lo que la operación necesita. Esta es la situación, lo que significa y lo que proponemos hacer.</p>
     </div>
     <img src="${iso}" alt="">
   </div>
 
   <div class="s-figs">
-    <div class="s-fig"><b>${fM(T.sales)}</b><span>Ventas netas del semestre</span></div>
-    <div class="s-fig bad"><b>${pct(drop)}</b><span>Variación de ventas de enero a junio</span></div>
+    <div class="s-fig"><b>${fM(T.sales)}</b><span>Ventas netas de enero a agosto</span></div>
+    <div class="s-fig bad"><b>${pct(drop)}</b><span>Ventas de ${LOW(last)} frente a enero</span></div>
     <div class="s-fig"><b>${fM(BE,1)}</b><span>Venta mensual necesaria para el equilibrio</span></div>
-    <div class="s-fig bad"><b>${fM(T.close)}</b><span>Caja de la cuenta empresarial al 30 de junio</span></div>
+    <div class="s-fig"><b>${fM(T.close)}</b><span>Caja al 31 de agosto, antes de ${fM(TAX_DUE)} en impuestos del 17 de septiembre</span></div>
   </div>
 
   <div class="chapter">
     <div class="ch-text">
-      <h3>Sabemos vender, pero no sostuvimos el ritmo</h3>
-      <p>Vendimos <b>${fM(T.sales)}</b> en seis meses, un promedio de ${fM(avg)} al mes. En ${list(over.map(LOW))} superamos los ${fM(BE,1)} que la operación necesita.</p>
-      <p>Desde abril el nivel bajó: ${list(under.filter(m=>MONTHS.indexOf(m)>=3).map(m=>`${LOW(m)} ${fM(M[m].sales,1)}`))}. Junio cerró ${pct(Math.abs(drop))} por debajo de enero.</p>
+      <h3>Sabemos vender, pero llevamos ${underTail.length} meses por debajo del equilibrio</h3>
+      <p>Vendimos <b>${fM(T.sales)}</b> en ocho meses, un promedio de ${fM(avg)} al mes. En ${list(over.map(LOW))} superamos los ${fM(BE,1)} que la operación necesita.</p>
+      <p>Desde ${LOW(MONTHS[st])} no volvimos a ese nivel: ${list(underTail.map(m=>`${LOW(m)} ${fM(M[m].sales,1)}`))}. ${CAP(lowest)} fue el mes más bajo del año, ${pct(Math.abs(M[lowest].sales/M.ENERO.sales-1))} por debajo de enero.</p>
       <p><b>La demanda está demostrada; el reto es volver a sostenerla.</b></p>
     </div>
     <div class="ch-visual"><p class="cap">Ventas netas por mes, millones de pesos</p><div class="chart diag-chart" id="dvSales"></div></div>
@@ -863,29 +902,30 @@ function renderDiag(){
   <div class="chapter">
     <div class="ch-text">
       <h3>La estructura quedó grande para las ventas actuales</h3>
-      <p>De cada $100 de costo del semestre, ${per100(structure[0][1])} fueron nómina, ${per100(structure[1][1])} compras, ${per100(structure[2][1])} ocupación del local y ${per100(structure[3][1])} el resto de gastos operativos.</p>
-      <p>El problema es el tamaño: esos costos sumaron <b>${fM(COSTS)}</b> frente a ventas de ${fM(T.sales)}, es decir, <b>gastamos $${nf(COSTS/T.sales*100,0)} por cada $100 vendidos</b>.</p>
-      <p>Nómina y ocupación no bajan cuando bajan las ventas, por eso cada mes flojo pesa tanto. Al nivel de ventas promedio, cada punto porcentual de costo fijo sobre ventas equivale a unos <b>${fM(onePoint)} al mes</b>.</p>
+      <p>Tomamos enero–junio porque es el periodo con todos los costos validados. De cada $100 de costo, ${per100(structure[0][1])} fueron nómina, ${per100(structure[1][1])} compras, ${per100(structure[2][1])} ocupación del local y ${per100(structure[3][1])} el resto de gastos operativos.</p>
+      <p>El problema es el tamaño: esos costos sumaron <b>${fM(COSTS)}</b> frente a ventas de ${fM(S.sales)}, es decir, <b>gastamos $${nf(COSTS/S.sales*100,0)} por cada $100 vendidos</b>.</p>
+      <p>Nómina y ocupación no bajan cuando bajan las ventas. Al nivel de ventas promedio, cada punto porcentual de costo fijo sobre ventas equivale a unos <b>${fM(avg*0.01)} al mes</b>.</p>
     </div>
-    <div class="ch-visual"><p class="cap">Cómo se reparten los costos del semestre</p><div class="hb">${structure.map(x=>`<div class="hb-row two${x[0]==="Ocupación"?' hl':''}"><span class="hb-name">${x[0]}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/structure[0][1]*100).toFixed(1)}%"></div></div><span class="hb-num">${pct(x[1])}<small>${fM(x[2])}</small></span></div>`).join("")}<div class="hb-row two"><span class="hb-name"><b>Total costos</b></span><span></span><span class="hb-num"><b>100,0 %</b><small>${fM(COSTS)}</small></span></div></div>
-      <div class="s-gap">Los costos superaron las ventas en <b>${fM(COST_GAP)}</b> (${pct(COST_GAP/T.sales)} de las ventas).</div></div>
+    <div class="ch-visual"><p class="cap">Cómo se reparten los costos de enero–junio</p><div class="hb">${structure.map(x=>`<div class="hb-row two${x[0]==="Ocupación"?' hl':''}"><span class="hb-name">${x[0]}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/structure[0][1]*100).toFixed(1)}%"></div></div><span class="hb-num">${pct(x[1])}<small>${fM(x[2])}</small></span></div>`).join("")}<div class="hb-row two"><span class="hb-name"><b>Total costos</b></span><span></span><span class="hb-num"><b>100,0 %</b><small>${fM(COSTS)}</small></span></div></div>
+      <div class="s-gap">Los costos superaron las ventas en <b>${fM(COST_GAP)}</b> (${pct(COST_GAP/S.sales)} de las ventas).</div></div>
   </div>
 
   <div class="chapter">
     <div class="ch-text">
-      <h3>${streak<N?`Desde ${LOW(MONTHS[streak])}, cada mes cierra en negativo`:"El resultado operativo del semestre"}</h3>
-      <p>Restando compras, nómina y gastos operativos a las ventas de cada mes, enero dejó ${fM(monthRes[0].v,1)} y junio ${fM(monthRes[N-1].v,1)}.</p>
-      <p>Aún no hay utilidad contable definitiva porque faltan los inventarios valorizados. Como referencia, si el inventario inicial y final fueran iguales, el semestre cerraría cerca de <b>${fM(base)}</b> con gastos financieros, y <b>${fM(base-H1.ape_interest)}</b> reconociendo el interés de los inversionistas.</p>
-      <p>Son señales gerenciales, no pérdidas certificadas.</p>
+      <h3>Julio y agosto se ven mejor, pero todavía no son comparables</h3>
+      <p>Con cierre validado, enero–junio dejó un resultado operativo de <b>${fM(sH1)}</b> antes de gastos financieros; ${list(worst.map(x=>`${LOW(x.k)} ${fM(x.v,1)}`))} fueron los peores meses.</p>
+      <p>Julio y agosto aparecen en positivo (${list(PROV.map(m=>fM(monthRes[MONTHS.indexOf(m)].v,1)))}), pero con información incompleta: la nómina recoge ${list(PROV.map(m=>String(M[m].people.length)))} personas con desprendible, frente a ${Math.min(...h1c)}–${Math.max(...h1c)} con pagos en el primer semestre (${fM(payJA,1)} al mes frente a ${fM(payH1,1)}); la ocupación va sin IVA, no aparecen servicios públicos ni marketing y quedan <b>${fM(T.pending)}</b> en compras sin clasificar.</p>
+      <p>Si el equipo y los costos realmente se redujeron, sería un cambio importante; hasta confirmarlo, no lo leemos como recuperación. Como referencia validada, enero–junio con inventarios iguales cerraría cerca de <b>${fM(baseH1)}</b> con gastos financieros.</p>
     </div>
     <div class="ch-visual"><p class="cap">Resultado operativo aproximado por mes, millones de pesos</p><div class="chart diag-chart" id="dvResult"></div></div>
   </div>
 
   <div class="chapter alert">
     <div class="ch-text">
-      <h3>La caja ya lo está sintiendo</h3>
-      <p>La cuenta empresarial empezó el año con <b>${fM(T.open)}</b> y cerró junio con <b>${fM(T.close)}</b>: consumimos en promedio ${fM(BURN)} al mes, y el saldo actual no alcanza para cubrir un mes a ese ritmo.</p>
-      <p>En el semestre tomamos un crédito bancario con desembolso neto de ${fM(H1.credit_net_inflow)}; su saldo de capital al 30 de junio es ${fM(H1.credit_principal)}. Los compromisos con inversionistas suman presión, pero no son la causa principal del desequilibrio.</p>
+      <h3>La caja subió, pero no por holgura</h3>
+      <p>El saldo pasó de ${fM(S.close)} al cierre de junio a <b>${fM(T.close)}</b> al 31 de agosto. De ese saldo, ${fM(TAX_DUE)} corresponden a INC e IVA que vencen el 17 de septiembre, lo que deja cerca de <b>${fM(T.close-TAX_DUE)}</b> disponibles.</p>
+      <p>Al mismo tiempo, las tarjetas de crédito llegaron a ${fM(JA.cardsAug)} y la factura del arriendo de agosto incluye intereses de mora por ${money(JA.rentLateInterest)}: señales de presión en los pagos y de uso de financiación de corto plazo.</p>
+      <p>El crédito bancario tenía un saldo de capital de ${fM(H1.credit_principal)} al 30 de junio, y los compromisos con inversionistas suman presión, aunque no son la causa principal del desequilibrio.</p>
     </div>
     <div class="ch-visual"><p class="cap">Saldo de la cuenta empresarial, millones de pesos</p><div class="chart diag-chart" id="dvCash"></div></div>
   </div>
@@ -893,8 +933,8 @@ function renderDiag(){
   <div class="chapter">
     <div class="ch-text">
       <h3>Qué cambia si recuperamos ventas</h3>
-      <p>Con la estructura actual y el mismo peso de las compras (${pct(VAR_RATIO)} de las ventas), el resultado mensual depende casi por completo del nivel de ventas.</p>
-      <p>Al ritmo de junio perdemos alrededor de ${fM(-cases[0][2],1)} al mes. Si volvemos al nivel que ya alcanzamos en ${list(over.map(LOW))}, el mismo negocio genera cerca de <b>${fM(cases[3][2],1)} al mes</b>.</p>
+      <p>Con la estructura validada de enero–junio y el mismo peso de las compras (${pct(VAR_RATIO)} de las ventas), el resultado mensual depende casi por completo del nivel de ventas.</p>
+      <p>Al ritmo de ${LOW(last)} perderíamos alrededor de ${fM(-cases[0][2],1)} al mes. Si volvemos al nivel que ya alcanzamos en ${list(over.map(LOW))}, el mismo negocio genera cerca de <b>${fM(cases[3][2],1)} al mes</b>.</p>
       <p>Es una estimación simple, pero muestra que el camino no pasa solo por recortar: recuperar ventas cambia el signo del resultado.</p>
     </div>
     <div class="ch-visual"><p class="cap">Resultado mensual estimado según nivel de ventas (incluye gastos financieros conocidos)</p>
@@ -904,43 +944,43 @@ function renderDiag(){
 
   <h3 class="s-block-title">Lo que proponemos</h3>
   <div class="proposals">
-    <div class="prop"><h4>Recuperar ventas</h4><p>Volver a vender por encima de ${fM(BE,1)} al mes, un nivel que ya alcanzamos en ${list(over.map(LOW))}. Junio quedó ${fM(BE-M.JUNIO.sales,1)} por debajo.</p><div class="measure"><b>Cómo lo mediremos:</b> ventas netas mensuales frente al equilibrio.</div></div>
-    <div class="prop"><h4>Ajustar nómina y ocupación</h4><p>Hoy la nómina pesa ${pct(T.payroll/T.sales)} de las ventas y la ocupación ${pct(OCCUPANCY/T.sales)}. Revisar turnos, organización del equipo y condiciones del local.</p><div class="measure"><b>Cómo lo mediremos:</b> nómina y ocupación como porcentaje de las ventas de cada mes.</div></div>
-    <div class="prop"><h4>Conocer el costo real de alimentos</h4><p>Valorizar inventario inicial y final para pasar de compras a costo de ventas, y así conocer el margen bruto real por mes.</p><div class="measure"><b>Cómo lo mediremos:</b> costo de ventas y margen bruto mensual.</div></div>
+    <div class="prop"><h4>Recuperar ventas</h4><p>Volver a vender por encima de ${fM(BE,1)} al mes, un nivel que ya alcanzamos en ${list(over.map(LOW))}. ${CAP(last)} quedó ${fM(BE-M[last].sales,1)} por debajo.</p><div class="measure"><b>Cómo lo mediremos:</b> ventas netas mensuales frente al equilibrio.</div></div>
+    <div class="prop"><h4>Ajustar nómina y ocupación</h4><p>En enero–junio la nómina pesó ${pct(S.payroll/S.sales)} de las ventas y la ocupación ${pct(OCC_H1/S.sales)}. Si la reducción de equipo que muestran julio y agosto se confirma, medir su efecto en el servicio y en las ventas.</p><div class="measure"><b>Cómo lo mediremos:</b> nómina y ocupación como porcentaje de las ventas de cada mes.</div></div>
+    <div class="prop"><h4>Conocer el costo real de alimentos</h4><p>Valorizar inventarios y clasificar los ${fM(T.pending)} de compras pendientes de julio y agosto, para pasar de compras a costo de ventas y conocer el margen bruto real.</p><div class="measure"><b>Cómo lo mediremos:</b> costo de ventas y margen bruto mensual.</div></div>
   </div>
 
   <div class="s-close">
     <h3>Nuestra lectura</h3>
-    <p>MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable. Tiene una estructura pensada para vender cerca de $74–75 millones al mes; cuando las ventas caen a $48–58 millones, nómina, ocupación y servicios presionan el resultado y la caja.</p>
-    <p>La situación requiere intervención y seguimiento, y hoy contamos con una base financiera organizada para decidir con información y no solo con percepciones.</p>
+    <p>MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable. Tiene una estructura pensada para vender cerca de $74–75 millones al mes; cuando las ventas caen a entre $${nf(Math.min(...underVals)/1e6,0)} y $${nf(Math.max(...underVals)/1e6,0)} millones, nómina, ocupación y servicios presionan el resultado y la caja.</p>
+    <p>Julio y agosto podrían mostrar el inicio de un ajuste, pero necesitamos cerrarlos con la misma cobertura del primer semestre antes de sacar conclusiones. Hoy contamos con una base financiera organizada para decidir con información y no solo con percepciones.</p>
   </div>
 
   <details class="fold method">
     <summary><b>Qué falta para cerrar las cifras</b><span>Pendientes de información y conciliación.</span></summary>
     <div class="fold-body"><ul>
-      <li><b>Inventario inicial y final valorizados:</b> para calcular costo de ventas y margen bruto.</li>
-      <li><b>Depuración laboral:</b> separar empleados formales, turnos, ocasionales y otros conceptos de la hoja de pagos.</li>
+      ${JA.controls.map(c=>`<li><b>${c[0]}:</b> ${c[1]}</li>`).join("")}
+      <li><b>Cobertura de julio y agosto:</b> confirmar pagos a personal por turnos, servicios públicos, marketing y el tratamiento del IVA en ocupación.</li>
+      <li><b>Inventarios valorizados:</b> para calcular costo de ventas y margen bruto.</li>
       <li><b>Instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
-      <li><b>Partidas mixtas y activos:</b> ${fM(H1.mixed+H1.assets_policy)} por clasificar entre gasto, costo y activo.</li>
-      <li><b>Gastos operativos:</b> rastrear la diferencia de ${fM(H1.opex-T.opexMonths)} entre meses y consolidado.</li>
-      <li><b>Cuentas relacionadas:</b> completar movimientos para cerrar el flujo de caja consolidado.</li>
-      <li><b>Ventas “por pagar”:</b> conciliar ${fM(H1.sales_pending)} con bancos antes de reconocerlas como cuenta por cobrar.</li>
+      <li><b>Partidas mixtas y activos de enero–junio:</b> ${fM(H1.mixed+H1.assets_policy)} por clasificar.</li>
+      <li><b>Ventas “por pagar”:</b> conciliar ${fM(H1.sales_pending)} con bancos.</li>
     </ul></div>
   </details>
   <details class="fold method">
     <summary><b>Notas metodológicas y fuentes</b><span>Cómo se construyeron las cifras.</span></summary>
     <div class="fold-body">
-      <p><b>Proceso:</b> fuente original, depuración, anti-duplicación, clasificación, causación frente a caja, conciliación y nivel de certeza.</p>
-      <p><b>Equilibrio:</b> (gastos operativos + nómina + gastos financieros conocidos) por mes, dividido entre 1 − compras/ventas del semestre (${pct(VAR_RATIO)}). Con interés APE sería ${fM(BE_APE,1)}.</p>
+      <p><b>Enero–junio:</b> cierre validado V11.3, sin reprocesar. <b>Julio–agosto:</b> cierre V12 STAGING, provisional; compras con base sin impuestos y nómina según desprendibles.</p>
+      <p><b>Resultado operativo del tablero:</b> ventas − compras clasificadas − nómina − gastos operativos. No descuenta PILA; el consolidado staging sí la descuenta y reporta ${fM(staging)} para enero–agosto.</p>
+      <p><b>Equilibrio:</b> estructura validada de enero–junio, (gastos operativos + nómina + gastos financieros conocidos) por mes, dividido entre 1 − compras/ventas (${pct(VAR_RATIO)}). Con interés APE sería ${fM(BE_APE,1)}.</p>
       <p><b>Escenarios por nivel de ventas:</b> ventas × (1 − ${pct(VAR_RATIO)}) − estructura mensual de ${fM(FIXED_MONTH)}.</p>
-      <p><b>Fuentes:</b> ventas, documentos UBL y compras, correo, WhatsApp, nómina y PILA, bancos, impuestos, financiación e inversionistas.</p>
+      <p><b>Fuentes:</b> ventas POS y facturación electrónica, documentos UBL, correo, WhatsApp, nómina y PILA, bancos, impuestos, financiación e inversionistas.</p>
     </div>
   </details>`);
   const W=el=>Math.max(320,Math.round(el.clientWidth||520));
   const dS=document.getElementById("dvSales"),dR=document.getElementById("dvResult"),dC=document.getElementById("dvCash");
-  dS.innerHTML=barChart({box:{W:W(dS),H:230},label:"Ventas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=BE?"var(--teal-dk)":"var(--navy)",refs:[{v:BE,name:"Equilibrio",value:fMs(BE),color:"var(--orange)"}],noSel:true});
-  dR.innerHTML=barChart({box:{W:W(dR),H:230},label:"Resultado por mes",data:monthRes,color:x=>x.v<0?"var(--orange)":"var(--teal-dk)",noSel:true});
-  dC.innerHTML=lineChart({W:W(dC),H:230},[{k:"INICIO",v:T.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo de caja",true);
+  dS.innerHTML=barChart({box:{W:W(dS),H:230},label:"Ventas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=BE?"#2F7479":"#224D8E",refs:[{v:BE,name:"Equilibrio",value:fMs(BE),color:"var(--orange)"}],noSel:true});
+  dR.innerHTML=barChart({box:{W:W(dR),H:230},label:"Resultado por mes",data:monthRes,color:x=>x.v<0?"#E96C24":"#2F7479",noSel:true});
+  dC.innerHTML=lineChart({W:W(dC),H:230},[{k:"INICIO",v:M.ENERO.bank.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo de caja",true);
 }
 
 /* ============================================================
@@ -950,7 +990,7 @@ const RENDER={resumen:renderResumen,ventas:renderVentas,compras:renderCompras,ga
 const TABS=Object.keys(RENDER);
 function renderAll(){
   const d=per();
-  document.querySelectorAll("[data-scope]").forEach(e=>e.textContent=d.title);
+  document.querySelectorAll("[data-scope]").forEach(e=>e.textContent=d.scope);
   document.querySelectorAll(".pbtn").forEach(b=>{b.classList.toggle("on",b.dataset.p===state.period);b.setAttribute("aria-pressed",b.dataset.p===state.period);});
   TABS.forEach(t=>{if(t!==state.tab)RENDER[t]();});
   RENDER[state.tab]();
@@ -965,7 +1005,7 @@ function showTab(t){
 }
 (function init(){
   const p=document.getElementById("period");
-  [["YTD","Ene–Jun"],...MONTHS.map(m=>[m,SHORT[m]])].forEach(([k,l])=>{const b=document.createElement("button");b.type="button";b.className="pbtn";b.dataset.p=k;b.textContent=l;b.addEventListener("click",()=>{state.period=k;renderAll();});p.insertBefore(b,p.querySelector(".period-fixed"));});
+  [["YTD","Ene–Ago"],...MONTHS.map(m=>[m,SHORT[m]])].forEach(([k,l])=>{const b=document.createElement("button");b.type="button";b.className="pbtn";b.dataset.p=k;b.textContent=l;b.addEventListener("click",()=>{state.period=k;renderAll();});p.insertBefore(b,p.querySelector(".period-fixed"));});
   ["cmpA","cmpB"].forEach((id,i)=>{const s=document.getElementById(id);s.innerHTML=MONTHS.map(m=>`<option value="${m}">${CAP(m)}</option>`).join("");s.value=i?MONTHS[N-1]:MONTHS[0];s.addEventListener("change",renderCompare);});
   document.getElementById("cmpSwap").addEventListener("click",()=>{const a=document.getElementById("cmpA"),b=document.getElementById("cmpB"),t=a.value;a.value=b.value;b.value=t;renderCompare();});
   document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
