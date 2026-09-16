@@ -609,7 +609,7 @@ nav{position:sticky;z-index:40}
 
 
 /* ============================================================
-   V11.2 - CLARIDAD DE PERIODO + GRÁFICOS MULTISELECCIÓN
+   V11.3 - CLARIDAD DE PERIODO + GRÁFICOS MULTISELECCIÓN
    ============================================================ */
 .detail-scope-note{
   margin:0 0 10px;padding:10px 12px;border-radius:9px;background:#F4F8FC;
@@ -640,7 +640,7 @@ nav{position:sticky;z-index:40}
 
 
 /* ============================================================
-   V11.2 - RESUMEN EXPLORABLE + MÓDULOS LIMPIOS
+   V11.3 - RESUMEN EXPLORABLE + MÓDULOS LIMPIOS
    ============================================================ */
 .summary-kpi-card{position:relative;cursor:pointer;transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease;padding-bottom:42px}
 .summary-kpi-card:hover{transform:translateY(-2px);border-color:#9FB1C4}
@@ -682,6 +682,31 @@ nav{position:sticky;z-index:40}
  .summary-month-btn{flex:0 0 auto}
 }
 
+
+/* ============================================================
+   V11.3 - DESGLOSE TRANSACCIONAL MENSUAL
+   ============================================================ */
+.month-breakdown-lead{
+  display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
+  margin:0 0 10px;padding:10px 12px;border-radius:9px;
+  background:#F6F9FC;border:1px solid var(--border);font-size:11px;line-height:1.45
+}
+.month-breakdown-lead b{color:var(--navy)}
+.source-chip{
+  display:inline-block;padding:3px 7px;border-radius:999px;background:var(--blue-bg);
+  color:var(--navy);font-size:9px;font-weight:900;white-space:nowrap
+}
+.unassigned-row td{background:#FFF7D6 !important}
+.total-row td{font-weight:900;background:#F4F7FA}
+.category-share{font-variant-numeric:tabular-nums}
+.scope-top-list{margin-top:10px;padding-top:9px;border-top:1px solid var(--border)}
+.scope-top-list div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:5px 0;font-size:11px}
+.scope-top-list b{color:var(--navy)}
+@media(max-width:768px){
+  .month-breakdown-lead{display:block}
+  .source-chip{margin-top:7px}
+}
+
 </style>
 </head>
 <body class="locked">
@@ -704,7 +729,7 @@ nav{position:sticky;z-index:40}
  <div class="header-row">
   <div>
   <div class="brand"><img class="brand-logo" src="assets/logo_maranello_horizontal.png" alt="MARANELLO buona & fresca"></div>
-  <div class="subtitle">Tablero Financiero Ejecutivo V11.2 · Base operativa enero–junio 2026 · Corte 30-jun-2026</div>
+  <div class="subtitle">Tablero Financiero Ejecutivo V11.3 · Base operativa enero–junio 2026 · Corte 30-jun-2026</div>
   <div class="brand-stripe"></div>
  </div>
   
@@ -817,7 +842,7 @@ nav{position:sticky;z-index:40}
    <div class="card chart module-chart"><div class="chart-title">Compras inventariables por mes</div><div id="inventoryChart"></div></div>
    <div class="card"><h3>Desglose mensual</h3><div id="inventoryMonthlyTable"></div></div>
   </div>
-  <details class="compact-details" id="inventoryCompositionDetails">
+  <details class="compact-details" id="inventoryCompositionDetails" open>
     <summary id="inventoryCompositionTitle">Composición acumulada de compras · Ene–Jun</summary>
     <div class="compact-details-body">
       <div class="detail-scope-note" id="inventoryDetailNote"></div>
@@ -827,7 +852,7 @@ nav{position:sticky;z-index:40}
  </section>
 
  <section id="gastos" class="section">
-  <div class="section-title"><h2>Gastos operativos</h2><p>Total mensual documentado y composición acumulada disponible</p></div>
+  <div class="section-title"><h2>Gastos operativos</h2><p>Total mensual documentado y desglose real por concepto</p></div>
   <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
     <button class="period-tab active" data-period="YTD">Acumulado</button>
     <button class="period-tab" data-period="ENERO">Ene</button><button class="period-tab" data-period="FEBRERO">Feb</button>
@@ -845,9 +870,9 @@ nav{position:sticky;z-index:40}
   <div class="card" style="margin-top:13px">
     <h3>Totales mensuales de gastos operativos</h3>
     <div id="opexMonthlyTable"></div>
-    <div class="callout warning" style="margin-top:10px"><b>Control de conciliación:</b> los valores mensuales disponibles suman $118,92 M, mientras el total consolidado validado es $119,92 M. Diferencia de $1,00 M pendiente de rastrear en la fuente transaccional; no se redistribuye entre meses.</div>
+    <div class="callout warning" style="margin-top:10px"><b>Conciliación identificada:</b> enero–junio asignado por mes suma <b>$118,92 M</b>. Existe además <b>$1,00 M</b> de <b>Marketing · Redes sociales</b>, fuente WhatsApp, con mes <b>SIN DEFINIR</b>. Por eso el consolidado de gastos es <b>$119,92 M</b>. La partida no se distribuye artificialmente entre abril y mayo hasta contar con soporte del periodo del servicio.</div>
   </div>
-  <details class="compact-details" id="opexCompositionDetails">
+  <details class="compact-details" id="opexCompositionDetails" open>
     <summary id="opexCompositionTitle">Composición acumulada de gastos · Ene–Jun</summary>
     <div class="compact-details-body">
       <div class="detail-scope-note" id="opexDetailNote"></div>
@@ -1070,7 +1095,7 @@ nav{position:sticky;z-index:40}
 
 </main>
 
-<footer>MARANELLO · Tablero Financiero Ejecutivo V11.2 · Base operativa enero–junio 2026 · Preparado para incorporación mensual de julio y agosto.</footer>
+<footer>MARANELLO · Tablero Financiero Ejecutivo V11.3 · Base operativa enero–junio 2026 · Preparado para incorporación mensual de julio y agosto.</footer>
 
 <dialog id="detailDialog">
  <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
@@ -1107,6 +1132,9 @@ function handleAccess(e){
 }
 
 const DATA = {"months": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO"], "monthly": {"ENERO": {"sales": 75414443.0, "opex": 21222535.03, "payroll": 23769805.84168561, "inventory": 22597008.29, "bank": 17221018.9, "people": 15, "pila_people": 7}, "FEBRERO": {"sales": 64315666.0, "opex": 20041737.2, "payroll": 26383014.20475379, "inventory": 19382474.26, "bank": 7444605.03, "people": 15, "pila_people": 7}, "MARZO": {"sales": 74210185.0, "opex": 21056144.04, "payroll": 26763268.143390153, "inventory": 25267486.21, "bank": 7884417.51, "people": 15, "pila_people": 7}, "ABRIL": {"sales": 55861241.0, "opex": 22682458.27, "payroll": 26677468.963068187, "inventory": 18977246.8, "bank": 8608183.57, "people": 15, "pila_people": 7}, "MAYO": {"sales": 58511536.71, "opex": 17813551.02, "payroll": 27526508.5582197, "inventory": 16711397.51, "bank": 8385862.98, "people": 13, "pila_people": 7}, "JUNIO": {"sales": 48068769.34, "opex": 16098737.24, "payroll": 26401717.584356066, "inventory": 18426892.12, "bank": 1848018.15, "people": 14, "pila_people": 7}}, "h1": {"sales": 376381841.05, "gross_docs": 401428753.0, "opex": 119915162.8, "payroll": 157521783.29547352, "inventory": 121362505.19, "bank_open": 26590532.07, "bank_close": 1848018.15, "bank_credits": 283460830.68, "bank_debits": 308203344.6, "tax_liability": 9632000.0, "tax_assets": 4472997.85, "credit_principal": 26269252.38, "investor_balance": 132088326.57675348, "investor_pending_may_jun": 9876623.162634695, "known_finance": 5971297.55, "ape_interest_candidate": 5356565.543340213, "mixed": 7789801.47, "assets_policy": 2024100.0, "sales_pending": 3808014.0, "pila_period": 17849800.0, "pila_cash": 20068238.0, "tax_cash": 23326000.0, "credit_net_inflow": 25396275.0}, "categories": [{"group": "COSTO / INVENTARIO PENDIENTE", "status": "pendiente", "value": 121362505.19, "desc": "Compras candidatas a inventario. No equivalen todavía al COGS real.", "items": [["Insumos y mercancías", 91545376.85], ["Bebidas y mercancías", 16408791.0], ["Empaques y consumibles", 7537987.34], ["Insumos y empaques", 5870350.0]]}, {"group": "GASTOS OPERATIVOS", "status": "provisional", "value": 119915162.8, "desc": "Gastos documentales operativos; pueden requerir depuración de IVA/política contable.", "items": [["Ocupación", 88456372.0], ["Comisiones y plataformas", 6961034.87], ["Servicios públicos", 6683295.0], ["Marketing", 4720000.0], ["Servicios profesionales", 2600000.0], ["Movilidad", 2250946.0], ["Mantenimiento y adecuaciones", 1880200.0], ["Administración", 1850800.0], ["Tecnología", 1369431.0], ["Telecomunicaciones", 955165.0], ["Comisiones y medios de pago", 705674.39], ["Mantenimiento", 494500.0], ["Higiene y SST", 469600.0], ["Mantenimiento / adecuación", 180000.0], ["Seguridad y SST", 140000.0], ["Suministros operativos", 104000.0], ["Aseo y suministros", 47700.03], ["Seguros", 46444.51]]}, {"group": "ACTIVOS / POLÍTICA PENDIENTE", "status": "pendiente", "value": 2024100.0, "desc": "Partidas que no deben llevarse automáticamente al PyG.", "items": [["Mantenimiento / activos menores", 1024100.0], ["Tecnología / implementación", 1000000.0]]}, {"group": "REVISAR / MIXTO", "status": "pendiente", "value": 7789801.47, "desc": "Documentos cuyo uso o naturaleza requiere validación adicional.", "items": [["Concepto por validar", 3955985.47], ["Suministros mixtos", 1282500.0], ["Retail mixto", 1126380.0], ["Uso empresarial por validar", 931367.0], ["Retail por validar", 493569.0]]}], "providers": [["CENTRAL CONTROL S.A.S.", 73256372.0, "GASTOS OPERATIVOS", "Ocupación"], ["QUESERA Y SALSAMENTARIA SAN FERNANDO S.A.S.", 37447101.68, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["INDUSTRIA NACIONAL DE GASEOSAS S.A.S.", 16408791.0, "COSTO / INVENTARIO PENDIENTE", "Bebidas y mercancías"], ["MERCAMIO S.A.", 13150872.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["JEPRI DISTRIBUIDORA DE ALIMENTOS", 12498783.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["BONNIPLAST S.A.S.", 7537987.34, "COSTO / INVENTARIO PENDIENTE", "Empaques y consumibles"], ["MERCAFAMILIAR LAS PALMAS S.A.S.", 7217600.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["D1 S.A.S.", 7062220.03, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["RAPPI S.A.S.", 6961034.87, "GASTOS OPERATIVOS", "Comisiones y plataformas"], ["GRUPO SANTIAGO EXPRESS S.A.S.", 5870350.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y empaques"]], "payroll_patterns": [["RECURRENTE", 10, 138131965.81], ["FRECUENTE", 4, 12895962.49], ["OCASIONAL", 10, 6493855.0]], "site": {"CONSOLIDADO": {"coverage": "completa", "known_docs": 251091569.46, "opex_site": 119915162.8}, "JP": {"coverage": "parcial", "known_docs": 619898.0, "opex_site": 619898.0, "note": "Solo existen registros con sede explícita JP/JP-R47A por $619.898. La mayor parte de UBL no identifica sede."}, "PP": {"coverage": "parcial", "known_docs": 21862397.0, "opex_site": 21862397.0, "note": "Solo existen registros con sede explícita PP/Patio 34 por $21,86 M. La mayor parte de UBL no identifica sede."}}};
+
+const MONTHLY_BREAKDOWN = {"opex":{"ENERO":{"Ocupación":15006037.0,"Servicios públicos":1432961.0,"Marketing":1360000.0,"Comisiones y plataformas":1195503.75,"Movilidad":996822.0,"Servicios profesionales":600000.0,"Comisiones y medios de pago":196807.77,"Telecomunicaciones":183959.0,"Suministros operativos":104000.0,"Mantenimiento":100000.0,"Seguros":46444.51},"FEBRERO":{"Ocupación":15014922.0,"Comisiones y plataformas":1373505.14,"Servicios públicos":1183858.0,"Marketing":1000000.0,"Servicios profesionales":500000.0,"Movilidad":223088.0,"Higiene y SST":169600.0,"Telecomunicaciones":153801.0,"Seguridad y SST":140000.0,"Mantenimiento / adecuación":130000.0,"Comisiones y medios de pago":105263.03,"Aseo y suministros":47700.03},"MARZO":{"Ocupación":15014137.0,"Administración":1611900.0,"Servicios públicos":1266874.0,"Comisiones y plataformas":1263501.54,"Servicios profesionales":500000.0,"Marketing":360000.0,"Movilidad":299926.0,"Tecnología":254960.0,"Mantenimiento":159500.0,"Telecomunicaciones":153801.0,"Comisiones y medios de pago":121544.5,"Mantenimiento / adecuación":50000.0},"ABRIL":{"Ocupación":15009202.0,"Comisiones y plataformas":2344152.44,"Mantenimiento y adecuaciones":1880200.0,"Servicios públicos":1393715.0,"Servicios profesionales":1000000.0,"Tecnología":394955.0,"Administración":226800.0,"Telecomunicaciones":153801.0,"Comisiones y medios de pago":124928.83,"Mantenimiento":80000.0,"Movilidad":74704.0},"MAYO":{"Ocupación":14206037.0,"Servicios públicos":1405887.0,"Marketing":1000000.0,"Higiene y SST":300000.0,"Tecnología":286545.0,"Movilidad":232049.0,"Mantenimiento":155000.0,"Telecomunicaciones":153801.0,"Comisiones y medios de pago":74232.02},"JUNIO":{"Ocupación":14206037.0,"Comisiones y plataformas":784372.0,"Tecnología":432971.0,"Movilidad":424357.0,"Telecomunicaciones":156002.0,"Comisiones y medios de pago":82898.24,"Administración":12100.0}},"inventory":{"ENERO":{"Insumos y mercancías":15164581.09,"Bebidas y mercancías":3359690.0,"Empaques y consumibles":2629237.2,"Insumos y empaques":1443500.0},"FEBRERO":{"Insumos y mercancías":14534846.96,"Bebidas y mercancías":1855936.0,"Insumos y empaques":1548475.0,"Empaques y consumibles":1443216.3},"MARZO":{"Insumos y mercancías":19692151.04,"Bebidas y mercancías":3110034.0,"Insumos y empaques":1955475.0,"Empaques y consumibles":509826.17},"ABRIL":{"Insumos y mercancías":14595913.6,"Bebidas y mercancías":2866901.0,"Insumos y empaques":922900.0,"Empaques y consumibles":591532.2},"MAYO":{"Insumos y mercancías":12910356.54,"Bebidas y mercancías":2714359.0,"Empaques y consumibles":1086681.97},"JUNIO":{"Insumos y mercancías":14647527.62,"Bebidas y mercancías":2501871.0,"Empaques y consumibles":1277493.5}},"opex_unassigned":[{"mes":"SIN_DEFINIR","proveedor":"Proveedor redes","categoria":"Marketing","subcategoria":"Redes sociales","valor":1000000.0,"fuente":"WHATSAPP","observacion":"Se incluye en el semestre, pero no se asigna a abril/mayo sin soporte del período del servicio."}]};
+
 const money = v => v===null || v===undefined || Number.isNaN(Number(v)) ? "N/D" : new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Number(v));
 const compact = v => v===null || v===undefined || Number.isNaN(Number(v)) ? "N/D" : "$" + (Number(v)/1e6).toLocaleString("es-CO",{minimumFractionDigits:2,maximumFractionDigits:2}) + " M";
 const pct = v => Number.isFinite(v) ? (v*100).toLocaleString("es-CO",{minimumFractionDigits:1,maximumFractionDigits:1})+" %" : "N/D";
@@ -1375,6 +1403,123 @@ function renderCashLocal(){
  let prev=null;
  DATA.months.forEach(m=>{const x=BANK_MONTH[m],cls=state.period===m?' class="selected-period-row"':'';h+=`<tr${cls}><td>${m[0]+m.slice(1).toLowerCase()}</td><td class="num">${money(x.open)}</td><td class="num">${money(x.credits)}</td><td class="num">${money(x.debits)}</td><td class="num">${money(x.close)}</td><td class="num">${variation(x.close,prev)}</td></tr>`;prev=x.close;});
  h+='</tbody></table></div>'; const t=document.getElementById("cashMonthlyTable"); if(t) t.innerHTML=h;
+}
+
+
+// ============================================================
+// V11.3 - Desglose mensual real por categoría
+// Fuente: Consolidado Gerencial Compras y Gastos Ene-Jun 2026
+// ============================================================
+
+function monthlyBreakdownConfig(index){
+  return index===0
+    ? {key:"inventory",label:"Compras inventariables",noun:"compras",totalField:"inventory"}
+    : {key:"opex",label:"Gastos operativos",noun:"gastos",totalField:"opex"};
+}
+
+function renderCategoryDetail(index,targetId,noteId){
+ const cfg=monthlyBreakdownConfig(index);
+ const target=document.getElementById(targetId);
+ if(!target) return;
+ const note=document.getElementById(noteId);
+ const title=document.getElementById(index===0?"inventoryCompositionTitle":"opexCompositionTitle");
+ const isYtd=state.period==="YTD";
+
+ if(isYtd){
+   const c=DATA.categories[index];
+   let h='<div class="month-breakdown-lead"><div><b>Composición acumulada enero–junio.</b> Esta tabla explica el total consolidado del periodo.</div><span class="source-chip">Fuente transaccional consolidada</span></div>';
+   h+='<div class="table-wrap" role="region" aria-label="Composición acumulada" tabindex="0"><table><thead><tr><th>Categoría</th><th class="num">Valor Ene–Jun</th><th class="num">% grupo</th></tr></thead><tbody>';
+   c.items.slice().sort((a,b)=>b[1]-a[1]).forEach(x=>{
+     h+=`<tr><td>${esc(x[0])}</td><td class="num">${money(x[1])}</td><td class="num">${pct(x[1]/c.value)}</td></tr>`;
+   });
+   h+=`<tr class="total-row"><td>Total</td><td class="num">${money(c.value)}</td><td class="num">100,0 %</td></tr></tbody></table></div>`;
+   target.innerHTML=h;
+   if(title) title.textContent=index===0?"Composición de compras · Ene–Jun":"Composición de gastos · Ene–Jun";
+   if(note){
+     note.className="detail-scope-note";
+     note.innerHTML=index===1
+       ? 'El consolidado de gastos incluye <b>$1,00 M de Marketing / Redes sociales con mes SIN DEFINIR</b>; por eso el total consolidado es $119,92 M aunque los seis meses asignados sumen $118,92 M.'
+       : 'Todas las compras inventariables del consolidado están asignadas a un mes entre enero y junio.';
+   }
+   return;
+ }
+
+ const map=(MONTHLY_BREAKDOWN[cfg.key]||{})[state.period]||{};
+ const rows=Object.entries(map).sort((a,b)=>b[1]-a[1]);
+ const total=DATA.monthly[state.period][cfg.totalField];
+ const sales=DATA.monthly[state.period].sales;
+ let h=`<div class="month-breakdown-lead"><div><b>${cfg.label} · ${periodName(state.period)}.</b> El detalle inferior corresponde únicamente al mes seleccionado.</div><span class="source-chip">Desglose real del mes</span></div>`;
+ h+='<div class="table-wrap" role="region" aria-label="Composición mensual" tabindex="0"><table><thead><tr><th>Categoría</th><th class="num">Valor del mes</th><th class="num">% '+cfg.noun+'</th><th class="num">% ventas</th></tr></thead><tbody>';
+ rows.forEach(([name,val])=>{
+   h+=`<tr><td>${esc(name)}</td><td class="num">${money(val)}</td><td class="num category-share">${pct(val/total)}</td><td class="num">${pct(val/sales)}</td></tr>`;
+ });
+ h+=`<tr class="total-row"><td>Total ${esc(periodName(state.period))}</td><td class="num">${money(total)}</td><td class="num">100,0 %</td><td class="num">${pct(total/sales)}</td></tr></tbody></table></div>`;
+ target.innerHTML=h;
+ if(title) title.textContent=`Composición de ${cfg.noun} · ${periodName(state.period)}`;
+ if(note){
+   note.className="detail-scope-note";
+   note.innerHTML=`Detalle reconstruido desde la base transaccional consolidada mediante <b>MES_ECONOMICO + GRUPO_GERENCIAL + CATEGORIA_GERENCIAL</b>. La suma de las categorías concilia con el KPI mensual.`;
+ }
+}
+
+function renderOpexMonthScope(){
+ const el=document.getElementById("opexMonthScope");
+ const title=document.getElementById("opexMonthScopeTitle");
+ if(!el) return;
+ const isYtd=state.period==="YTD";
+ const d=isYtd?DATA.h1:DATA.monthly[state.period];
+
+ if(title) title.textContent=isYtd?"Qué compone el acumulado Ene–Jun":"Qué corresponde a "+periodName(state.period);
+
+ if(isYtd){
+   const assigned=DATA.months.reduce((s,m)=>s+DATA.monthly[m].opex,0);
+   const unassigned=(MONTHLY_BREAKDOWN.opex_unassigned||[]).reduce((s,x)=>s+Number(x.valor||0),0);
+   el.innerHTML=`<div class="opex-scope-stat"><span>Gasto operativo consolidado</span><b>${money(DATA.h1.opex)}</b></div>
+   <div class="opex-scope-stat"><span>Asignado a Ene–Jun</span><b>${money(assigned)}</b></div>
+   <div class="opex-scope-stat"><span>Sin mes definido</span><b>${money(unassigned)}</b></div>
+   <div class="scope-concepts"><b>Partida sin mes:</b> Marketing · Redes sociales, fuente WhatsApp. Se conserva dentro del acumulado, pero no se asigna artificialmente a un mes.</div>`;
+   return;
+ }
+
+ const prev=previousMonth(state.period);
+ const varText=prev?pct((d.opex-DATA.monthly[prev].opex)/DATA.monthly[prev].opex):"—";
+ const cats=Object.entries((MONTHLY_BREAKDOWN.opex||{})[state.period]||{}).sort((a,b)=>b[1]-a[1]);
+ const top=cats.slice(0,4).map(([name,val])=>`<div><span>${esc(name)}</span><b>${money(val)} · ${pct(val/d.opex)}</b></div>`).join("");
+ el.innerHTML=`<div class="opex-scope-stat"><span>Gasto operativo documentado</span><b>${money(d.opex)}</b></div>
+ <div class="opex-scope-stat"><span>% de ventas del mes</span><b>${pct(d.opex/d.sales)}</b></div>
+ <div class="opex-scope-stat"><span>Variación vs mes anterior</span><b>${varText}</b></div>
+ <div class="scope-top-list"><b>Principales conceptos del mes</b>${top}</div>`;
+}
+
+function renderOpexMonthlyTable(){
+ const el=document.getElementById("opexMonthlyTable");
+ if(!el) return;
+ let h='<div class="table-wrap" role="region" aria-label="Gastos operativos por mes" tabindex="0"><table><thead><tr><th>Periodo</th><th class="num">Gastos operativos</th><th class="num">% ventas</th><th class="num">Var. mes</th></tr></thead><tbody>';
+ let prev=null;
+ DATA.months.forEach(m=>{
+   const d=DATA.monthly[m],cls=state.period===m?' class="selected-period-row"':'';
+   h+=`<tr${cls}><td>${periodName(m)}</td><td class="num">${money(d.opex)}</td><td class="num">${pct(d.opex/d.sales)}</td><td class="num">${variation(d.opex,prev)}</td></tr>`;
+   prev=d.opex;
+ });
+ const unassigned=(MONTHLY_BREAKDOWN.opex_unassigned||[]).reduce((s,x)=>s+Number(x.valor||0),0);
+ h+=`<tr class="unassigned-row"><td>Sin mes definido · Marketing / Redes</td><td class="num">${money(unassigned)}</td><td class="num">—</td><td class="num">—</td></tr>`;
+ h+=`<tr class="total-row"><td>Total consolidado Ene–Jun</td><td class="num">${money(DATA.h1.opex)}</td><td class="num">${pct(DATA.h1.opex/DATA.h1.sales)}</td><td class="num">—</td></tr>`;
+ h+='</tbody></table></div><div class="month-table-note">La fila “Sin mes definido” está incluida en el consolidado, pero no en ninguno de los seis meses.</div>';
+ el.innerHTML=h;
+}
+
+function renderMonthlyTables(){
+ const sales=document.getElementById("salesMonthlyTable");
+ if(sales) sales.innerHTML=monthlyMetricTable("sales","Ventas netas",false);
+ const inv=document.getElementById("inventoryMonthlyTable");
+ if(inv) inv.innerHTML=monthlyMetricTable("inventory","Compras",true)+'<div class="month-table-note">% ventas = compras inventariables del mes / ventas netas del mes.</div>';
+ renderOpexMonthlyTable();
+}
+
+function renderPurchasesAndOpex(){
+ renderCategoryDetail(0,"inventoryCategoryDetail","inventoryDetailNote");
+ renderCategoryDetail(1,"opexCategoryDetail","opexDetailNote");
+ renderOpexMonthScope();
 }
 
 function simulate(){
