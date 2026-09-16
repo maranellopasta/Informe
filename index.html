@@ -609,7 +609,7 @@ nav{position:sticky;z-index:40}
 
 
 /* ============================================================
-   V11.1 - CLARIDAD DE PERIODO + GRÁFICOS MULTISELECCIÓN
+   V11.2 - CLARIDAD DE PERIODO + GRÁFICOS MULTISELECCIÓN
    ============================================================ */
 .detail-scope-note{
   margin:0 0 10px;padding:10px 12px;border-radius:9px;background:#F4F8FC;
@@ -637,6 +637,51 @@ nav{position:sticky;z-index:40}
 }
 @media(max-width:390px){.compare-sales-grid{grid-template-columns:1fr}}
 
+
+
+/* ============================================================
+   V11.2 - RESUMEN EXPLORABLE + MÓDULOS LIMPIOS
+   ============================================================ */
+.summary-kpi-card{position:relative;cursor:pointer;transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease;padding-bottom:42px}
+.summary-kpi-card:hover{transform:translateY(-2px);border-color:#9FB1C4}
+.summary-kpi-card.active{border-color:var(--yellow-brand);box-shadow:inset 0 4px 0 var(--yellow-brand),var(--shadow);background:#FFFCF2}
+.summary-kpi-card .module-link{position:absolute;left:14px;bottom:11px;border:0;background:transparent;color:var(--navy);font-size:9.5px;font-weight:900;padding:0;cursor:pointer}
+.summary-kpi-card .module-link:hover{text-decoration:underline}
+.summary-explorer-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:5px}
+.summary-explorer-head .chart-title{margin:0}
+.summary-selected-badge{font-size:9px;font-weight:900;color:var(--navy);background:var(--yellow-bg);border:1px solid #E5D18A;border-radius:999px;padding:5px 8px;white-space:nowrap}
+.summary-month-controls{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;padding-top:8px;border-top:1px solid var(--border)}
+.summary-month-btn{border:1px solid var(--border);background:#fff;color:var(--navy);border-radius:999px;padding:5px 9px;font-size:9.5px;font-weight:900;cursor:pointer;min-height:29px}
+.summary-month-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.summary-month-btn:hover{border-color:var(--turquoise)}
+.summary-module-metrics .metric-row{padding:11px 0}
+.period-reading{font-size:12px;line-height:1.6;color:var(--ink)}
+.period-reading b{color:var(--navy)}
+.module-chart-note{margin-top:6px;color:var(--muted);font-size:9.5px;line-height:1.35}
+.opex-month-scope{display:grid;gap:8px}
+.opex-scope-stat{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:11px}
+.opex-scope-stat:last-of-type{border-bottom:0}
+.opex-scope-stat b{color:var(--navy);font-variant-numeric:tabular-nums}
+.scope-concepts{margin-top:6px;padding:10px 12px;border-radius:9px;background:#F7F9FB;font-size:10.5px;line-height:1.5;color:var(--ink)}
+.scope-concepts b{color:var(--navy)}
+.compact-details{margin-top:13px;border:1px solid var(--border);border-radius:12px;background:#fff;overflow:hidden}
+.compact-details summary{cursor:pointer;padding:13px 15px;color:var(--navy);font-weight:900;font-size:12px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+.compact-details summary::-webkit-details-marker{display:none}
+.compact-details summary::after{content:'+';font-size:17px;line-height:1}
+.compact-details[open] summary::after{content:'−'}
+.compact-details[open] summary{border-bottom:1px solid var(--border);background:#F8FAFC}
+.compact-details-body{padding:13px 15px}
+/* Los gráficos de módulos vuelven a una lectura simple; la multiselección queda solo en Resumen. */
+.module-chart .chart-controls,.module-chart .chart-selection-summary{display:none!important}
+@media(max-width:768px){
+ .summary-kpi-card{padding-bottom:38px}
+ .summary-explorer-head{align-items:flex-start}
+ .summary-selected-badge{font-size:8.5px}
+ .summary-month-controls{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+ .summary-month-controls::-webkit-scrollbar{display:none}
+ .summary-month-btn{flex:0 0 auto}
+}
+
 </style>
 </head>
 <body class="locked">
@@ -659,7 +704,7 @@ nav{position:sticky;z-index:40}
  <div class="header-row">
   <div>
   <div class="brand"><img class="brand-logo" src="assets/logo_maranello_horizontal.png" alt="MARANELLO buona & fresca"></div>
-  <div class="subtitle">Tablero Financiero Ejecutivo V11.1 · Base operativa enero–junio 2026 · Corte 30-jun-2026</div>
+  <div class="subtitle">Tablero Financiero Ejecutivo V11.2 · Base operativa enero–junio 2026 · Corte 30-jun-2026</div>
   <div class="brand-stripe"></div>
  </div>
   
@@ -692,28 +737,33 @@ nav{position:sticky;z-index:40}
   </div>
 
   <div class="grid kpis" id="kpiGrid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-   <div class="card clickable" data-target-tab="ventas"><h3>Ventas netas</h3><div class="kpi-value" id="kSales">—</div><div class="kpi-sub" id="kSalesSub"></div></div>
-   <div class="card clickable" data-target-tab="compras"><h3>Compras inventariables</h3><div class="kpi-value" id="kInventory">—</div><div class="kpi-sub" id="kInventorySub"></div></div>
-   <div class="card clickable" data-target-tab="gastos"><h3>Gastos operativos</h3><div class="kpi-value" id="kOpex">—</div><div class="kpi-sub" id="kOpexSub"></div></div>
-   <div class="card clickable" data-target-tab="nomina"><h3>Carga laboral</h3><div class="kpi-value" id="kPayroll">—</div><div class="kpi-sub" id="kPayrollSub"></div></div>
-   <div class="card clickable" data-target-tab="caja"><h3>Caja disponible</h3><div class="kpi-value" id="kCash">—</div><div class="kpi-sub" id="kCashSub"></div></div>
+   <div class="card summary-kpi-card active" data-summary-kpi="sales"><h3>Ventas netas</h3><div class="kpi-value" id="kSales">—</div><div class="kpi-sub" id="kSalesSub"></div><button class="module-link" data-target-tab="ventas" type="button">Ver módulo →</button></div>
+   <div class="card summary-kpi-card" data-summary-kpi="inventory"><h3>Compras inventariables</h3><div class="kpi-value" id="kInventory">—</div><div class="kpi-sub" id="kInventorySub"></div><button class="module-link" data-target-tab="compras" type="button">Ver módulo →</button></div>
+   <div class="card summary-kpi-card" data-summary-kpi="opex"><h3>Gastos operativos</h3><div class="kpi-value" id="kOpex">—</div><div class="kpi-sub" id="kOpexSub"></div><button class="module-link" data-target-tab="gastos" type="button">Ver módulo →</button></div>
+   <div class="card summary-kpi-card" data-summary-kpi="payroll"><h3>Carga laboral</h3><div class="kpi-value" id="kPayroll">—</div><div class="kpi-sub" id="kPayrollSub"></div><button class="module-link" data-target-tab="nomina" type="button">Ver módulo →</button></div>
+   <div class="card summary-kpi-card" data-summary-kpi="bank"><h3>Caja disponible</h3><div class="kpi-value" id="kCash">—</div><div class="kpi-sub" id="kCashSub"></div><button class="module-link" data-target-tab="caja" type="button">Ver módulo →</button></div>
   </div>
 
   <div class="grid two" style="margin-top:13px">
-   <div class="card chart"><div class="chart-title">Ventas mensuales · referencia del periodo seleccionado</div><div id="salesChart"></div></div>
-   <div class="card">
-    <h3>Lectura del periodo</h3>
-    <div class="metric-row"><span>Periodo seleccionado</span><b id="quickPeriod">Acumulado Ene–Jun</b></div>
-    <div class="metric-row"><span>Compras inventariables / ventas</span><b id="quickInventoryPct">—</b></div>
-    <div class="metric-row"><span>Gastos operativos / ventas</span><b id="quickOpexPct">—</b></div>
-    <div class="metric-row"><span>Carga laboral / ventas</span><b id="quickPayrollPct">—</b></div>
-    <div class="metric-row"><span>Caja al cierre</span><b id="quickCash">—</b></div>
-    <div class="callout" style="margin-top:10px"><b>Trazabilidad:</b> cada KPI abre la pestaña que contiene su evolución mensual y detalle disponible.</div>
+   <div class="card chart">
+    <div class="summary-explorer-head"><div class="chart-title" id="summaryChartTitle">Evolución mensual — Ventas netas</div><span class="summary-selected-badge" id="summarySelectedBadge">Ventas</span></div>
+    <div id="summaryDynamicChart"></div>
+    <div class="summary-month-controls" id="summaryMonthControls"></div>
+    <div class="module-chart-note">Selecciona uno o varios meses para compararlos visualmente. El filtro superior continúa definiendo los KPI del periodo.</div>
+   </div>
+   <div class="card summary-module-metrics">
+    <h3 id="summaryModuleTitle">Indicadores de Ventas</h3>
+    <div class="metric-row"><span id="summaryMetricLabel1">Valor del periodo</span><b id="summaryMetricValue1">—</b></div>
+    <div class="metric-row"><span id="summaryMetricLabel2">Promedio mensual</span><b id="summaryMetricValue2">—</b></div>
+    <div class="metric-row"><span id="summaryMetricLabel3">Mayor mes</span><b id="summaryMetricValue3">—</b></div>
    </div>
   </div>
- </section>
 
- 
+  <div class="card" style="margin-top:13px">
+    <h3>Lectura del periodo</h3>
+    <div class="period-reading" id="summaryPeriodReading">—</div>
+  </div>
+ </section>
 
  <section id="ventas" class="section">
   <div class="section-title"><h2>Ventas</h2><p>Evolución mensual y comparación de períodos</p></div>
@@ -731,7 +781,7 @@ nav{position:sticky;z-index:40}
    <div class="card"><h3>Referencia comercial</h3><div class="metric-row"><span>Ventas acumuladas Ene–Jun</span><b>$376,38 M</b></div><div class="kpi-sub">La tabla inferior conserva la trazabilidad mensual.</div></div>
   </div>
   <div class="grid two" style="margin-top:13px">
-   <div class="card chart"><div class="chart-title">Ventas netas por mes</div><div id="salesChart2"></div></div>
+   <div class="card chart module-chart"><div class="chart-title">Ventas netas por mes</div><div id="salesChart2"></div></div>
    <div class="card"><h3>Detalle mensual</h3><div id="salesMonthlyTable"></div></div>
   </div>
   <div class="card" style="margin-top:13px">
@@ -764,47 +814,51 @@ nav{position:sticky;z-index:40}
    <div class="card"><div class="callout warning"><b>Criterio contable:</b> COGS = inventario inicial + compras inventariables − inventario final. Esta pestaña muestra compras, no costo de ventas definitivo.</div></div>
   </div>
   <div class="grid two" style="margin-top:13px">
-   <div class="card chart"><div class="chart-title">Compras inventariables por mes</div><div id="inventoryChart"></div></div>
+   <div class="card chart module-chart"><div class="chart-title">Compras inventariables por mes</div><div id="inventoryChart"></div></div>
    <div class="card"><h3>Desglose mensual</h3><div id="inventoryMonthlyTable"></div></div>
   </div>
-  <div class="card" style="margin-top:13px">
-    <h3 id="inventoryCompositionTitle">Composición acumulada de compras · Ene–Jun</h3>
-    <div class="detail-scope-note" id="inventoryDetailNote"></div>
-    <div id="inventoryCategoryDetail"></div>
-  </div>
+  <details class="compact-details" id="inventoryCompositionDetails">
+    <summary id="inventoryCompositionTitle">Composición acumulada de compras · Ene–Jun</summary>
+    <div class="compact-details-body">
+      <div class="detail-scope-note" id="inventoryDetailNote"></div>
+      <div id="inventoryCategoryDetail"></div>
+    </div>
+  </details>
  </section>
 
  <section id="gastos" class="section">
-  <div class="section-title"><h2>Gastos operativos</h2><p>Evolución mensual y composición documental</p></div>
+  <div class="section-title"><h2>Gastos operativos</h2><p>Total mensual documentado y composición acumulada disponible</p></div>
   <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
     <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button>
-    <button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button>
-    <button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button>
-    <button class="period-tab" data-period="JUNIO">Jun</button>
+    <button class="period-tab" data-period="ENERO">Ene</button><button class="period-tab" data-period="FEBRERO">Feb</button>
+    <button class="period-tab" data-period="MARZO">Mar</button><button class="period-tab" data-period="ABRIL">Abr</button>
+    <button class="period-tab" data-period="MAYO">May</button><button class="period-tab" data-period="JUNIO">Jun</button>
   </div>
   <div class="grid two">
    <div class="card"><h3 id="opexPeriodTitle">Gastos operativos del periodo</h3><div class="kpi-value" id="opexPeriodValue">—</div><div class="kpi-sub" id="opexPeriodSub"></div></div>
-   <div class="card"><div class="callout"><b>Alcance:</b> este KPI contiene únicamente gastos operativos documentados. Activos/política pendiente y partidas mixtas se muestran aparte y no se suman al KPI.</div></div>
+   <div class="card"><div class="callout"><b>Alcance:</b> incluye únicamente documentos clasificados como gasto operativo. Activos/política pendiente y partidas mixtas se controlan por separado.</div></div>
   </div>
   <div class="grid two" style="margin-top:13px">
-   <div class="card chart"><div class="chart-title">Gastos operativos por mes</div><div id="opexChart"></div></div>
-   <div class="card"><h3>Desglose mensual</h3><div id="opexMonthlyTable"></div><div class="callout warning" style="margin-top:10px"><b>Control de conciliación:</b> los valores mensuales disponibles suman $118,92 M, mientras el total consolidado validado es $119,92 M. Diferencia de $1,00 M pendiente de rastrear en la fuente transaccional; no se redistribuye entre meses.</div></div>
+   <div class="card chart module-chart"><div class="chart-title">Gastos operativos por mes</div><div id="opexChart"></div><div class="module-chart-note">Pasa el cursor sobre una barra para ver el valor exacto. El mes del filtro superior queda resaltado.</div></div>
+   <div class="card"><h3 id="opexMonthScopeTitle">Qué corresponde al periodo seleccionado</h3><div id="opexMonthScope" class="opex-month-scope"></div></div>
   </div>
   <div class="card" style="margin-top:13px">
-    <h3 id="opexCompositionTitle">Composición acumulada de gastos · Ene–Jun</h3>
-    <div class="detail-scope-note" id="opexDetailNote"></div>
-    <div id="opexCategoryDetail"></div>
+    <h3>Totales mensuales de gastos operativos</h3>
+    <div id="opexMonthlyTable"></div>
+    <div class="callout warning" style="margin-top:10px"><b>Control de conciliación:</b> los valores mensuales disponibles suman $118,92 M, mientras el total consolidado validado es $119,92 M. Diferencia de $1,00 M pendiente de rastrear en la fuente transaccional; no se redistribuye entre meses.</div>
   </div>
+  <details class="compact-details" id="opexCompositionDetails">
+    <summary id="opexCompositionTitle">Composición acumulada de gastos · Ene–Jun</summary>
+    <div class="compact-details-body">
+      <div class="detail-scope-note" id="opexDetailNote"></div>
+      <div id="opexCategoryDetail"></div>
+    </div>
+  </details>
   <div class="grid two" style="margin-top:13px">
     <div class="card"><h3>Activos / política pendiente</h3><div class="kpi-value">$2,02 M</div><div class="kpi-sub">Partidas que no deben llevarse automáticamente al PyG.</div></div>
     <div class="card"><h3>Revisar / mixto</h3><div class="kpi-value">$7,79 M</div><div class="kpi-sub">Documentos cuyo uso o naturaleza requiere validación adicional.</div></div>
   </div>
  </section>
-
- 
 
  <section id="nomina" class="section">
   <div class="section-title"><h2>Nómina y carga laboral</h2><p>Seguimiento mensual de la fuente de pagos y control PILA</p></div>
@@ -824,7 +878,7 @@ nav{position:sticky;z-index:40}
    <div class="card"><h3>Empleados PILA</h3><div class="kpi-value" id="nomPilaPeople">—</div><div class="kpi-sub">Control de vinculación formal</div></div>
   </div>
   <div class="grid two" style="margin-top:13px">
-   <div class="card chart"><div class="chart-title">Carga laboral por mes</div><div id="payrollChart"></div></div>
+   <div class="card chart module-chart"><div class="chart-title">Carga laboral por mes</div><div id="payrollChart"></div></div>
    <div class="card"><h3>Detalle mensual</h3><div id="payrollTable"></div></div>
   </div>
   <div class="card" style="margin-top:13px"><h3>Patrón de pagos acumulado Ene–Jun</h3><div id="payrollPattern"></div><div class="callout warning" style="margin-top:10px">Frecuencia de pago no equivale a clasificación jurídica. La cifra de carga laboral permanece provisional mientras se completa la depuración.</div></div>
@@ -1016,7 +1070,7 @@ nav{position:sticky;z-index:40}
 
 </main>
 
-<footer>MARANELLO · Tablero Financiero Ejecutivo V11.1 · Base operativa enero–junio 2026 · Preparado para incorporación mensual de julio y agosto.</footer>
+<footer>MARANELLO · Tablero Financiero Ejecutivo V11.2 · Base operativa enero–junio 2026 · Preparado para incorporación mensual de julio y agosto.</footer>
 
 <dialog id="detailDialog">
  <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
@@ -1064,7 +1118,7 @@ function peopleTooltip(month){const names=PAYROLL_PEOPLE[month]||[];return names
 function h1PeopleRange(){const vals=Object.values(PAYROLL_PEOPLE).map(x=>x.length).filter(Boolean); if(!vals.length) return 'N/D'; const mn=Math.min(...vals), mx=Math.max(...vals); return mn===mx?String(mn):`${mn}–${mx}`;}
 function h1PeopleTooltip(){return DATA.months.map(m=>m[0]+m.slice(1).toLowerCase()+': '+peopleCount(m)+' ('+(PAYROLL_PEOPLE[m]||[]).join(', ')+')').join('\n\n');}
 
-const state = {period:"YTD",tab:"resumen",chartSelections:{}};
+const state = {period:"YTD",tab:"resumen",summaryKpi:"sales",summaryMonths:new Set(DATA.months)};
 
 const PILA_MONTH = {
  ENERO:3087100,FEBRERO:2701400,MARZO:2867500,ABRIL:3134700,MAYO:3180800,JUNIO:2878300
@@ -1118,11 +1172,6 @@ function renderKPIs(){
  set("kPayrollSub",sales?pct(payroll/sales)+" de ventas":"");
  set("kCashSub",isYtd?"Saldo al 30-jun":"Saldo final del mes");
  set("periodLabel",isYtd?"Acumulado enero–junio 2026":periodName(state.period));
- set("quickPeriod",periodName(state.period));
- set("quickInventoryPct",sales?pct(inventory/sales):"N/D");
- set("quickOpexPct",sales?pct(opex/sales):"N/D");
- set("quickPayrollPct",sales?pct(payroll/sales):"N/D");
- set("quickCash",compact(cash));
  set("salesPeriodValue",compact(sales));
  set("salesPeriodSub",isYtd?"Total acumulado enero–junio":"Ventas netas correspondientes a "+periodName(state.period));
  set("inventoryPeriodValue",compact(inventory));
@@ -1138,61 +1187,82 @@ function renderKPIs(){
 }
 
 function monthShort(m){return ({ENERO:"Ene",FEBRERO:"Feb",MARZO:"Mar",ABRIL:"Abr",MAYO:"May",JUNIO:"Jun",JULIO:"Jul",AGOSTO:"Ago",SEPTIEMBRE:"Sep",OCTUBRE:"Oct",NOVIEMBRE:"Nov",DICIEMBRE:"Dic"})[m]||m.slice(0,3);}
-function chartSelection(key){
- if(!state.chartSelections[key]) state.chartSelections[key]=new Set(DATA.months);
- return state.chartSelections[key];
+function previousMonth(month){const i=DATA.months.indexOf(month);return i>0?DATA.months[i-1]:null;}
+function fieldSeries(field){return DATA.months.map(m=>({k:m,v:DATA.monthly[m][field]}));}
+function maxPoint(field){return fieldSeries(field).reduce((a,b)=>b.v>a.v?b:a);}
+
+function svgModuleBarChart(values){
+ const max=Math.max(...values.map(x=>x.v),1),W=760,H=245,pad=42,gap=18,bw=(W-pad*2-gap*(values.length-1))/values.length;
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico mensual"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
+ values.forEach((x,i)=>{const bh=(x.v/max)*(H-82),xx=pad+i*(bw+gap),yy=H-35-bh,selected=state.period===x.k;const fill=selected?"#224D8E":"#BFD2D8";s+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${fill}" ${selected?'stroke="#FABF00" stroke-width="3"':''}><title>${periodName(x.k)}: ${money(x.v)}</title></rect><text x="${xx+bw/2}" y="${H-16}" text-anchor="middle" class="axis-label">${monthShort(x.k).toUpperCase()}</text>`;if(selected)s+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-7)}" text-anchor="middle" class="axis-label">${compact(x.v)}</text>`;});
+ return s+'</svg>';
 }
-function toggleChartMonth(key,month){
- const sel=chartSelection(key);
- if(sel.has(month)) sel.delete(month); else sel.add(month);
- renderCharts();
+function svgModuleLineChart(values){
+ const W=760,H=245,pad=42,max=Math.max(...values.map(x=>x.v),1),min=Math.min(...values.map(x=>x.v),0),span=Math.max(max-min,1);
+ const pts=values.map((x,i)=>({ ...x,x:pad+i*((W-pad*2)/(values.length-1)),y:25+(max-x.v)/span*(H-75)}));
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico mensual"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/><polyline fill="none" stroke="#224D8E" stroke-width="4" points="${pts.map(p=>p.x+','+p.y).join(' ')}"/>`;
+ pts.forEach(p=>{const selected=state.period===p.k;s+=`<circle cx="${p.x}" cy="${p.y}" r="${selected?7:5}" fill="${selected?'#E96C24':'#BFD6DC'}" stroke="${selected?'#FABF00':'#224D8E'}" stroke-width="${selected?3:1}"><title>${periodName(p.k)}: ${money(p.v)}</title></circle><text x="${p.x}" y="${H-16}" text-anchor="middle" class="axis-label">${monthShort(p.k).toUpperCase()}</text>`;if(selected)s+=`<text x="${p.x}" y="${p.y-12}" text-anchor="middle" class="axis-label">${compact(p.v)}</text>`;});return s+'</svg>';
 }
-function setChartSelection(key,mode){
- state.chartSelections[key]=mode==="all"?new Set(DATA.months):new Set();
- renderCharts();
+
+function summaryConfig(){
+ return {
+  sales:{field:'sales',title:'Evolución mensual — Ventas netas',badge:'Ventas',module:'Indicadores de Ventas'},
+  inventory:{field:'inventory',title:'Evolución mensual — Compras inventariables',badge:'Compras',module:'Indicadores de Compras'},
+  opex:{field:'opex',title:'Evolución mensual — Gastos operativos',badge:'Gastos',module:'Indicadores de Gastos'},
+  payroll:{field:'payroll',title:'Evolución mensual — Carga laboral',badge:'Nómina',module:'Indicadores de Nómina'},
+  bank:{field:'bank',title:'Evolución mensual — Caja disponible',badge:'Caja',module:'Indicadores de Caja'}
+ }[state.summaryKpi];
 }
-function chartControls(key,values,summaryMode="sum"){
- const sel=chartSelection(key), chosen=values.filter(x=>sel.has(x.k));
- const total=chosen.reduce((a,x)=>a+x.v,0), avg=chosen.length?total/chosen.length:0;
- const names=chosen.map(x=>monthShort(x.k)).join(", ")||"ninguno";
- let metric="";
- if(chosen.length){
-   metric=summaryMode==="avgOnly"?`Promedio seleccionado: <b>${compact(avg)}</b>`:`Total seleccionado: <b>${compact(total)}</b> · Promedio: <b>${compact(avg)}</b>`;
+function toggleSummaryMonth(month){
+ if(state.summaryMonths.has(month)) state.summaryMonths.delete(month); else state.summaryMonths.add(month);
+ renderSummaryExplorer();
+}
+function renderSummaryExplorer(){
+ const cfg=summaryConfig(),vals=fieldSeries(cfg.field),sel=state.summaryMonths;
+ document.querySelectorAll('[data-summary-kpi]').forEach(c=>c.classList.toggle('active',c.dataset.summaryKpi===state.summaryKpi));
+ const title=document.getElementById('summaryChartTitle');if(title)title.textContent=cfg.title;
+ const badge=document.getElementById('summarySelectedBadge');if(badge)badge.textContent=cfg.badge;
+ const mt=document.getElementById('summaryModuleTitle');if(mt)mt.textContent=cfg.module;
+ const chart=document.getElementById('summaryDynamicChart');
+ if(chart){
+   const max=Math.max(...vals.map(x=>x.v),1),W=760,H=245,pad=42,gap=18,bw=(W-pad*2-gap*(vals.length-1))/vals.length;
+   let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.title}"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
+   vals.forEach((x,i)=>{const bh=(x.v/max)*(H-82),xx=pad+i*(bw+gap),yy=H-35-bh,active=sel.has(x.k),focus=state.period===x.k;svg+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${active?'#224D8E':'#DDE7EA'}" ${focus?'stroke="#FABF00" stroke-width="3"':''}><title>${periodName(x.k)}: ${money(x.v)}</title></rect><text x="${xx+bw/2}" y="${H-16}" text-anchor="middle" class="axis-label">${monthShort(x.k).toUpperCase()}</text>`;if(active)svg+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-7)}" text-anchor="middle" class="axis-label">${(x.v/1e6).toFixed(1)}</text>`;});
+   chart.innerHTML=svg+'</svg>';
  }
- return `<div class="chart-controls"><span class="chart-controls-label">Comparar meses</span>`+
-   DATA.months.map(m=>`<button type="button" class="chart-month-btn ${sel.has(m)?"active":""}" onclick="toggleChartMonth('${key}','${m}')">${monthShort(m)}</button>`).join("")+
-   `<button type="button" class="chart-action-btn" onclick="setChartSelection('${key}','all')">Todos</button>`+
-   `<button type="button" class="chart-action-btn" onclick="setChartSelection('${key}','none')">Limpiar</button></div>`+
-   `<div class="chart-selection-summary">Selección gráfica: <b>${names}</b>${metric?" · "+metric:""}. Esta selección no cambia el filtro del KPI superior.</div>`;
+ const controls=document.getElementById('summaryMonthControls');if(controls)controls.innerHTML=DATA.months.map(m=>`<button type="button" class="summary-month-btn ${sel.has(m)?'active':''}" data-summary-month="${m}">${monthShort(m)}</button>`).join('');
+ renderSummaryModuleMetrics();
 }
-function svgBarChart(values,key){
- const sel=chartSelection(key),max=Math.max(...values.map(x=>x.v),1), W=760,H=260,pad=42,gap=18;
- const bw=(W-pad*2-gap*(values.length-1))/values.length;
- let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico interactivo de barras">`;
- s+=`<line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
- values.forEach((x,i)=>{
-   const bh=(x.v/max)*(H-85), xx=pad+i*(bw+gap), yy=H-35-bh, active=sel.has(x.k);
-   const fill=active?"#224D8E":"#D8E5E8", stroke=(state.period===x.k)?"#FABF00":"none", sw=(state.period===x.k)?3:0;
-   s+=`<rect class="chart-bar-selectable" tabindex="0" x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" onclick="toggleChartMonth('${key}','${x.k}')"><title>${x.k}: ${money(x.v)} · clic para seleccionar/quitar</title></rect>`;
-   s+=`<text x="${xx+bw/2}" y="${H-17}" text-anchor="middle" class="axis-label">${monthShort(x.k).toUpperCase()}</text>`;
-   s+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-6)}" text-anchor="middle" class="axis-label">${(x.v/1e6).toFixed(1)}</text>`;
- });
- return s+"</svg>";
+function renderSummaryModuleMetrics(){
+ const cfg=summaryConfig(),field=cfg.field,isYtd=state.period==='YTD',d=selectedData(),sales=d.sales;
+ const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
+ let labels=[],values=[];
+ if(state.summaryKpi==='bank'){
+   if(isYtd){labels=['Saldo inicial','Saldo final','Variación de caja'];values=[compact(DATA.h1.bank_open),compact(DATA.h1.bank_close),pct((DATA.h1.bank_close-DATA.h1.bank_open)/DATA.h1.bank_open)];}
+   else{const b=BANK_MONTH[state.period];labels=['Saldo inicial','Saldo final','Variación del mes'];values=[compact(b.open),compact(b.close),pct((b.close-b.open)/b.open)];}
+ }else{
+   const val=isYtd?DATA.h1[field]:DATA.monthly[state.period][field];const max=maxPoint(field);const prev=state.period==='YTD'?null:previousMonth(state.period);
+   if(state.summaryKpi==='sales'){
+     labels=isYtd?['Ventas acumuladas','Promedio mensual','Mayor mes']:['Ventas del mes','Variación vs mes anterior','Vs promedio Ene–Jun'];
+     values=isYtd?[compact(DATA.h1.sales),compact(DATA.h1.sales/DATA.months.length),monthShort(max.k)+' · '+compact(max.v)]:[compact(val),prev?pct((val-DATA.monthly[prev].sales)/DATA.monthly[prev].sales):'—',pct((val-(DATA.h1.sales/DATA.months.length))/(DATA.h1.sales/DATA.months.length))];
+   }else{
+     const share=sales?val/sales:NaN;
+     labels=isYtd?['Valor acumulado','% de ventas','Mayor mes']:['Valor del mes','% de ventas','Variación vs mes anterior'];
+     values=isYtd?[compact(val),pct(val/DATA.h1.sales),monthShort(max.k)+' · '+compact(max.v)]:[compact(val),pct(share),prev?pct((val-DATA.monthly[prev][field])/DATA.monthly[prev][field]):'—'];
+   }
+ }
+ for(let i=0;i<3;i++){set('summaryMetricLabel'+(i+1),labels[i]);set('summaryMetricValue'+(i+1),values[i]);}
 }
-function svgLineChart(values,key){
- const sel=chartSelection(key),W=760,H=260,pad=42,max=Math.max(...values.map(x=>x.v),1),min=Math.min(...values.map(x=>x.v),0),span=Math.max(max-min,1);
- const pts=values.map((x,i)=>{const xx=pad+i*((W-pad*2)/(values.length-1));const yy=25+(max-x.v)/span*(H-75);return {...x,x:xx,y:yy};});
- let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico interactivo de línea"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
- s+=`<polyline fill="none" stroke="#224D8E" stroke-width="4" points="${pts.map(p=>p.x+","+p.y).join(" ")}"/>`;
- pts.forEach(p=>{const active=sel.has(p.k),fill=active?"#E96C24":"#BFD6DC",stroke=(state.period===p.k)?"#FABF00":"#224D8E",sw=(state.period===p.k)?3:1;s+=`<circle class="chart-point-selectable" tabindex="0" cx="${p.x}" cy="${p.y}" r="7" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" onclick="toggleChartMonth('${key}','${p.k}')"><title>${p.k}: ${money(p.v)} · clic para seleccionar/quitar</title></circle><text x="${p.x}" y="${H-17}" text-anchor="middle" class="axis-label">${monthShort(p.k).toUpperCase()}</text><text x="${p.x}" y="${p.y-12}" text-anchor="middle" class="axis-label">${(p.v/1e6).toFixed(1)}</text>`;});
- return s+"</svg>";
+function renderSummaryPeriodReading(){
+ const d=selectedData(),isYtd=state.period==='YTD',cash=isYtd?DATA.h1.bank_close:d.bank;
+ const el=document.getElementById('summaryPeriodReading');if(!el)return;
+ el.innerHTML=`<b>${periodName(state.period)}:</b> ventas ${compact(d.sales)} · compras inventariables ${compact(d.inventory)} (${pct(d.inventory/d.sales)}) · gastos operativos ${compact(d.opex)} (${pct(d.opex/d.sales)}) · carga laboral ${compact(d.payroll)} (${pct(d.payroll/d.sales)}) · caja al cierre ${compact(cash)}. <span style="color:var(--muted)">Compras inventariables no equivalen todavía al costo de ventas.</span>`;
 }
 function renderCharts(){
- const series=(field)=>DATA.months.map(m=>({k:m,v:DATA.monthly[m][field]}));
- const maps=[["salesChart","sales","sales"],["salesChart2","sales","sales"],["inventoryChart","inventory","inventory"],["opexChart","opex","opex"],["payrollChart","payroll","payroll"]];
- maps.forEach(([id,field,key])=>{const el=document.getElementById(id);if(el){const vals=series(field);el.innerHTML=svgBarChart(vals,key)+chartControls(key,vals);}});
- const cash=document.getElementById("cashChart");
- if(cash){const vals=DATA.months.map(m=>({k:m,v:DATA.monthly[m].bank}));cash.innerHTML=svgLineChart(vals,"bank")+chartControls("bank",vals,"avgOnly");}
+ const maps=[["salesChart2","sales"],["inventoryChart","inventory"],["opexChart","opex"],["payrollChart","payroll"]];
+ maps.forEach(([id,field])=>{const el=document.getElementById(id);if(el)el.innerHTML=svgModuleBarChart(fieldSeries(field));});
+ const cash=document.getElementById('cashChart');if(cash)cash.innerHTML=svgModuleLineChart(fieldSeries('bank'));
+ renderSummaryExplorer();
 }
 
 function variation(curr,prev){
@@ -1253,9 +1323,21 @@ function renderCategoryDetail(index,targetId,noteId){
    if(note){note.className="detail-scope-note warning";note.innerHTML=`<b>Importante:</b> esta tabla <b>no corresponde únicamente a ${periodName(state.period)}</b>. El valor superior <b>${money(monthly)}</b> sí corresponde al mes seleccionado; la composición por subcategoría continúa acumulada enero–junio hasta reconstruir el detalle transaccional mensual.`;}
  }
 }
+function renderOpexMonthScope(){
+ const el=document.getElementById("opexMonthScope"),title=document.getElementById("opexMonthScopeTitle");if(!el)return;
+ const isYtd=state.period==="YTD",d=isYtd?DATA.h1:DATA.monthly[state.period];
+ if(title) title.textContent=isYtd?"Qué incluye el acumulado Ene–Jun":"Qué corresponde a "+periodName(state.period);
+ let prev=null,varText="—";
+ if(!isYtd){prev=previousMonth(state.period);if(prev)varText=pct((d.opex-DATA.monthly[prev].opex)/DATA.monthly[prev].opex);}
+ el.innerHTML=`<div class="opex-scope-stat"><span>Gasto operativo documentado</span><b>${money(d.opex)}</b></div>
+ <div class="opex-scope-stat"><span>% de ventas ${isYtd?'acumuladas':'del mes'}</span><b>${pct(d.opex/d.sales)}</b></div>
+ ${!isYtd?`<div class="opex-scope-stat"><span>Variación vs mes anterior</span><b>${varText}</b></div>`:''}
+ <div class="scope-concepts"><b>Conceptos incluidos en la clasificación de gastos operativos:</b> ocupación, comisiones/plataformas, servicios públicos, marketing, servicios profesionales, movilidad, mantenimiento/adecuaciones, administración, tecnología, telecomunicaciones, medios de pago, higiene/SST, suministros operativos, aseo y seguros.<br><br>${isYtd?'La composición acumulada por concepto puede abrirse abajo y sí explica el consolidado Ene–Jun.':'<b>Limitación actual:</b> la base embebida conserva el total de '+state.period.toLowerCase()+' pero no cuánto corresponde a cada uno de esos conceptos durante ese mes. La composición inferior es Ene–Jun y no se redistribuye artificialmente.'}</div>`;
+}
 function renderPurchasesAndOpex(){
  renderCategoryDetail(0,"inventoryCategoryDetail","inventoryDetailNote");
  renderCategoryDetail(1,"opexCategoryDetail","opexDetailNote");
+ renderOpexMonthScope();
 }
 
 function renderPayroll(){
@@ -1321,10 +1403,10 @@ function showTab(tab){
  window.scrollTo({top:0,behavior:"smooth"});
 }
 function renderAll(){
- syncPeriodTabs(); renderKPIs(); renderCharts(); renderMonthlyTables(); renderCompare(); renderPurchasesAndOpex(); renderPayroll(); renderPayrollLocal(); renderCashLocal();
+ syncPeriodTabs(); renderKPIs(); renderCharts(); renderSummaryPeriodReading(); renderMonthlyTables(); renderCompare(); renderPurchasesAndOpex(); renderPayroll(); renderPayrollLocal(); renderCashLocal();
 }
 function resetAll(){
- state.period="YTD"; state.chartSelections={}; document.getElementById("compareA").value="ENERO"; document.getElementById("compareB").value="JUNIO";
+ state.period="YTD"; state.summaryKpi="sales"; state.summaryMonths=new Set(DATA.months); document.getElementById("compareA").value="ENERO"; document.getElementById("compareB").value="JUNIO";
  document.getElementById("invInitial").value=""; document.getElementById("invFinal").value=""; document.getElementById("apeToggle").value="0";
  renderAll(); simulate(); showTab("resumen");
 }
@@ -1335,7 +1417,9 @@ function bindLocalControls(){
 }
 function bind(){
  document.querySelectorAll(".nav-link").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
- document.querySelectorAll("[data-target-tab]").forEach(c=>c.addEventListener("click",()=>showTab(c.dataset.targetTab)));
+ document.querySelectorAll("[data-summary-kpi]").forEach(c=>c.addEventListener("click",e=>{if(e.target.closest("[data-target-tab]"))return;state.summaryKpi=c.dataset.summaryKpi;renderSummaryExplorer();}));
+ document.addEventListener("click",e=>{const b=e.target.closest("[data-summary-month]");if(b)toggleSummaryMonth(b.dataset.summaryMonth);});
+ document.querySelectorAll("[data-target-tab]").forEach(c=>c.addEventListener("click",e=>{e.stopPropagation();showTab(c.dataset.targetTab);}));
  const a=document.getElementById("compareA"), b=document.getElementById("compareB");
  if(a) a.addEventListener("change",renderCompare); if(b) b.addEventListener("change",renderCompare);
  const swap=document.getElementById("swapCompare"); if(swap) swap.addEventListener("click",()=>{const t=a.value;a.value=b.value;b.value=t;renderCompare();});
