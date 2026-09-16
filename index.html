@@ -3,1587 +3,873 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>MARANELLO | Tablero Financiero Ejecutivo 2026 V11</title>
+<title>MARANELLO | Tablero financiero enero–junio 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
- --navy:#224D8E;--navy2:#183A6B;--turquoise:#6DC1CB;--yellow-brand:#FABF00;--orange:#E96C24;
- --ink:#25303A;--muted:#6E7780;--bg:#FFFFFF;--card:#FFFFFF;--border:#E6DCCF;--light:#F2F7FA;
- --green:#357F84;--green-bg:#E6F6F7;--yellow:#806000;--yellow-bg:#FFF4C2;
- --red:#B84D22;--red-bg:#FDEBDD;--blue-bg:#E5F3F5;--shadow:0 8px 24px rgba(34,77,142,.10)
+  --navy:#224D8E; --navy-dk:#183A6B; --teal:#6DC1CB; --teal-dk:#2F7479; --yellow:#FABF00; --orange:#E96C24; --red:#B84D22;
+  --ink:#22303D; --muted:#5F6B77; --line:#DDE4EB; --wash:#F3F6FA; --paper:#FFFFFF;
+  --good:#2F7479; --good-bg:#E4F4F5; --warn:#7A5B00; --warn-bg:#FFF3C4; --bad:#A8441C; --bad-bg:#FCE7DA;
+  --f-body:"Barlow",Arial,Helvetica,sans-serif;
+  --f-num:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --r-sm:6px; --r-md:10px;
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
-button,select,input{font:inherit}
-header{background:#FFFFFF;color:var(--navy);padding:12px 22px;position:sticky;top:0;z-index:30;box-shadow:0 2px 10px rgba(34,77,142,.12);border-bottom:4px solid var(--yellow-brand)}
-.header-row{max-width:1480px;margin:auto;display:flex;align-items:center;gap:16px;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:14px}.brand-logo{height:58px;width:auto;display:block}.brand-text{font-size:22px;font-weight:900;letter-spacing:.04em;color:var(--navy)} .subtitle{font-size:12px;color:#526273;margin-top:3px}
-.header-actions{display:flex;gap:8px;flex-wrap:wrap}
-.btn{border:1px solid var(--navy);background:#fff;color:var(--navy);padding:8px 11px;border-radius:8px;font-weight:800;cursor:pointer}
-.btn:hover{background:var(--blue-bg)}
-nav{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:71px;z-index:25}
-.nav-inner{max-width:1480px;margin:auto;display:flex;gap:4px;padding:8px 14px;overflow:auto}
-.nav-link{border:0;background:transparent;padding:9px 11px;border-radius:8px;cursor:pointer;font-weight:800;color:var(--navy);white-space:nowrap}
-.nav-link.active,.nav-link:hover{background:var(--yellow-brand);color:var(--navy)}
-main{max-width:1480px;margin:auto;padding:18px}
-.controlbar{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:13px;padding:12px;display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;align-items:end;margin-bottom:14px}
-.field label{display:block;font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:0 0 5px}
-.field select,.field input{width:100%;min-height:40px;border:1px solid var(--border);border-radius:8px;background:#fff;padding:8px;color:var(--ink)}
-.mode-group{display:flex;gap:6px;align-items:center;min-height:40px}
-.mode-btn{border:1px solid var(--border);background:#fff;color:var(--navy);font-weight:800;border-radius:8px;padding:9px 11px;cursor:pointer}
-.mode-btn.active{background:var(--navy);color:#fff;border-color:var(--navy);box-shadow:inset 0 -3px 0 var(--yellow-brand)}
-.coverage{padding:11px 13px;border-radius:10px;background:var(--blue-bg);color:var(--navy);font-size:12px;line-height:1.4;margin-bottom:14px}
-.coverage.warn{background:var(--yellow-bg);color:#684F00}
-.notice{background:var(--yellow-bg);border:1px solid #E5D18A;color:#5F4C00;padding:12px 14px;border-radius:10px;font-weight:700;margin-bottom:14px;font-size:12px;line-height:1.45}
-.section{display:none} .section.active{display:block}
-.section-title{display:flex;justify-content:space-between;gap:15px;align-items:end;margin:6px 0 12px}
-.section-title h2{margin:0;color:var(--navy);font-size:22px} .section-title p{margin:0;color:var(--muted);font-size:12px}
-.grid{display:grid;gap:13px} .kpis{grid-template-columns:repeat(6,minmax(0,1fr))}
-.two{grid-template-columns:1.2fr .8fr} .three{grid-template-columns:repeat(3,minmax(0,1fr))} .four{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px;box-shadow:var(--shadow);min-width:0}
-.card.clickable{cursor:pointer;transition:transform .12s ease,border-color .12s ease}
-.card.clickable:hover{transform:translateY(-2px);border-color:#AAB6C3}
-.card h3{margin:0 0 7px;font-size:13px;color:var(--navy)} .kpi-value{font-size:27px;font-weight:900;letter-spacing:-.02em}
-.kpi-sub{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.35}
-.status{display:inline-block;margin-top:8px;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;letter-spacing:.04em;text-transform:uppercase}
-.status.confirmado{background:#E5F6F8;color:#276F77;border:1px solid #B6E3E7} .status.provisional{background:#FFF3BE;color:#725800;border:1px solid #F1D96B}
-.status.pendiente{background:#FDE9DA;color:#A3441A;border:1px solid #F3BE99} .status.sensibilidad{background:var(--blue-bg);color:var(--navy)}
-.metric-row{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);font-size:12px}
-.metric-row:last-child{border-bottom:0} .metric-row b{color:var(--navy)}
-.callout{padding:13px;border-radius:10px;background:var(--light);border-left:5px solid var(--navy);font-size:12px;line-height:1.45}
-.callout.danger{background:var(--red-bg);border-left-color:var(--red)} .callout.warning{background:var(--yellow-bg);border-left-color:#C99E00}
-.table-wrap{overflow:auto} table{width:100%;border-collapse:collapse;font-size:11px} th{background:var(--navy);color:#fff;text-align:left;padding:8px;white-space:nowrap}
-td{padding:8px;border-bottom:1px solid var(--border);vertical-align:top} tr:last-child td{border-bottom:0} .num{text-align:right;font-variant-numeric:tabular-nums}
-.chart{min-height:300px} .chart-title{font-size:12px;font-weight:900;color:var(--navy);margin-bottom:8px}
-svg{display:block;width:100%;height:auto} .axis-label{fill:#66717B;font-size:10px} .bar-label{font-size:10px;fill:#334}
-.category-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-.category-btn{border:1px solid var(--border);background:#fff;border-radius:11px;padding:13px;text-align:left;cursor:pointer;min-height:110px}
-.category-btn:hover,.category-btn.active{border-color:var(--turquoise);background:#F1FBFC;box-shadow:inset 0 3px 0 var(--yellow-brand)} .category-btn b{display:block;color:var(--navy);font-size:12px;line-height:1.3}
-.category-btn strong{display:block;font-size:22px;margin-top:8px;color:var(--ink)} .category-btn small{display:block;margin-top:5px;color:var(--muted)}
-.detail-panel{margin-top:10px;background:#fff;border:1px solid var(--border);border-radius:12px;padding:14px}
-.pill-row{display:flex;gap:6px;flex-wrap:wrap} .filter-pill{border:1px solid var(--border);background:#fff;color:var(--navy);padding:7px 10px;border-radius:999px;font-size:10px;font-weight:800;cursor:pointer}
-.filter-pill.active{background:var(--navy);color:#fff}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:end;margin-bottom:12px}
-.delta.negative{color:var(--red);font-weight:900} .delta.positive{color:var(--green);font-weight:900}
-.sim-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px} .sim-output{background:var(--light);border-radius:10px;padding:12px}
-.sim-output span{font-size:10px;color:var(--muted);text-transform:uppercase;font-weight:800} .sim-output strong{display:block;margin-top:5px;font-size:20px;color:var(--navy)}
-.gauge-row{display:grid;grid-template-columns:170px 1fr 100px;gap:10px;align-items:center;margin:9px 0;font-size:11px}
-.gauge-track{height:10px;border-radius:999px;background:#E9EDF1;overflow:hidden} .gauge-fill{height:100%;border-radius:999px;background:var(--navy)}
-.traffic{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px} .traffic-item{border:1px solid var(--border);border-radius:10px;background:#fff;padding:11px}
-.traffic-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px} .traffic-dot.red{background:var(--orange)} .traffic-dot.yellow{background:var(--yellow-brand)} .traffic-dot.green{background:var(--turquoise)}
-.traffic-item b{display:block;color:var(--navy);font-size:12px;margin-top:6px} .traffic-item small{display:block;color:var(--muted);margin-top:4px;line-height:1.35}
-.report-hero{background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff;border-radius:14px;padding:20px;box-shadow:var(--shadow);border-bottom:6px solid var(--yellow-brand)} .report-hero h3{margin:0 0 8px;font-size:20px} .report-hero p{margin:0;font-size:12px;line-height:1.55}
-.tech-only{display:none} body.tech-mode .tech-only{display:block}
-body.tech-mode .exec-only{display:none}
-dialog{border:0;border-radius:14px;max-width:820px;width:calc(100% - 28px);padding:0;box-shadow:0 20px 70px rgba(0,0,0,.25)} dialog::backdrop{background:rgba(17,29,43,.55)}
-.modal-head{background:var(--navy);color:#fff;padding:14px 16px;display:flex;justify-content:space-between;gap:10px;align-items:center} .modal-head h3{margin:0;font-size:15px}
-.modal-close{border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;border-radius:8px;padding:6px 9px;cursor:pointer} .modal-body{padding:16px;max-height:70vh;overflow:auto}
-.empty{color:var(--muted);font-size:12px;padding:18px;text-align:center}
-footer{max-width:1480px;margin:auto;padding:8px 18px 30px;color:var(--muted);font-size:10px}
-@media(max-width:1150px){.kpis{grid-template-columns:repeat(3,1fr)}.two,.three,.four{grid-template-columns:1fr 1fr}.category-grid{grid-template-columns:1fr 1fr}.traffic{grid-template-columns:repeat(3,1fr)}.controlbar{grid-template-columns:1fr 1fr}}
-@media(max-width:720px){header{position:static}nav{top:0}main{padding:12px}.kpis,.two,.three,.four,.category-grid,.traffic,.sim-grid,.controlbar,.compare-grid{grid-template-columns:1fr}.header-row{align-items:flex-start}.header-actions{display:none}.gauge-row{grid-template-columns:120px 1fr 80px}}
-@media print{header,nav,.controlbar,.header-actions,dialog{display:none!important}body{background:#fff}.section{display:block!important;page-break-inside:auto}.card{box-shadow:none;break-inside:avoid}}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+html.present{font-size:19px}
+body{margin:0;font-family:var(--f-body);color:var(--ink);background:var(--wash);line-height:1.45;overflow-x:hidden}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
-.brand-stripe{height:5px;background:linear-gradient(90deg,var(--navy) 0 25%,var(--turquoise) 25% 50%,var(--yellow-brand) 50% 75%,var(--orange) 75% 100%);border-radius:999px;margin:10px 0 0}
-.brand-mark-card{display:flex;align-items:center;gap:16px;background:#FFFFFF;border:1px solid #EADAC4;border-radius:12px;padding:13px}
-.brand-mark-card img{width:110px;max-height:100px;object-fit:contain}
-.brand-mark-card p{margin:0;color:#526273;font-size:11px;line-height:1.45}
-.brand-swatch{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.swatch{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--muted);font-weight:700}
-.swatch i{display:inline-block;width:18px;height:18px;border-radius:50%;border:1px solid rgba(0,0,0,.08)}
+/* ---------- Acceso ---------- */
+#gate{position:fixed;inset:0;z-index:100;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:20px}
+.gate-card{width:min(400px,100%);text-align:center}
+.gate-card img{width:190px;max-width:70%;height:auto;margin:0 auto 18px;display:block}
+.gate-card h1{font-family:var(--f-num);font-size:1.9rem;color:var(--navy);margin:0 0 4px;font-weight:700}
+.gate-card p{margin:0 0 20px;color:var(--muted);font-size:.9rem}
+.gate-card input{width:100%;border:1px solid var(--line);border-radius:var(--r-md);padding:13px 14px;font-size:1rem}
+.gate-card button{width:100%;margin-top:10px;border:0;border-radius:var(--r-md);background:var(--navy);color:#fff;padding:13px;font-weight:700;cursor:pointer;border-bottom:4px solid var(--yellow)}
+.gate-error{min-height:20px;margin-top:8px;color:var(--bad);font-size:.85rem;font-weight:600}
+body.locked .app{visibility:hidden}
 
+/* ---------- Encabezado ---------- */
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.top::after{content:"";display:block;height:4px;background:var(--yellow)}
+.top-row{max-width:1320px;margin:auto;display:flex;align-items:center;gap:20px;padding:10px 20px}
+.brand img{height:42px;width:auto;display:block}
+.brand-meta{border-left:1px solid var(--line);padding-left:16px}
+.brand-meta b{display:block;font-family:var(--f-num);font-size:1.25rem;color:var(--navy);line-height:1.1}
+.brand-meta span{font-size:.78rem;color:var(--muted)}
+.top-actions{margin-left:auto;display:flex;gap:8px}
+.btn{border:1px solid var(--navy);background:var(--paper);color:var(--navy);border-radius:var(--r-sm);padding:7px 12px;font-weight:600;font-size:.85rem;cursor:pointer}
+.btn:hover{background:var(--wash)}
+.btn.on{background:var(--navy);color:#fff}
+.bar-row{max-width:1320px;margin:auto;display:flex;align-items:center;gap:16px;padding:0 20px;flex-wrap:wrap}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:transparent;padding:11px 12px 9px;font-weight:600;font-size:.92rem;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+.tab:hover{color:var(--navy)}
+.tab.on{color:var(--navy);border-bottom-color:var(--navy)}
+.period{display:flex;align-items:center;gap:4px;padding:6px 0;overflow-x:auto;scrollbar-width:none}
+.period::-webkit-scrollbar{display:none}
+.period-label{font-size:.78rem;color:var(--muted);margin-right:4px;white-space:nowrap}
+.pbtn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;font-size:.8rem;font-weight:600;color:var(--navy);cursor:pointer;white-space:nowrap}
+.pbtn.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.period.fixed .pbtn{display:none}
+.period-fixed{display:none;font-size:.8rem;font-weight:600;color:var(--navy);background:var(--wash);border-radius:999px;padding:5px 11px}
+.period.fixed .period-fixed{display:inline-block}
 
-.coverage{display:none !important;}
-.notice{display:none !important;}
-.diag-narrative{display:grid;gap:14px}
-.diag-block{background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px;box-shadow:var(--shadow)}
-.diag-block h3{margin:0 0 8px;color:var(--navy);font-size:16px}
-.diag-block p{margin:0 0 10px;color:var(--ink);font-size:13px;line-height:1.62}
-.diag-block p:last-child{margin-bottom:0}
-.diag-highlight{background:#F4F8FC;border-left:6px solid var(--navy)}
-.diag-warning{background:#FFF4E8;border-left:6px solid var(--orange)}
-.diag-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-.diag-actions .diag-block{height:100%}
-@media(max-width:900px){.diag-actions{grid-template-columns:1fr}}
+/* ---------- Estructura ---------- */
+main{max-width:1320px;margin:auto;padding:22px 20px 40px}
+.section{display:none}
+.section.on{display:block}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 16px;flex-wrap:wrap}
+.sec-head h2{margin:0;font-family:var(--f-num);font-weight:700;font-size:2rem;color:var(--navy);line-height:1}
+.sec-head p{margin:0;color:var(--muted);font-size:.88rem;max-width:62ch}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g-wide{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
+.mt{margin-top:14px}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;min-width:0}
+.panel h3{margin:0 0 2px;font-size:1rem;color:var(--ink);font-weight:700}
+.panel .hint{margin:0 0 10px;font-size:.8rem;color:var(--muted)}
+.note{font-size:.78rem;color:var(--muted);margin:10px 0 0;line-height:1.45}
 
+/* ---------- KPI ---------- */
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;min-width:0}
+.kpi .lbl{font-size:.82rem;color:var(--muted);font-weight:600}
+.kpi .val{font-family:var(--f-num);font-weight:700;font-size:2.05rem;line-height:1.05;margin-top:4px;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi .sub{font-size:.8rem;color:var(--muted);margin-top:4px}
+.kpi.bad .val{color:var(--bad)} .kpi.good .val{color:var(--good)}
+.kpi.warnline{border-left:4px solid var(--orange)}
+button.kpi{display:flex;flex-direction:column;justify-content:flex-start;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color .12s ease}
+button.kpi:hover{border-color:var(--navy)}
+.kpi .go{display:block;margin-top:auto;padding-top:10px;font-size:.8rem;font-weight:600;color:var(--navy)}
+button.kpi:hover .go{text-decoration:underline}
 
-.controlbar{display:none !important;}
-.local-control{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin:0 0 13px}
-.local-control .field{min-width:220px;max-width:320px}
-.local-control-note{font-size:11px;color:var(--muted);line-height:1.4;padding:9px 11px;background:#F7F9FB;border:1px solid var(--border);border-radius:9px}
-.site-coverage-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.site-coverage-card{border:1px solid var(--border);border-radius:10px;padding:13px;background:#fff}
-.site-coverage-card strong{display:block;font-size:22px;color:var(--navy);margin-top:5px}
-.site-coverage-card small{display:block;color:var(--muted);margin-top:5px;line-height:1.4}
-@media(max-width:720px){.site-coverage-grid{grid-template-columns:1fr}.local-control .field{min-width:100%;max-width:none}}
+/* ---------- Gráficos ---------- */
+svg{display:block;width:100%;height:auto}
+svg .axis{stroke:#C5CFD9;stroke-width:1}
+svg .grid-l{stroke:#EDF1F5;stroke-width:1}
+svg .val{font-family:var(--f-num);font-size:15px;font-weight:600;fill:var(--ink)}
+svg .val,svg .ref{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
+svg .val.sel{fill:var(--navy);font-weight:700}
+svg .tick{font-size:13px;fill:var(--muted);font-weight:600}
+svg .tick.sel{fill:var(--navy);font-weight:700}
+svg .tick.small{font-size:11.5px;font-weight:500}
+svg .ref{font-size:12.5px;font-weight:700}
+svg .dim{opacity:.35}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.legend i.dash{height:0;border-top:2px dashed var(--orange);border-radius:0;vertical-align:3px;width:16px}
 
-#accessGate{position:fixed;inset:0;z-index:9999;background:#FFFFFF;display:flex;align-items:center;justify-content:center;padding:20px}
-.access-card{width:min(430px,100%);background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:0 20px 60px rgba(34,77,142,.16);padding:28px;text-align:center}
-.access-card img{width:240px;max-width:80%;height:auto;margin:0 auto 10px;display:block}
-.access-card h1{margin:10px 0 6px;color:var(--navy);font-size:22px}
-.access-card p{margin:0 0 18px;color:var(--muted);font-size:12px;line-height:1.5}
-.access-card input{width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 13px;font-size:15px;outline:none}
-.access-card input:focus{border-color:var(--navy);box-shadow:0 0 0 3px rgba(34,77,142,.10)}
-.access-submit{width:100%;margin-top:10px;border:0;border-radius:10px;background:var(--navy);color:#fff;padding:12px 14px;font-weight:900;cursor:pointer;box-shadow:inset 0 -4px 0 var(--yellow-brand)}
-.access-submit:hover{background:var(--navy2)}
-.access-error{min-height:18px;margin-top:9px;color:var(--orange);font-size:11px;font-weight:800}
-.access-note{margin-top:16px!important;font-size:10px!important;color:#8A9198!important}
-body.locked>header,body.locked>nav,body.locked>main,body.locked>footer{visibility:hidden}
-.period-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 13px}
-.period-tab{border:1px solid var(--border);background:#fff;color:var(--navy);font-size:11px;font-weight:900;padding:8px 11px;border-radius:999px;cursor:pointer}
-.period-tab.active,.period-tab:hover{background:var(--yellow-brand);border-color:var(--yellow-brand)}
-.method-details{margin-top:14px;border-top:1px solid var(--border);padding-top:12px}
-.method-details summary{cursor:pointer;color:var(--navy);font-weight:900;font-size:12px}
-.method-details .method-body{margin-top:10px;color:var(--muted);font-size:11px;line-height:1.6}
+/* ---------- Barras horizontales ---------- */
+.hb{display:grid;gap:7px}
+.hb-row{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 5.6rem;gap:10px;align-items:center;font-size:.84rem}
+.hb-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb-track{height:14px;background:var(--wash);border-radius:3px;overflow:hidden}
+.hb-fill{height:100%;background:var(--teal);border-radius:3px}
+.hb-row.hl .hb-fill{background:var(--orange)} .hb-row.hl .hb-name{font-weight:700}
+.hb-num{text-align:right;font-family:var(--f-num);font-weight:600;font-size:.98rem;font-variant-numeric:tabular-nums}
+.hb-num small{display:block;font-family:var(--f-body);font-size:.7rem;color:var(--muted);font-weight:500}
 
+/* ---------- Tablas ---------- */
+details.data{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md)}
+details.data summary{cursor:pointer;padding:11px 16px;font-weight:600;font-size:.88rem;color:var(--navy);list-style:none}
+details.data summary::-webkit-details-marker{display:none}
+details.data summary::before{content:"+";display:inline-block;width:1.1em;font-weight:700}
+details.data[open] summary::before{content:"−"}
+.tw{overflow-x:auto;padding:0 16px 14px}
+table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:520px}
+th{text-align:left;font-weight:600;color:var(--muted);border-bottom:2px solid var(--line);padding:8px;white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--line)}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.sel td{background:#FFF7D6;font-weight:600}
+tr.tot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
+.neg{color:var(--bad)} .pos{color:var(--good)}
 
-/* ============================================================
-   V8 - OPTIMIZACIÓN MÓVIL
-   ============================================================ */
-html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%}
-button,select,input{touch-action:manipulation}
-.nav-inner,.period-tabs,.table-wrap{-webkit-overflow-scrolling:touch}
+/* ---------- Matriz de turnos ---------- */
+.roster{min-width:560px}
+.roster td,.roster th{padding:5px 6px;text-align:center}
+.roster td:first-child,.roster th:first-child{text-align:left;white-space:nowrap}
+.cell{display:inline-block;width:100%;max-width:44px;height:18px;border-radius:3px;background:var(--wash)}
+.cell.in{background:var(--teal)}
+.roster .colsel{background:#FFF7D6}
+.roster tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
 
-/* Mejor lectura y objetivos táctiles */
-.nav-link,.period-tab,.mode-btn,.category-btn,.access-submit{
-  min-height:44px;
+/* ---------- Comparador / simulador ---------- */
+.fields{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.field label{display:block;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:4px}
+.field select,.field input{min-width:150px;min-height:40px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);padding:7px 9px;font-size:.95rem}
+.cmp-out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.mini{background:var(--wash);border-radius:var(--r-sm);padding:10px 12px}
+.mini span{display:block;font-size:.76rem;color:var(--muted);font-weight:600}
+.mini b{display:block;font-family:var(--f-num);font-size:1.45rem;font-variant-numeric:tabular-nums}
+.callout{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 13px;font-size:.84rem}
+.callout.warn{border-left-color:var(--yellow);background:var(--warn-bg)}
+.callout.bad{border-left-color:var(--orange);background:var(--bad-bg)}
+.rows .r{display:grid;grid-template-columns:1fr auto;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.rows .r:last-child{border-bottom:0}
+.rows .r b{font-family:var(--f-num);font-size:1.05rem;font-variant-numeric:tabular-nums}
+
+/* ---------- Diagnóstico ---------- */
+.diag{width:100%}
+.diag-figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
+.diag article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;margin-bottom:12px}
+.diag article h3{margin:0 0 8px;font-family:var(--f-num);font-size:1.4rem;color:var(--navy);font-weight:700}
+.diag article p{margin:0 0 9px;font-size:.98rem;line-height:1.6}
+.diag article p:last-child{margin-bottom:0}
+.diag article.alert{border-left:6px solid var(--orange)}
+.diag article.close{border-left:6px solid var(--teal)}
+.diag ul{margin:6px 0 0 18px;padding:0}
+.diag li{margin:0 0 6px;font-size:.92rem}
+
+footer{max-width:1320px;margin:auto;padding:0 20px 28px;font-size:.76rem;color:var(--muted)}
+
+/* ---------- Modo presentación ---------- */
+html.present .method{display:none!important}
+html.present details.data{display:none}
+html.present .top-row{padding-top:6px;padding-bottom:6px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1080px){
+  .g4,.cmp-out,.diag-figs{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g-wide{grid-template-columns:1fr}
 }
-input,select{font-size:16px;} /* Evita zoom automático en iPhone */
-
-/* Indicador visual de scroll en navegación */
-nav{position:sticky;z-index:40}
-.nav-inner{
-  scrollbar-width:none;
-  scroll-snap-type:x proximity;
+@media (max-width:720px){
+  .top{position:static}
+  .bar-row{position:sticky;top:0}
+  .top-row{flex-wrap:wrap;gap:10px;padding:10px 14px}
+  .brand img{height:34px}
+  .brand-meta{border-left:0;padding-left:0}
+  .top-actions{display:none}
+  .bar-row{padding:0 10px}
+  main{padding:16px 12px 30px}
+  .g2,.g3{grid-template-columns:1fr}
+  .kpi .val{font-size:1.7rem}
+  .hb-row{grid-template-columns:minmax(0,7.5rem) minmax(0,1fr) 4.8rem}
+  .sec-head h2{font-size:1.65rem}
 }
-.nav-inner::-webkit-scrollbar,.period-tabs::-webkit-scrollbar{display:none}
-.nav-link{scroll-snap-align:start}
-
-/* Evitar que palabras/números largos rompan tarjetas */
-.card,.diag-block,.traffic-item,.sim-output{overflow-wrap:anywhere}
-.kpi-value{font-variant-numeric:tabular-nums}
-
-/* Tablas: desplazamiento contenido, no de toda la página */
-.table-wrap{
-  width:100%;
-  max-width:100%;
-  overflow-x:auto;
-  border-radius:8px;
-}
-.table-wrap table{min-width:640px}
-
-/* Formularios */
-.field select,.field input{min-height:46px}
-
-/* Acceso */
-.access-card{max-height:calc(100dvh - 24px);overflow:auto}
-.access-submit{min-height:48px}
-
-/* MÓVIL */
-@media (max-width: 768px){
+@media (max-width:420px){.g4,.cmp-out,.diag-figs{grid-template-columns:1fr}}
+@media print{
   body{background:#fff}
-  header{
-    position:static;
-    padding:9px 12px 10px;
-    border-bottom-width:3px;
-  }
-  .header-row{
-    display:block;
-    max-width:none;
-  }
-  .brand{justify-content:flex-start}
-  .brand-logo{
-    height:auto;
-    width:min(210px,70vw);
-    max-height:52px;
-    object-fit:contain;
-    object-position:left center;
-  }
-  .subtitle{
-    margin-top:5px;
-    font-size:10.5px;
-    line-height:1.35;
-  }
-  .brand-stripe{margin-top:7px;height:4px}
-
-  nav{
-    top:0;
-    background:#fff;
-    box-shadow:0 3px 12px rgba(34,77,142,.08);
-  }
-  .nav-inner{
-    max-width:none;
-    padding:6px 8px;
-    gap:4px;
-    overflow-x:auto;
-    flex-wrap:nowrap;
-  }
-  .nav-link{
-    flex:0 0 auto;
-    padding:9px 12px;
-    font-size:12px;
-    border-radius:9px;
-  }
-
-  main{
-    max-width:none;
-    padding:10px 10px 18px;
-  }
-
-  .section-title{
-    align-items:flex-start;
-    display:block;
-    margin:3px 0 10px;
-  }
-  .section-title h2{
-    font-size:19px;
-    line-height:1.2;
-  }
-  .section-title p{
-    margin-top:4px;
-    font-size:10.5px;
-    line-height:1.4;
-  }
-
-  /* Selector de periodo en una sola línea deslizable */
-  .period-tabs{
-    display:flex;
-    flex-wrap:nowrap;
-    overflow-x:auto;
-    gap:5px;
-    padding:2px 0 8px;
-    margin-bottom:8px;
-    scrollbar-width:none;
-    scroll-snap-type:x proximity;
-  }
-  .period-tab{
-    flex:0 0 auto;
-    min-width:58px;
-    padding:8px 12px;
-    font-size:11px;
-    scroll-snap-align:start;
-  }
-  .period-tab:first-child{min-width:92px}
-
-  /* KPI: dos columnas en teléfonos normales */
-  .kpis,
-  #kpiGrid{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-    gap:8px;
-  }
-  #kpiGrid .card:last-child{
-    grid-column:1 / -1;
-  }
-  .card{
-    padding:12px;
-    border-radius:10px;
-    box-shadow:0 4px 16px rgba(34,77,142,.06);
-  }
-  .card h3{
-    font-size:11.5px;
-    line-height:1.3;
-    margin-bottom:5px;
-  }
-  .kpi-value{
-    font-size:21px;
-    line-height:1.1;
-  }
-  .kpi-sub{
-    font-size:10px;
-    line-height:1.35;
-  }
-
-  /* Semáforo como lista compacta */
-  .traffic{
-    grid-template-columns:1fr 1fr;
-    gap:7px;
-  }
-  .traffic-item{padding:10px}
-  .traffic-item b{font-size:11px}
-  .traffic-item small{font-size:9.5px}
-
-  /* Todas las grillas analíticas pasan a una columna */
-  .two,.three,.four,.diag-actions,.sim-grid,.compare-grid,.category-grid{
-    grid-template-columns:1fr !important;
-  }
-
-  /* Categorías: tarjetas horizontales más compactas */
-  .category-grid{gap:7px}
-  .category-btn{
-    min-height:0;
-    padding:11px 12px;
-    display:grid;
-    grid-template-columns:1fr auto;
-    column-gap:10px;
-    align-items:center;
-  }
-  .category-btn b{font-size:11px}
-  .category-btn strong{
-    margin:0;
-    font-size:18px;
-    text-align:right;
-  }
-  .category-btn small{
-    grid-column:1 / -1;
-    font-size:9.5px;
-    margin-top:4px;
-  }
-
-  /* Gráficos: menos alto, siguen siendo SVG responsivos */
-  .chart{min-height:0}
-  .chart-title{font-size:11px}
-  .chart svg{max-height:245px}
-
-  /* Simulador */
-  .sim-grid{gap:8px}
-  .sim-output{padding:11px}
-  .sim-output strong{font-size:18px}
-  #simReset{width:100%;min-height:46px}
-
-  /* Métricas */
-  .metric-row{
-    grid-template-columns:minmax(0,1fr) auto;
-    gap:8px;
-    padding:9px 0;
-    font-size:11px;
-  }
-  .metric-row b{text-align:right}
-
-  /* Diagnóstico narrativo */
-  .report-hero{
-    padding:15px;
-    border-radius:11px;
-    border-bottom-width:5px;
-  }
-  .report-hero h3{font-size:17px}
-  .report-hero p{font-size:11.5px;line-height:1.55}
-  .diag-narrative{gap:9px}
-  .diag-block{
-    padding:13px;
-    box-shadow:none;
-  }
-  .diag-block h3{font-size:14px}
-  .diag-block p{
-    font-size:11.5px;
-    line-height:1.58;
-  }
-
-  /* Cobertura por sede */
-  .site-coverage-grid{grid-template-columns:1fr !important}
-  .site-coverage-card strong{font-size:18px}
-
-  /* Gauge nómina: se convierte a bloque */
-  .gauge-row{
-    grid-template-columns:1fr;
-    gap:5px;
-    padding:8px 0;
-    border-bottom:1px solid var(--border);
-  }
-  .gauge-row b{text-align:right}
-
-  /* Modal móvil tipo hoja */
-  dialog{
-    width:calc(100% - 16px);
-    max-width:none;
-    max-height:92dvh;
-    border-radius:14px;
-  }
-  .modal-head{padding:12px}
-  .modal-body{padding:12px;max-height:78dvh}
-
-  /* Login */
-  #accessGate{padding:12px}
-  .access-card{
-    padding:20px 16px;
-    border-radius:15px;
-  }
-  .access-card img{width:min(230px,76vw)}
-  .access-card h1{font-size:20px}
-  .access-card p{font-size:11px}
-  .access-card input{min-height:48px}
-  .access-submit{font-size:14px}
-
-  footer{
-    padding:10px 12px 22px;
-    text-align:center;
-    font-size:9px;
-    line-height:1.45;
-  }
+  .top{position:static}
+  .tabs,.period,.top-actions,#gate{display:none!important}
+  .section{display:block!important;break-before:page}
+  .section:first-of-type{break-before:auto}
+  .panel,.kpi,.diag article{break-inside:avoid}
+  details.data{display:none}
 }
-
-/* Teléfonos estrechos */
-@media (max-width: 390px){
-  #kpiGrid,.kpis{
-    grid-template-columns:1fr !important;
-  }
-  #kpiGrid .card:last-child{grid-column:auto}
-  .traffic{grid-template-columns:1fr}
-  .nav-link{font-size:11px;padding:8px 10px}
-  .kpi-value{font-size:22px}
-  .metric-row{
-    grid-template-columns:1fr;
-  }
-  .metric-row b{text-align:left}
-}
-
-/* Horizontal móvil */
-@media (max-height: 500px) and (orientation: landscape){
-  .access-card{max-height:94dvh;padding:14px 18px}
-  .access-card img{width:170px;margin-bottom:4px}
-  .access-card h1{margin:4px 0;font-size:18px}
-  .access-card p{margin-bottom:9px}
-  .access-note{display:none}
-}
-
-
-/* ============================================================
-   V9 - DIAGNÓSTICO EJECUTIVO NARRATIVO
-   ============================================================ */
-.diag-intro{
-  background:#fff;
-  border:1px solid var(--border);
-  border-left:6px solid var(--navy);
-  border-radius:12px;
-  padding:17px 19px;
-  box-shadow:var(--shadow);
-}
-.diag-intro p{
-  margin:0 0 11px;
-  font-size:13.5px;
-  line-height:1.7;
-  color:var(--ink);
-}
-.diag-intro p:last-child{margin-bottom:0}
-
-.diag-keyfigures{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:10px;
-  margin:13px 0;
-}
-.diag-figure{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:14px;
-  text-align:center;
-}
-.diag-figure strong{
-  display:block;
-  color:var(--navy);
-  font-size:24px;
-  line-height:1.1;
-  margin-bottom:5px;
-  font-variant-numeric:tabular-nums;
-}
-.diag-figure span{
-  display:block;
-  color:var(--muted);
-  font-size:10.5px;
-  line-height:1.35;
-}
-.diag-story{
-  display:grid;
-  gap:11px;
-}
-.diag-story article{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:17px 19px;
-}
-.diag-story article h3{
-  margin:0 0 10px;
-  color:var(--navy);
-  font-size:16px;
-  line-height:1.3;
-}
-.diag-story article p{
-  margin:0 0 10px;
-  color:var(--ink);
-  font-size:13px;
-  line-height:1.68;
-}
-.diag-story article p:last-child{margin-bottom:0}
-.diag-story .diag-conclusion{
-  background:#F6FAFC;
-  border-left:6px solid var(--turquoise);
-}
-.diag-story .diag-liquidity{
-  background:#FFF9F3;
-  border-left:6px solid var(--orange);
-}
-
-.diag-details{
-  margin-top:12px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:11px;
-  overflow:hidden;
-}
-.diag-details summary{
-  list-style:none;
-  cursor:pointer;
-  padding:14px 16px;
-  color:var(--navy);
-  font-size:12.5px;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  min-height:48px;
-}
-.diag-details summary::-webkit-details-marker{display:none}
-.diag-details summary::after{
-  content:"›";
-  font-size:22px;
-  line-height:1;
-  transform:rotate(90deg);
-  transition:transform .18s ease;
-  color:var(--navy);
-}
-.diag-details[open] summary::after{transform:rotate(-90deg)}
-.diag-details[open] summary{
-  border-bottom:1px solid var(--border);
-  background:#F8FAFC;
-}
-.diag-details-body{
-  padding:13px 16px 16px;
-  font-size:11.5px;
-  line-height:1.6;
-  color:var(--ink);
-}
-.diag-details-body p{margin:0 0 9px}
-.diag-details-body p:last-child{margin-bottom:0}
-.diag-details-body ul{
-  margin:4px 0 0 18px;
-  padding:0;
-}
-.diag-details-body li{margin:0 0 7px}
-
-@media(max-width:768px){
-  .diag-intro{padding:14px}
-  .diag-intro p{font-size:11.8px;line-height:1.62}
-  .diag-keyfigures{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:7px;
-  }
-  .diag-figure{padding:11px 8px}
-  .diag-figure strong{font-size:20px}
-  .diag-figure span{font-size:9.5px}
-  .diag-story{gap:8px}
-  .diag-story article{padding:14px}
-  .diag-story article h3{font-size:14px}
-  .diag-story article p{font-size:11.6px;line-height:1.6}
-  .diag-details summary{padding:12px;font-size:11.5px}
-  .diag-details-body{padding:11px 12px 14px;font-size:10.8px}
-}
-@media(max-width:390px){
-  .diag-keyfigures{grid-template-columns:1fr 1fr}
-  .diag-figure strong{font-size:19px}
-}
-
-
-.hint-count{cursor:help;text-decoration:underline dotted;text-underline-offset:2px}
-.diag-intro p{font-size:14.2px;line-height:1.52;margin:0 0 8px}
-.diag-story article p{font-size:13.8px;line-height:1.50;margin:0 0 7px}
-@media(max-width:768px){
-  .diag-intro p{font-size:12.4px;line-height:1.48;margin:0 0 7px}
-  .diag-story article p{font-size:12.1px;line-height:1.46;margin:0 0 6px}
-}
-
-
-/* ============================================================
-   V11 - BASE OPERATIVA KPI / TRAZABILIDAD MENSUAL
-   ============================================================ */
-.shared-period-tabs{margin-bottom:13px}
-.selected-period-row td{background:#FFF8D9;font-weight:800}
-.month-table-note{font-size:10px;color:var(--muted);line-height:1.4;margin-top:8px}
-.card[data-target-tab]{position:relative}
-.card[data-target-tab]::after{content:"Ver detalle →";display:block;margin-top:9px;font-size:9px;font-weight:900;color:var(--navy)}
-.section .period-tabs{border-bottom:1px solid var(--border);padding-bottom:10px}
-@media(max-width:768px){
- .section .period-tabs{border-bottom:0;padding-bottom:6px}
- .card[data-target-tab]::after{font-size:9px}
-}
-
-
-/* ============================================================
-   V11.3 - CLARIDAD DE PERIODO + GRÁFICOS MULTISELECCIÓN
-   ============================================================ */
-.detail-scope-note{
-  margin:0 0 10px;padding:10px 12px;border-radius:9px;background:#F4F8FC;
-  border-left:4px solid var(--navy);font-size:11px;line-height:1.45;color:var(--ink)
-}
-.detail-scope-note.warning{background:var(--yellow-bg);border-left-color:#C99E00;color:#5F4C00}
-.chart-controls{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:8px;padding-top:9px;border-top:1px solid var(--border)}
-.chart-controls-label{font-size:10px;font-weight:900;color:var(--muted);margin-right:3px;text-transform:uppercase;letter-spacing:.03em}
-.chart-month-btn,.chart-action-btn{border:1px solid var(--border);background:#fff;color:var(--navy);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:900;cursor:pointer;min-height:30px}
-.chart-month-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.chart-month-btn:hover,.chart-action-btn:hover{border-color:var(--turquoise);background:#F1FBFC;color:var(--navy)}
-.chart-selection-summary{margin-top:7px;padding:8px 10px;border-radius:8px;background:#F7F9FB;color:var(--muted);font-size:10.5px;line-height:1.4}
-.chart-selection-summary b{color:var(--navy)}
-.chart-bar-selectable,.chart-point-selectable{cursor:pointer;transition:opacity .12s ease,filter .12s ease}
-.chart-bar-selectable:hover,.chart-point-selectable:hover{filter:brightness(.95)}
-.compare-sales-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
-.compare-sales-card{background:#F8FAFC;border:1px solid var(--border);border-radius:10px;padding:12px}
-.compare-sales-card span{display:block;color:var(--muted);font-size:10px;font-weight:800;text-transform:uppercase}
-.compare-sales-card strong{display:block;margin-top:5px;color:var(--navy);font-size:21px;font-variant-numeric:tabular-nums}
-.compare-sales-note{margin-top:10px;padding:10px 12px;border-radius:9px;background:var(--blue-bg);color:var(--navy);font-size:11px;line-height:1.45}
-@media(max-width:768px){
- .compare-sales-grid{grid-template-columns:1fr 1fr}
- .chart-controls{gap:5px}
- .chart-month-btn,.chart-action-btn{padding:6px 8px;font-size:9.5px}
-}
-@media(max-width:390px){.compare-sales-grid{grid-template-columns:1fr}}
-
-
-
-/* ============================================================
-   V11.3 - RESUMEN EXPLORABLE + MÓDULOS LIMPIOS
-   ============================================================ */
-.summary-kpi-card{position:relative;cursor:pointer;transition:transform .12s ease,border-color .12s ease,box-shadow .12s ease;padding-bottom:42px}
-.summary-kpi-card:hover{transform:translateY(-2px);border-color:#9FB1C4}
-.summary-kpi-card.active{border-color:var(--yellow-brand);box-shadow:inset 0 4px 0 var(--yellow-brand),var(--shadow);background:#FFFCF2}
-.summary-kpi-card .module-link{position:absolute;left:14px;bottom:11px;border:0;background:transparent;color:var(--navy);font-size:9.5px;font-weight:900;padding:0;cursor:pointer}
-.summary-kpi-card .module-link:hover{text-decoration:underline}
-.summary-explorer-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:5px}
-.summary-explorer-head .chart-title{margin:0}
-.summary-selected-badge{font-size:9px;font-weight:900;color:var(--navy);background:var(--yellow-bg);border:1px solid #E5D18A;border-radius:999px;padding:5px 8px;white-space:nowrap}
-.summary-month-controls{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px;padding-top:8px;border-top:1px solid var(--border)}
-.summary-month-btn{border:1px solid var(--border);background:#fff;color:var(--navy);border-radius:999px;padding:5px 9px;font-size:9.5px;font-weight:900;cursor:pointer;min-height:29px}
-.summary-month-btn.active{background:var(--navy);color:#fff;border-color:var(--navy)}
-.summary-month-btn:hover{border-color:var(--turquoise)}
-.summary-module-metrics .metric-row{padding:11px 0}
-.period-reading{font-size:12px;line-height:1.6;color:var(--ink)}
-.period-reading b{color:var(--navy)}
-.module-chart-note{margin-top:6px;color:var(--muted);font-size:9.5px;line-height:1.35}
-.opex-month-scope{display:grid;gap:8px}
-.opex-scope-stat{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:11px}
-.opex-scope-stat:last-of-type{border-bottom:0}
-.opex-scope-stat b{color:var(--navy);font-variant-numeric:tabular-nums}
-.scope-concepts{margin-top:6px;padding:10px 12px;border-radius:9px;background:#F7F9FB;font-size:10.5px;line-height:1.5;color:var(--ink)}
-.scope-concepts b{color:var(--navy)}
-.compact-details{margin-top:13px;border:1px solid var(--border);border-radius:12px;background:#fff;overflow:hidden}
-.compact-details summary{cursor:pointer;padding:13px 15px;color:var(--navy);font-weight:900;font-size:12px;list-style:none;display:flex;justify-content:space-between;gap:10px}
-.compact-details summary::-webkit-details-marker{display:none}
-.compact-details summary::after{content:'+';font-size:17px;line-height:1}
-.compact-details[open] summary::after{content:'−'}
-.compact-details[open] summary{border-bottom:1px solid var(--border);background:#F8FAFC}
-.compact-details-body{padding:13px 15px}
-/* Los gráficos de módulos vuelven a una lectura simple; la multiselección queda solo en Resumen. */
-.module-chart .chart-controls,.module-chart .chart-selection-summary{display:none!important}
-@media(max-width:768px){
- .summary-kpi-card{padding-bottom:38px}
- .summary-explorer-head{align-items:flex-start}
- .summary-selected-badge{font-size:8.5px}
- .summary-month-controls{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
- .summary-month-controls::-webkit-scrollbar{display:none}
- .summary-month-btn{flex:0 0 auto}
-}
-
-
-/* ============================================================
-   V11.3 - DESGLOSE TRANSACCIONAL MENSUAL
-   ============================================================ */
-.month-breakdown-lead{
-  display:flex;justify-content:space-between;gap:12px;align-items:flex-start;
-  margin:0 0 10px;padding:10px 12px;border-radius:9px;
-  background:#F6F9FC;border:1px solid var(--border);font-size:11px;line-height:1.45
-}
-.month-breakdown-lead b{color:var(--navy)}
-.source-chip{
-  display:inline-block;padding:3px 7px;border-radius:999px;background:var(--blue-bg);
-  color:var(--navy);font-size:9px;font-weight:900;white-space:nowrap
-}
-.unassigned-row td{background:#FFF7D6 !important}
-.total-row td{font-weight:900;background:#F4F7FA}
-.category-share{font-variant-numeric:tabular-nums}
-.scope-top-list{margin-top:10px;padding-top:9px;border-top:1px solid var(--border)}
-.scope-top-list div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:5px 0;font-size:11px}
-.scope-top-list b{color:var(--navy)}
-@media(max-width:768px){
-  .month-breakdown-lead{display:block}
-  .source-chip{margin-top:7px}
-}
-
 </style>
 </head>
 <body class="locked">
 
-<div id="accessGate">
- <div class="access-card">
-  <img src="assets/logo_maranello_horizontal.png" alt="MARANELLO">
-  <h1>Tablero financiero</h1>
-  <p>Información financiera de uso interno. Ingresa la clave asignada para continuar.</p>
-  <form id="accessForm">
-   <input type="password" id="accessPassword" autocomplete="current-password" placeholder="Clave de acceso" aria-label="Clave de acceso">
-   <button class="access-submit" type="submit">Ingresar</button>
-   <div id="accessError" class="access-error"></div>
+<div id="gate">
+  <form class="gate-card" id="gateForm">
+    <img src="data:image/png;base64,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" alt="MARANELLO buona &amp; fresca">
+    <h1>Tablero financiero</h1>
+    <p>Información de uso interno. Ingresa la clave asignada.</p>
+    <input type="password" id="gatePass" autocomplete="current-password" placeholder="Clave de acceso" aria-label="Clave de acceso">
+    <button type="submit">Ingresar</button>
+    <div class="gate-error" id="gateError" role="alert"></div>
   </form>
-  <p class="access-note">MARANELLO · Información de gestión · Base enero–junio 2026</p>
- </div>
 </div>
 
-<header>
- <div class="header-row">
-  <div>
-  <div class="brand"><img class="brand-logo" src="assets/logo_maranello_horizontal.png" alt="MARANELLO buona & fresca"></div>
-  <div class="subtitle">Tablero Financiero Ejecutivo V11.3 · Base operativa enero–junio 2026 · Corte 30-jun-2026</div>
-  <div class="brand-stripe"></div>
- </div>
-  
- </div>
+<div class="app">
+<header class="top">
+  <div class="top-row">
+    <div class="brand"><img src="data:image/png;base64,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" alt="MARANELLO buona &amp; fresca"></div>
+    <div class="brand-meta"><b>Tablero financiero</b><span>Enero a junio de 2026, corte al 30 de junio</span></div>
+    <div class="top-actions">
+      <button class="btn" id="btnPresent" type="button" aria-pressed="false">Presentar</button>
+      <button class="btn" id="btnPrint" type="button">Imprimir</button>
+    </div>
+  </div>
+  <div class="bar-row">
+    <nav class="tabs" id="tabs" aria-label="Secciones">
+      <button class="tab on" data-tab="resumen">Resumen</button>
+      <button class="tab" data-tab="ventas">Ventas</button>
+      <button class="tab" data-tab="compras">Compras</button>
+      <button class="tab" data-tab="gastos">Gastos</button>
+      <button class="tab" data-tab="nomina">Nómina</button>
+      <button class="tab" data-tab="caja">Caja</button>
+      <button class="tab" data-tab="resultado">Resultado</button>
+      <button class="tab" data-tab="diagnostico">Diagnóstico</button>
+    </nav>
+    <div class="period" id="period" role="group" aria-label="Periodo">
+      <span class="period-label">Periodo</span>
+      <span class="period-fixed">Semestre completo</span>
+    </div>
+  </div>
 </header>
-<nav aria-label="Navegación del tablero"><div class="nav-inner" id="nav">
- <button class="nav-link active" data-tab="resumen">Resumen</button>
- <button class="nav-link" data-tab="ventas">Ventas</button>
- <button class="nav-link" data-tab="compras">Compras</button>
- <button class="nav-link" data-tab="gastos">Gastos</button>
- <button class="nav-link" data-tab="nomina">Nómina</button>
- <button class="nav-link" data-tab="caja">Caja</button>
- <button class="nav-link" data-tab="resultado">Resultado</button>
- <button class="nav-link" data-tab="diagnostico">Diagnóstico</button>
-</div></nav>
 
 <main>
 
-
- <section id="resumen" class="section active">
-  <div class="section-title"><h2>Resumen ejecutivo</h2><p id="periodLabel">Acumulado enero–junio 2026</p></div>
-  <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
-    <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button>
-    <button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button>
-    <button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button>
-    <button class="period-tab" data-period="JUNIO">Jun</button>
-  </div>
-
-  <div class="grid kpis" id="kpiGrid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
-   <div class="card summary-kpi-card active" data-summary-kpi="sales"><h3>Ventas netas</h3><div class="kpi-value" id="kSales">—</div><div class="kpi-sub" id="kSalesSub"></div><button class="module-link" data-target-tab="ventas" type="button">Ver módulo →</button></div>
-   <div class="card summary-kpi-card" data-summary-kpi="inventory"><h3>Compras inventariables</h3><div class="kpi-value" id="kInventory">—</div><div class="kpi-sub" id="kInventorySub"></div><button class="module-link" data-target-tab="compras" type="button">Ver módulo →</button></div>
-   <div class="card summary-kpi-card" data-summary-kpi="opex"><h3>Gastos operativos</h3><div class="kpi-value" id="kOpex">—</div><div class="kpi-sub" id="kOpexSub"></div><button class="module-link" data-target-tab="gastos" type="button">Ver módulo →</button></div>
-   <div class="card summary-kpi-card" data-summary-kpi="payroll"><h3>Carga laboral</h3><div class="kpi-value" id="kPayroll">—</div><div class="kpi-sub" id="kPayrollSub"></div><button class="module-link" data-target-tab="nomina" type="button">Ver módulo →</button></div>
-   <div class="card summary-kpi-card" data-summary-kpi="bank"><h3>Caja disponible</h3><div class="kpi-value" id="kCash">—</div><div class="kpi-sub" id="kCashSub"></div><button class="module-link" data-target-tab="caja" type="button">Ver módulo →</button></div>
-  </div>
-
-  <div class="grid two" style="margin-top:13px">
-   <div class="card chart">
-    <div class="summary-explorer-head"><div class="chart-title" id="summaryChartTitle">Evolución mensual — Ventas netas</div><span class="summary-selected-badge" id="summarySelectedBadge">Ventas</span></div>
-    <div id="summaryDynamicChart"></div>
-    <div class="summary-month-controls" id="summaryMonthControls"></div>
-    <div class="module-chart-note">Selecciona uno o varios meses para compararlos visualmente. El filtro superior continúa definiendo los KPI del periodo.</div>
-   </div>
-   <div class="card summary-module-metrics">
-    <h3 id="summaryModuleTitle">Indicadores de Ventas</h3>
-    <div class="metric-row"><span id="summaryMetricLabel1">Valor del periodo</span><b id="summaryMetricValue1">—</b></div>
-    <div class="metric-row"><span id="summaryMetricLabel2">Promedio mensual</span><b id="summaryMetricValue2">—</b></div>
-    <div class="metric-row"><span id="summaryMetricLabel3">Mayor mes</span><b id="summaryMetricValue3">—</b></div>
-   </div>
-  </div>
-
-  <div class="card" style="margin-top:13px">
-    <h3>Lectura del periodo</h3>
-    <div class="period-reading" id="summaryPeriodReading">—</div>
-  </div>
- </section>
-
- <section id="ventas" class="section">
-  <div class="section-title"><h2>Ventas</h2><p>Evolución mensual y comparación de períodos</p></div>
-  <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
-    <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button>
-    <button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button>
-    <button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button>
-    <button class="period-tab" data-period="JUNIO">Jun</button>
-  </div>
-  <div class="grid two">
-   <div class="card"><h3>Ventas del periodo</h3><div class="kpi-value" id="salesPeriodValue">—</div><div class="kpi-sub" id="salesPeriodSub"></div></div>
-   <div class="card"><h3>Referencia comercial</h3><div class="metric-row"><span>Ventas acumuladas Ene–Jun</span><b>$376,38 M</b></div><div class="kpi-sub">La tabla inferior conserva la trazabilidad mensual.</div></div>
-  </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card chart module-chart"><div class="chart-title">Ventas netas por mes</div><div id="salesChart2"></div></div>
-   <div class="card"><h3>Detalle mensual</h3><div id="salesMonthlyTable"></div></div>
-  </div>
-  <div class="card" style="margin-top:13px">
-   <h3>Comparador de ventas</h3>
-   <div class="kpi-sub" style="margin-bottom:10px">Compara exclusivamente las ventas netas entre dos meses. La variación se calcula como Periodo B − Periodo A.</div>
-   <div class="compare-grid">
-    <div class="field"><label>Periodo A</label><select id="compareA"></select></div>
-    <div class="field"><label>Periodo B</label><select id="compareB"></select></div>
-    <button class="mode-btn" id="swapCompare">Intercambiar</button>
-   </div>
-   <div id="compareTable"></div>
-  </div>
- </section>
-
- 
-
- <section id="compras" class="section">
-  <div class="section-title"><h2>Compras inventariables</h2><p>Compras candidatas a inventario; no equivalen todavía al costo de ventas</p></div>
-  <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
-    <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button>
-    <button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button>
-    <button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button>
-    <button class="period-tab" data-period="JUNIO">Jun</button>
-  </div>
-  <div class="grid two">
-   <div class="card"><h3 id="inventoryPeriodTitle">Compras inventariables del periodo</h3><div class="kpi-value" id="inventoryPeriodValue">—</div><div class="kpi-sub" id="inventoryPeriodSub"></div></div>
-   <div class="card"><div class="callout warning"><b>Criterio contable:</b> COGS = inventario inicial + compras inventariables − inventario final. Esta pestaña muestra compras, no costo de ventas definitivo.</div></div>
-  </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card chart module-chart"><div class="chart-title">Compras inventariables por mes</div><div id="inventoryChart"></div></div>
-   <div class="card"><h3>Desglose mensual</h3><div id="inventoryMonthlyTable"></div></div>
-  </div>
-  <details class="compact-details" id="inventoryCompositionDetails" open>
-    <summary id="inventoryCompositionTitle">Composición acumulada de compras · Ene–Jun</summary>
-    <div class="compact-details-body">
-      <div class="detail-scope-note" id="inventoryDetailNote"></div>
-      <div id="inventoryCategoryDetail"></div>
+<!-- ================= RESUMEN ================= -->
+<section id="resumen" class="section on">
+  <div class="sec-head"><h2>Resumen</h2><p data-scope></p></div>
+  <div class="grid g3" id="sumKpis"></div>
+  <div class="panel mt">
+    <h3>Ventas frente a costos, mes a mes</h3>
+    <p class="hint">Millones de pesos. La línea punteada es la venta mensual necesaria para cubrir la estructura.</p>
+    <div id="chSalesCost"></div>
+    <div class="legend">
+      <span><i style="background:var(--navy)"></i>Ventas netas</span>
+      <span><i style="background:var(--teal)"></i>Compras inventariables</span>
+      <span><i style="background:#8FA9CF"></i>Nómina</span>
+      <span><i style="background:var(--yellow)"></i>Gastos operativos</span>
+      <span><i class="dash"></i>Equilibrio</span>
     </div>
-  </details>
- </section>
-
- <section id="gastos" class="section">
-  <div class="section-title"><h2>Gastos operativos</h2><p>Total mensual documentado y desglose real por concepto</p></div>
-  <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
-    <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button><button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button><button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button><button class="period-tab" data-period="JUNIO">Jun</button>
   </div>
-  <div class="grid two">
-   <div class="card"><h3 id="opexPeriodTitle">Gastos operativos del periodo</h3><div class="kpi-value" id="opexPeriodValue">—</div><div class="kpi-sub" id="opexPeriodSub"></div></div>
-   <div class="card"><div class="callout"><b>Alcance:</b> incluye únicamente documentos clasificados como gasto operativo. Activos/política pendiente y partidas mixtas se controlan por separado.</div></div>
-  </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card chart module-chart"><div class="chart-title">Gastos operativos por mes</div><div id="opexChart"></div><div class="module-chart-note">Pasa el cursor sobre una barra para ver el valor exacto. El mes del filtro superior queda resaltado.</div></div>
-   <div class="card"><h3 id="opexMonthScopeTitle">Qué corresponde al periodo seleccionado</h3><div id="opexMonthScope" class="opex-month-scope"></div></div>
-  </div>
-  <div class="card" style="margin-top:13px">
-    <h3>Totales mensuales de gastos operativos</h3>
-    <div id="opexMonthlyTable"></div>
-    <div class="callout warning" style="margin-top:10px"><b>Conciliación identificada:</b> enero–junio asignado por mes suma <b>$118,92 M</b>. Existe además <b>$1,00 M</b> de <b>Marketing · Redes sociales</b>, fuente WhatsApp, con mes <b>SIN DEFINIR</b>. Por eso el consolidado de gastos es <b>$119,92 M</b>. La partida no se distribuye artificialmente entre abril y mayo hasta contar con soporte del periodo del servicio.</div>
-  </div>
-  <details class="compact-details" id="opexCompositionDetails" open>
-    <summary id="opexCompositionTitle">Composición acumulada de gastos · Ene–Jun</summary>
-    <div class="compact-details-body">
-      <div class="detail-scope-note" id="opexDetailNote"></div>
-      <div id="opexCategoryDetail"></div>
-    </div>
-  </details>
-  <div class="grid two" style="margin-top:13px">
-    <div class="card"><h3>Activos / política pendiente</h3><div class="kpi-value">$2,02 M</div><div class="kpi-sub">Partidas que no deben llevarse automáticamente al PyG.</div></div>
-    <div class="card"><h3>Revisar / mixto</h3><div class="kpi-value">$7,79 M</div><div class="kpi-sub">Documentos cuyo uso o naturaleza requiere validación adicional.</div></div>
-  </div>
- </section>
-
- <section id="nomina" class="section">
-  <div class="section-title"><h2>Nómina y carga laboral</h2><p>Seguimiento mensual de la fuente de pagos y control PILA</p></div>
-  <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
-    <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button>
-    <button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button>
-    <button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button>
-    <button class="period-tab" data-period="JUNIO">Jun</button>
-  </div>
-  <div class="grid four">
-   <div class="card"><h3 id="nomPayrollTitle">Carga laboral acumulada</h3><div class="kpi-value" id="nomPayroll">—</div><div class="kpi-sub" id="nomPayrollSub"></div></div>
-   <div class="card"><h3 id="nomPilaTitle">PILA acumulada</h3><div class="kpi-value" id="nomPila">—</div><div class="kpi-sub">No sumar íntegramente sobre nómina</div></div>
-   <div class="card"><h3>Personas registradas</h3><div class="kpi-value" id="nomPeople">—</div><div class="kpi-sub" id="nomPeopleSub"></div></div>
-   <div class="card"><h3>Empleados PILA</h3><div class="kpi-value" id="nomPilaPeople">—</div><div class="kpi-sub">Control de vinculación formal</div></div>
-  </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card chart module-chart"><div class="chart-title">Carga laboral por mes</div><div id="payrollChart"></div></div>
-   <div class="card"><h3>Detalle mensual</h3><div id="payrollTable"></div></div>
-  </div>
-  <div class="card" style="margin-top:13px"><h3>Patrón de pagos acumulado Ene–Jun</h3><div id="payrollPattern"></div><div class="callout warning" style="margin-top:10px">Frecuencia de pago no equivale a clasificación jurídica. La cifra de carga laboral permanece provisional mientras se completa la depuración.</div></div>
- </section>
-
- 
-
- <section id="caja" class="section">
-  <div class="section-title"><h2>Caja y liquidez</h2><p>Cuenta empresarial conciliada mensualmente</p></div>
-  <div class="period-tabs shared-period-tabs" aria-label="Periodo de análisis">
-    <button class="period-tab active" data-period="YTD">Acumulado</button>
-    <button class="period-tab" data-period="ENERO">Ene</button>
-    <button class="period-tab" data-period="FEBRERO">Feb</button>
-    <button class="period-tab" data-period="MARZO">Mar</button>
-    <button class="period-tab" data-period="ABRIL">Abr</button>
-    <button class="period-tab" data-period="MAYO">May</button>
-    <button class="period-tab" data-period="JUNIO">Jun</button>
-  </div>
-  <div class="grid four">
-   <div class="card"><h3>Saldo inicial</h3><div class="kpi-value" id="cashOpen">—</div></div>
-   <div class="card"><h3 id="cashCreditsTitle">Abonos acumulados</h3><div class="kpi-value" id="cashCredits">—</div></div>
-   <div class="card"><h3 id="cashDebitsTitle">Cargos acumulados</h3><div class="kpi-value" id="cashDebits">—</div></div>
-   <div class="card"><h3>Saldo final</h3><div class="kpi-value" id="cashClose">—</div></div>
-  </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card chart"><div class="chart-title">Saldo final de la cuenta empresarial</div><div id="cashChart"></div></div>
-   <div class="card"><h3>Movimiento mensual</h3><div id="cashMonthlyTable"></div></div>
-  </div>
-  <div class="grid two" style="margin-top:13px">
-   <div class="card"><h3>Crédito neto recibido</h3><div class="kpi-value">$25,40 M</div><div class="kpi-sub">Financiación identificada en el semestre.</div></div>
-   <div class="card"><h3>Cuentas relacionadas</h3><div class="kpi-value" style="font-size:22px">Parcial</div><div class="kpi-sub">Pendiente completar movimientos empresariales relacionados.</div></div>
-  </div>
- </section>
-
- 
-
- 
-
- <section id="resultado" class="section">
-  <div class="section-title"><h2>Resultado y simulador de inventario</h2><p>Modelo Semestre completo; no se filtra por mes</p></div>
-  <div class="card">
-   <h3>Simulador</h3>
-   <div class="sim-grid">
-    <div class="field"><label>Inventario inicial</label><input type="number" id="invInitial" min="0" step="100000" placeholder="Ej. 10000000"></div>
-    <div class="field"><label>Inventario final</label><input type="number" id="invFinal" min="0" step="100000" placeholder="Ej. 20000000"></div>
-    <div class="field"><label>Reconocer interés APE</label><select id="apeToggle"><option value="0">No</option><option value="1">Sí, $5,36 M candidato</option></select></div>
-    <button class="mode-btn" id="simReset">Limpiar simulador</button>
-   </div>
-   <div class="sim-grid" style="margin-top:11px">
-    <div class="sim-output"><span>Costo de ventas calculado</span><strong id="simCogs">Pendiente</strong></div>
-    <div class="sim-output"><span>Margen bruto</span><strong id="simGross">Pendiente</strong></div>
-    <div class="sim-output"><span>Resultado antes renta</span><strong id="simResult">Pendiente</strong></div>
-    <div class="sim-output"><span>Margen resultado</span><strong id="simMargin">Pendiente</strong></div>
-   </div>
-   <div id="simMessage" class="callout warning" style="margin-top:11px">Ingrese inventario inicial y final. Fórmula: COGS = inventario inicial + compras inventariables − inventario final.</div>
-  </div>
-  <div class="grid three" style="margin-top:13px">
-   <div class="card" data-status="sensibilidad"><h3>Inventario inicial = final</h3><div class="kpi-value" style="color:var(--red)">-$28,39 M</div><div class="kpi-sub">Sin interés APE</div><span class="status sensibilidad">SENSIBILIDAD</span></div>
-   <div class="card" data-status="sensibilidad"><h3>Con interés APE candidato</h3><div class="kpi-value" style="color:var(--red)">-$33,75 M</div><div class="kpi-sub">Escenario más exigente</div><span class="status sensibilidad">SENSIBILIDAD</span></div>
-   <div class="card" data-status="sensibilidad"><h3>Δ inventario para equilibrio</h3><div class="kpi-value">+$28,39 M</div><div class="kpi-sub">Sin interés APE</div><span class="status sensibilidad">SENSIBILIDAD</span></div>
-  </div>
- 
-
-  <div class="section-title" style="margin-top:22px"><h2>Posición al 30 de junio</h2><p>Lectura parcial de activos y obligaciones conocidas</p></div>
-  <div class="grid two">
-   <div class="card">
-    <h3>Activos conocidos</h3>
-    <div class="metric-row"><span>Caja Bancolombia empresa</span><b>$1,85 M</b></div>
-    <div class="metric-row"><span>Anticipos tributarios</span><b>$4,47 M</b></div>
-    <div class="metric-row"><span>Inventario 30-jun</span><b>PENDIENTE</b></div>
-    <div class="metric-row"><span>Ventas “Por Pagar”</span><b>$3,81 M control</b></div>
-   </div>
-   <div class="card">
-    <h3>Pasivos / financiación conocidos</h3>
-    <div class="metric-row"><span>Pasivos tributarios</span><b>$9,63 M</b></div>
-    <div class="metric-row"><span>Crédito Bancolombia capital</span><b>$26,27 M</b></div>
-    <div class="metric-row"><span>Saldo económico APE</span><b>$132,09 M</b></div>
-    <div class="metric-row"><span>Cuotas APE may-jun programadas</span><b>$9,88 M</b></div>
-   </div>
-  </div>
-  <div class="callout warning" style="margin-top:13px">El instrumento APE no se clasifica definitivamente como pasivo o patrimonio en este tablero. Las cuotas mayo-junio son subconjunto del plan y no se suman nuevamente al saldo económico.</div>
- 
 </section>
 
- 
+<!-- ================= VENTAS ================= -->
+<section id="ventas" class="section">
+  <div class="sec-head"><h2>Ventas</h2><p data-scope></p></div>
+  <div class="grid g4" id="salesKpis"></div>
+  <div class="panel mt">
+    <h3>Ventas netas por mes</h3>
+    <p class="hint">Millones de pesos, con el promedio del semestre y el nivel de equilibrio.</p>
+    <div id="chSales"></div>
+    <div class="legend"><span><i style="background:var(--teal-dk)"></i>Mes sobre equilibrio</span><span><i style="background:var(--navy)"></i>Mes bajo equilibrio</span><span><i class="dash"></i>Equilibrio</span><span><i class="dash" style="border-top-color:var(--muted)"></i>Promedio Ene–Jun</span></div>
+  </div>
+  <div class="panel mt">
+    <h3>Comparar dos meses</h3>
+    <div class="fields mt">
+      <div class="field"><label for="cmpA">Mes A</label><select id="cmpA"></select></div>
+      <div class="field"><label for="cmpB">Mes B</label><select id="cmpB"></select></div>
+      <button class="btn" id="cmpSwap" type="button">Intercambiar</button>
+    </div>
+    <div class="cmp-out" id="cmpOut"></div>
+  </div>
+  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbSales"></div></details>
+</section>
 
- 
+<!-- ================= COMPRAS ================= -->
+<section id="compras" class="section">
+  <div class="sec-head"><h2>Compras inventariables</h2><p>Compras candidatas a inventario. Todavía no son costo de ventas: falta valorizar inventario inicial y final.</p></div>
+  <div class="grid g3" id="invKpis"></div>
+  <div class="grid g-wide mt">
+    <div class="panel">
+      <h3>Compras por mes</h3>
+      <p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p>
+      <div id="chInv"></div>
+    </div>
+    <div class="panel">
+      <h3>Principales proveedores de inventario</h3>
+      <p class="hint">Acumulado Ene–Jun.</p>
+      <div class="hb" id="hbInvProv"></div>
+    </div>
+  </div>
+  <div class="panel mt">
+    <h3>Composición de las compras</h3>
+    <p class="hint" id="invCompNote"></p>
+    <div class="hb" id="hbInvCat"></div>
+  </div>
+  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbInv"></div></details>
+</section>
 
- 
+<!-- ================= GASTOS ================= -->
+<section id="gastos" class="section">
+  <div class="sec-head"><h2>Gastos operativos</h2><p>Documentos clasificados como gasto operativo. Activos y partidas mixtas se controlan aparte.</p></div>
+  <div class="grid g4" id="opexKpis"></div>
+  <div class="grid g-wide mt">
+    <div class="panel">
+      <h3>Gastos operativos por mes</h3>
+      <p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p>
+      <div id="chOpex"></div>
+    </div>
+    <div class="panel">
+      <h3>En qué se va el gasto</h3>
+      <p class="hint" id="opexCompNote"></p>
+      <div class="hb" id="hbOpexCat"></div>
+    </div>
+  </div>
+  <div class="callout warn mt method" id="opexRecon"></div>
+  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbOpex"></div></details>
+</section>
 
+<!-- ================= NÓMINA ================= -->
+<section id="nomina" class="section">
+  <div class="sec-head"><h2>Nómina y turnos</h2><p>El número de personas cambia cada mes porque el equipo trabaja por turnos.</p></div>
+  <div class="grid g4" id="payKpis"></div>
+  <div class="panel mt">
+    <h3>Carga laboral por mes</h3>
+    <p class="hint">Millones de pesos; debajo de cada mes, personas con pagos registrados.</p>
+    <div id="chPay"></div>
+  </div>
+  <div class="grid g-wide mt">
+    <div class="panel">
+      <h3>Quién trabajó cada mes</h3>
+      <p class="hint">Cada celda marcada es un mes con pagos registrados para esa persona.</p>
+      <div class="tw" style="padding:0" id="roster"></div>
+    </div>
+    <div class="panel">
+      <h3>Patrón de pagos del semestre</h3>
+      <p class="hint">Según la frecuencia en la hoja de pagos. La frecuencia no define el tipo de vinculación.</p>
+      <div class="hb" id="hbPattern"></div>
+      <p class="note method">La carga laboral sigue siendo provisional mientras se separan empleados formales, turnos y ocasionales. La PILA no se suma completa sobre la nómina.</p>
+    </div>
+  </div>
+  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbPay"></div></details>
+</section>
+
+<!-- ================= CAJA ================= -->
+<section id="caja" class="section">
+  <div class="sec-head"><h2>Caja y liquidez</h2><p>Cuenta empresarial conciliada mes a mes.</p></div>
+  <div class="grid g4" id="cashKpis"></div>
+  <div class="grid g-wide mt">
+    <div class="panel">
+      <h3>Saldo al cierre de cada mes</h3>
+      <p class="hint">Millones de pesos.</p>
+      <div id="chCash"></div>
+    </div>
+    <div class="panel">
+      <h3>Financiación y ritmo de caja</h3>
+      <div class="rows" id="cashFin"></div>
+      <p class="note method">Cuentas relacionadas: información parcial; faltan movimientos empresariales para cerrar el flujo consolidado.</p>
+    </div>
+  </div>
+  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbCash"></div></details>
+</section>
+
+<!-- ================= RESULTADO ================= -->
+<section id="resultado" class="section">
+  <div class="sec-head"><h2>Resultado</h2><p>Modelo del semestre completo. No es una utilidad contable: faltan inventarios y depurar nómina.</p></div>
+  <div class="panel">
+    <h3>Resultado operativo aproximado por mes</h3>
+    <p class="hint">Ventas menos compras, nómina y gastos operativos. Sin gastos financieros; las compras hacen de costo de alimentos mientras no haya inventarios.</p>
+    <div id="chResult"></div>
+    <p class="note method" id="resultNote"></p>
+  </div>
+  <div class="grid g3 mt" id="scenarios"></div>
+  <div class="panel mt">
+    <h3>Simulador con inventarios</h3>
+    <p class="hint">Costo de ventas = inventario inicial + compras inventariables − inventario final.</p>
+    <div class="fields">
+      <div class="field"><label for="invIni">Inventario inicial (1-ene)</label><input type="number" id="invIni" min="0" step="100000" placeholder="Ej. 10000000"></div>
+      <div class="field"><label for="invFin">Inventario final (30-jun)</label><input type="number" id="invFin" min="0" step="100000" placeholder="Ej. 12000000"></div>
+      <div class="field"><label for="apeT">Interés APE</label><select id="apeT"><option value="0">No incluir</option><option value="1">Incluir candidato</option></select></div>
+      <button class="btn" id="simReset" type="button">Limpiar</button>
+    </div>
+    <div class="cmp-out" id="simOut"></div>
+    <div class="callout warn mt" id="simMsg"></div>
+  </div>
+  <div class="grid g2 mt">
+    <div class="panel"><h3>Activos conocidos al 30 de junio</h3><div class="rows" id="posAssets"></div></div>
+    <div class="panel"><h3>Pasivos y financiación conocidos</h3><div class="rows" id="posLiab"></div></div>
+  </div>
+  <p class="note method">El instrumento APE no se clasifica todavía como pasivo o patrimonio. Las cuotas de mayo y junio son parte del plan y no se suman otra vez al saldo.</p>
+</section>
+
+<!-- ================= DIAGNÓSTICO ================= -->
 <section id="diagnostico" class="section">
-  <div class="section-title">
-    <h2>Diagnóstico financiero</h2>
-    <p>Lectura consolidada del semestre enero–junio de 2026</p>
-  </div>
-
-  <div class="diag-intro">
-    <p><b>Después de consolidar las ventas, compras, gastos, nómina, bancos, impuestos y financiación del semestre, ya tenemos una lectura mucho más clara de cómo está operando MARANELLO.</b></p>
-    <p>El negocio sí demuestra capacidad para generar ventas. El principal problema no parece estar en la ausencia de mercado, sino en que durante los últimos meses del semestre las ventas disminuyeron mientras buena parte de nuestra estructura de costos y gastos se mantuvo. Esta situación comenzó a reflejarse tanto en la rentabilidad estimada como en la disponibilidad de caja.</p>
-    <p>Las cifras que presentamos a continuación nos permiten entender dónde está la presión y cuáles son los frentes que debemos atender para recuperar equilibrio.</p>
-  </div>
-
-  <div class="diag-keyfigures">
-    <div class="diag-figure">
-      <strong>$376,38 M</strong>
-      <span>Ventas netas del semestre</span>
-    </div>
-    <div class="diag-figure">
-      <strong>-36,3 %</strong>
-      <span>Variación de ventas enero → junio</span>
-    </div>
-    <div class="diag-figure">
-      <strong>≈ $68 M/mes</strong>
-      <span>Referencia provisional de equilibrio</span>
-    </div>
-    <div class="diag-figure">
-      <strong>$1,85 M</strong>
-      <span>Caja empresarial al cierre</span>
-    </div>
-  </div>
-
-  <div class="diag-story">
-
-    <article>
-      <h3>1. Comportamiento de las ventas</h3>
-      <p>Durante el semestre registramos ventas netas por <b>$376,38 millones</b>, equivalentes a un promedio mensual cercano a <b>$62,73 millones</b>.</p>
-      <p>El comportamiento no fue uniforme. Enero y marzo estuvieron alrededor de $74–75 millones, mientras que abril, mayo y junio se ubicaron en un nivel inferior. Junio cerró en <b>$48,07 millones</b>, aproximadamente <b>36,3 % por debajo de enero</b>.</p>
-      <p><b>Esto nos muestra que MARANELLO tiene capacidad para alcanzar niveles de venta superiores a $70 millones mensuales, pero durante el cierre del semestre no logramos sostener ese ritmo.</b> Esta reducción es especialmente importante porque varios de nuestros costos no disminuyen automáticamente cuando bajan las ventas.</p>
-    </article>
-
-    <article>
-      <h3>2. Estructura de costos y operación</h3>
-      <p>Al revisar cómo se distribuyen nuestros ingresos, encontramos una estructura exigente. Los gastos operativos documentados suman aproximadamente <b>$119,92 millones</b>, mientras que el universo de nómina procesado alcanza <b>$157,52 millones</b>.</p>
-      <p>En conjunto, estos dos bloques representan aproximadamente <b>73,7 % de las ventas del semestre</b>, antes de incorporar el costo real de los alimentos, bebidas y demás insumos vendidos.</p>
-      <p>Las compras clasificadas como inventariables alcanzaron <b>$121,36 millones</b>. Sin embargo, todavía no las estamos tratando como costo de ventas definitivo porque necesitamos incorporar correctamente el inventario inicial y final.</p>
-      <p><b>Esta combinación explica por qué una reducción de ventas tiene un impacto rápido sobre el resultado y la caja.</b></p>
-    </article>
-
-    <article>
-      <h3>3. Rentabilidad y punto de equilibrio</h3>
-      <p><b>Todavía no tenemos una utilidad contable definitiva</b>, principalmente porque necesitamos cerrar los inventarios y depurar algunos componentes de la nómina.</p>
-      <p>Aun así, los escenarios construidos nos permiten entender el orden de magnitud del problema. Si asumimos únicamente como referencia que el inventario inicial y final fueran iguales, el resultado estimado del semestre sería cercano a <b>-$28,39 millones</b>. Si además incorporáramos el componente financiero candidato de los inversionistas, el resultado podría aproximarse a <b>-$33,75 millones</b>.</p>
-      <p>Estas cifras no deben interpretarse como una pérdida certificada, sino como una <b>señal gerencial</b>. Con la estructura actual, estimamos que MARANELLO necesita ventas mensuales cercanas a <b>$67–68 millones</b> para aproximarse al punto de equilibrio. Junio, con $48,07 millones, quedó alrededor de $19–20 millones por debajo de esa referencia.</p>
-    </article>
-
-    <article class="diag-liquidity">
-      <h3>4. Liquidez y financiación</h3>
-      <p><b>Uno de los aspectos que más nos preocupa es la evolución de la caja.</b> La cuenta empresarial inició el semestre con aproximadamente <b>$26,59 millones</b> y terminó junio con <b>$1,85 millones</b>.</p>
-      <p>Durante este mismo período fue necesario incorporar financiación bancaria mediante un crédito de $26,5 millones. Esto confirma que la presión que estamos identificando no es únicamente un resultado contable: <b>también se está reflejando directamente en la liquidez disponible para operar.</b></p>
-      <p>Los compromisos con inversionistas agregan presión sobre la caja, aunque el análisis muestra que no son la causa principal del desequilibrio operativo.</p>
-    </article>
-
-    <article class="diag-conclusion">
-      <h3>5. Nuestra lectura de la situación</h3>
-      <p><b>Con la información analizada, consideramos que MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable.</b></p>
-      <p>El principal problema es que actualmente tenemos una estructura diseñada para un nivel de ventas superior al observado durante los últimos meses del semestre. Cuando alcanzamos ventas cercanas a $74–75 millones mensuales, la operación se aproxima mucho más a una estructura sostenible. Cuando las ventas caen hacia $48–58 millones, los costos laborales, ocupación, servicios y demás gastos mantienen una presión considerable.</p>
-      <p>Por esta razón, nuestro enfoque para los próximos meses debe concentrarse en tres frentes: <b>recuperar ventas, ajustar y entender mejor la estructura laboral y determinar el costo real de alimentos mediante inventarios.</b></p>
-      <p>La situación requiere intervención y seguimiento, pero ahora contamos con una base financiera mucho más organizada para tomar decisiones con información y no únicamente con percepciones.</p>
-    </article>
-
-  </div>
-
-  <details class="diag-details">
-    <summary>Prioridades para cerrar la información</summary>
-    <div class="diag-details-body">
-      <ul>
-        <li><b>Inventario inicial valorizado:</b> necesario para calcular correctamente el costo de ventas.</li>
-        <li><b>Inventario final valorizado:</b> necesario para cerrar COGS y margen bruto.</li>
-        <li><b>Depuración laboral:</b> separar empleados formales, turnos, ocasionales y otros conceptos incluidos en la hoja de pagos.</li>
-        <li><b>Tratamiento del instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
-        <li><b>Partidas mixtas y activos pendientes:</b> terminar su clasificación entre gasto, costo y activo.</li>
-        <li><b>Cuentas relacionadas:</b> completar los movimientos empresariales faltantes para cerrar el flujo de caja consolidado.</li>
-        <li><b>Ventas marcadas “Por Pagar”:</b> conciliarlas con bancos/caja antes de reconocerlas como cuenta por cobrar.</li>
-      </ul>
-    </div>
-  </details>
-
-  <details class="diag-details">
-    <summary>Notas metodológicas y fuentes</summary>
-    <div class="diag-details-body">
-      <p><b>Metodología aplicada:</b> fuente original → depuración → anti-duplicación → clasificación → causación vs. caja → conciliación → nivel de certeza.</p>
-      <p>Las compras inventariables no se convierten automáticamente en costo de ventas. Los movimientos bancarios no se convierten automáticamente en gastos. El principal de impuestos y financiación se separa del resultado operativo, y los escenarios de sensibilidad no sustituyen cifras contables definitivas.</p>
-      <p>La reconstrucción del semestre utiliza ventas, documentos UBL y compras, correo, WhatsApp, nómina y PILA, bancos, impuestos e información de financiación e inversionistas.</p>
-    </div>
-  </details>
-
+  <div class="sec-head"><h2>Diagnóstico financiero</h2><p>Lectura consolidada del semestre enero–junio de 2026.</p></div>
+  <div class="diag-figs" id="diagFigs"></div>
+  <div class="diag" id="diagBody"></div>
 </section>
-
 
 </main>
-
-<footer>MARANELLO · Tablero Financiero Ejecutivo V11.3 · Base operativa enero–junio 2026 · Preparado para incorporación mensual de julio y agosto.</footer>
-
-<dialog id="detailDialog">
- <div class="modal-head"><h3 id="modalTitle">Detalle</h3><button class="modal-close" id="modalClose">Cerrar</button></div>
- <div class="modal-body" id="modalBody"></div>
-</dialog>
+<footer>MARANELLO · Tablero financiero V12 · Base operativa enero–junio 2026. Todas las cifras se calculan desde el bloque de datos del código; para incorporar un mes nuevo basta agregarlo a MONTHS y M.</footer>
+</div>
 
 <script>
+/* ============================================================
+   ACCESO (control de uso interno: los datos siguen visibles en el código fuente)
+   ============================================================ */
+const ACCESS_HASH="251be919";
+function accessHash(t){let h=2166136261;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0).toString(16).padStart(8,"0");}
+function unlock(){document.body.classList.remove("locked");document.getElementById("gate").style.display="none";try{sessionStorage.setItem("maraFinanceAccess","1");}catch(e){}}
+document.getElementById("gateForm").addEventListener("submit",e=>{
+  e.preventDefault();const i=document.getElementById("gatePass");
+  if(accessHash(i.value)===ACCESS_HASH){unlock();}else{document.getElementById("gateError").textContent="Clave incorrecta. Verifica mayúsculas y vuelve a intentar.";i.select();}
+});
+try{if(sessionStorage.getItem("maraFinanceAccess")==="1")unlock();}catch(e){}
 
-const ACCESS_HASH = "251be919";
-function accessHash(text){
- let h=2166136261;
- for(let i=0;i<text.length;i++){
-   h^=text.charCodeAt(i);
-   h=Math.imul(h,16777619);
- }
- return (h>>>0).toString(16).padStart(8,"0");
-}
-function unlockDashboard(){
- document.body.classList.remove("locked");
- document.getElementById("accessGate").style.display="none";
- sessionStorage.setItem("maraFinanceAccess","1");
-}
-function handleAccess(e){
- e.preventDefault();
- const input=document.getElementById("accessPassword");
- const error=document.getElementById("accessError");
- if(accessHash(input.value)===ACCESS_HASH){
-   error.textContent="";
-   unlockDashboard();
- } else {
-   error.textContent="Clave incorrecta.";
-   input.select();
- }
-}
-
-const DATA = {"months": ["ENERO", "FEBRERO", "MARZO", "ABRIL", "MAYO", "JUNIO"], "monthly": {"ENERO": {"sales": 75414443.0, "opex": 21222535.03, "payroll": 23769805.84168561, "inventory": 22597008.29, "bank": 17221018.9, "people": 15, "pila_people": 7}, "FEBRERO": {"sales": 64315666.0, "opex": 20041737.2, "payroll": 26383014.20475379, "inventory": 19382474.26, "bank": 7444605.03, "people": 15, "pila_people": 7}, "MARZO": {"sales": 74210185.0, "opex": 21056144.04, "payroll": 26763268.143390153, "inventory": 25267486.21, "bank": 7884417.51, "people": 15, "pila_people": 7}, "ABRIL": {"sales": 55861241.0, "opex": 22682458.27, "payroll": 26677468.963068187, "inventory": 18977246.8, "bank": 8608183.57, "people": 15, "pila_people": 7}, "MAYO": {"sales": 58511536.71, "opex": 17813551.02, "payroll": 27526508.5582197, "inventory": 16711397.51, "bank": 8385862.98, "people": 13, "pila_people": 7}, "JUNIO": {"sales": 48068769.34, "opex": 16098737.24, "payroll": 26401717.584356066, "inventory": 18426892.12, "bank": 1848018.15, "people": 14, "pila_people": 7}}, "h1": {"sales": 376381841.05, "gross_docs": 401428753.0, "opex": 119915162.8, "payroll": 157521783.29547352, "inventory": 121362505.19, "bank_open": 26590532.07, "bank_close": 1848018.15, "bank_credits": 283460830.68, "bank_debits": 308203344.6, "tax_liability": 9632000.0, "tax_assets": 4472997.85, "credit_principal": 26269252.38, "investor_balance": 132088326.57675348, "investor_pending_may_jun": 9876623.162634695, "known_finance": 5971297.55, "ape_interest_candidate": 5356565.543340213, "mixed": 7789801.47, "assets_policy": 2024100.0, "sales_pending": 3808014.0, "pila_period": 17849800.0, "pila_cash": 20068238.0, "tax_cash": 23326000.0, "credit_net_inflow": 25396275.0}, "categories": [{"group": "COSTO / INVENTARIO PENDIENTE", "status": "pendiente", "value": 121362505.19, "desc": "Compras candidatas a inventario. No equivalen todavía al COGS real.", "items": [["Insumos y mercancías", 91545376.85], ["Bebidas y mercancías", 16408791.0], ["Empaques y consumibles", 7537987.34], ["Insumos y empaques", 5870350.0]]}, {"group": "GASTOS OPERATIVOS", "status": "provisional", "value": 119915162.8, "desc": "Gastos documentales operativos; pueden requerir depuración de IVA/política contable.", "items": [["Ocupación", 88456372.0], ["Comisiones y plataformas", 6961034.87], ["Servicios públicos", 6683295.0], ["Marketing", 4720000.0], ["Servicios profesionales", 2600000.0], ["Movilidad", 2250946.0], ["Mantenimiento y adecuaciones", 1880200.0], ["Administración", 1850800.0], ["Tecnología", 1369431.0], ["Telecomunicaciones", 955165.0], ["Comisiones y medios de pago", 705674.39], ["Mantenimiento", 494500.0], ["Higiene y SST", 469600.0], ["Mantenimiento / adecuación", 180000.0], ["Seguridad y SST", 140000.0], ["Suministros operativos", 104000.0], ["Aseo y suministros", 47700.03], ["Seguros", 46444.51]]}, {"group": "ACTIVOS / POLÍTICA PENDIENTE", "status": "pendiente", "value": 2024100.0, "desc": "Partidas que no deben llevarse automáticamente al PyG.", "items": [["Mantenimiento / activos menores", 1024100.0], ["Tecnología / implementación", 1000000.0]]}, {"group": "REVISAR / MIXTO", "status": "pendiente", "value": 7789801.47, "desc": "Documentos cuyo uso o naturaleza requiere validación adicional.", "items": [["Concepto por validar", 3955985.47], ["Suministros mixtos", 1282500.0], ["Retail mixto", 1126380.0], ["Uso empresarial por validar", 931367.0], ["Retail por validar", 493569.0]]}], "providers": [["CENTRAL CONTROL S.A.S.", 73256372.0, "GASTOS OPERATIVOS", "Ocupación"], ["QUESERA Y SALSAMENTARIA SAN FERNANDO S.A.S.", 37447101.68, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["INDUSTRIA NACIONAL DE GASEOSAS S.A.S.", 16408791.0, "COSTO / INVENTARIO PENDIENTE", "Bebidas y mercancías"], ["MERCAMIO S.A.", 13150872.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["JEPRI DISTRIBUIDORA DE ALIMENTOS", 12498783.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["BONNIPLAST S.A.S.", 7537987.34, "COSTO / INVENTARIO PENDIENTE", "Empaques y consumibles"], ["MERCAFAMILIAR LAS PALMAS S.A.S.", 7217600.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["D1 S.A.S.", 7062220.03, "COSTO / INVENTARIO PENDIENTE", "Insumos y mercancías"], ["RAPPI S.A.S.", 6961034.87, "GASTOS OPERATIVOS", "Comisiones y plataformas"], ["GRUPO SANTIAGO EXPRESS S.A.S.", 5870350.0, "COSTO / INVENTARIO PENDIENTE", "Insumos y empaques"]], "payroll_patterns": [["RECURRENTE", 10, 138131965.81], ["FRECUENTE", 4, 12895962.49], ["OCASIONAL", 10, 6493855.0]], "site": {"CONSOLIDADO": {"coverage": "completa", "known_docs": 251091569.46, "opex_site": 119915162.8}, "JP": {"coverage": "parcial", "known_docs": 619898.0, "opex_site": 619898.0, "note": "Solo existen registros con sede explícita JP/JP-R47A por $619.898. La mayor parte de UBL no identifica sede."}, "PP": {"coverage": "parcial", "known_docs": 21862397.0, "opex_site": 21862397.0, "note": "Solo existen registros con sede explícita PP/Patio 34 por $21,86 M. La mayor parte de UBL no identifica sede."}}};
-
-const MONTHLY_BREAKDOWN = {"opex":{"ENERO":{"Ocupación":15006037.0,"Servicios públicos":1432961.0,"Marketing":1360000.0,"Comisiones y plataformas":1195503.75,"Movilidad":996822.0,"Servicios profesionales":600000.0,"Comisiones y medios de pago":196807.77,"Telecomunicaciones":183959.0,"Suministros operativos":104000.0,"Mantenimiento":100000.0,"Seguros":46444.51},"FEBRERO":{"Ocupación":15014922.0,"Comisiones y plataformas":1373505.14,"Servicios públicos":1183858.0,"Marketing":1000000.0,"Servicios profesionales":500000.0,"Movilidad":223088.0,"Higiene y SST":169600.0,"Telecomunicaciones":153801.0,"Seguridad y SST":140000.0,"Mantenimiento / adecuación":130000.0,"Comisiones y medios de pago":105263.03,"Aseo y suministros":47700.03},"MARZO":{"Ocupación":15014137.0,"Administración":1611900.0,"Servicios públicos":1266874.0,"Comisiones y plataformas":1263501.54,"Servicios profesionales":500000.0,"Marketing":360000.0,"Movilidad":299926.0,"Tecnología":254960.0,"Mantenimiento":159500.0,"Telecomunicaciones":153801.0,"Comisiones y medios de pago":121544.5,"Mantenimiento / adecuación":50000.0},"ABRIL":{"Ocupación":15009202.0,"Comisiones y plataformas":2344152.44,"Mantenimiento y adecuaciones":1880200.0,"Servicios públicos":1393715.0,"Servicios profesionales":1000000.0,"Tecnología":394955.0,"Administración":226800.0,"Telecomunicaciones":153801.0,"Comisiones y medios de pago":124928.83,"Mantenimiento":80000.0,"Movilidad":74704.0},"MAYO":{"Ocupación":14206037.0,"Servicios públicos":1405887.0,"Marketing":1000000.0,"Higiene y SST":300000.0,"Tecnología":286545.0,"Movilidad":232049.0,"Mantenimiento":155000.0,"Telecomunicaciones":153801.0,"Comisiones y medios de pago":74232.02},"JUNIO":{"Ocupación":14206037.0,"Comisiones y plataformas":784372.0,"Tecnología":432971.0,"Movilidad":424357.0,"Telecomunicaciones":156002.0,"Comisiones y medios de pago":82898.24,"Administración":12100.0}},"inventory":{"ENERO":{"Insumos y mercancías":15164581.09,"Bebidas y mercancías":3359690.0,"Empaques y consumibles":2629237.2,"Insumos y empaques":1443500.0},"FEBRERO":{"Insumos y mercancías":14534846.96,"Bebidas y mercancías":1855936.0,"Insumos y empaques":1548475.0,"Empaques y consumibles":1443216.3},"MARZO":{"Insumos y mercancías":19692151.04,"Bebidas y mercancías":3110034.0,"Insumos y empaques":1955475.0,"Empaques y consumibles":509826.17},"ABRIL":{"Insumos y mercancías":14595913.6,"Bebidas y mercancías":2866901.0,"Insumos y empaques":922900.0,"Empaques y consumibles":591532.2},"MAYO":{"Insumos y mercancías":12910356.54,"Bebidas y mercancías":2714359.0,"Empaques y consumibles":1086681.97},"JUNIO":{"Insumos y mercancías":14647527.62,"Bebidas y mercancías":2501871.0,"Empaques y consumibles":1277493.5}},"opex_unassigned":[{"mes":"SIN_DEFINIR","proveedor":"Proveedor redes","categoria":"Marketing","subcategoria":"Redes sociales","valor":1000000.0,"fuente":"WHATSAPP","observacion":"Se incluye en el semestre, pero no se asigna a abril/mayo sin soporte del período del servicio."}]};
-
-const money = v => v===null || v===undefined || Number.isNaN(Number(v)) ? "N/D" : new Intl.NumberFormat("es-CO",{style:"currency",currency:"COP",maximumFractionDigits:0}).format(Number(v));
-const compact = v => v===null || v===undefined || Number.isNaN(Number(v)) ? "N/D" : "$" + (Number(v)/1e6).toLocaleString("es-CO",{minimumFractionDigits:2,maximumFractionDigits:2}) + " M";
-const pct = v => Number.isFinite(v) ? (v*100).toLocaleString("es-CO",{minimumFractionDigits:1,maximumFractionDigits:1})+" %" : "N/D";
-const esc = s => String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-
-const PAYROLL_PEOPLE = {"ENERO": ["Diana", "Camilo", "Sofia", "Adriana T", "Martha", "Liliana", "Adriana Z", "Thalia", "Leydi", "Nathalie", "Lina Garcia", "Viviana", "Rubi", "Jhon", "Joshua"], "FEBRERO": ["Diana", "Valentina", "Camilo", "Sofia", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Thalia", "Leydi", "Nathalie", "Julián", "Viviana", "Jhon"], "MARZO": ["Diana", "Valentina", "Camilo", "Sofia", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Catalina", "Leydi", "Nathalie", "Isabel", "Thalia", "Viviana"], "ABRIL": ["Diana", "Valentina", "Camilo", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Thalia", "Leydi", "Nathalie", "Julián", "Isabel", "Viviana"], "MAYO": ["Diana", "Valentina", "Camilo", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Leydi", "Nathalie", "Álvaro", "Julián"], "JUNIO": ["Diana", "Valentina", "Camilo", "Adriana T", "Martha", "Liliana", "Adriana Z", "Luisa", "Brandon", "Leydi", "Nathalie", "Álvaro", "Sebastián"]};
-function peopleCount(month){return (PAYROLL_PEOPLE[month]||[]).length;}
-function peopleTooltip(month){const names=PAYROLL_PEOPLE[month]||[];return names.length?('Nombres registrados en '+month.toLowerCase()+':\n'+names.join(', ')):'Sin nombres registrados';}
-function h1PeopleRange(){const vals=Object.values(PAYROLL_PEOPLE).map(x=>x.length).filter(Boolean); if(!vals.length) return 'N/D'; const mn=Math.min(...vals), mx=Math.max(...vals); return mn===mx?String(mn):`${mn}–${mx}`;}
-function h1PeopleTooltip(){return DATA.months.map(m=>m[0]+m.slice(1).toLowerCase()+': '+peopleCount(m)+' ('+(PAYROLL_PEOPLE[m]||[]).join(', ')+')').join('\n\n');}
-
-const state = {period:"YTD",tab:"resumen",summaryKpi:"sales",summaryMonths:new Set(DATA.months)};
-
-const PILA_MONTH = {
- ENERO:3087100,FEBRERO:2701400,MARZO:2867500,ABRIL:3134700,MAYO:3180800,JUNIO:2878300
+/* ============================================================
+   DATOS — única fuente de verdad
+   ============================================================ */
+const MONTHS=["ENERO","FEBRERO","MARZO","ABRIL","MAYO","JUNIO"];
+const M={
+  ENERO:  {sales:75414443.00, inventory:22597008.29, opex:21222535.03, payroll:23769805.84168561, pila:3087100, pilaPeople:7,
+           bank:{open:26590532.07,credits:46625904.53,debits:55995417.70,close:17221018.90},
+           people:["Diana","Camilo","Sofia","Adriana T","Martha","Liliana","Adriana Z","Thalia","Leydi","Nathalie","Lina Garcia","Viviana","Rubi","Jhon","Joshua"]},
+  FEBRERO:{sales:64315666.00, inventory:19382474.26, opex:20041737.20, payroll:26383014.20475379, pila:2701400, pilaPeople:7,
+           bank:{open:17221018.90,credits:38845419.55,debits:48621833.42,close:7444605.03},
+           people:["Diana","Valentina","Camilo","Sofia","Adriana T","Martha","Liliana","Adriana Z","Luisa","Thalia","Leydi","Nathalie","Julián","Viviana","Jhon"]},
+  MARZO:  {sales:74210185.00, inventory:25267486.21, opex:21056144.04, payroll:26763268.143390153, pila:2867500, pilaPeople:7,
+           bank:{open:7444605.03,credits:52248686.57,debits:51808874.09,close:7884417.51},
+           people:["Diana","Valentina","Camilo","Sofia","Adriana T","Martha","Liliana","Adriana Z","Luisa","Catalina","Leydi","Nathalie","Isabel","Thalia","Viviana"]},
+  ABRIL:  {sales:55861241.00, inventory:18977246.80, opex:22682458.27, payroll:26677468.963068187, pila:3134700, pilaPeople:7,
+           bank:{open:7884417.51,credits:58430512.26,debits:57706746.20,close:8608183.57},
+           people:["Diana","Valentina","Camilo","Adriana T","Martha","Liliana","Adriana Z","Luisa","Thalia","Leydi","Nathalie","Julián","Isabel","Viviana"]},
+  MAYO:   {sales:58511536.71, inventory:16711397.51, opex:17813551.02, payroll:27526508.5582197, pila:3180800, pilaPeople:7,
+           bank:{open:8608183.57,credits:37150174.26,debits:37372494.85,close:8385862.98},
+           people:["Diana","Valentina","Camilo","Adriana T","Martha","Liliana","Adriana Z","Luisa","Leydi","Nathalie","Álvaro","Julián"]},
+  JUNIO:  {sales:48068769.34, inventory:18426892.12, opex:16098737.24, payroll:26401717.584356066, pila:2878300, pilaPeople:7,
+           bank:{open:8385862.98,credits:50160133.51,debits:56697978.34,close:1848018.15},
+           people:["Diana","Valentina","Camilo","Adriana T","Martha","Liliana","Adriana Z","Luisa","Brandon","Leydi","Nathalie","Álvaro","Sebastián"]}
 };
-const BANK_MONTH = {
- ENERO:{open:26590532.07,credits:46625904.53,debits:55995417.70,close:17221018.90},
- FEBRERO:{open:17221018.90,credits:38845419.55,debits:48621833.42,close:7444605.03},
- MARZO:{open:7444605.03,credits:52248686.57,debits:51808874.09,close:7884417.51},
- ABRIL:{open:7884417.51,credits:58430512.26,debits:57706746.20,close:8608183.57},
- MAYO:{open:8608183.57,credits:37150174.26,debits:37372494.85,close:8385862.98},
- JUNIO:{open:8385862.98,credits:50160133.51,debits:56697978.34,close:1848018.15}
+/* Totales validados del semestre (el gasto operativo consolidado supera en $1,00 M la suma mensual) */
+const H1={
+  opex:119915162.80, gross_docs:401428753.00,
+  known_finance:5971297.55, ape_interest:5356565.543340213,
+  mixed:7789801.47, assets_policy:2024100.00, sales_pending:3808014.00,
+  pila_cash:20068238.00, tax_cash:23326000.00, tax_liability:9632000.00, tax_assets:4472997.85,
+  credit_principal:26269252.38, credit_net_inflow:25396275.00,
+  investor_balance:132088326.57675348, investor_pending_may_jun:9876623.162634695
+};
+const CATEGORIES={
+  inventory:[["Insumos y mercancías",91545376.85],["Bebidas y mercancías",16408791.00],["Empaques y consumibles",7537987.34],["Insumos y empaques",5870350.00]],
+  opex:[["Ocupación",88456372.00],["Comisiones y plataformas",6961034.87],["Servicios públicos",6683295.00],["Marketing",4720000.00],["Servicios profesionales",2600000.00],["Movilidad",2250946.00],["Mantenimiento y adecuaciones",1880200.00],["Administración",1850800.00],["Tecnología",1369431.00],["Telecomunicaciones",955165.00],["Comisiones y medios de pago",705674.39],["Mantenimiento",494500.00],["Higiene y SST",469600.00],["Mantenimiento / adecuación",180000.00],["Seguridad y SST",140000.00],["Suministros operativos",104000.00],["Aseo y suministros",47700.03],["Seguros",46444.51]],
+  assets:[["Mantenimiento / activos menores",1024100.00],["Tecnología / implementación",1000000.00]],
+  mixed:[["Concepto por validar",3955985.47],["Suministros mixtos",1282500.00],["Retail mixto",1126380.00],["Uso empresarial por validar",931367.00],["Retail por validar",493569.00]]
+};
+const PROVIDERS=[
+  ["CENTRAL CONTROL S.A.S.",73256372.00,"opex","Ocupación"],
+  ["QUESERA Y SALSAMENTARIA SAN FERNANDO S.A.S.",37447101.68,"inventory","Insumos y mercancías"],
+  ["INDUSTRIA NACIONAL DE GASEOSAS S.A.S.",16408791.00,"inventory","Bebidas y mercancías"],
+  ["MERCAMIO S.A.",13150872.00,"inventory","Insumos y mercancías"],
+  ["JEPRI DISTRIBUIDORA DE ALIMENTOS",12498783.00,"inventory","Insumos y mercancías"],
+  ["BONNIPLAST S.A.S.",7537987.34,"inventory","Empaques y consumibles"],
+  ["MERCAFAMILIAR LAS PALMAS S.A.S.",7217600.00,"inventory","Insumos y mercancías"],
+  ["D1 S.A.S.",7062220.03,"inventory","Insumos y mercancías"],
+  ["RAPPI S.A.S.",6961034.87,"opex","Comisiones y plataformas"],
+  ["GRUPO SANTIAGO EXPRESS S.A.S.",5870350.00,"inventory","Insumos y empaques"]
+];
+const PAY_PATTERNS=[["Recurrente",10,138131965.81],["Frecuente",4,12895962.49],["Ocasional",10,6493855.00]];
+
+/* Referencias orientativas usadas en Compras y Nómina (ajustables) */
+const REF={
+  primeCost:{good:.65,warn:.70},     // compras + nómina / ventas
+  labor:{good:.33,warn:.38},         // nómina / ventas
+  occupancy:{good:.10,warn:.15},     // ocupación / ventas
+  cashMonths:{good:3,warn:1},        // meses de caja al ritmo de consumo del semestre
+  breakeven:{good:1,warn:.9},        // ventas / ventas de equilibrio
+  result:{good:0,warn:-.03}          // resultado operativo / ventas
 };
 
-function periodName(p){
- if(p==="YTD") return "Acumulado Ene–Jun";
- return p[0]+p.slice(1).toLowerCase()+" 2026";
-}
-function selectedData(){
- return state.period==="YTD" ? DATA.h1 : DATA.monthly[state.period];
-}
-function syncPeriodTabs(){
- document.querySelectorAll(".shared-period-tabs .period-tab").forEach(btn=>{
-   btn.classList.toggle("active",btn.dataset.period===state.period);
- });
-}
-function initSelectors(){
- ["compareA","compareB"].forEach((id,idx)=>{
-   const el=document.getElementById(id); if(!el) return;
-   el.innerHTML="";
-   DATA.months.forEach(m=>{
-     const o=document.createElement("option"); o.value=m; o.textContent=m[0]+m.slice(1).toLowerCase(); el.appendChild(o);
-   });
-   el.value=idx===0?"ENERO":"JUNIO";
- });
+/* ============================================================
+   CÁLCULOS DERIVADOS
+   ============================================================ */
+const sumM=(f,ms=MONTHS)=>ms.reduce((a,m)=>a+M[m][f],0);
+const T={sales:sumM("sales"),inventory:sumM("inventory"),payroll:sumM("payroll"),opexMonths:sumM("opex"),pila:sumM("pila"),
+  credits:MONTHS.reduce((a,m)=>a+M[m].bank.credits,0),debits:MONTHS.reduce((a,m)=>a+M[m].bank.debits,0),
+  open:M[MONTHS[0]].bank.open,close:M[MONTHS[MONTHS.length-1]].bank.close};
+const N=MONTHS.length;
+const OCCUPANCY=CATEGORIES.opex.find(c=>c[0]==="Ocupación")[1];
+const VAR_RATIO=T.inventory/T.sales;
+/* Equilibrio: estructura fija mensual (gastos operativos + nómina + gastos financieros conocidos) / margen después de compras.
+   Mismo criterio que el escenario de resultado del semestre; no incluye el interés APE. */
+const FIXED_MONTH=(H1.opex+T.payroll+H1.known_finance)/N;
+const BE=FIXED_MONTH/(1-VAR_RATIO);
+const BE_APE=(FIXED_MONTH+H1.ape_interest/N)/(1-VAR_RATIO);
+const BURN=(T.open-T.close)/N;
+const ALL_PEOPLE=(()=>{const c={};MONTHS.forEach(m=>M[m].people.forEach(p=>c[p]=(c[p]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"es"));})();
+
+/* ============================================================
+   FORMATO
+   ============================================================ */
+const MINUS="−";
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const nf=(v,d)=>Math.abs(v).toLocaleString("es-CO",{minimumFractionDigits:d,maximumFractionDigits:d});
+const fM=(v,d=2)=>(v<0?MINUS:"")+"$"+nf(v/1e6,d)+" M";
+const fMs=v=>(v<0?MINUS:"")+nf(v/1e6,1);
+const money=v=>(v<0?MINUS:"")+"$"+nf(Math.round(v),0);
+const pct=(v,d=1)=>Number.isFinite(v)?(v<0?MINUS:"")+nf(v*100,d)+" %":"—";
+const sPct=(v,d=1)=>Number.isFinite(v)?(v>0?"+":"")+pct(v,d):"—";
+const SHORT={ENERO:"Ene",FEBRERO:"Feb",MARZO:"Mar",ABRIL:"Abr",MAYO:"May",JUNIO:"Jun",JULIO:"Jul",AGOSTO:"Ago",SEPTIEMBRE:"Sep",OCTUBRE:"Oct",NOVIEMBRE:"Nov",DICIEMBRE:"Dic"};
+const LOW=m=>m.toLowerCase();
+const CAP=m=>m[0]+m.slice(1).toLowerCase();
+
+/* ============================================================
+   ESTADO Y PERIODO
+   ============================================================ */
+const state={period:"YTD",tab:"resumen"};
+const FIXED_TABS=["resultado","diagnostico"];
+function per(){
+  const ytd=state.period==="YTD",ms=ytd?MONTHS:[state.period];
+  const d={ytd,ms,n:ms.length,
+    name: ytd?"enero–junio":LOW(state.period),
+    title: ytd?"Acumulado enero–junio 2026":CAP(state.period)+" 2026",
+    sales:sumM("sales",ms),inventory:sumM("inventory",ms),payroll:sumM("payroll",ms),
+    opex: ytd?H1.opex:sumM("opex",ms), pila:sumM("pila",ms),
+    open:M[ms[0]].bank.open, close:M[ms[ms.length-1]].bank.close,
+    credits:ms.reduce((a,m)=>a+M[m].bank.credits,0), debits:ms.reduce((a,m)=>a+M[m].bank.debits,0)};
+  d.result=d.sales-d.inventory-d.payroll-d.opex;
+  d.be=BE*d.n;
+  d.prev= ytd?null:(MONTHS.indexOf(state.period)>0?MONTHS[MONTHS.indexOf(state.period)-1]:null);
+  return d;
 }
 
-function renderKPIs(){
- const d=selectedData();
- const isYtd=state.period==="YTD";
- const sales=d.sales, inventory=d.inventory, opex=d.opex, payroll=d.payroll;
- const cash=isYtd?DATA.h1.bank_close:d.bank;
- const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
- set("kSales",compact(sales));
- set("kInventory",compact(inventory));
- set("kOpex",compact(opex));
- set("kPayroll",compact(payroll));
- set("kCash",compact(cash));
- set("kSalesSub",isYtd?"Promedio mensual "+compact(DATA.h1.sales/DATA.months.length)+" · Ene–Jun":"Ventas netas del mes seleccionado");
- set("kInventorySub",sales?pct(inventory/sales)+" de ventas · no equivale al COGS":"");
- set("kOpexSub",sales?pct(opex/sales)+" de ventas":"");
- set("kPayrollSub",sales?pct(payroll/sales)+" de ventas":"");
- set("kCashSub",isYtd?"Saldo al 30-jun":"Saldo final del mes");
- set("periodLabel",isYtd?"Acumulado enero–junio 2026":periodName(state.period));
- set("salesPeriodValue",compact(sales));
- set("salesPeriodSub",isYtd?"Total acumulado enero–junio":"Ventas netas correspondientes a "+periodName(state.period));
- set("inventoryPeriodValue",compact(inventory));
- set("inventoryPeriodTitle",isYtd?"Compras inventariables acumuladas · Ene–Jun":"Compras inventariables · "+periodName(state.period));
- set("inventoryPeriodSub",isYtd
-   ? (sales?pct(inventory/sales)+" de las ventas acumuladas. Suma de documentos clasificados como compras inventariables entre enero y junio; no equivale al COGS.":"")
-   : (sales?"Corresponde al total de compras clasificadas como inventariables registradas en "+state.period.toLowerCase()+". Representa "+pct(inventory/sales)+" de las ventas del mes; no equivale al costo de ventas.":""));
- set("opexPeriodValue",compact(opex));
- set("opexPeriodTitle",isYtd?"Gastos operativos acumulados · Ene–Jun":"Gastos operativos · "+periodName(state.period));
- set("opexPeriodSub",isYtd
-   ? (sales?pct(opex/sales)+" de las ventas acumuladas. Corresponde al total consolidado de gastos operativos documentados.":"")
-   : (sales?"Corresponde a los gastos operativos documentados asignados a "+state.period.toLowerCase()+". Representa "+pct(opex/sales)+" de las ventas del mes.":""));
+/* ============================================================
+   COMPONENTES
+   ============================================================ */
+function kpi(label,value,sub,cls=""){return `<div class="kpi ${cls}"><div class="lbl">${label}</div><div class="val">${value}</div>${sub?`<div class="sub">${sub}</div>`:""}</div>`;}
+
+const MOBILE=()=>window.innerWidth<720;
+const CW=()=>MOBILE()?440:760;
+const GUT=86;
+function refLine(r,x1,x2,yy){return `<line x1="${x1}" x2="${x2}" y1="${yy}" y2="${yy}" stroke="${r.color}" stroke-width="2" stroke-dasharray="7 5"/><text x="${x2+6}" y="${yy-3}" class="ref" fill="${r.color}">${esc(r.name)}</text><text x="${x2+6}" y="${yy+13}" class="ref" fill="${r.color}">${esc(r.value)}</text>`;}
+function barChart(o){
+  const data=o.data,W=CW(),H=o.h||(MOBILE()?300:270),padX=14,top=30,bottom=o.sub?52:34;
+  const padR=(o.refs&&o.refs.length)?GUT:padX;
+  const refs=o.refs||[];
+  const hi=Math.max(...data.map(x=>x.v),...refs.map(r=>r.v),0)*1.14||1;
+  const lo=Math.min(...data.map(x=>x.v),0)*1.25;
+  const y=v=>top+(hi-v)/(hi-lo)*(H-top-bottom);
+  const slot=(W-padX-padR)/data.length,bw=Math.min(slot*.58,74);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label)}">`;
+  data.forEach((x,i)=>{
+    const cx=padX+slot*i+slot/2,y0=y(0),yv=y(x.v),yt=Math.min(y0,yv),h=Math.max(Math.abs(y0-yv),1);
+    const sel=state.period===x.k, dim=state.period!=="YTD"&&!sel;
+    const fill=typeof o.color==="function"?o.color(x):o.color;
+    s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw/2}" y="${yt}" width="${bw}" height="${h}" rx="3" fill="${fill}"><title>${CAP(x.k)}: ${money(x.v)}</title></rect>`;
+    s+=`<text x="${cx}" y="${x.v>=0?yt-8:yt+h+17}" text-anchor="middle" class="val${sel?' sel':''}">${fMs(x.v)}</text></g>`;
+    s+=`<text x="${cx}" y="${H-bottom+20}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[x.k]}</text>`;
+    if(o.sub) s+=`<text x="${cx}" y="${H-bottom+37}" text-anchor="middle" class="tick small">${esc(o.sub(x))}</text>`;
+  });
+  s+=`<line x1="${padX}" x2="${W-padR}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
+  const ry=refs.map(r=>y(r.v)); if(ry.length===2&&Math.abs(ry[0]-ry[1])<34){const m=(ry[0]+ry[1])/2; if(ry[0]<ry[1]){ry[0]=m-17;ry[1]=m+17;}else{ry[0]=m+17;ry[1]=m-17;}}
+  refs.forEach((r,i)=>{const yy=y(r.v);s+=`<line x1="${padX}" x2="${W-padR}" y1="${yy}" y2="${yy}" stroke="${r.color}" stroke-width="2" stroke-dasharray="7 5"/><text x="${W-padR+6}" y="${ry[i]-3}" class="ref" fill="${r.color}">${esc(r.name)}</text><text x="${W-padR+6}" y="${ry[i]+13}" class="ref" fill="${r.color}">${esc(r.value)}</text>`;});
+  return s+"</svg>";
 }
 
-function monthShort(m){return ({ENERO:"Ene",FEBRERO:"Feb",MARZO:"Mar",ABRIL:"Abr",MAYO:"May",JUNIO:"Jun",JULIO:"Jul",AGOSTO:"Ago",SEPTIEMBRE:"Sep",OCTUBRE:"Oct",NOVIEMBRE:"Nov",DICIEMBRE:"Dic"})[m]||m.slice(0,3);}
-function previousMonth(month){const i=DATA.months.indexOf(month);return i>0?DATA.months[i-1]:null;}
-function fieldSeries(field){return DATA.months.map(m=>({k:m,v:DATA.monthly[m][field]}));}
-function maxPoint(field){return fieldSeries(field).reduce((a,b)=>b.v>a.v?b:a);}
-
-function svgModuleBarChart(values){
- const max=Math.max(...values.map(x=>x.v),1),W=760,H=245,pad=42,gap=18,bw=(W-pad*2-gap*(values.length-1))/values.length;
- let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico mensual"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
- values.forEach((x,i)=>{const bh=(x.v/max)*(H-82),xx=pad+i*(bw+gap),yy=H-35-bh,selected=state.period===x.k;const fill=selected?"#224D8E":"#BFD2D8";s+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${fill}" ${selected?'stroke="#FABF00" stroke-width="3"':''}><title>${periodName(x.k)}: ${money(x.v)}</title></rect><text x="${xx+bw/2}" y="${H-16}" text-anchor="middle" class="axis-label">${monthShort(x.k).toUpperCase()}</text>`;if(selected)s+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-7)}" text-anchor="middle" class="axis-label">${compact(x.v)}</text>`;});
- return s+'</svg>';
-}
-function svgModuleLineChart(values){
- const W=760,H=245,pad=42,max=Math.max(...values.map(x=>x.v),1),min=Math.min(...values.map(x=>x.v),0),span=Math.max(max-min,1);
- const pts=values.map((x,i)=>({ ...x,x:pad+i*((W-pad*2)/(values.length-1)),y:25+(max-x.v)/span*(H-75)}));
- let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico mensual"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/><polyline fill="none" stroke="#224D8E" stroke-width="4" points="${pts.map(p=>p.x+','+p.y).join(' ')}"/>`;
- pts.forEach(p=>{const selected=state.period===p.k;s+=`<circle cx="${p.x}" cy="${p.y}" r="${selected?7:5}" fill="${selected?'#E96C24':'#BFD6DC'}" stroke="${selected?'#FABF00':'#224D8E'}" stroke-width="${selected?3:1}"><title>${periodName(p.k)}: ${money(p.v)}</title></circle><text x="${p.x}" y="${H-16}" text-anchor="middle" class="axis-label">${monthShort(p.k).toUpperCase()}</text>`;if(selected)s+=`<text x="${p.x}" y="${p.y-12}" text-anchor="middle" class="axis-label">${compact(p.v)}</text>`;});return s+'</svg>';
-}
-
-function summaryConfig(){
- return {
-  sales:{field:'sales',title:'Evolución mensual — Ventas netas',badge:'Ventas',module:'Indicadores de Ventas'},
-  inventory:{field:'inventory',title:'Evolución mensual — Compras inventariables',badge:'Compras',module:'Indicadores de Compras'},
-  opex:{field:'opex',title:'Evolución mensual — Gastos operativos',badge:'Gastos',module:'Indicadores de Gastos'},
-  payroll:{field:'payroll',title:'Evolución mensual — Carga laboral',badge:'Nómina',module:'Indicadores de Nómina'},
-  bank:{field:'bank',title:'Evolución mensual — Caja disponible',badge:'Caja',module:'Indicadores de Caja'}
- }[state.summaryKpi];
-}
-function toggleSummaryMonth(month){
- if(state.summaryMonths.has(month)) state.summaryMonths.delete(month); else state.summaryMonths.add(month);
- renderSummaryExplorer();
-}
-function renderSummaryExplorer(){
- const cfg=summaryConfig(),vals=fieldSeries(cfg.field),sel=state.summaryMonths;
- document.querySelectorAll('[data-summary-kpi]').forEach(c=>c.classList.toggle('active',c.dataset.summaryKpi===state.summaryKpi));
- const title=document.getElementById('summaryChartTitle');if(title)title.textContent=cfg.title;
- const badge=document.getElementById('summarySelectedBadge');if(badge)badge.textContent=cfg.badge;
- const mt=document.getElementById('summaryModuleTitle');if(mt)mt.textContent=cfg.module;
- const chart=document.getElementById('summaryDynamicChart');
- if(chart){
-   const max=Math.max(...vals.map(x=>x.v),1),W=760,H=245,pad=42,gap=18,bw=(W-pad*2-gap*(vals.length-1))/vals.length;
-   let svg=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${cfg.title}"><line x1="${pad}" y1="${H-35}" x2="${W-pad}" y2="${H-35}" stroke="#C9D1D9"/>`;
-   vals.forEach((x,i)=>{const bh=(x.v/max)*(H-82),xx=pad+i*(bw+gap),yy=H-35-bh,active=sel.has(x.k),focus=state.period===x.k;svg+=`<rect x="${xx}" y="${yy}" width="${bw}" height="${bh}" rx="5" fill="${active?'#224D8E':'#DDE7EA'}" ${focus?'stroke="#FABF00" stroke-width="3"':''}><title>${periodName(x.k)}: ${money(x.v)}</title></rect><text x="${xx+bw/2}" y="${H-16}" text-anchor="middle" class="axis-label">${monthShort(x.k).toUpperCase()}</text>`;if(active)svg+=`<text x="${xx+bw/2}" y="${Math.max(13,yy-7)}" text-anchor="middle" class="axis-label">${(x.v/1e6).toFixed(1)}</text>`;});
-   chart.innerHTML=svg+'</svg>';
- }
- const controls=document.getElementById('summaryMonthControls');if(controls)controls.innerHTML=DATA.months.map(m=>`<button type="button" class="summary-month-btn ${sel.has(m)?'active':''}" data-summary-month="${m}">${monthShort(m)}</button>`).join('');
- renderSummaryModuleMetrics();
-}
-function renderSummaryModuleMetrics(){
- const cfg=summaryConfig(),field=cfg.field,isYtd=state.period==='YTD',d=selectedData(),sales=d.sales;
- const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
- let labels=[],values=[];
- if(state.summaryKpi==='bank'){
-   if(isYtd){labels=['Saldo inicial','Saldo final','Variación de caja'];values=[compact(DATA.h1.bank_open),compact(DATA.h1.bank_close),pct((DATA.h1.bank_close-DATA.h1.bank_open)/DATA.h1.bank_open)];}
-   else{const b=BANK_MONTH[state.period];labels=['Saldo inicial','Saldo final','Variación del mes'];values=[compact(b.open),compact(b.close),pct((b.close-b.open)/b.open)];}
- }else{
-   const val=isYtd?DATA.h1[field]:DATA.monthly[state.period][field];const max=maxPoint(field);const prev=state.period==='YTD'?null:previousMonth(state.period);
-   if(state.summaryKpi==='sales'){
-     labels=isYtd?['Ventas acumuladas','Promedio mensual','Mayor mes']:['Ventas del mes','Variación vs mes anterior','Vs promedio Ene–Jun'];
-     values=isYtd?[compact(DATA.h1.sales),compact(DATA.h1.sales/DATA.months.length),monthShort(max.k)+' · '+compact(max.v)]:[compact(val),prev?pct((val-DATA.monthly[prev].sales)/DATA.monthly[prev].sales):'—',pct((val-(DATA.h1.sales/DATA.months.length))/(DATA.h1.sales/DATA.months.length))];
-   }else{
-     const share=sales?val/sales:NaN;
-     labels=isYtd?['Valor acumulado','% de ventas','Mayor mes']:['Valor del mes','% de ventas','Variación vs mes anterior'];
-     values=isYtd?[compact(val),pct(val/DATA.h1.sales),monthShort(max.k)+' · '+compact(max.v)]:[compact(val),pct(share),prev?pct((val-DATA.monthly[prev][field])/DATA.monthly[prev][field]):'—'];
-   }
- }
- for(let i=0;i<3;i++){set('summaryMetricLabel'+(i+1),labels[i]);set('summaryMetricValue'+(i+1),values[i]);}
-}
-function renderSummaryPeriodReading(){
- const d=selectedData(),isYtd=state.period==='YTD',cash=isYtd?DATA.h1.bank_close:d.bank;
- const el=document.getElementById('summaryPeriodReading');if(!el)return;
- el.innerHTML=`<b>${periodName(state.period)}:</b> ventas ${compact(d.sales)} · compras inventariables ${compact(d.inventory)} (${pct(d.inventory/d.sales)}) · gastos operativos ${compact(d.opex)} (${pct(d.opex/d.sales)}) · carga laboral ${compact(d.payroll)} (${pct(d.payroll/d.sales)}) · caja al cierre ${compact(cash)}. <span style="color:var(--muted)">Compras inventariables no equivalen todavía al costo de ventas.</span>`;
-}
-function renderCharts(){
- const maps=[["salesChart2","sales"],["inventoryChart","inventory"],["opexChart","opex"],["payrollChart","payroll"]];
- maps.forEach(([id,field])=>{const el=document.getElementById(id);if(el)el.innerHTML=svgModuleBarChart(fieldSeries(field));});
- const cash=document.getElementById('cashChart');if(cash)cash.innerHTML=svgModuleLineChart(fieldSeries('bank'));
- renderSummaryExplorer();
+function salesCostChart(){
+  const W=CW(),H=MOBILE()?320:300,padX=14,padR=GUT,top=30,bottom=34,mob=MOBILE();
+  const rows=MONTHS.map(m=>({k:m,s:M[m].sales,parts:[[M[m].inventory,"var(--teal)","Compras"],[M[m].payroll,"#8FA9CF","Nómina"],[M[m].opex,"var(--yellow)","Gastos"]]}));
+  rows.forEach(r=>r.c=r.parts.reduce((a,p)=>a+p[0],0));
+  const hi=Math.max(...rows.map(r=>Math.max(r.s,r.c)),BE)*1.12;
+  const y=v=>top+(hi-v)/hi*(H-top-bottom);
+  const slot=(W-padX-padR)/rows.length,bw=Math.min(slot*.32,40);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Ventas frente a costos por mes">`;
+  rows.forEach((r,i)=>{
+    const cx=padX+slot*i+slot/2,sel=state.period===r.k,dim=state.period!=="YTD"&&!sel;
+    s+=`<g${dim?' class="dim"':''}>`;
+    s+=`<rect x="${cx-bw-3}" y="${y(r.s)}" width="${bw}" height="${y(0)-y(r.s)}" rx="3" fill="var(--navy)"><title>${CAP(r.k)} ventas: ${money(r.s)}</title></rect>`;
+    s+=`<text x="${cx-bw/2-3}" y="${y(r.s)-8}" text-anchor="middle" class="val"${mob?' style="font-size:13px"':''}>${fMs(r.s)}</text>`;
+    let acc=0;
+    r.parts.forEach(p=>{const y1=y(acc+p[0]),y0=y(acc);s+=`<rect x="${cx+3}" y="${y1}" width="${bw}" height="${y0-y1}" fill="${p[1]}"><title>${CAP(r.k)} ${p[2]}: ${money(p[0])}</title></rect>`;acc+=p[0];});
+    if(!mob) s+=`<text x="${cx+bw/2+3}" y="${y(r.c)-8}" text-anchor="middle" class="val" style="fill:var(--muted)">${fMs(r.c)}</text>`;
+    s+=`</g><text x="${cx}" y="${H-bottom+20}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[r.k]}</text>`;
+  });
+  s+=`<line x1="${padX}" x2="${W-padR}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
+  s+=refLine({name:"Equilibrio",value:fMs(BE),color:"var(--orange)"},padX,W-padR,y(BE));
+  return s+"</svg>";
 }
 
-function variation(curr,prev){
- if(prev===null||prev===undefined||prev===0) return "—";
- return pct((curr-prev)/prev);
-}
-function monthlyMetricTable(field,label,includeSalesPct=true){
- let h=`<div class="table-wrap" role="region" aria-label="${esc(label)} por mes" tabindex="0"><table><thead><tr><th>Mes</th><th class="num">${esc(label)}</th>`;
- if(includeSalesPct) h+='<th class="num">% ventas</th>';
- h+='<th class="num">Var. mes</th></tr></thead><tbody>';
- let prev=null;
- DATA.months.forEach(m=>{
-   const d=DATA.monthly[m],v=d[field],cls=state.period===m?' class="selected-period-row"':'';
-   h+=`<tr${cls}><td>${m[0]+m.slice(1).toLowerCase()}</td><td class="num">${money(v)}</td>`;
-   if(includeSalesPct) h+=`<td class="num">${pct(v/d.sales)}</td>`;
-   h+=`<td class="num">${variation(v,prev)}</td></tr>`; prev=v;
- });
- h+='</tbody></table></div>';
- return h;
-}
-function renderMonthlyTables(){
- const sales=document.getElementById("salesMonthlyTable"); if(sales) sales.innerHTML=monthlyMetricTable("sales","Ventas netas",false);
- const inv=document.getElementById("inventoryMonthlyTable"); if(inv) inv.innerHTML=monthlyMetricTable("inventory","Compras",true)+'<div class="month-table-note">% ventas = compras inventariables del mes / ventas netas del mes.</div>';
- const op=document.getElementById("opexMonthlyTable"); if(op) op.innerHTML=monthlyMetricTable("opex","Gastos operativos",true)+'<div class="month-table-note">% ventas = gastos operativos del mes / ventas netas del mes.</div>';
+function lineChart(data,label){
+  const W=CW(),H=MOBILE()?290:260,padX=MOBILE()?26:40,top=34,bottom=34;
+  const hi=Math.max(...data.map(x=>x.v))*1.15,lo=0;
+  const y=v=>top+(hi-v)/(hi-lo)*(H-top-bottom);
+  const x=i=>padX+i*(W-padX*2)/(data.length-1);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">`;
+  s+=`<line x1="${padX-20}" x2="${W-padX+20}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
+  s+=`<polygon fill="rgba(34,77,142,.08)" points="${x(0)},${y(0)} ${data.map((p,i)=>x(i)+","+y(p.v)).join(" ")} ${x(data.length-1)},${y(0)}"/>`;
+  s+=`<polyline fill="none" stroke="var(--navy)" stroke-width="3" points="${data.map((p,i)=>x(i)+","+y(p.v)).join(" ")}"/>`;
+  data.forEach((p,i)=>{const sel=state.period===p.k,last=i===data.length-1;
+    s+=`<circle cx="${x(i)}" cy="${y(p.v)}" r="${sel?7:5}" fill="${last?'var(--orange)':'#fff'}" stroke="${last?'var(--orange)':'var(--navy)'}" stroke-width="2.5"><title>${esc(p.label||CAP(p.k))}: ${money(p.v)}</title></circle>`;
+    s+=`<text x="${x(i)}" y="${y(p.v)-13}" text-anchor="middle" class="val${sel?' sel':''}">${fMs(p.v)}</text>`;
+    s+=`<text x="${x(i)}" y="${H-bottom+20}" text-anchor="middle" class="tick${sel?' sel':''}">${p.tick||SHORT[p.k]}</text>`;});
+  return s+"</svg>";
 }
 
+function hbars(el,items,{total,hl=[],pctLabel="del total"}={}){
+  const max=Math.max(...items.map(x=>x[1]));
+  document.getElementById(el).innerHTML=items.map(x=>`<div class="hb-row${hl.includes(x[0])?' hl':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)} ${pctLabel}</small>`:""}</span></div>`).join("");
+}
+function topWithOthers(items,k){const s=items.slice().sort((a,b)=>b[1]-a[1]);if(s.length<=k)return s;const rest=s.slice(k).reduce((a,x)=>a+x[1],0);return [...s.slice(0,k),[`Otros (${s.length-k} conceptos)`,rest]];}
+
+function monthTable(el,cols,totalRow){
+  let h=`<table><thead><tr><th>Mes</th>${cols.map(c=>`<th class="num">${c.h}</th>`).join("")}</tr></thead><tbody>`;
+  MONTHS.forEach((m,i)=>{h+=`<tr${state.period===m?' class="sel"':''}><td>${CAP(m)}</td>${cols.map(c=>{const v=c.f(m,i);return `<td class="num${c.cls?(' '+c.cls(v)):''}">${c.fmt(v)}</td>`;}).join("")}</tr>`;});
+  if(totalRow) h+=`<tr class="tot"><td>${totalRow.label}</td>${totalRow.cells.map(c=>`<td class="num">${c}</td>`).join("")}</tr>`;
+  document.getElementById(el).innerHTML=h+"</tbody></table>";
+}
+const prevOf=i=>i>0?MONTHS[i-1]:null;
+const varCol=f=>({h:"Var. mes",f:(m,i)=>i>0?M[m][f]/M[prevOf(i)][f]-1:NaN,fmt:v=>sPct(v),cls:v=>v<0?"neg":v>0?"pos":""});
+
+/* ============================================================
+   RENDER POR SECCIÓN
+   ============================================================ */
+function renderResumen(){
+  const d=per(),cover=d.close/BURN,people=d.ytd?`${Math.min(...MONTHS.map(m=>M[m].people.length))} a ${Math.max(...MONTHS.map(m=>M[m].people.length))} personas por mes`:`${M[state.period].people.length} personas`;
+  const vsPrev=f=>d.prev?`${sPct(d[f]/M[d.prev][f]-1)} frente a ${LOW(d.prev)}`:"";
+  const card=(tab,label,value,subs,cls="")=>`<button type="button" class="kpi ${cls}" data-go="${tab}"><span class="lbl">${label}</span><span class="val" style="display:block">${value}</span>${subs.filter(Boolean).map(x=>`<span class="sub" style="display:block">${x}</span>`).join("")}<span class="go">Ver módulo</span></button>`;
+  document.getElementById("sumKpis").innerHTML=
+    card("ventas","Ventas netas",fM(d.sales),[d.ytd?`Promedio ${fM(d.sales/N)} por mes`:vsPrev("sales"),`Equilibrio: ${fM(d.be)}${d.sales<d.be?` (${pct(d.sales/d.be,0)} alcanzado)`:""}`])+
+    card("compras","Compras inventariables",fM(d.inventory),[`${pct(d.inventory/d.sales)} de las ventas`,d.ytd?"No equivale aún al costo de ventas":vsPrev("inventory")])+
+    card("gastos","Gastos operativos",fM(d.opex),[`${pct(d.opex/d.sales)} de las ventas`,d.ytd?`Ocupación: ${fM(OCCUPANCY)} (${pct(OCCUPANCY/T.sales)} de ventas)`:vsPrev("opex")])+
+    card("nomina","Carga laboral",fM(d.payroll),[`${pct(d.payroll/d.sales)} de las ventas`,people])+
+    card("caja","Caja al cierre",fM(d.close),[`${sPct(d.close/d.open-1)} frente al saldo inicial`,`Cubre ${nf(cover,1)} meses al consumo promedio`],cover<1?"bad":"")+
+    card("resultado","Resultado operativo aproximado",fM(d.result),[`${pct(d.result/d.sales)} de las ventas, sin financieros`,d.ytd?`Con financieros: ${fM(d.result-H1.known_finance)}`:""],d.result<0?"bad":"good");
+  document.querySelectorAll("#sumKpis [data-go]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.go)));
+  document.getElementById("chSalesCost").innerHTML=salesCostChart();
+}
+
+function renderVentas(){
+  const d=per(),avg=T.sales/N,best=MONTHS.reduce((a,m)=>M[m].sales>M[a].sales?m:a);
+  document.getElementById("salesKpis").innerHTML=
+    kpi(d.ytd?"Ventas del semestre":"Ventas del mes",fM(d.sales),d.ytd?`${pct(M.JUNIO.sales/M.ENERO.sales-1)} de enero a junio`:`${pct(d.sales/T.sales)} del semestre`)+
+    (d.ytd?kpi("Promedio mensual",fM(avg),`Mejor mes: ${LOW(best)} con ${fM(M[best].sales)}`)
+          :kpi("Frente al mes anterior",d.prev?sPct(d.sales/M[d.prev].sales-1):"—",d.prev?`${LOW(d.prev)}: ${fM(M[d.prev].sales)}`:"Enero es el primer mes",d.prev&&d.sales<M[d.prev].sales?"bad":""))+
+    kpi("Frente al promedio",d.ytd?`${MONTHS.filter(m=>M[m].sales>=avg).length} de ${N} meses`:sPct(d.sales/avg-1),d.ytd?"meses por encima del promedio":`Promedio ${fM(avg)}`)+
+    kpi("Meses sobre equilibrio",`${MONTHS.filter(m=>M[m].sales>=BE).length} de ${N}`,`Equilibrio ${fM(BE)} por mes`);
+  document.getElementById("chSales").innerHTML=barChart({label:"Ventas netas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),
+    color:x=>x.v>=BE?"var(--teal-dk)":"var(--navy)",
+    refs:[{v:BE,name:"Equilibrio",value:fMs(BE),color:"var(--orange)"},{v:avg,name:"Promedio",value:fMs(avg),color:"var(--muted)"}]});
+  renderCompare();
+  monthTable("tbSales",[{h:"Ventas netas",f:m=>M[m].sales,fmt:money},varCol("sales"),{h:"Vs equilibrio",f:m=>M[m].sales-BE,fmt:money,cls:v=>v<0?"neg":"pos"}],
+    {label:"Semestre",cells:[money(T.sales),"",money(T.sales-BE*N)]});
+}
 function renderCompare(){
- const ea=document.getElementById("compareA"), eb=document.getElementById("compareB"), out=document.getElementById("compareTable");
- if(!ea||!eb||!out) return;
- const a=ea.value,b=eb.value,A=DATA.monthly[a].sales,B=DATA.monthly[b].sales;
- const da=B-A,dp=A!==0?da/A:NaN;
- const direction=da>0?"por encima de":da<0?"por debajo de":"igual a";
- const absPct=Number.isFinite(dp)?Math.abs(dp):NaN;
- out.innerHTML=`<div class="compare-sales-grid">
-   <div class="compare-sales-card"><span>Ventas · ${periodName(a)}</span><strong>${money(A)}</strong></div>
-   <div class="compare-sales-card"><span>Ventas · ${periodName(b)}</span><strong>${money(B)}</strong></div>
-   <div class="compare-sales-card"><span>Variación absoluta B − A</span><strong class="${da<0?"delta negative":"delta positive"}">${money(da)}</strong></div>
-   <div class="compare-sales-card"><span>Variación relativa</span><strong class="${dp<0?"delta negative":"delta positive"}">${pct(dp)}</strong></div>
- </div>
- <div class="compare-sales-note"><b>Lectura:</b> ${periodName(b)} está ${Number.isFinite(absPct)?pct(absPct):"N/D"} ${direction} ${periodName(a)} en ventas netas. Diferencia: <b>${money(Math.abs(da))}</b>.</div>`;
+  const a=document.getElementById("cmpA").value,b=document.getElementById("cmpB").value,A=M[a].sales,B=M[b].sales,dv=B-A,dp=B/A-1;
+  document.getElementById("cmpOut").innerHTML=`<div class="mini"><span>${CAP(a)}</span><b>${fM(A)}</b></div><div class="mini"><span>${CAP(b)}</span><b>${fM(B)}</b></div><div class="mini"><span>Diferencia ${CAP(b)} − ${CAP(a)}</span><b class="${dv<0?'neg':'pos'}">${fM(dv)}</b></div><div class="mini"><span>Variación</span><b class="${dp<0?'neg':'pos'}">${sPct(dp)}</b></div>`;
 }
 
-function renderCategoryDetail(index,targetId,noteId){
- const c=DATA.categories[index],target=document.getElementById(targetId); if(!target) return;
- let h='<div class="table-wrap" role="region" aria-label="Composición acumulada" tabindex="0"><table><thead><tr><th>Subcategoría</th><th class="num">Valor Ene–Jun</th><th class="num">% grupo</th></tr></thead><tbody>';
- c.items.slice().sort((a,b)=>b[1]-a[1]).forEach(x=>{h+=`<tr><td>${esc(x[0])}</td><td class="num">${money(x[1])}</td><td class="num">${pct(x[1]/c.value)}</td></tr>`;});
- h+=`<tr><td><b>Total</b></td><td class="num"><b>${money(c.value)}</b></td><td class="num"><b>100,0 %</b></td></tr></tbody></table></div>`;
- target.innerHTML=h;
- const note=document.getElementById(noteId);
- const isInventory=index===0;
- const title=document.getElementById(isInventory?"inventoryCompositionTitle":"opexCompositionTitle");
- if(state.period==="YTD"){
-   if(title) title.textContent=isInventory?"Composición acumulada de compras · Ene–Jun":"Composición acumulada de gastos · Ene–Jun";
-   if(note){note.className="detail-scope-note";note.innerHTML="Esta tabla sí corresponde al periodo acumulado enero–junio y explica la composición del total consolidado superior.";}
- }else{
-   if(title) title.textContent=(isInventory?"Composición disponible de compras":"Composición disponible de gastos")+" · Ene–Jun (referencia acumulada)";
-   const monthly=isInventory?DATA.monthly[state.period].inventory:DATA.monthly[state.period].opex;
-   if(note){note.className="detail-scope-note warning";note.innerHTML=`<b>Importante:</b> esta tabla <b>no corresponde únicamente a ${periodName(state.period)}</b>. El valor superior <b>${money(monthly)}</b> sí corresponde al mes seleccionado; la composición por subcategoría continúa acumulada enero–junio hasta reconstruir el detalle transaccional mensual.`;}
- }
-}
-function renderOpexMonthScope(){
- const el=document.getElementById("opexMonthScope"),title=document.getElementById("opexMonthScopeTitle");if(!el)return;
- const isYtd=state.period==="YTD",d=isYtd?DATA.h1:DATA.monthly[state.period];
- if(title) title.textContent=isYtd?"Qué incluye el acumulado Ene–Jun":"Qué corresponde a "+periodName(state.period);
- let prev=null,varText="—";
- if(!isYtd){prev=previousMonth(state.period);if(prev)varText=pct((d.opex-DATA.monthly[prev].opex)/DATA.monthly[prev].opex);}
- el.innerHTML=`<div class="opex-scope-stat"><span>Gasto operativo documentado</span><b>${money(d.opex)}</b></div>
- <div class="opex-scope-stat"><span>% de ventas ${isYtd?'acumuladas':'del mes'}</span><b>${pct(d.opex/d.sales)}</b></div>
- ${!isYtd?`<div class="opex-scope-stat"><span>Variación vs mes anterior</span><b>${varText}</b></div>`:''}
- <div class="scope-concepts"><b>Conceptos incluidos en la clasificación de gastos operativos:</b> ocupación, comisiones/plataformas, servicios públicos, marketing, servicios profesionales, movilidad, mantenimiento/adecuaciones, administración, tecnología, telecomunicaciones, medios de pago, higiene/SST, suministros operativos, aseo y seguros.<br><br>${isYtd?'La composición acumulada por concepto puede abrirse abajo y sí explica el consolidado Ene–Jun.':'<b>Limitación actual:</b> la base embebida conserva el total de '+state.period.toLowerCase()+' pero no cuánto corresponde a cada uno de esos conceptos durante ese mes. La composición inferior es Ene–Jun y no se redistribuye artificialmente.'}</div>`;
-}
-function renderPurchasesAndOpex(){
- renderCategoryDetail(0,"inventoryCategoryDetail","inventoryDetailNote");
- renderCategoryDetail(1,"opexCategoryDetail","opexDetailNote");
- renderOpexMonthScope();
+function renderCompras(){
+  const d=per(),prime=(d.inventory+d.payroll)/d.sales;
+  document.getElementById("invKpis").innerHTML=
+    kpi(d.ytd?"Compras del semestre":"Compras de "+d.name,fM(d.inventory),d.prev?`${sPct(d.inventory/M[d.prev].inventory-1)} frente a ${LOW(d.prev)}`:"")+
+    kpi("Peso sobre ventas",pct(d.inventory/d.sales),`Semestre: ${pct(T.inventory/T.sales)}`)+
+    kpi("Compras + nómina sobre ventas",pct(prime),`Referencia orientativa: hasta ${pct(REF.primeCost.good,0)}`,prime>REF.primeCost.warn?"bad":"");
+  document.getElementById("chInv").innerHTML=barChart({label:"Compras inventariables por mes",data:MONTHS.map(m=>({k:m,v:M[m].inventory})),color:"var(--teal)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
+  const inv=PROVIDERS.filter(p=>p[2]==="inventory").map(p=>[p[0].replace(/ S\.A\.S\.| S\.A\./,""),p[1]]);
+  hbars("hbInvProv",inv,{total:T.inventory});
+  hbars("hbInvCat",CATEGORIES.inventory,{total:T.inventory});
+  document.getElementById("invCompNote").textContent=d.ytd?"Acumulado Ene–Jun.":`Acumulado Ene–Jun: la base aún no tiene el detalle por concepto de ${d.name}.`;
+  monthTable("tbInv",[{h:"Compras",f:m=>M[m].inventory,fmt:money},{h:"% ventas",f:m=>M[m].inventory/M[m].sales,fmt:v=>pct(v)},varCol("inventory")],
+    {label:"Semestre",cells:[money(T.inventory),pct(T.inventory/T.sales),""]});
 }
 
-function renderPayroll(){
- let h='<div class="table-wrap" role="region" aria-label="Nómina mensual" tabindex="0"><table><thead><tr><th>Mes</th><th class="num">Carga laboral</th><th class="num">% ventas</th><th class="num">Var. mes</th><th class="num">Personas</th><th class="num">PILA</th></tr></thead><tbody>';
- let prev=null;
- DATA.months.forEach(m=>{const d=DATA.monthly[m],n=peopleCount(m),tip=esc(peopleTooltip(m)).replace(/\n/g,'&#10;'),cls=state.period===m?' class="selected-period-row"':'';h+=`<tr${cls}><td>${m[0]+m.slice(1).toLowerCase()}</td><td class="num">${money(d.payroll)}</td><td class="num">${pct(d.payroll/d.sales)}</td><td class="num">${variation(d.payroll,prev)}</td><td class="num"><span class="hint-count" title="${tip}">${n}</span></td><td class="num">${money(PILA_MONTH[m])}</td></tr>`;prev=d.payroll;});
- h+='</tbody></table></div>'; const el=document.getElementById("payrollTable"); if(el) el.innerHTML=h;
- const pat=document.getElementById("payrollPattern"); if(pat){const max=Math.max(...DATA.payroll_patterns.map(x=>x[2]));pat.innerHTML=DATA.payroll_patterns.map(x=>`<div class="gauge-row"><span>${x[0]} · ${x[1]} registros/personas etiqueta</span><div class="gauge-track"><div class="gauge-fill" style="width:${(x[2]/max*100).toFixed(1)}%"></div></div><b>${compact(x[2])}</b></div>`).join("");}
-}
-function renderPayrollLocal(){
- const v=state.period,isYtd=v==="YTD";
- const d=isYtd?DATA.h1:DATA.monthly[v];
- const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
- set("nomPayrollTitle",isYtd?"Carga laboral acumulada":"Carga laboral · "+periodName(v));
- set("nomPayroll",compact(d.payroll));
- set("nomPayrollSub",pct(d.payroll/d.sales)+" de ventas");
- set("nomPilaTitle",isYtd?"PILA acumulada":"PILA · "+periodName(v));
- set("nomPila",compact(isYtd?DATA.h1.pila_period:PILA_MONTH[v]));
- if(isYtd){
-   set("nomPeople",h1PeopleRange()); const p=document.getElementById("nomPeople"); if(p) p.title=h1PeopleTooltip();
-   set("nomPeopleSub","Rango mensual de personas registradas"); set("nomPilaPeople","7");
- }else{
-   set("nomPeople",String(peopleCount(v))); const p=document.getElementById("nomPeople"); if(p) p.title=peopleTooltip(v);
-   set("nomPeopleSub","Personas registradas en "+v.toLowerCase()); set("nomPilaPeople",String(d.pila_people));
- }
+function renderGastos(){
+  const d=per(),central=PROVIDERS.find(p=>p[3]==="Ocupación");
+  document.getElementById("opexKpis").innerHTML=
+    kpi(d.ytd?"Gastos del semestre":"Gastos de "+d.name,fM(d.opex),d.prev?`${sPct(d.opex/M[d.prev].opex-1)} frente a ${LOW(d.prev)}`:(d.ytd?"Total consolidado validado":""))+
+    kpi("Peso sobre ventas",pct(d.opex/d.sales),`Semestre: ${pct(H1.opex/T.sales)}`)+
+    kpi("Ocupación del semestre",fM(OCCUPANCY),`${pct(OCCUPANCY/T.sales)} de las ventas y ${pct(OCCUPANCY/H1.opex,0)} del gasto operativo`,"warnline")+
+    kpi("Pendiente de clasificar",fM(H1.assets_policy+H1.mixed),`Activos ${fM(H1.assets_policy)} y partidas mixtas ${fM(H1.mixed)}; fuera del resultado`);
+  document.getElementById("chOpex").innerHTML=barChart({label:"Gastos operativos por mes",data:MONTHS.map(m=>({k:m,v:M[m].opex})),color:"var(--yellow)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
+  hbars("hbOpexCat",topWithOthers(CATEGORIES.opex,6),{total:H1.opex,hl:["Ocupación"]});
+  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Jun. ":`Acumulado Ene–Jun: aún no hay detalle por concepto de ${d.name}. `)+`${central[0]} concentra ${pct(central[1]/H1.opex,0)} del gasto operativo.`;
+  document.getElementById("opexRecon").innerHTML=`<b>Conciliación pendiente:</b> los meses suman ${fM(T.opexMonths)} y el consolidado validado es ${fM(H1.opex)}. La diferencia de ${fM(H1.opex-T.opexMonths)} se rastrea en la fuente y no se reparte entre meses.`;
+  monthTable("tbOpex",[{h:"Gastos operativos",f:m=>M[m].opex,fmt:money},{h:"% ventas",f:m=>M[m].opex/M[m].sales,fmt:v=>pct(v)},varCol("opex")],
+    {label:"Suma de meses",cells:[money(T.opexMonths),pct(T.opexMonths/T.sales),""]});
 }
 
-function renderCashLocal(){
- const v=state.period,isYtd=v==="YTD";
- const d=isYtd?{open:DATA.h1.bank_open,credits:DATA.h1.bank_credits,debits:DATA.h1.bank_debits,close:DATA.h1.bank_close}:BANK_MONTH[v];
- const set=(id,val)=>{const el=document.getElementById(id); if(el) el.textContent=val;};
- set("cashOpen",compact(d.open)); set("cashCredits",compact(d.credits)); set("cashDebits",compact(d.debits)); set("cashClose",compact(d.close));
- set("cashCreditsTitle",isYtd?"Abonos acumulados":"Abonos del mes"); set("cashDebitsTitle",isYtd?"Cargos acumulados":"Cargos del mes");
- let h='<div class="table-wrap" role="region" aria-label="Movimiento mensual de caja" tabindex="0"><table><thead><tr><th>Mes</th><th class="num">Inicial</th><th class="num">Abonos</th><th class="num">Cargos</th><th class="num">Final</th><th class="num">Var. cierre</th></tr></thead><tbody>';
- let prev=null;
- DATA.months.forEach(m=>{const x=BANK_MONTH[m],cls=state.period===m?' class="selected-period-row"':'';h+=`<tr${cls}><td>${m[0]+m.slice(1).toLowerCase()}</td><td class="num">${money(x.open)}</td><td class="num">${money(x.credits)}</td><td class="num">${money(x.debits)}</td><td class="num">${money(x.close)}</td><td class="num">${variation(x.close,prev)}</td></tr>`;prev=x.close;});
- h+='</tbody></table></div>'; const t=document.getElementById("cashMonthlyTable"); if(t) t.innerHTML=h;
+function renderNomina(){
+  const d=per(),counts=MONTHS.map(m=>M[m].people.length),mn=Math.min(...counts),mx=Math.max(...counts);
+  const all=ALL_PEOPLE.length,full=ALL_PEOPLE.filter(p=>p[1]===N).length;
+  document.getElementById("payKpis").innerHTML=
+    kpi(d.ytd?"Carga laboral del semestre":"Carga laboral de "+d.name,fM(d.payroll),d.prev?`${sPct(d.payroll/M[d.prev].payroll-1)} frente a ${LOW(d.prev)}`:"Provisional")+
+    kpi("Peso sobre ventas",pct(d.payroll/d.sales),`Semestre: ${pct(T.payroll/T.sales)}`,d.payroll/d.sales>REF.labor.warn?"bad":"")+
+    (d.ytd?kpi("Personas por mes",`${mn} a ${mx}`,`${all} personas distintas; ${full} trabajaron los ${N} meses`)
+          :kpi("Personas en "+d.name,String(M[state.period].people.length),`${M[state.period].pilaPeople} con PILA`))+
+    kpi(d.ytd?"PILA del semestre":"PILA de "+d.name,fM(d.pila),d.ytd?`Pagada en caja: ${fM(H1.pila_cash)}`:`${M[state.period].pilaPeople} empleados con aportes`);
+  document.getElementById("chPay").innerHTML=barChart({label:"Carga laboral por mes",data:MONTHS.map(m=>({k:m,v:M[m].payroll})),color:"#6F8FC0",sub:x=>M[x.k].people.length+" personas"});
+  // Matriz de turnos
+  const ci=MONTHS.indexOf(state.period);
+  let r=`<table class="roster"><thead><tr><th>Persona</th>${MONTHS.map((m,i)=>`<th class="${i===ci?'colsel':''}">${SHORT[m]}</th>`).join("")}<th>Meses</th></tr></thead><tbody>`;
+  ALL_PEOPLE.forEach(([p,c])=>{r+=`<tr><td>${esc(p)}</td>${MONTHS.map((m,i)=>`<td class="${i===ci?'colsel':''}"><span class="cell${M[m].people.includes(p)?' in':''}" aria-label="${M[m].people.includes(p)?'Trabajó':'Sin pagos'}"></span></td>`).join("")}<td>${c}</td></tr>`;});
+  r+=`</tbody><tfoot><tr><td>Personas</td>${MONTHS.map((m,i)=>`<td class="${i===ci?'colsel':''}">${M[m].people.length}</td>`).join("")}<td>${all}</td></tr></tfoot></table>`;
+  document.getElementById("roster").innerHTML=r;
+  hbars("hbPattern",PAY_PATTERNS.map(x=>[`${x[0]} (${x[1]})`,x[2]]),{total:T.payroll});
+  monthTable("tbPay",[{h:"Carga laboral",f:m=>M[m].payroll,fmt:money},{h:"% ventas",f:m=>M[m].payroll/M[m].sales,fmt:v=>pct(v)},varCol("payroll"),{h:"Personas",f:m=>M[m].people.length,fmt:String},{h:"PILA",f:m=>M[m].pila,fmt:money}],
+    {label:"Semestre",cells:[money(T.payroll),pct(T.payroll/T.sales),"",`${all} distintas`,money(T.pila)]});
 }
 
-
-// ============================================================
-// V11.3 - Desglose mensual real por categoría
-// Fuente: Consolidado Gerencial Compras y Gastos Ene-Jun 2026
-// ============================================================
-
-function monthlyBreakdownConfig(index){
-  return index===0
-    ? {key:"inventory",label:"Compras inventariables",noun:"compras",totalField:"inventory"}
-    : {key:"opex",label:"Gastos operativos",noun:"gastos",totalField:"opex"};
+function renderCaja(){
+  const d=per();
+  document.getElementById("cashKpis").innerHTML=
+    kpi("Saldo inicial",fM(d.open),d.ytd?"1 de enero":"Inicio de "+d.name)+
+    kpi(d.ytd?"Abonos del semestre":"Abonos del mes",fM(d.credits))+
+    kpi(d.ytd?"Cargos del semestre":"Cargos del mes",fM(d.debits))+
+    kpi("Saldo final",fM(d.close),`${sPct(d.close/d.open-1)} frente al saldo inicial`,d.close<d.open?"bad":"good");
+  const pts=[{k:"INICIO",v:T.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))];
+  document.getElementById("chCash").innerHTML=lineChart(pts,"Saldo al cierre de cada mes");
+  document.getElementById("cashFin").innerHTML=[
+    ["Consumo promedio de caja",fM(BURN)+" por mes"],
+    ["Cobertura del saldo al 30-jun",nf(T.close/BURN,1)+" meses"],
+    ["Desembolso neto del crédito",fM(H1.credit_net_inflow)],
+    ["Saldo de capital del crédito al 30-jun",fM(H1.credit_principal)],
+    ["Impuestos pagados en el semestre",fM(H1.tax_cash)],
+    ["PILA pagada en caja",fM(H1.pila_cash)]
+  ].map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
+  monthTable("tbCash",[{h:"Inicial",f:m=>M[m].bank.open,fmt:money},{h:"Abonos",f:m=>M[m].bank.credits,fmt:money},{h:"Cargos",f:m=>M[m].bank.debits,fmt:money},{h:"Final",f:m=>M[m].bank.close,fmt:money},{h:"Variación",f:m=>M[m].bank.close-M[m].bank.open,fmt:money,cls:v=>v<0?"neg":"pos"}],
+    {label:"Semestre",cells:[money(T.open),money(T.credits),money(T.debits),money(T.close),money(T.close-T.open)]});
 }
 
-function renderCategoryDetail(index,targetId,noteId){
- const cfg=monthlyBreakdownConfig(index);
- const target=document.getElementById(targetId);
- if(!target) return;
- const note=document.getElementById(noteId);
- const title=document.getElementById(index===0?"inventoryCompositionTitle":"opexCompositionTitle");
- const isYtd=state.period==="YTD";
-
- if(isYtd){
-   const c=DATA.categories[index];
-   let h='<div class="month-breakdown-lead"><div><b>Composición acumulada enero–junio.</b> Esta tabla explica el total consolidado del periodo.</div><span class="source-chip">Fuente transaccional consolidada</span></div>';
-   h+='<div class="table-wrap" role="region" aria-label="Composición acumulada" tabindex="0"><table><thead><tr><th>Categoría</th><th class="num">Valor Ene–Jun</th><th class="num">% grupo</th></tr></thead><tbody>';
-   c.items.slice().sort((a,b)=>b[1]-a[1]).forEach(x=>{
-     h+=`<tr><td>${esc(x[0])}</td><td class="num">${money(x[1])}</td><td class="num">${pct(x[1]/c.value)}</td></tr>`;
-   });
-   h+=`<tr class="total-row"><td>Total</td><td class="num">${money(c.value)}</td><td class="num">100,0 %</td></tr></tbody></table></div>`;
-   target.innerHTML=h;
-   if(title) title.textContent=index===0?"Composición de compras · Ene–Jun":"Composición de gastos · Ene–Jun";
-   if(note){
-     note.className="detail-scope-note";
-     note.innerHTML=index===1
-       ? 'El consolidado de gastos incluye <b>$1,00 M de Marketing / Redes sociales con mes SIN DEFINIR</b>; por eso el total consolidado es $119,92 M aunque los seis meses asignados sumen $118,92 M.'
-       : 'Todas las compras inventariables del consolidado están asignadas a un mes entre enero y junio.';
-   }
-   return;
- }
-
- const map=(MONTHLY_BREAKDOWN[cfg.key]||{})[state.period]||{};
- const rows=Object.entries(map).sort((a,b)=>b[1]-a[1]);
- const total=DATA.monthly[state.period][cfg.totalField];
- const sales=DATA.monthly[state.period].sales;
- let h=`<div class="month-breakdown-lead"><div><b>${cfg.label} · ${periodName(state.period)}.</b> El detalle inferior corresponde únicamente al mes seleccionado.</div><span class="source-chip">Desglose real del mes</span></div>`;
- h+='<div class="table-wrap" role="region" aria-label="Composición mensual" tabindex="0"><table><thead><tr><th>Categoría</th><th class="num">Valor del mes</th><th class="num">% '+cfg.noun+'</th><th class="num">% ventas</th></tr></thead><tbody>';
- rows.forEach(([name,val])=>{
-   h+=`<tr><td>${esc(name)}</td><td class="num">${money(val)}</td><td class="num category-share">${pct(val/total)}</td><td class="num">${pct(val/sales)}</td></tr>`;
- });
- h+=`<tr class="total-row"><td>Total ${esc(periodName(state.period))}</td><td class="num">${money(total)}</td><td class="num">100,0 %</td><td class="num">${pct(total/sales)}</td></tr></tbody></table></div>`;
- target.innerHTML=h;
- if(title) title.textContent=`Composición de ${cfg.noun} · ${periodName(state.period)}`;
- if(note){
-   note.className="detail-scope-note";
-   note.innerHTML=`Detalle reconstruido desde la base transaccional consolidada mediante <b>MES_ECONOMICO + GRUPO_GERENCIAL + CATEGORIA_GERENCIAL</b>. La suma de las categorías concilia con el KPI mensual.`;
- }
+function renderResultado(){
+  const res=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex}));
+  const sumRes=res.reduce((a,x)=>a+x.v,0);
+  document.getElementById("chResult").innerHTML=barChart({label:"Resultado operativo aproximado por mes",data:res,color:x=>x.v<0?"var(--orange)":"var(--teal-dk)",h:250});
+  document.getElementById("resultNote").textContent=`Suma de los meses: ${fM(sumRes)}. Con el consolidado validado de gastos operativos (${fM(H1.opex-T.opexMonths)} más) el semestre queda en ${fM(T.sales-T.inventory-T.payroll-H1.opex)}.`;
+  const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance;
+  document.getElementById("scenarios").innerHTML=
+    kpi("Si inventario inicial = final",fM(base),"Incluye gastos financieros conocidos, sin interés APE",base<0?"bad":"good")+
+    kpi("Con interés APE candidato",fM(base-H1.ape_interest),"Escenario más exigente",base-H1.ape_interest<0?"bad":"good")+
+    kpi("Aumento de inventario que llevaría a cero",fM(Math.max(0,-base)),"Inventario final menos inicial, sin APE");
+  simulate();
+  const rows=(el,a)=>document.getElementById(el).innerHTML=a.map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
+  rows("posAssets",[["Caja cuenta empresarial",fM(T.close)],["Anticipos tributarios",fM(H1.tax_assets)],["Ventas registradas “por pagar” (en control)",fM(H1.sales_pending)],["Inventario al 30-jun","Pendiente"]]);
+  rows("posLiab",[["Pasivos tributarios",fM(H1.tax_liability)],["Crédito bancario, saldo de capital",fM(H1.credit_principal)],["Saldo económico APE",fM(H1.investor_balance)],["Cuotas APE may–jun programadas (incluidas en el saldo)",fM(H1.investor_pending_may_jun)]]);
 }
-
-function renderOpexMonthScope(){
- const el=document.getElementById("opexMonthScope");
- const title=document.getElementById("opexMonthScopeTitle");
- if(!el) return;
- const isYtd=state.period==="YTD";
- const d=isYtd?DATA.h1:DATA.monthly[state.period];
-
- if(title) title.textContent=isYtd?"Qué compone el acumulado Ene–Jun":"Qué corresponde a "+periodName(state.period);
-
- if(isYtd){
-   const assigned=DATA.months.reduce((s,m)=>s+DATA.monthly[m].opex,0);
-   const unassigned=(MONTHLY_BREAKDOWN.opex_unassigned||[]).reduce((s,x)=>s+Number(x.valor||0),0);
-   el.innerHTML=`<div class="opex-scope-stat"><span>Gasto operativo consolidado</span><b>${money(DATA.h1.opex)}</b></div>
-   <div class="opex-scope-stat"><span>Asignado a Ene–Jun</span><b>${money(assigned)}</b></div>
-   <div class="opex-scope-stat"><span>Sin mes definido</span><b>${money(unassigned)}</b></div>
-   <div class="scope-concepts"><b>Partida sin mes:</b> Marketing · Redes sociales, fuente WhatsApp. Se conserva dentro del acumulado, pero no se asigna artificialmente a un mes.</div>`;
-   return;
- }
-
- const prev=previousMonth(state.period);
- const varText=prev?pct((d.opex-DATA.monthly[prev].opex)/DATA.monthly[prev].opex):"—";
- const cats=Object.entries((MONTHLY_BREAKDOWN.opex||{})[state.period]||{}).sort((a,b)=>b[1]-a[1]);
- const top=cats.slice(0,4).map(([name,val])=>`<div><span>${esc(name)}</span><b>${money(val)} · ${pct(val/d.opex)}</b></div>`).join("");
- el.innerHTML=`<div class="opex-scope-stat"><span>Gasto operativo documentado</span><b>${money(d.opex)}</b></div>
- <div class="opex-scope-stat"><span>% de ventas del mes</span><b>${pct(d.opex/d.sales)}</b></div>
- <div class="opex-scope-stat"><span>Variación vs mes anterior</span><b>${varText}</b></div>
- <div class="scope-top-list"><b>Principales conceptos del mes</b>${top}</div>`;
-}
-
-function renderOpexMonthlyTable(){
- const el=document.getElementById("opexMonthlyTable");
- if(!el) return;
- let h='<div class="table-wrap" role="region" aria-label="Gastos operativos por mes" tabindex="0"><table><thead><tr><th>Periodo</th><th class="num">Gastos operativos</th><th class="num">% ventas</th><th class="num">Var. mes</th></tr></thead><tbody>';
- let prev=null;
- DATA.months.forEach(m=>{
-   const d=DATA.monthly[m],cls=state.period===m?' class="selected-period-row"':'';
-   h+=`<tr${cls}><td>${periodName(m)}</td><td class="num">${money(d.opex)}</td><td class="num">${pct(d.opex/d.sales)}</td><td class="num">${variation(d.opex,prev)}</td></tr>`;
-   prev=d.opex;
- });
- const unassigned=(MONTHLY_BREAKDOWN.opex_unassigned||[]).reduce((s,x)=>s+Number(x.valor||0),0);
- h+=`<tr class="unassigned-row"><td>Sin mes definido · Marketing / Redes</td><td class="num">${money(unassigned)}</td><td class="num">—</td><td class="num">—</td></tr>`;
- h+=`<tr class="total-row"><td>Total consolidado Ene–Jun</td><td class="num">${money(DATA.h1.opex)}</td><td class="num">${pct(DATA.h1.opex/DATA.h1.sales)}</td><td class="num">—</td></tr>`;
- h+='</tbody></table></div><div class="month-table-note">La fila “Sin mes definido” está incluida en el consolidado, pero no en ninguno de los seis meses.</div>';
- el.innerHTML=h;
-}
-
-function renderMonthlyTables(){
- const sales=document.getElementById("salesMonthlyTable");
- if(sales) sales.innerHTML=monthlyMetricTable("sales","Ventas netas",false);
- const inv=document.getElementById("inventoryMonthlyTable");
- if(inv) inv.innerHTML=monthlyMetricTable("inventory","Compras",true)+'<div class="month-table-note">% ventas = compras inventariables del mes / ventas netas del mes.</div>';
- renderOpexMonthlyTable();
-}
-
-function renderPurchasesAndOpex(){
- renderCategoryDetail(0,"inventoryCategoryDetail","inventoryDetailNote");
- renderCategoryDetail(1,"opexCategoryDetail","opexDetailNote");
- renderOpexMonthScope();
-}
-
 function simulate(){
- const i=Number(document.getElementById("invInitial").value), f=Number(document.getElementById("invFinal").value);
- if(!Number.isFinite(i)||!Number.isFinite(f)||document.getElementById("invInitial").value===""||document.getElementById("invFinal").value===""){
-  ["simCogs","simGross","simResult","simMargin"].forEach(id=>document.getElementById(id).textContent="Pendiente");
-  document.getElementById("simMessage").className="callout warning";
-  document.getElementById("simMessage").textContent="Ingrese inventario inicial y final. Fórmula: COGS = inventario inicial + compras inventariables − inventario final."; return;
- }
- const cogs=i+DATA.h1.inventory-f;
- const gross=DATA.h1.sales-cogs;
- const ape=document.getElementById("apeToggle").value==="1"?DATA.h1.ape_interest_candidate:0;
- const result=DATA.h1.sales-cogs-DATA.h1.opex-DATA.h1.payroll-DATA.h1.known_finance-ape;
- document.getElementById("simCogs").textContent=money(cogs);
- document.getElementById("simGross").textContent=money(gross);
- document.getElementById("simResult").textContent=money(result);
- document.getElementById("simMargin").textContent=pct(result/DATA.h1.sales);
- const msg=document.getElementById("simMessage"); msg.className=result>=0?"callout":"callout danger";
- msg.innerHTML=result>=0?"<b>Escenario positivo:</b> bajo estos inventarios el modelo provisional supera el punto de equilibrio.":"<b>Escenario negativo:</b> bajo estos inventarios el modelo provisional permanece por debajo del equilibrio.";
+  const ii=document.getElementById("invIni"),ff=document.getElementById("invFin"),out=document.getElementById("simOut"),msg=document.getElementById("simMsg");
+  if(ii.value===""||ff.value===""){
+    out.innerHTML=["Costo de ventas","Margen bruto","Resultado antes de renta","Margen del resultado"].map(t=>`<div class="mini"><span>${t}</span><b style="color:var(--muted)">—</b></div>`).join("");
+    msg.className="callout warn mt";msg.textContent="Ingresa el inventario inicial y final valorizados para calcular el costo de ventas real.";return;
+  }
+  const cogs=Number(ii.value)+T.inventory-Number(ff.value),gross=T.sales-cogs;
+  const ape=document.getElementById("apeT").value==="1"?H1.ape_interest:0;
+  const r=gross-H1.opex-T.payroll-H1.known_finance-ape;
+  out.innerHTML=`<div class="mini"><span>Costo de ventas</span><b>${fM(cogs)}</b></div><div class="mini"><span>Margen bruto</span><b>${fM(gross)} <small style="font-size:.8rem">${pct(gross/T.sales)}</small></b></div><div class="mini"><span>Resultado antes de renta</span><b class="${r<0?'neg':'pos'}">${fM(r)}</b></div><div class="mini"><span>Margen del resultado</span><b class="${r<0?'neg':'pos'}">${pct(r/T.sales)}</b></div>`;
+  msg.className="callout mt "+(r>=0?"":"bad");
+  msg.innerHTML=r>=0?"<b>Resultado positivo</b> con estos inventarios.":`<b>Resultado negativo</b> con estos inventarios: faltan ${fM(-r)} para llegar a cero.`;
 }
 
-function showTab(tab){
- state.tab=tab;
- document.querySelectorAll(".section").forEach(s=>s.classList.toggle("active",s.id===tab));
- document.querySelectorAll(".nav-link").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
- window.scrollTo({top:0,behavior:"smooth"});
+function renderDiag(){
+  const avg=T.sales/N,drop=M.JUNIO.sales/M.ENERO.sales-1,over=MONTHS.filter(m=>M[m].sales>=BE);
+  const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance,occ=OCCUPANCY/T.sales,prime=(T.inventory+T.payroll)/T.sales;
+  const lowMonths=MONTHS.slice(3);
+  document.getElementById("diagFigs").innerHTML=
+    kpi("Ventas netas del semestre",fM(T.sales))+kpi("Ventas de enero a junio",pct(drop),"",drop<0?"bad":"")+
+    kpi("Venta mensual de equilibrio",fM(BE,1),"Con gastos financieros conocidos")+kpi("Caja al 30 de junio",fM(T.close),"",T.close<BURN?"bad":"");
+  const list=a=>a.length<=1?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1];
+  document.getElementById("diagBody").innerHTML=`
+  <article>
+    <h3>Comportamiento de las ventas</h3>
+    <p>Durante el semestre registramos ventas netas por <b>${fM(T.sales)}</b>, un promedio de <b>${fM(avg)}</b> por mes.</p>
+    <p>El comportamiento no fue uniforme. ${list(over.map((m,i)=>i?LOW(m):CAP(m)))} superaron el nivel de equilibrio, mientras que ${list(lowMonths.map(LOW))} quedaron por debajo (${lowMonths.map(m=>fM(M[m].sales,1)).join(", ")}). Junio cerró en <b>${fM(M.JUNIO.sales)}</b>, ${pct(Math.abs(drop))} menos que enero.</p>
+    <p>MARANELLO ya demostró que puede vender más de $70 millones al mes, pero no sostuvo ese ritmo al cierre del semestre, y buena parte de los costos no baja cuando bajan las ventas.</p>
+  </article>
+  <article>
+    <h3>Estructura de costos</h3>
+    <p>Los gastos operativos suman <b>${fM(H1.opex)}</b> y la nómina procesada <b>${fM(T.payroll)}</b>: juntos equivalen al <b>${pct((H1.opex+T.payroll)/T.sales)}</b> de las ventas, antes del costo de alimentos y bebidas.</p>
+    <p>Dentro del gasto operativo, la <b>ocupación</b> suma ${fM(OCCUPANCY)}, el ${pct(occ)} de las ventas y el ${pct(OCCUPANCY/H1.opex,0)} de todo el gasto operativo. Es el rubro individual de mayor peso fuera de la nómina.</p>
+    <p>Las compras inventariables llegaron a ${fM(T.inventory)}. Sumadas a la nómina representan el <b>${pct(prime)}</b> de las ventas. Todavía no son costo de ventas definitivo porque falta valorizar inventarios.</p>
+  </article>
+  <article>
+    <h3>Rentabilidad y punto de equilibrio</h3>
+    <p><b>Todavía no hay una utilidad contable definitiva.</b> Si el inventario inicial y final fueran iguales, el resultado del semestre sería cercano a <b>${fM(base)}</b>; con el componente financiero candidato de los inversionistas, <b>${fM(base-H1.ape_interest)}</b>.</p>
+    <p>Son una señal gerencial, no una pérdida certificada. Con la estructura actual, incluidos los gastos financieros conocidos, necesitamos vender cerca de <b>${fM(BE,1)} por mes</b> para llegar al equilibrio (${fM(BE_APE,1)} si se reconoce el interés APE). Junio quedó ${fM(BE-M.JUNIO.sales,1)} por debajo.</p>
+  </article>
+  <article class="alert">
+    <h3>Liquidez y financiación</h3>
+    <p>La cuenta empresarial empezó el semestre con <b>${fM(T.open)}</b> y cerró junio con <b>${fM(T.close)}</b>: en promedio se consumieron ${fM(BURN)} por mes, y el saldo final no alcanza para un mes a ese ritmo.</p>
+    <p>En el mismo periodo recibimos un desembolso neto de crédito bancario por ${fM(H1.credit_net_inflow)} (saldo de capital al 30 de junio: ${fM(H1.credit_principal)}). La presión no es solo contable: ya se refleja en la caja disponible para operar.</p>
+    <p>Los compromisos con inversionistas agregan presión, pero el análisis indica que no son la causa principal del desequilibrio operativo.</p>
+  </article>
+  <article class="close">
+    <h3>Nuestra lectura</h3>
+    <p><b>MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable.</b> Tiene una estructura pensada para ventas superiores a las de los últimos meses: cerca de $74–75 millones la operación se acerca al equilibrio; entre $48 y $58 millones, nómina, ocupación y servicios presionan el resultado y la caja.</p>
+    <p>Proponemos concentrarnos en tres frentes: <b>recuperar ventas</b>, <b>revisar la estructura laboral y el costo de ocupación</b>, y <b>determinar el costo real de alimentos con inventarios</b>.</p>
+  </article>
+  <details class="data"><summary>Prioridades para cerrar la información</summary><div class="tw"><ul>
+    <li><b>Inventario inicial y final valorizados:</b> para calcular costo de ventas y margen bruto.</li>
+    <li><b>Depuración laboral:</b> separar empleados formales, turnos, ocasionales y otros conceptos de la hoja de pagos.</li>
+    <li><b>Instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
+    <li><b>Partidas mixtas y activos:</b> ${fM(H1.mixed+H1.assets_policy)} por clasificar entre gasto, costo y activo.</li>
+    <li><b>Gastos operativos:</b> rastrear la diferencia de ${fM(H1.opex-T.opexMonths)} entre meses y consolidado.</li>
+    <li><b>Cuentas relacionadas:</b> completar movimientos para cerrar el flujo de caja consolidado.</li>
+    <li><b>Ventas “por pagar”:</b> conciliar ${fM(H1.sales_pending)} con bancos antes de reconocerlas como cuenta por cobrar.</li>
+  </ul></div></details>
+  <details class="data"><summary>Notas metodológicas y fuentes</summary><div class="tw">
+    <p><b>Proceso:</b> fuente original, depuración, anti-duplicación, clasificación, causación frente a caja, conciliación y nivel de certeza.</p>
+    <p><b>Equilibrio:</b> (gastos operativos + nómina + gastos financieros conocidos) por mes, dividido entre 1 − compras/ventas del semestre (${pct(VAR_RATIO)}).</p>
+    <p>Las compras no se convierten automáticamente en costo de ventas ni los movimientos bancarios en gastos. El capital de impuestos y financiación se separa del resultado. Los escenarios no sustituyen cifras contables definitivas.</p>
+    <p><b>Fuentes:</b> ventas, documentos UBL y compras, correo, WhatsApp, nómina y PILA, bancos, impuestos, financiación e inversionistas.</p>
+  </div></details>`;
 }
+
+/* ============================================================
+   NAVEGACIÓN Y CONTROLES
+   ============================================================ */
+const RENDER={resumen:renderResumen,ventas:renderVentas,compras:renderCompras,gastos:renderGastos,nomina:renderNomina,caja:renderCaja,resultado:renderResultado,diagnostico:renderDiag};
+const TABS=Object.keys(RENDER);
 function renderAll(){
- syncPeriodTabs(); renderKPIs(); renderCharts(); renderSummaryPeriodReading(); renderMonthlyTables(); renderCompare(); renderPurchasesAndOpex(); renderPayroll(); renderPayrollLocal(); renderCashLocal();
+  const d=per();
+  document.querySelectorAll("[data-scope]").forEach(e=>e.textContent=d.title);
+  document.querySelectorAll(".pbtn").forEach(b=>{b.classList.toggle("on",b.dataset.p===state.period);b.setAttribute("aria-pressed",b.dataset.p===state.period);});
+  TABS.forEach(t=>RENDER[t]());
 }
-function resetAll(){
- state.period="YTD"; state.summaryKpi="sales"; state.summaryMonths=new Set(DATA.months); document.getElementById("compareA").value="ENERO"; document.getElementById("compareB").value="JUNIO";
- document.getElementById("invInitial").value=""; document.getElementById("invFinal").value=""; document.getElementById("apeToggle").value="0";
- renderAll(); simulate(); showTab("resumen");
+function showTab(t){
+  state.tab=t;
+  document.querySelectorAll(".section").forEach(s=>s.classList.toggle("on",s.id===t));
+  document.querySelectorAll(".tab").forEach(b=>{b.classList.toggle("on",b.dataset.tab===t);if(b.dataset.tab===t){b.setAttribute("aria-current","page");b.scrollIntoView({block:"nearest",inline:"nearest"});}else b.removeAttribute("aria-current");});
+  document.getElementById("period").classList.toggle("fixed",FIXED_TABS.includes(t));
+  window.scrollTo({top:0});
 }
-function bindLocalControls(){
- document.querySelectorAll(".shared-period-tabs .period-tab").forEach(btn=>{
-   btn.addEventListener("click",()=>{state.period=btn.dataset.period; renderAll();});
- });
-}
-function bind(){
- document.querySelectorAll(".nav-link").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
- document.querySelectorAll("[data-summary-kpi]").forEach(c=>c.addEventListener("click",e=>{if(e.target.closest("[data-target-tab]"))return;state.summaryKpi=c.dataset.summaryKpi;renderSummaryExplorer();}));
- document.addEventListener("click",e=>{const b=e.target.closest("[data-summary-month]");if(b)toggleSummaryMonth(b.dataset.summaryMonth);});
- document.querySelectorAll("[data-target-tab]").forEach(c=>c.addEventListener("click",e=>{e.stopPropagation();showTab(c.dataset.targetTab);}));
- const a=document.getElementById("compareA"), b=document.getElementById("compareB");
- if(a) a.addEventListener("change",renderCompare); if(b) b.addEventListener("change",renderCompare);
- const swap=document.getElementById("swapCompare"); if(swap) swap.addEventListener("click",()=>{const t=a.value;a.value=b.value;b.value=t;renderCompare();});
- ["invInitial","invFinal","apeToggle"].forEach(id=>{const el=document.getElementById(id);if(el) el.addEventListener("input",simulate);});
- const simReset=document.getElementById("simReset"); if(simReset) simReset.addEventListener("click",()=>{document.getElementById("invInitial").value="";document.getElementById("invFinal").value="";document.getElementById("apeToggle").value="0";simulate();});
- const close=document.getElementById("modalClose"); if(close) close.addEventListener("click",()=>document.getElementById("detailDialog").close());
- const dlg=document.getElementById("detailDialog"); if(dlg) dlg.addEventListener("click",e=>{if(e.target===e.currentTarget)e.currentTarget.close();});
-}
-
-const accessForm=document.getElementById("accessForm");
-if(accessForm) accessForm.addEventListener("submit",handleAccess);
-if(sessionStorage.getItem("maraFinanceAccess")==="1") unlockDashboard();
-
-initSelectors();
-bind();
-bindLocalControls();
-renderAll();
-renderPayrollLocal();
-renderCashLocal();
-simulate();
+(function init(){
+  const p=document.getElementById("period");
+  [["YTD","Ene–Jun"],...MONTHS.map(m=>[m,SHORT[m]])].forEach(([k,l])=>{const b=document.createElement("button");b.type="button";b.className="pbtn";b.dataset.p=k;b.textContent=l;b.addEventListener("click",()=>{state.period=k;renderAll();});p.insertBefore(b,p.querySelector(".period-fixed"));});
+  ["cmpA","cmpB"].forEach((id,i)=>{const s=document.getElementById(id);s.innerHTML=MONTHS.map(m=>`<option value="${m}">${CAP(m)}</option>`).join("");s.value=i?MONTHS[N-1]:MONTHS[0];s.addEventListener("change",renderCompare);});
+  document.getElementById("cmpSwap").addEventListener("click",()=>{const a=document.getElementById("cmpA"),b=document.getElementById("cmpB"),t=a.value;a.value=b.value;b.value=t;renderCompare();});
+  document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+  ["invIni","invFin"].forEach(id=>document.getElementById(id).addEventListener("input",simulate));
+  document.getElementById("apeT").addEventListener("change",simulate);
+  document.getElementById("simReset").addEventListener("click",()=>{document.getElementById("invIni").value="";document.getElementById("invFin").value="";document.getElementById("apeT").value="0";simulate();});
+  const bp=document.getElementById("btnPresent");
+  bp.addEventListener("click",()=>{const on=document.documentElement.classList.toggle("present");bp.classList.toggle("on",on);bp.setAttribute("aria-pressed",on);bp.textContent=on?"Salir de presentación":"Presentar";
+    try{if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!on&&document.fullscreenElement)document.exitFullscreen();}catch(e){}});
+  document.getElementById("btnPrint").addEventListener("click",()=>window.print());
+  document.addEventListener("keydown",e=>{
+    if(!document.documentElement.classList.contains("present"))return;
+    if(["INPUT","SELECT","TEXTAREA"].includes(document.activeElement.tagName))return;
+    const i=TABS.indexOf(state.tab);
+    if(e.key==="ArrowRight"&&i<TABS.length-1){showTab(TABS[i+1]);e.preventDefault();}
+    if(e.key==="ArrowLeft"&&i>0){showTab(TABS[i-1]);e.preventDefault();}
+  });
+  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.documentElement.classList.contains("present"))bp.click();});
+  let rz;window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(renderAll,200);});
+  renderAll();
+})();
 </script>
-</body></html>
+</body>
+</html>
