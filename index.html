@@ -872,44 +872,56 @@ function simulate(){
 
 /* ---------- Diagnóstico: relato para socios e inversionistas ---------- */
 function renderDiag(){
-  const last=MONTHS[N-1],firstJ=PROV[0];
-  const h1Res=H1_MONTHS.map(m=>M[m].sales-M[m].inventory-M[m].payroll-M[m].opex);
-  const sH1=h1Res.reduce((a,x)=>a+x,0);
+  const last=MONTHS[N-1],avg=T.sales/N,drop=M[last].sales/M.ENERO.sales-1;
+  const over=MONTHS.filter(m=>M[m].sales>=beOf(m));
+  let st=N; for(let i=N-1;i>=0&&M[MONTHS[i]].sales<beOf(MONTHS[i]);i--) st=i;
+  const underTail=MONTHS.slice(st), lowest=MONTHS.reduce((a,m)=>M[m].sales<M[a].sales?m:a);
   const monthRes=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex}));
+  const sH1=monthRes.filter(x=>!isProv(x.k)).reduce((a,x)=>a+x.v,0);
+  const baseH1=S.sales-S.inventory-S.payroll-H1.opex-H1.known_finance;
   const jRes=PROV.map(m=>({m,op:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex,fin:(M[m].finance||0)+(M[m].interest||0),pila:M[m].pila}));
-  const overH1=H1_MONTHS.filter(m=>M[m].sales>=BE);
   const iso=document.getElementById("isoLogo").src;
   const COSTS=S.payroll+S.inventory+H1.opex, COST_GAP=COSTS-S.sales;
   const structure=[["Nómina",S.payroll],["Compras",S.inventory],["Ocupación",OCC_H1],["Otros gastos operativos",H1.opex-OCC_H1]].map(x=>[x[0],x[1]/COSTS,x[1]]);
   const per100=v=>"$"+nf(v*100,1);
-  const h1c=counts(H1_MONTHS),avg=(f,ms)=>sumM(f,ms)/ms.length,catAvg=(c,ms)=>ms.reduce((a,m)=>a+(M[m].opexCat[c]||0),0)/ms.length;
-  const cmp=[["Nómina",avg("payroll",H1_MONTHS),avg("payroll",PROV)],["Ocupación",catAvg("Ocupación",H1_MONTHS),catAvg("Ocupación",PROV)],["Otros gastos operativos",H1.opex/N6-catAvg("Ocupación",H1_MONTHS),J.opex/NJ-catAvg("Ocupación",PROV)],["Estructura fija mensual",FIXED_MONTH,FIXED_JP],["Venta de equilibrio",BE,BE_JP]];
-  const cmpMax=Math.max(...cmp.map(x=>Math.max(x[1],x[2])));
-  const cases=[[`Nivel de ${LOW(last)}`,M[last].sales],["Equilibrio",BE_JP],["Meta $50 M",50e6],["Meta $55 M",55e6]].map(c=>[c[0],c[1],resultAt(c[1])]);
+  const h1c=counts(H1_MONTHS);
+  const worst=monthRes.filter(x=>!isProv(x.k)).sort((a,b)=>a.v-b.v).slice(0,2).sort((a,b)=>MONTHS.indexOf(a.k)-MONTHS.indexOf(b.k));
+  const cases=[[`Nivel de ${LOW(last)}`,M[last].sales],["Equilibrio",BE_JP],["Ventas de $50 M",50e6],["Ventas de $55 M",55e6]].map(c=>[c[0],c[1],resultAt(c[1])]);
   const maxAbs=Math.max(...cases.map(c=>Math.abs(c[2])))||1;
-  const reduction=1-FIXED_JP/FIXED_MONTH;
+  const underVals=underTail.map(m=>M[m].sales);
 
   setHTML("story",`
   <div class="s-hero">
     <div>
-      <h3>Cerramos una sede y la estructura bajó ${pct(reduction,0)}. Ahora Jardín Plaza necesita vender ${fM(BE_JP,1)} al mes.</h3>
-      <p>Consolidamos enero a agosto de 2026. Hasta junio MARANELLO operó con dos sedes y una estructura que costaba más de lo que vendíamos. Desde julio operamos solo en ${JA.site}, tras cerrar ${JA.closedSite}. Esta es la situación, lo que significa y lo que proponemos hacer.</p>
+      <h3>MARANELLO sabe vender. Hoy su estructura cuesta más de lo que estamos vendiendo.</h3>
+      <p>Consolidamos enero a agosto de 2026. Hasta junio operamos con dos sedes; en julio cerramos ${JA.closedSite} y hoy operamos solo en ${JA.site}. El mercado existe, pero desde ${LOW(MONTHS[st])} las ventas están por debajo de lo que la operación necesita. Esta es la situación, lo que significa y lo que proponemos hacer.</p>
     </div>
     <img src="${iso}" alt="">
   </div>
 
   <div class="s-figs">
     <div class="s-fig"><b>${fM(T.sales)}</b><span>Ventas netas de enero a agosto</span></div>
-    <div class="s-fig"><b>${fM(BE_JP,1)}</b><span>Venta mensual de equilibrio de ${JA.site}</span></div>
-    <div class="s-fig bad"><b>${fM(M[last].sales,1)}</b><span>Ventas de ${LOW(last)}, ${pct(M[last].sales/BE_JP,0)} del equilibrio</span></div>
-    <div class="s-fig bad"><b>${fM(T.close)}</b><span>Caja al 31 de agosto, frente a ${fM(SEP_DUE)} en pagos de septiembre</span></div>
+    <div class="s-fig bad"><b>${pct(drop)}</b><span>Ventas de ${LOW(last)} frente a enero</span></div>
+    <div class="s-fig"><b>${fM(BE_JP,1)}</b><span>Venta mensual necesaria para el equilibrio con una sede</span></div>
+    <div class="s-fig bad"><b>${fM(T.close)}</b><span>Caja al 31 de agosto, antes de ${fM(SEP_DUE)} en pagos de septiembre</span></div>
   </div>
 
   <div class="chapter">
     <div class="ch-text">
-      <h3>Con dos sedes, la estructura quedó grande para las ventas</h3>
-      <p>Entre enero y junio vendimos ${fM(S.sales)}. Solo ${list(overH1.map(LOW))} superaron los ${fM(BE,1)} que necesitaba la operación de dos sedes, y el resultado operativo del semestre fue <b>${fM(sH1)}</b>.</p>
-      <p>De cada $100 de costo, ${per100(structure[0][1])} fueron nómina, ${per100(structure[1][1])} compras, ${per100(structure[2][1])} ocupación y ${per100(structure[3][1])} el resto de gastos. En total <b>gastamos $${nf(COSTS/S.sales*100,0)} por cada $100 vendidos</b>.</p>
+      <h3>Sabemos vender, pero llevamos ${underTail.length} meses por debajo del equilibrio</h3>
+      <p>Vendimos <b>${fM(T.sales)}</b> en ocho meses, un promedio de ${fM(avg)} al mes. En ${list(over.map(LOW))} superamos los ${fM(BE,1)} que necesitaba la operación de dos sedes.</p>
+      <p>Desde ${LOW(MONTHS[st])} no volvimos a ese nivel: ${list(underTail.map(m=>`${LOW(m)} ${fM(M[m].sales,1)}`))}. ${CAP(lowest)} fue el mes más bajo del año, ${pct(Math.abs(M[lowest].sales/M.ENERO.sales-1))} por debajo de enero. Con el cierre de ${JA.closedSite} el equilibrio bajó a ${fM(BE_JP,1)}, y aun así julio quedó justo en el límite y agosto por debajo.</p>
+      <p><b>La demanda está demostrada; el reto es volver a sostenerla.</b></p>
+    </div>
+    <div class="ch-visual"><p class="cap">Ventas netas por mes y equilibrio de cada estructura, millones de pesos</p><div class="chart diag-chart" id="dvSales"></div></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-text">
+      <h3>La estructura quedó grande para las ventas</h3>
+      <p>En enero–junio, con dos sedes, de cada $100 de costo ${per100(structure[0][1])} fueron nómina, ${per100(structure[1][1])} compras, ${per100(structure[2][1])} ocupación de los locales y ${per100(structure[3][1])} el resto de gastos operativos.</p>
+      <p>El problema es el tamaño: esos costos sumaron <b>${fM(COSTS)}</b> frente a ventas de ${fM(S.sales)}, es decir, <b>gastamos $${nf(COSTS/S.sales*100,0)} por cada $100 vendidos</b>.</p>
+      <p>Nómina y ocupación no bajan cuando bajan las ventas. Al nivel de ventas promedio, cada punto porcentual de costo fijo sobre ventas equivale a unos <b>${fM(avg*0.01)} al mes</b>.</p>
     </div>
     <div class="ch-visual"><p class="cap">Cómo se reparten los costos de enero–junio</p><div class="hb">${structure.map(x=>`<div class="hb-row two${x[0]==="Ocupación"?' hl':''}"><span class="hb-name">${x[0]}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/structure[0][1]*100).toFixed(1)}%"></div></div><span class="hb-num">${pct(x[1])}<small>${fM(x[2])}</small></span></div>`).join("")}<div class="hb-row two"><span class="hb-name"><b>Total costos</b></span><span></span><span class="hb-num"><b>100,0 %</b><small>${fM(COSTS)}</small></span></div></div>
       <div class="s-gap">Los costos superaron las ventas en <b>${fM(COST_GAP)}</b> (${pct(COST_GAP/S.sales)} de las ventas).</div></div>
@@ -917,59 +929,47 @@ function renderDiag(){
 
   <div class="chapter">
     <div class="ch-text">
-      <h3>El cierre de ${JA.closedSite} redujo la estructura</h3>
-      <p>Desde julio el equipo pasó de ${Math.min(...h1c)}–${Math.max(...h1c)} a ${list(PROV.map(m=>String(M[m].people.length)))} personas con pagos por mes, contando el personal por turnos. La nómina bajó de ${fM(cmp[0][1],1)} a ${fM(cmp[0][2],1)} al mes y la ocupación de ${fM(cmp[1][1],1)} a ${fM(cmp[1][2],1)}.</p>
-      <p>La estructura fija mensual, incluidos los gastos financieros conocidos, pasó de ${fM(FIXED_MONTH,1)} a <b>${fM(FIXED_JP,1)}</b>. Con eso, la venta necesaria para el equilibrio bajó de ${fM(BE,1)} a <b>${fM(BE_JP,1)} al mes</b>.</p>
-      <p>Para julio y agosto las compras y gastos incluyen el IVA pagado como costo, los servicios públicos, la contadora y el marketing.</p>
+      <h3>El cierre de ${JA.closedSite} redujo la estructura, pero todavía no alcanza</h3>
+      <p>Con dos sedes, enero–junio dejó un resultado operativo de <b>${fM(sH1)}</b> antes de gastos financieros; ${list(worst.map(x=>`${LOW(x.k)} ${fM(x.v,1)}`))} fueron los peores meses.</p>
+      <p>Desde julio el equipo pasó de ${Math.min(...h1c)}–${Math.max(...h1c)} a ${list(PROV.map(m=>String(M[m].people.length)))} personas con pagos, y la estructura fija mensual bajó de ${fM(FIXED_MONTH,1)} a <b>${fM(FIXED_JP,1)}</b>. El resultado operativo fue ${list(jRes.map(x=>`${fM(x.op,1)} en ${LOW(x.m)}`))}; con gastos financieros y PILA, ${list(jRes.map(x=>`${fM(x.op-x.fin-x.pila,1)} en ${LOW(x.m)}`))}.</p>
+      <p>El ajuste va en la dirección correcta, pero con las ventas actuales ${JA.site} todavía no cubre su estructura.</p>
     </div>
-    <div class="ch-visual"><p class="cap">Promedio mensual, antes y después del cierre</p>
-      <div class="pair-legend"><span><i style="background:#8FA9CF"></i>Dos sedes (Ene–Jun)</span><span><i style="background:#2F7479"></i>${JA.site} (Jul–Ago)</span></div>
-      <div class="pairs">${cmp.map(x=>`<div class="pair"><span class="pair-name">${x[0]}</span><div class="pair-bars"><div class="pb" style="width:${(x[1]/cmpMax*100).toFixed(1)}%;background:#8FA9CF"></div><div class="pb" style="width:${(x[2]/cmpMax*100).toFixed(1)}%;background:#2F7479"></div></div><span class="pair-num">${fM(x[1],1)}<br><b>${fM(x[2],1)}</b></span></div>`).join("")}</div>
-    </div>
+    <div class="ch-visual"><p class="cap">Resultado operativo aproximado por mes, millones de pesos</p><div class="chart diag-chart" id="dvResult"></div></div>
   </div>
 
   <div class="chapter alert">
     <div class="ch-text">
-      <h3>${JA.site} está cerca del equilibrio, pero todavía por debajo</h3>
-      <p>${list(jRes.map((x,i)=>`${i?LOW(x.m):CAP(x.m)} vendió ${fM(M[x.m].sales,1)} (${pct(M[x.m].sales/BE_JP,1)} del equilibrio)`))}.</p>
-      <p>Antes de gastos financieros y PILA, el resultado operativo fue ${list(jRes.map(x=>`${fM(x.op,1)} en ${LOW(x.m)}`))}. Sumando los gastos financieros conocidos queda en ${list(jRes.map(x=>`${fM(x.op-x.fin,1)} en ${LOW(x.m)}`))}, y con los aportes de PILA, en ${list(jRes.map(x=>`${fM(x.op-x.fin-x.pila,1)}`))}.</p>
-      <p><b>La nueva estructura funciona si las ventas vuelven a crecer: hoy nos faltan cerca de ${fM(BE_JP-M[last].sales,1)} al mes.</b></p>
-    </div>
-    <div class="ch-visual"><p class="cap">Ventas netas por mes y equilibrio de cada estructura, millones de pesos</p><div class="chart diag-chart" id="dvSales"></div></div>
-  </div>
-
-  <div class="chapter alert">
-    <div class="ch-text">
-      <h3>Septiembre exige cuidar la caja</h3>
-      <p>El saldo pasó de ${fM(S.close)} al cierre de junio a <b>${fM(T.close)}</b> al 31 de agosto. En septiembre vencen ${fM(TAX_DUE)} de INC e IVA (día 17) y ${fM(JA.emcali.total)} de EMCALI (día 21), que incluye ${fM(JA.emcali.pastDue)} vencidos con aviso de suspensión el ${JA.emcali.suspension}. Después de esos pagos quedarían cerca de <b>${fM(T.close-SEP_DUE)}</b>.</p>
-      <p>Las tarjetas de crédito llegaron a ${fM(M.AGOSTO.cards)} y el arriendo y los servicios de agosto traen intereses de mora: la caja se está sosteniendo con financiación de corto plazo.</p>
+      <h3>La caja subió, pero no por holgura</h3>
+      <p>El saldo pasó de ${fM(S.close)} al cierre de junio a <b>${fM(T.close)}</b> al 31 de agosto. En septiembre vencen ${fM(TAX_DUE)} de INC e IVA y ${fM(JA.emcali.total)} de EMCALI, que incluye ${fM(JA.emcali.pastDue)} vencidos con aviso de suspensión el ${JA.emcali.suspension}. Después de esos pagos quedarían cerca de <b>${fM(T.close-SEP_DUE)}</b>.</p>
+      <p>Al mismo tiempo, las tarjetas de crédito llegaron a ${fM(M.AGOSTO.cards)}, y el arriendo y los servicios de agosto traen intereses de mora: señales de presión en los pagos y de uso de financiación de corto plazo.</p>
+      <p>El crédito bancario tenía un saldo de capital de ${fM(H1.credit_principal)} al 30 de junio, y los compromisos con inversionistas suman presión, aunque no son la causa principal del desequilibrio.</p>
     </div>
     <div class="ch-visual"><p class="cap">Saldo de la cuenta empresarial, millones de pesos</p><div class="chart diag-chart" id="dvCash"></div></div>
   </div>
 
   <div class="chapter">
     <div class="ch-text">
-      <h3>Cuánto cambia el resultado si recuperamos ventas</h3>
-      <p>Con la estructura actual de ${JA.site} (${fM(FIXED_JP,1)} fijos al mes) y compras de ${pct(VAR_JP,0)} sobre las ventas, cada millón adicional de ventas deja cerca de ${fM((1-VAR_JP)*1e6)} para cubrir la estructura.</p>
-      <p>Al ritmo de ${LOW(last)} perdemos alrededor de ${fM(-cases[0][2],1)} al mes. Vendiendo $50 millones ganaríamos cerca de <b>${fM(cases[2][2],1)}</b>, y con $55 millones cerca de <b>${fM(cases[3][2],1)}</b>.</p>
-      <p>El ajuste de estructura ya se hizo; el siguiente paso es comercial.</p>
+      <h3>Qué cambia si recuperamos ventas</h3>
+      <p>Con la estructura actual de ${JA.site} y el mismo peso de las compras (${pct(VAR_JP)} de las ventas), el resultado mensual depende casi por completo del nivel de ventas.</p>
+      <p>Al ritmo de ${LOW(last)} perderíamos alrededor de ${fM(-cases[0][2],1)} al mes. Vendiendo $50 millones el negocio generaría cerca de <b>${fM(cases[2][2],1)} al mes</b>, y con $55 millones cerca de <b>${fM(cases[3][2],1)}</b>.</p>
+      <p>Es una estimación simple, pero muestra que el camino no pasa solo por recortar: recuperar ventas cambia el signo del resultado.</p>
     </div>
-    <div class="ch-visual"><p class="cap">Resultado mensual estimado de ${JA.site} según nivel de ventas (con gastos financieros, sin PILA)</p>
+    <div class="ch-visual"><p class="cap">Resultado mensual estimado según nivel de ventas (incluye gastos financieros conocidos)</p>
       <div class="whatif">${cases.map(c=>{const w=Math.abs(c[2])/maxAbs*50;return `<div class="wi"><span>${c[0]}<br><small style="color:var(--muted)">${fM(c[1],1)} en ventas</small></span><div class="wi-bar"><div class="z" style="left:50%"></div>${Math.abs(c[2])>1e5?`<div class="f" style="${c[2]<0?`right:50%`:`left:50%`};width:${w}%;background:${c[2]<0?'var(--orange)':'var(--teal-dk)'}"></div>`:""}</div><b class="${c[2]<-1e5?'neg':c[2]>1e5?'pos':''}">${Math.abs(c[2])<1e5?"≈ $0":fM(c[2],1)}</b></div>`;}).join("")}</div>
     </div>
   </div>
 
   <h3 class="s-block-title">Lo que proponemos</h3>
   <div class="proposals">
-    <div class="prop"><h4>Llevar ${JA.site} sobre ${fM(BE_JP,1)}</h4><p>Recuperar ventas con foco comercial en la única sede. ${CAP(last)} quedó ${fM(BE_JP-M[last].sales,1)} por debajo del equilibrio.</p><div class="measure"><b>Cómo lo mediremos:</b> ventas netas mensuales frente a ${fM(BE_JP,1)}.</div></div>
-    <div class="prop"><h4>Proteger la caja de septiembre</h4><p>Priorizar INC e IVA (${fM(TAX_DUE)}) y EMCALI (${fM(JA.emcali.total)}) para evitar sanciones y la suspensión del servicio, y frenar el crecimiento de las tarjetas.</p><div class="measure"><b>Cómo lo mediremos:</b> saldo de caja semanal y saldo de tarjetas.</div></div>
-    <div class="prop"><h4>Cerrar las cifras que faltan</h4><p>Inventario físico valorizado al 31 de agosto para conocer el costo real de alimentos, y extracto bancario de julio.</p><div class="measure"><b>Cómo lo mediremos:</b> costo de ventas y margen bruto mensual.</div></div>
+    <div class="prop"><h4>Recuperar ventas</h4><p>Volver a vender por encima de ${fM(BE_JP,1)} al mes en ${JA.site}. ${CAP(last)} quedó ${fM(BE_JP-M[last].sales,1)} por debajo.</p><div class="measure"><b>Cómo lo mediremos:</b> ventas netas mensuales frente al equilibrio.</div></div>
+    <div class="prop"><h4>Ajustar nómina y ocupación</h4><p>En enero–junio la nómina pesó ${pct(S.payroll/S.sales)} de las ventas y la ocupación ${pct(OCC_H1/S.sales)}. Con una sede bajaron a ${pct(J.payroll/J.sales)} y ${pct(catSum("opexCat",PROV)["Ocupación"]/J.sales)}; hay que sostener ese ajuste sin afectar el servicio.</p><div class="measure"><b>Cómo lo mediremos:</b> nómina y ocupación como porcentaje de las ventas de cada mes.</div></div>
+    <div class="prop"><h4>Conocer el costo real de alimentos</h4><p>Valorizar el inventario físico al 31 de agosto para pasar de compras a costo de ventas y conocer el margen bruto real.</p><div class="measure"><b>Cómo lo mediremos:</b> costo de ventas y margen bruto mensual.</div></div>
   </div>
 
   <div class="s-close">
     <h3>Nuestra lectura</h3>
-    <p>MARANELLO tomó una decisión de fondo: cerrar ${JA.closedSite} y concentrarse en ${JA.site}. La estructura bajó de ${fM(FIXED_MONTH,1)} a ${fM(FIXED_JP,1)} al mes, y el negocio quedó a una distancia alcanzable del equilibrio.</p>
-    <p>El reto ahora es vender por encima de ${fM(BE_JP,1)} al mes y ordenar la caja de corto plazo. Contamos con una base financiera organizada para seguirlo mes a mes.</p>
+    <p>MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable. Tenía una estructura pensada para vender cerca de $74–75 millones al mes; con el cierre de ${JA.closedSite} la redujimos a una que se equilibra con ${fM(BE_JP,1)}. Cuando las ventas caen a entre $${nf(Math.min(...underVals)/1e6,0)} y $${nf(Math.max(...underVals)/1e6,0)} millones, nómina, ocupación y servicios presionan el resultado y la caja.</p>
+    <p>La situación requiere seguimiento cercano, sobre todo de las ventas y de la caja de septiembre. Hoy contamos con una base financiera organizada para decidir con información y no solo con percepciones.</p>
   </div>
 
   <details class="fold method">
@@ -978,20 +978,23 @@ function renderDiag(){
       ${JA.controls.map(c=>`<li><b>${c[0]}:</b> ${c[1]}</li>`).join("")}
       <li><b>Instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
       <li><b>Partidas mixtas y activos de enero–junio:</b> ${fM(H1.mixed+H1.assets_policy)} por clasificar.</li>
+      <li><b>Ventas “por pagar”:</b> conciliar ${fM(H1.sales_pending)} con bancos.</li>
     </ul></div>
   </details>
   <details class="fold method">
     <summary><b>Notas metodológicas y fuentes</b><span>Cómo se construyeron las cifras.</span></summary>
     <div class="fold-body">
-      <p><b>Enero–junio:</b> cierre validado V11.3, dos sedes, sin reprocesar. <b>Julio–agosto:</b> cierre gerencial V12.2, solo ${JA.site}, con ajustes: IVA de compras y gastos como mayor valor del costo (${fM(J.iva)}), pagos por turnos de agosto, servicios públicos EMCALI (julio estimado igual a agosto), contadora y marketing.</p>
-      <p><b>Resultado operativo:</b> ventas − compras − nómina − gastos operativos. No descuenta PILA ni gastos financieros; las compras hacen de costo de alimentos hasta valorizar inventarios.</p>
+      <p><b>Enero–junio:</b> cierre validado V11.3, dos sedes, sin reprocesar. <b>Julio–agosto:</b> cierre gerencial V12.2, solo ${JA.site}, con IVA de compras y gastos como mayor valor del costo (${fM(J.iva)}), pagos por turnos de agosto, servicios públicos EMCALI (julio estimado igual a agosto), contadora y marketing.</p>
+      <p><b>Resultado operativo:</b> ventas − compras − nómina − gastos operativos. No descuenta PILA ni gastos financieros; las compras hacen de costo de alimentos hasta valorizar inventarios. Como referencia validada, enero–junio con inventarios iguales cerraría en ${fM(baseH1)} con gastos financieros (${fM(baseH1-H1.ape_interest)} con interés APE).</p>
       <p><b>Equilibrio de cada estructura:</b> (gastos operativos + nómina + gastos financieros conocidos) por mes, dividido entre 1 − compras/ventas. Dos sedes: ${fM(BE,1)}. ${JA.site}: ${fM(BE_JP,1)}; con PILA, ${fM(BE_JP_PILA,1)}.</p>
-      <p><b>Fuentes:</b> ventas POS y facturación electrónica, documentos UBL, nómina y PILA, extractos bancarios, recibos de servicios públicos, impuestos y financiación.</p>
+      <p><b>Escenarios por nivel de ventas:</b> ventas × (1 − ${pct(VAR_JP)}) − estructura mensual de ${fM(FIXED_JP)}.</p>
+      <p><b>Fuentes:</b> ventas POS y facturación electrónica, documentos UBL, correo, WhatsApp, nómina y PILA, bancos, recibos de servicios públicos, impuestos, financiación e inversionistas.</p>
     </div>
   </details>`);
   const W=el=>Math.max(320,Math.round(el.clientWidth||520));
-  const dS=document.getElementById("dvSales"),dC=document.getElementById("dvCash");
+  const dS=document.getElementById("dvSales"),dR=document.getElementById("dvResult"),dC=document.getElementById("dvCash");
   dS.innerHTML=barChart({box:{W:W(dS),H:240},label:"Ventas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=beOf(x.k)?"#2F7479":"#224D8E",step:true,noSel:true});
+  dR.innerHTML=barChart({box:{W:W(dR),H:230},label:"Resultado por mes",data:monthRes,color:x=>x.v<0?"#E96C24":"#2F7479",noSel:true});
   dC.innerHTML=lineChart({W:W(dC),H:230},[{k:"INICIO",v:M.ENERO.bank.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo de caja",true);
 }
 
