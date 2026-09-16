@@ -9,16 +9,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#224D8E; --navy-dk:#183A6B; --teal:#6DC1CB; --teal-dk:#2F7479; --yellow:#FABF00; --orange:#E96C24; --red:#B84D22;
+  --navy:#224D8E; --navy-dk:#183A6B; --teal:#6DC1CB; --teal-dk:#2F7479; --yellow:#FABF00; --orange:#E96C24;
   --ink:#22303D; --muted:#5F6B77; --line:#DDE4EB; --wash:#F3F6FA; --paper:#FFFFFF;
   --good:#2F7479; --good-bg:#E4F4F5; --warn:#7A5B00; --warn-bg:#FFF3C4; --bad:#A8441C; --bad-bg:#FCE7DA;
   --f-body:"Barlow",Arial,Helvetica,sans-serif;
   --f-num:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
-  --r-sm:6px; --r-md:10px;
+  --r-sm:6px; --r-md:10px; --gap:12px;
 }
 *{box-sizing:border-box}
 html{font-size:16px;-webkit-text-size-adjust:100%}
-html.present{font-size:19px}
 body{margin:0;font-family:var(--f-body);color:var(--ink);background:var(--wash);line-height:1.45;overflow-x:hidden}
 button,select,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
@@ -36,66 +35,68 @@ button,select,input{font:inherit;color:inherit}
 body.locked .app{visibility:hidden}
 
 /* ---------- Encabezado ---------- */
-.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
-.top::after{content:"";display:block;height:4px;background:var(--yellow)}
-.top-row{max-width:1320px;margin:auto;display:flex;align-items:center;gap:20px;padding:10px 20px}
-.brand img{height:42px;width:auto;display:block}
-.brand-meta{border-left:1px solid var(--line);padding-left:16px}
-.brand-meta b{display:block;font-family:var(--f-num);font-size:1.25rem;color:var(--navy);line-height:1.1}
-.brand-meta span{font-size:.78rem;color:var(--muted)}
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:4px solid var(--yellow)}
+.top-row{max-width:1440px;margin:auto;display:flex;align-items:center;gap:18px;padding:8px 20px 4px}
+.brand img{height:38px;width:auto;display:block}
+.brand-meta{border-left:1px solid var(--line);padding-left:14px}
+.brand-meta b{display:block;font-family:var(--f-num);font-size:1.2rem;color:var(--navy);line-height:1.1}
+.brand-meta span{font-size:.76rem;color:var(--muted)}
 .top-actions{margin-left:auto;display:flex;gap:8px}
-.btn{border:1px solid var(--navy);background:var(--paper);color:var(--navy);border-radius:var(--r-sm);padding:7px 12px;font-weight:600;font-size:.85rem;cursor:pointer}
+.btn{border:1px solid var(--navy);background:var(--paper);color:var(--navy);border-radius:var(--r-sm);padding:6px 12px;font-weight:600;font-size:.84rem;cursor:pointer}
 .btn:hover{background:var(--wash)}
 .btn.on{background:var(--navy);color:#fff}
-.bar-row{max-width:1320px;margin:auto;display:flex;align-items:center;gap:16px;padding:0 20px;flex-wrap:wrap}
+.bar-row{max-width:1440px;margin:auto;display:flex;align-items:center;gap:16px;padding:0 20px;flex-wrap:wrap}
 .tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1 1 auto}
 .tabs::-webkit-scrollbar{display:none}
-.tab{border:0;background:transparent;padding:11px 12px 9px;font-weight:600;font-size:.92rem;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
+.tab{border:0;background:transparent;padding:9px 11px 7px;font-weight:600;font-size:.9rem;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent}
 .tab:hover{color:var(--navy)}
 .tab.on{color:var(--navy);border-bottom-color:var(--navy)}
-.period{display:flex;align-items:center;gap:4px;padding:6px 0;overflow-x:auto;scrollbar-width:none}
+.period{display:flex;align-items:center;gap:4px;padding:5px 0;overflow-x:auto;scrollbar-width:none}
 .period::-webkit-scrollbar{display:none}
-.period-label{font-size:.78rem;color:var(--muted);margin-right:4px;white-space:nowrap}
-.pbtn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 11px;font-size:.8rem;font-weight:600;color:var(--navy);cursor:pointer;white-space:nowrap}
+.period-label{font-size:.76rem;color:var(--muted);margin-right:4px;white-space:nowrap}
+.pbtn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:4px 10px;font-size:.8rem;font-weight:600;color:var(--navy);cursor:pointer;white-space:nowrap}
 .pbtn.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .period.fixed .pbtn{display:none}
-.period-fixed{display:none;font-size:.8rem;font-weight:600;color:var(--navy);background:var(--wash);border-radius:999px;padding:5px 11px}
+.period-fixed{display:none;font-size:.8rem;font-weight:600;color:var(--navy);background:var(--wash);border-radius:999px;padding:4px 10px}
 .period.fixed .period-fixed{display:inline-block}
 
 /* ---------- Estructura ---------- */
-main{max-width:1320px;margin:auto;padding:22px 20px 40px}
+main{max-width:1440px;margin:auto;padding:16px 20px 32px}
 .section{display:none}
-.section.on{display:block}
-.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 16px;flex-wrap:wrap}
-.sec-head h2{margin:0;font-family:var(--f-num);font-weight:700;font-size:2rem;color:var(--navy);line-height:1}
-.sec-head p{margin:0;color:var(--muted);font-size:.88rem;max-width:62ch}
-.grid{display:grid;gap:14px}
+.section.on{display:flex;flex-direction:column;gap:var(--gap)}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sec-head h2{margin:0;font-family:var(--f-num);font-weight:700;font-size:1.75rem;color:var(--navy);line-height:1}
+.sec-head p{margin:0;color:var(--muted);font-size:.84rem;max-width:70ch}
+.grid{display:grid;gap:var(--gap)}
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g6{grid-template-columns:repeat(6,minmax(0,1fr))}
 .g-wide{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr)}
-.mt{margin-top:14px}
-.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;min-width:0}
-.panel h3{margin:0 0 2px;font-size:1rem;color:var(--ink);font-weight:700}
-.panel .hint{margin:0 0 10px;font-size:.8rem;color:var(--muted)}
-.note{font-size:.78rem;color:var(--muted);margin:10px 0 0;line-height:1.45}
+.col{display:flex;flex-direction:column;gap:var(--gap);min-width:0}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 16px;min-width:0}
+.p-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px}
+.panel h3{margin:0;font-size:.98rem;color:var(--ink);font-weight:700}
+.hint{margin:1px 0 0;font-size:.78rem;color:var(--muted)}
+.note{font-size:.76rem;color:var(--muted);margin:6px 0 0;line-height:1.4}
+.link-btn{border:0;background:none;color:var(--navy);font-weight:600;font-size:.8rem;cursor:pointer;padding:2px 0;white-space:nowrap}
+.link-btn:hover{text-decoration:underline}
 
 /* ---------- KPI ---------- */
-.kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;min-width:0}
-.kpi .lbl{font-size:.82rem;color:var(--muted);font-weight:600}
-.kpi .val{font-family:var(--f-num);font-weight:700;font-size:2.05rem;line-height:1.05;margin-top:4px;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.kpi .sub{font-size:.8rem;color:var(--muted);margin-top:4px}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:11px 14px;min-width:0}
+.kpi .lbl{display:flex;justify-content:space-between;gap:6px;font-size:.8rem;color:var(--muted);font-weight:600}
+.kpi .val{display:block;font-family:var(--f-num);font-weight:700;font-size:1.85rem;line-height:1.05;margin-top:3px;color:var(--ink);font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.kpi .sub{display:block;font-size:.77rem;color:var(--muted);margin-top:2px;line-height:1.35}
 .kpi.bad .val{color:var(--bad)} .kpi.good .val{color:var(--good)}
 .kpi.warnline{border-left:4px solid var(--orange)}
-button.kpi{display:flex;flex-direction:column;justify-content:flex-start;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color .12s ease}
+button.kpi{display:flex;flex-direction:column;width:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;transition:border-color .12s ease}
 button.kpi:hover{border-color:var(--navy)}
-.kpi .go{display:block;margin-top:auto;padding-top:10px;font-size:.8rem;font-weight:600;color:var(--navy)}
+.kpi .go{font-size:.74rem;color:var(--navy);font-weight:600;white-space:nowrap}
 button.kpi:hover .go{text-decoration:underline}
 
 /* ---------- Gráficos ---------- */
-svg{display:block;width:100%;height:auto}
+.chart svg{display:block;width:100%;height:auto}
 svg .axis{stroke:#C5CFD9;stroke-width:1}
-svg .grid-l{stroke:#EDF1F5;stroke-width:1}
 svg .val{font-family:var(--f-num);font-size:15px;font-weight:600;fill:var(--ink)}
 svg .val,svg .ref{paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round}
 svg .val.sel{fill:var(--navy);font-weight:700}
@@ -104,115 +105,189 @@ svg .tick.sel{fill:var(--navy);font-weight:700}
 svg .tick.small{font-size:11.5px;font-weight:500}
 svg .ref{font-size:12.5px;font-weight:700}
 svg .dim{opacity:.35}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:8px}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:.76rem;color:var(--muted);margin-top:4px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px;margin-right:5px;vertical-align:-1px}
 .legend i.dash{height:0;border-top:2px dashed var(--orange);border-radius:0;vertical-align:3px;width:16px}
 
 /* ---------- Barras horizontales ---------- */
-.hb{display:grid;gap:7px}
-.hb-row{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 5.6rem;gap:10px;align-items:center;font-size:.84rem}
+.hb{display:grid;gap:5px}
+.hb-row{display:grid;grid-template-columns:minmax(0,11rem) minmax(0,1fr) 5.4rem;gap:10px;align-items:center;font-size:.8rem}
 .hb-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hb-track{height:14px;background:var(--wash);border-radius:3px;overflow:hidden}
+.hb-track{height:11px;background:var(--wash);border-radius:3px;overflow:hidden}
 .hb-fill{height:100%;background:var(--teal);border-radius:3px}
 .hb-row.hl .hb-fill{background:var(--orange)} .hb-row.hl .hb-name{font-weight:700}
-.hb-num{text-align:right;font-family:var(--f-num);font-weight:600;font-size:.98rem;font-variant-numeric:tabular-nums}
-.hb-num small{display:block;font-family:var(--f-body);font-size:.7rem;color:var(--muted);font-weight:500}
+.hb-row.nav .hb-fill{background:var(--navy)}
+.hb-num{text-align:right;font-family:var(--f-num);font-weight:600;font-size:.95rem;font-variant-numeric:tabular-nums;line-height:1.1}
+.hb-num small{display:block;font-family:var(--f-body);font-size:.68rem;color:var(--muted);font-weight:500}
 
 /* ---------- Tablas ---------- */
-details.data{margin-top:14px;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md)}
-details.data summary{cursor:pointer;padding:11px 16px;font-weight:600;font-size:.88rem;color:var(--navy);list-style:none}
-details.data summary::-webkit-details-marker{display:none}
-details.data summary::before{content:"+";display:inline-block;width:1.1em;font-weight:700}
-details.data[open] summary::before{content:"−"}
-.tw{overflow-x:auto;padding:0 16px 14px}
-table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:520px}
-th{text-align:left;font-weight:600;color:var(--muted);border-bottom:2px solid var(--line);padding:8px;white-space:nowrap}
-td{padding:8px;border-bottom:1px solid var(--line)}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{text-align:left;font-weight:600;color:var(--muted);border-bottom:2px solid var(--line);padding:7px 8px;white-space:nowrap}
+td{padding:7px 8px;border-bottom:1px solid var(--line)}
 .num{text-align:right;font-variant-numeric:tabular-nums}
 tr.sel td{background:#FFF7D6;font-weight:600}
 tr.tot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
 .neg{color:var(--bad)} .pos{color:var(--good)}
 
 /* ---------- Matriz de turnos ---------- */
-.roster{min-width:560px}
-.roster td,.roster th{padding:5px 6px;text-align:center}
+.roster{min-width:460px;font-size:.78rem}
+.roster td,.roster th{padding:2px 5px;text-align:center;border-bottom:1px solid #EEF2F6}
 .roster td:first-child,.roster th:first-child{text-align:left;white-space:nowrap}
-.cell{display:inline-block;width:100%;max-width:44px;height:18px;border-radius:3px;background:var(--wash)}
+.roster thead th{position:sticky;top:0;background:var(--paper);z-index:1}
+.cell{display:inline-block;width:100%;max-width:40px;height:12px;border-radius:2px;background:var(--wash);vertical-align:middle}
 .cell.in{background:var(--teal)}
 .roster .colsel{background:#FFF7D6}
-.roster tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
+.roster tfoot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0;position:sticky;bottom:0;background:var(--paper)}
 
-/* ---------- Comparador / simulador ---------- */
+/* ---------- Comparador / simulador / filas ---------- */
 .fields{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
-.field label{display:block;font-size:.78rem;color:var(--muted);font-weight:600;margin-bottom:4px}
-.field select,.field input{min-width:150px;min-height:40px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);padding:7px 9px;font-size:.95rem}
-.cmp-out{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
-.mini{background:var(--wash);border-radius:var(--r-sm);padding:10px 12px}
-.mini span{display:block;font-size:.76rem;color:var(--muted);font-weight:600}
-.mini b{display:block;font-family:var(--f-num);font-size:1.45rem;font-variant-numeric:tabular-nums}
-.callout{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 13px;font-size:.84rem}
+.field label{display:block;font-size:.76rem;color:var(--muted);font-weight:600;margin-bottom:3px}
+.field select,.field input{min-width:130px;min-height:36px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--paper);padding:6px 8px;font-size:.92rem}
+.minis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.minis.four{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mini{background:var(--wash);border-radius:var(--r-sm);padding:8px 11px}
+.mini span{display:block;font-size:.74rem;color:var(--muted);font-weight:600}
+.mini b{display:block;font-family:var(--f-num);font-size:1.4rem;font-variant-numeric:tabular-nums}
+.callout{border-left:4px solid var(--navy);background:var(--wash);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:8px 12px;font-size:.82rem}
 .callout.warn{border-left-color:var(--yellow);background:var(--warn-bg)}
 .callout.bad{border-left-color:var(--orange);background:var(--bad-bg)}
-.rows .r{display:grid;grid-template-columns:1fr auto;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.88rem}
+.rows .r{display:grid;grid-template-columns:1fr auto;gap:12px;padding:6px 0;border-bottom:1px solid var(--line);font-size:.85rem}
 .rows .r:last-child{border-bottom:0}
-.rows .r b{font-family:var(--f-num);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.rows .r b{font-family:var(--f-num);font-size:1.02rem;font-variant-numeric:tabular-nums}
 
-/* ---------- Diagnóstico ---------- */
-.diag{width:100%}
-.diag-figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:18px}
-.diag article{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;margin-bottom:12px}
-.diag article h3{margin:0 0 8px;font-family:var(--f-num);font-size:1.4rem;color:var(--navy);font-weight:700}
-.diag article p{margin:0 0 9px;font-size:.98rem;line-height:1.6}
-.diag article p:last-child{margin-bottom:0}
-.diag article.alert{border-left:6px solid var(--orange)}
-.diag article.close{border-left:6px solid var(--teal)}
-.diag ul{margin:6px 0 0 18px;padding:0}
-.diag li{margin:0 0 6px;font-size:.92rem}
+/* Bloque plegable (simulador) */
+details.fold{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md)}
+details.fold>summary{cursor:pointer;list-style:none;padding:10px 16px;display:flex;align-items:center;gap:10px}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::before{content:"";width:8px;height:8px;border-right:2.5px solid var(--navy);border-bottom:2.5px solid var(--navy);transform:rotate(-45deg);transition:transform .15s ease;flex:none;margin:0 2px}
+details.fold[open]>summary::before{transform:rotate(45deg)}
+details.fold>summary b{font-size:.95rem}
+details.fold>summary span{font-size:.78rem;color:var(--muted)}
+.fold-body{padding:0 16px 14px}
 
-footer{max-width:1320px;margin:auto;padding:0 20px 28px;font-size:.76rem;color:var(--muted)}
+/* Diálogo de tablas */
+dialog{border:0;border-radius:var(--r-md);padding:0;width:min(860px,calc(100% - 24px));box-shadow:0 20px 60px rgba(24,58,107,.25)}
+dialog::backdrop{background:rgba(24,58,107,.45)}
+.dlg-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line)}
+.dlg-head h3{margin:0;font-size:1rem;color:var(--navy)}
+.dlg-body{padding:6px 16px 16px;max-height:75vh;overflow:auto}
+
+/* ---------- Diagnóstico narrativo ---------- */
+.story{display:flex;flex-direction:column;gap:14px}
+.s-hero{background:var(--paper);border:1px solid var(--line);border-bottom:5px solid var(--yellow);border-radius:var(--r-md);padding:26px 30px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center}
+.s-hero h3{margin:0 0 10px;font-family:var(--f-num);font-weight:700;font-size:2.6rem;line-height:1.05;color:var(--navy);max-width:28ch}
+.s-hero p{margin:0;font-size:1.05rem;line-height:1.6;max-width:72ch}
+.s-hero img{width:150px;height:auto;opacity:.95}
+.s-figs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap)}
+.s-fig{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:14px 18px}
+.s-fig b{display:block;font-family:var(--f-num);font-size:2.2rem;line-height:1;color:var(--navy);font-variant-numeric:tabular-nums}
+.s-fig.bad b{color:var(--bad)}
+.s-fig span{display:block;margin-top:5px;font-size:.84rem;color:var(--muted)}
+.chapter{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);overflow:hidden}
+.ch-text{padding:22px 26px}
+.ch-text h3{margin:0 0 10px;font-family:var(--f-num);font-weight:700;font-size:1.65rem;line-height:1.1;color:var(--navy)}
+.ch-text p{margin:0 0 10px;font-size:1rem;line-height:1.62}
+.ch-text p:last-child{margin-bottom:0}
+.ch-visual{background:#F8FAFC;border-left:1px solid var(--line);padding:18px 22px;display:flex;flex-direction:column;justify-content:center}
+.ch-visual .cap{font-size:.78rem;color:var(--muted);margin:0 0 6px}
+.chapter.alert{border-left:6px solid var(--orange)}
+.whatif{display:grid;gap:8px}
+.wi{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr) 6rem;gap:10px;align-items:center;font-size:.86rem}
+.wi-bar{position:relative;height:16px;background:#E8EDF3;border-radius:3px}
+.wi-bar .z{position:absolute;top:-4px;bottom:-4px;border-left:2px solid var(--ink)}
+.wi-bar .f{position:absolute;top:0;bottom:0;border-radius:3px}
+.wi b{text-align:right;font-family:var(--f-num);font-size:1.05rem}
+.proposals{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.prop{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--navy);border-radius:var(--r-md);padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.prop h4{margin:0;font-family:var(--f-num);font-size:1.4rem;color:var(--navy);line-height:1.1}
+.prop p{margin:0;font-size:.93rem;line-height:1.55}
+.prop .measure{margin-top:auto;padding-top:10px;border-top:1px solid var(--line);font-size:.84rem;color:var(--muted)}
+.prop .measure b{color:var(--ink)}
+.s-close{background:var(--navy);color:#fff;border-radius:var(--r-md);padding:24px 30px;border-bottom:5px solid var(--yellow)}
+.s-close h3{margin:0 0 8px;font-family:var(--f-num);font-size:1.7rem;color:var(--yellow)}
+.s-close p{margin:0 0 8px;font-size:1.02rem;line-height:1.62;max-width:95ch}
+.s-close p:last-child{margin-bottom:0}
+.s-block-title{margin:8px 0 0;font-family:var(--f-num);font-size:1.5rem;color:var(--navy)}
+.story details.fold ul{margin:0 0 0 18px;padding:0}
+.story details.fold li{margin:0 0 6px;font-size:.9rem}
+.story details.fold p{font-size:.9rem;margin:0 0 8px}
+
+footer{max-width:1440px;margin:auto;padding:0 20px 24px;font-size:.74rem;color:var(--muted)}
 
 /* ---------- Modo presentación ---------- */
 html.present .method{display:none!important}
-html.present details.data{display:none}
-html.present .top-row{padding-top:6px;padding-bottom:6px}
+
+/* ---------- Vista ajustada a la pantalla (sin desplazamiento) ---------- */
+@media (min-width:1080px) and (min-height:620px){
+  body{height:100vh;overflow:hidden}
+  .app{height:100vh;display:flex;flex-direction:column}
+  .top{position:relative;flex:none}
+  main{flex:1;min-height:0;width:100%;overflow:hidden;padding:12px 20px 14px}
+  footer{display:none}
+  .section.on{height:100%;min-height:0}
+  .fill{flex:1;min-height:0}
+  .grid.fill{grid-template-rows:minmax(0,1fr)}
+  .panel.fill{display:flex;flex-direction:column}
+  .fill>.panel,.fill>.col>.panel.grow{display:flex;flex-direction:column;min-height:0}
+  .fill>.col{min-height:0;overflow-y:auto;scrollbar-width:thin}
+  #scenarios .kpi .val{font-size:1.6rem}
+  .grow{flex:1;min-height:0}
+  .chart{flex:1;min-height:0;position:relative}
+  .chart svg{position:absolute;inset:0;width:100%;height:100%}
+  .scroll-y{flex:1;min-height:0;overflow:auto}
+  .chart.diag-chart{position:static;flex:none}
+  .chart.diag-chart svg{position:static;height:auto}
+  body[data-tab="diagnostico"] main,body.sim-open[data-tab="resultado"] main{overflow-y:auto}
+  body[data-tab="diagnostico"] .section.on,body.sim-open[data-tab="resultado"] .section.on{height:auto}
+  body.sim-open[data-tab="resultado"] .fill{flex:none;height:360px}
+}
 
 /* ---------- Responsive ---------- */
-@media (max-width:1080px){
-  .g4,.cmp-out,.diag-figs{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .g-wide{grid-template-columns:1fr}
+@media (max-width:1279px){ .g6{grid-template-columns:repeat(3,minmax(0,1fr))} }
+@media (max-width:1079px){
+  .g4,.s-figs,.minis.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g3,.proposals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .g-wide,.chapter{grid-template-columns:1fr}
+  .ch-visual{border-left:0;border-top:1px solid var(--line)}
 }
 @media (max-width:720px){
   .top{position:static}
-  .bar-row{position:sticky;top:0}
   .top-row{flex-wrap:wrap;gap:10px;padding:10px 14px}
-  .brand img{height:34px}
+  .brand img{height:32px}
   .brand-meta{border-left:0;padding-left:0}
   .top-actions{display:none}
-  .bar-row{padding:0 10px}
-  main{padding:16px 12px 30px}
-  .g2,.g3{grid-template-columns:1fr}
-  .kpi .val{font-size:1.7rem}
+  .bar-row{padding:0 10px;position:sticky;top:0}
+  main{padding:14px 12px 28px}
+  .g2,.g3,.g6,.proposals{grid-template-columns:1fr}
+  .kpi .val{font-size:1.65rem}
   .hb-row{grid-template-columns:minmax(0,7.5rem) minmax(0,1fr) 4.8rem}
-  .sec-head h2{font-size:1.65rem}
+  .s-hero{grid-template-columns:1fr;padding:20px}
+  .s-hero img{display:none}
+  .s-hero h3{font-size:2rem}
+  .ch-text{padding:18px}
+  .wi{grid-template-columns:minmax(0,6.5rem) minmax(0,1fr) 4.8rem}
 }
-@media (max-width:420px){.g4,.cmp-out,.diag-figs{grid-template-columns:1fr}}
+@media (max-width:420px){.g4,.s-figs,.minis.four{grid-template-columns:1fr}}
 @media print{
-  body{background:#fff}
-  .top{position:static}
-  .tabs,.period,.top-actions,#gate{display:none!important}
-  .section{display:block!important;break-before:page}
+  body{background:#fff;height:auto;overflow:visible}
+  .app{height:auto;display:block}
+  main{overflow:visible}
+  .tabs,.period,.top-actions,#gate,.link-btn{display:none!important}
+  .section{display:flex!important;flex-direction:column;gap:12px;break-before:page;height:auto!important}
   .section:first-of-type{break-before:auto}
-  .panel,.kpi,.diag article{break-inside:avoid}
-  details.data{display:none}
+  .chart{position:static!important}
+  .chart svg{position:static!important;width:100%!important;height:auto!important}
+  .panel,.kpi,.chapter,.prop{break-inside:avoid}
+  .s-close{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
-<body class="locked">
+<body class="locked" data-tab="resumen">
 
 <div id="gate">
   <form class="gate-card" id="gateForm">
-    <img src="data:image/png;base64,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" alt="MARANELLO buona &amp; fresca">
+    <img id="isoLogo" src="data:image/png;base64,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" alt="MARANELLO buona &amp; fresca">
     <h1>Tablero financiero</h1>
     <p>Información de uso interno. Ingresa la clave asignada.</p>
     <input type="password" id="gatePass" autocomplete="current-password" placeholder="Clave de acceso" aria-label="Clave de acceso">
@@ -254,11 +329,10 @@ html.present .top-row{padding-top:6px;padding-bottom:6px}
 <!-- ================= RESUMEN ================= -->
 <section id="resumen" class="section on">
   <div class="sec-head"><h2>Resumen</h2><p data-scope></p></div>
-  <div class="grid g3" id="sumKpis"></div>
-  <div class="panel mt">
-    <h3>Ventas frente a costos, mes a mes</h3>
-    <p class="hint">Millones de pesos. La línea punteada es la venta mensual necesaria para cubrir la estructura.</p>
-    <div id="chSalesCost"></div>
+  <div class="grid g6" id="sumKpis"></div>
+  <div class="panel fill">
+    <div class="p-head"><div><h3>Ventas frente a costos, mes a mes</h3><p class="hint">Millones de pesos. La línea punteada es la venta mensual necesaria para cubrir la estructura.</p></div></div>
+    <div class="chart" id="chSalesCost"></div>
     <div class="legend">
       <span><i style="background:var(--navy)"></i>Ventas netas</span>
       <span><i style="background:var(--teal)"></i>Compras inventariables</span>
@@ -273,151 +347,139 @@ html.present .top-row{padding-top:6px;padding-bottom:6px}
 <section id="ventas" class="section">
   <div class="sec-head"><h2>Ventas</h2><p data-scope></p></div>
   <div class="grid g4" id="salesKpis"></div>
-  <div class="panel mt">
-    <h3>Ventas netas por mes</h3>
-    <p class="hint">Millones de pesos, con el promedio del semestre y el nivel de equilibrio.</p>
-    <div id="chSales"></div>
-    <div class="legend"><span><i style="background:var(--teal-dk)"></i>Mes sobre equilibrio</span><span><i style="background:var(--navy)"></i>Mes bajo equilibrio</span><span><i class="dash"></i>Equilibrio</span><span><i class="dash" style="border-top-color:var(--muted)"></i>Promedio Ene–Jun</span></div>
-  </div>
-  <div class="panel mt">
-    <h3>Comparar dos meses</h3>
-    <div class="fields mt">
-      <div class="field"><label for="cmpA">Mes A</label><select id="cmpA"></select></div>
-      <div class="field"><label for="cmpB">Mes B</label><select id="cmpB"></select></div>
-      <button class="btn" id="cmpSwap" type="button">Intercambiar</button>
+  <div class="grid g-wide fill">
+    <div class="panel">
+      <div class="p-head"><div><h3>Ventas netas por mes</h3><p class="hint">Millones de pesos, con el promedio del semestre y el nivel de equilibrio.</p></div><button class="link-btn" data-table="sales">Ver tabla mensual</button></div>
+      <div class="chart" id="chSales"></div>
+      <div class="legend"><span><i style="background:var(--teal-dk)"></i>Mes sobre equilibrio</span><span><i style="background:var(--navy)"></i>Mes bajo equilibrio</span><span><i class="dash"></i>Equilibrio</span><span><i class="dash" style="border-top-color:var(--muted)"></i>Promedio</span></div>
     </div>
-    <div class="cmp-out" id="cmpOut"></div>
+    <div class="panel">
+      <div class="p-head"><div><h3>Comparar dos meses</h3><p class="hint">Diferencia calculada como mes B menos mes A.</p></div></div>
+      <div class="fields">
+        <div class="field"><label for="cmpA">Mes A</label><select id="cmpA"></select></div>
+        <div class="field"><label for="cmpB">Mes B</label><select id="cmpB"></select></div>
+        <button class="btn" id="cmpSwap" type="button">Intercambiar</button>
+      </div>
+      <div class="minis" id="cmpOut"></div>
+    </div>
   </div>
-  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbSales"></div></details>
 </section>
 
 <!-- ================= COMPRAS ================= -->
 <section id="compras" class="section">
-  <div class="sec-head"><h2>Compras inventariables</h2><p>Compras candidatas a inventario. Todavía no son costo de ventas: falta valorizar inventario inicial y final.</p></div>
+  <div class="sec-head"><h2>Compras inventariables</h2><p>Aún no son costo de ventas: falta valorizar inventarios.</p></div>
   <div class="grid g3" id="invKpis"></div>
-  <div class="grid g-wide mt">
+  <div class="grid g-wide fill">
     <div class="panel">
-      <h3>Compras por mes</h3>
-      <p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p>
-      <div id="chInv"></div>
+      <div class="p-head"><div><h3>Compras por mes</h3><p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p></div><button class="link-btn" data-table="inv">Ver tabla mensual</button></div>
+      <div class="chart" id="chInv"></div>
     </div>
-    <div class="panel">
-      <h3>Principales proveedores de inventario</h3>
-      <p class="hint">Acumulado Ene–Jun.</p>
-      <div class="hb" id="hbInvProv"></div>
+    <div class="col">
+      <div class="panel"><div class="p-head"><div><h3>Principales proveedores</h3><p class="hint">Acumulado Ene–Jun.</p></div></div><div class="hb" id="hbInvProv"></div></div>
+      <div class="panel"><div class="p-head"><div><h3>Composición</h3><p class="hint" id="invCompNote"></p></div></div><div class="hb" id="hbInvCat"></div></div>
     </div>
   </div>
-  <div class="panel mt">
-    <h3>Composición de las compras</h3>
-    <p class="hint" id="invCompNote"></p>
-    <div class="hb" id="hbInvCat"></div>
-  </div>
-  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbInv"></div></details>
 </section>
 
 <!-- ================= GASTOS ================= -->
 <section id="gastos" class="section">
-  <div class="sec-head"><h2>Gastos operativos</h2><p>Documentos clasificados como gasto operativo. Activos y partidas mixtas se controlan aparte.</p></div>
+  <div class="sec-head"><h2>Gastos operativos</h2><p>Activos y partidas mixtas se controlan aparte.</p></div>
   <div class="grid g4" id="opexKpis"></div>
-  <div class="grid g-wide mt">
+  <div class="grid g-wide fill">
     <div class="panel">
-      <h3>Gastos operativos por mes</h3>
-      <p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p>
-      <div id="chOpex"></div>
+      <div class="p-head"><div><h3>Gastos operativos por mes</h3><p class="hint">Millones de pesos; debajo de cada mes, su peso sobre las ventas.</p></div><button class="link-btn" data-table="opex">Ver tabla mensual</button></div>
+      <div class="chart" id="chOpex"></div>
+      <p class="note method" id="opexRecon"></p>
     </div>
     <div class="panel">
-      <h3>En qué se va el gasto</h3>
-      <p class="hint" id="opexCompNote"></p>
+      <div class="p-head"><div><h3>En qué se va el gasto</h3><p class="hint" id="opexCompNote"></p></div></div>
       <div class="hb" id="hbOpexCat"></div>
     </div>
   </div>
-  <div class="callout warn mt method" id="opexRecon"></div>
-  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbOpex"></div></details>
 </section>
 
 <!-- ================= NÓMINA ================= -->
 <section id="nomina" class="section">
   <div class="sec-head"><h2>Nómina y turnos</h2><p>El número de personas cambia cada mes porque el equipo trabaja por turnos.</p></div>
   <div class="grid g4" id="payKpis"></div>
-  <div class="panel mt">
-    <h3>Carga laboral por mes</h3>
-    <p class="hint">Millones de pesos; debajo de cada mes, personas con pagos registrados.</p>
-    <div id="chPay"></div>
-  </div>
-  <div class="grid g-wide mt">
-    <div class="panel">
-      <h3>Quién trabajó cada mes</h3>
-      <p class="hint">Cada celda marcada es un mes con pagos registrados para esa persona.</p>
-      <div class="tw" style="padding:0" id="roster"></div>
+  <div class="grid g-wide fill">
+    <div class="col">
+      <div class="panel grow">
+        <div class="p-head"><div><h3>Carga laboral por mes</h3><p class="hint">Millones de pesos; debajo de cada mes, personas con pagos registrados.</p></div><button class="link-btn" data-table="pay">Ver tabla mensual</button></div>
+        <div class="chart" id="chPay"></div>
+      </div>
+      <div class="panel">
+        <div class="p-head"><div><h3>Patrón de pagos del semestre</h3><p class="hint">Según la frecuencia en la hoja de pagos; no define el tipo de vinculación.</p></div></div>
+        <div class="hb" id="hbPattern"></div>
+      </div>
     </div>
     <div class="panel">
-      <h3>Patrón de pagos del semestre</h3>
-      <p class="hint">Según la frecuencia en la hoja de pagos. La frecuencia no define el tipo de vinculación.</p>
-      <div class="hb" id="hbPattern"></div>
-      <p class="note method">La carga laboral sigue siendo provisional mientras se separan empleados formales, turnos y ocasionales. La PILA no se suma completa sobre la nómina.</p>
+      <div class="p-head"><div><h3>Quién trabajó cada mes</h3><p class="hint">Celda marcada: mes con pagos registrados para esa persona.</p></div></div>
+      <div class="tw scroll-y" id="roster"></div>
     </div>
   </div>
-  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbPay"></div></details>
 </section>
 
 <!-- ================= CAJA ================= -->
 <section id="caja" class="section">
   <div class="sec-head"><h2>Caja y liquidez</h2><p>Cuenta empresarial conciliada mes a mes.</p></div>
   <div class="grid g4" id="cashKpis"></div>
-  <div class="grid g-wide mt">
+  <div class="grid g-wide fill">
     <div class="panel">
-      <h3>Saldo al cierre de cada mes</h3>
-      <p class="hint">Millones de pesos.</p>
-      <div id="chCash"></div>
+      <div class="p-head"><div><h3>Saldo al cierre de cada mes</h3><p class="hint">Millones de pesos.</p></div><button class="link-btn" data-table="cash">Ver tabla mensual</button></div>
+      <div class="chart" id="chCash"></div>
     </div>
     <div class="panel">
-      <h3>Financiación y ritmo de caja</h3>
+      <div class="p-head"><div><h3>Financiación y ritmo de caja</h3></div></div>
       <div class="rows" id="cashFin"></div>
       <p class="note method">Cuentas relacionadas: información parcial; faltan movimientos empresariales para cerrar el flujo consolidado.</p>
     </div>
   </div>
-  <details class="data"><summary>Ver tabla mensual</summary><div class="tw" id="tbCash"></div></details>
 </section>
 
 <!-- ================= RESULTADO ================= -->
 <section id="resultado" class="section">
-  <div class="sec-head"><h2>Resultado</h2><p>Modelo del semestre completo. No es una utilidad contable: faltan inventarios y depurar nómina.</p></div>
-  <div class="panel">
-    <h3>Resultado operativo aproximado por mes</h3>
-    <p class="hint">Ventas menos compras, nómina y gastos operativos. Sin gastos financieros; las compras hacen de costo de alimentos mientras no haya inventarios.</p>
-    <div id="chResult"></div>
-    <p class="note method" id="resultNote"></p>
-  </div>
-  <div class="grid g3 mt" id="scenarios"></div>
-  <div class="panel mt">
-    <h3>Simulador con inventarios</h3>
-    <p class="hint">Costo de ventas = inventario inicial + compras inventariables − inventario final.</p>
-    <div class="fields">
-      <div class="field"><label for="invIni">Inventario inicial (1-ene)</label><input type="number" id="invIni" min="0" step="100000" placeholder="Ej. 10000000"></div>
-      <div class="field"><label for="invFin">Inventario final (30-jun)</label><input type="number" id="invFin" min="0" step="100000" placeholder="Ej. 12000000"></div>
-      <div class="field"><label for="apeT">Interés APE</label><select id="apeT"><option value="0">No incluir</option><option value="1">Incluir candidato</option></select></div>
-      <button class="btn" id="simReset" type="button">Limpiar</button>
+  <div class="sec-head"><h2>Resultado</h2><p>Semestre completo; no es utilidad contable definitiva.</p></div>
+  <div class="grid g-wide fill">
+    <div class="panel">
+      <div class="p-head"><div><h3>Resultado operativo aproximado por mes</h3><p class="hint">Ventas menos compras, nómina y gastos operativos, sin gastos financieros.</p></div></div>
+      <div class="chart" id="chResult"></div>
+      <p class="note method" id="resultNote"></p>
     </div>
-    <div class="cmp-out" id="simOut"></div>
-    <div class="callout warn mt" id="simMsg"></div>
+    <div class="col" id="scenarios"></div>
   </div>
-  <div class="grid g2 mt">
-    <div class="panel"><h3>Activos conocidos al 30 de junio</h3><div class="rows" id="posAssets"></div></div>
-    <div class="panel"><h3>Pasivos y financiación conocidos</h3><div class="rows" id="posLiab"></div></div>
+  <div class="grid g2">
+    <div class="panel"><div class="p-head"><h3>Activos conocidos al 30 de junio</h3></div><div class="rows" id="posAssets"></div></div>
+    <div class="panel"><div class="p-head"><h3>Pasivos y financiación conocidos</h3></div><div class="rows" id="posLiab"></div></div>
   </div>
-  <p class="note method">El instrumento APE no se clasifica todavía como pasivo o patrimonio. Las cuotas de mayo y junio son parte del plan y no se suman otra vez al saldo.</p>
+  <details class="fold" id="simFold">
+    <summary><b>Simulador con inventarios</b><span>Calcula costo de ventas, margen bruto y resultado con inventarios valorizados.</span></summary>
+    <div class="fold-body">
+      <div class="fields">
+        <div class="field"><label for="invIni">Inventario inicial (1-ene)</label><input type="number" id="invIni" min="0" step="100000" placeholder="Ej. 10000000"></div>
+        <div class="field"><label for="invFin">Inventario final (30-jun)</label><input type="number" id="invFin" min="0" step="100000" placeholder="Ej. 12000000"></div>
+        <div class="field"><label for="apeT">Interés APE</label><select id="apeT"><option value="0">No incluir</option><option value="1">Incluir candidato</option></select></div>
+        <button class="btn" id="simReset" type="button">Limpiar</button>
+      </div>
+      <div class="minis four" id="simOut"></div>
+      <div class="callout warn" style="margin-top:10px" id="simMsg"></div>
+    </div>
+  </details>
 </section>
 
 <!-- ================= DIAGNÓSTICO ================= -->
 <section id="diagnostico" class="section">
-  <div class="sec-head"><h2>Diagnóstico financiero</h2><p>Lectura consolidada del semestre enero–junio de 2026.</p></div>
-  <div class="diag-figs" id="diagFigs"></div>
-  <div class="diag" id="diagBody"></div>
+  <div class="story" id="story"></div>
 </section>
 
 </main>
-<footer>MARANELLO · Tablero financiero V12 · Base operativa enero–junio 2026. Todas las cifras se calculan desde el bloque de datos del código; para incorporar un mes nuevo basta agregarlo a MONTHS y M.</footer>
+<footer>MARANELLO · Tablero financiero V12 · Base operativa enero–junio 2026. Todas las cifras se calculan desde el bloque de datos del código.</footer>
 </div>
+
+<dialog id="dlg" aria-labelledby="dlgTitle">
+  <div class="dlg-head"><h3 id="dlgTitle"></h3><button class="btn" id="dlgClose" type="button">Cerrar</button></div>
+  <div class="dlg-body tw" id="dlgBody"></div>
+</dialog>
 
 <script>
 /* ============================================================
@@ -425,12 +487,11 @@ html.present .top-row{padding-top:6px;padding-bottom:6px}
    ============================================================ */
 const ACCESS_HASH="251be919";
 function accessHash(t){let h=2166136261;for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619);}return (h>>>0).toString(16).padStart(8,"0");}
-function unlock(){document.body.classList.remove("locked");document.getElementById("gate").style.display="none";try{sessionStorage.setItem("maraFinanceAccess","1");}catch(e){}}
+function unlock(){document.body.classList.remove("locked");document.getElementById("gate").style.display="none";try{sessionStorage.setItem("maraFinanceAccess","1");}catch(e){}requestAnimationFrame(()=>RENDER[state.tab]&&RENDER[state.tab]());}
 document.getElementById("gateForm").addEventListener("submit",e=>{
   e.preventDefault();const i=document.getElementById("gatePass");
   if(accessHash(i.value)===ACCESS_HASH){unlock();}else{document.getElementById("gateError").textContent="Clave incorrecta. Verifica mayúsculas y vuelve a intentar.";i.select();}
 });
-try{if(sessionStorage.getItem("maraFinanceAccess")==="1")unlock();}catch(e){}
 
 /* ============================================================
    DATOS — única fuente de verdad
@@ -484,16 +545,8 @@ const PROVIDERS=[
   ["GRUPO SANTIAGO EXPRESS S.A.S.",5870350.00,"inventory","Insumos y empaques"]
 ];
 const PAY_PATTERNS=[["Recurrente",10,138131965.81],["Frecuente",4,12895962.49],["Ocasional",10,6493855.00]];
-
 /* Referencias orientativas usadas en Compras y Nómina (ajustables) */
-const REF={
-  primeCost:{good:.65,warn:.70},     // compras + nómina / ventas
-  labor:{good:.33,warn:.38},         // nómina / ventas
-  occupancy:{good:.10,warn:.15},     // ocupación / ventas
-  cashMonths:{good:3,warn:1},        // meses de caja al ritmo de consumo del semestre
-  breakeven:{good:1,warn:.9},        // ventas / ventas de equilibrio
-  result:{good:0,warn:-.03}          // resultado operativo / ventas
-};
+const REF={primeCost:{good:.65,warn:.70},labor:{good:.33,warn:.38}};
 
 /* ============================================================
    CÁLCULOS DERIVADOS
@@ -505,12 +558,12 @@ const T={sales:sumM("sales"),inventory:sumM("inventory"),payroll:sumM("payroll")
 const N=MONTHS.length;
 const OCCUPANCY=CATEGORIES.opex.find(c=>c[0]==="Ocupación")[1];
 const VAR_RATIO=T.inventory/T.sales;
-/* Equilibrio: estructura fija mensual (gastos operativos + nómina + gastos financieros conocidos) / margen después de compras.
-   Mismo criterio que el escenario de resultado del semestre; no incluye el interés APE. */
+/* Equilibrio: (gastos operativos + nómina + gastos financieros conocidos) por mes / (1 − compras/ventas). Sin interés APE. */
 const FIXED_MONTH=(H1.opex+T.payroll+H1.known_finance)/N;
 const BE=FIXED_MONTH/(1-VAR_RATIO);
 const BE_APE=(FIXED_MONTH+H1.ape_interest/N)/(1-VAR_RATIO);
 const BURN=(T.open-T.close)/N;
+const resultAt=s=>s*(1-VAR_RATIO)-FIXED_MONTH;
 const ALL_PEOPLE=(()=>{const c={};MONTHS.forEach(m=>M[m].people.forEach(p=>c[p]=(c[p]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0],"es"));})();
 
 /* ============================================================
@@ -527,6 +580,7 @@ const sPct=(v,d=1)=>Number.isFinite(v)?(v>0?"+":"")+pct(v,d):"—";
 const SHORT={ENERO:"Ene",FEBRERO:"Feb",MARZO:"Mar",ABRIL:"Abr",MAYO:"May",JUNIO:"Jun",JULIO:"Jul",AGOSTO:"Ago",SEPTIEMBRE:"Sep",OCTUBRE:"Oct",NOVIEMBRE:"Nov",DICIEMBRE:"Dic"};
 const LOW=m=>m.toLowerCase();
 const CAP=m=>m[0]+m.slice(1).toLowerCase();
+const list=a=>a.length<=1?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1];
 
 /* ============================================================
    ESTADO Y PERIODO
@@ -535,32 +589,33 @@ const state={period:"YTD",tab:"resumen"};
 const FIXED_TABS=["resultado","diagnostico"];
 function per(){
   const ytd=state.period==="YTD",ms=ytd?MONTHS:[state.period];
-  const d={ytd,ms,n:ms.length,
-    name: ytd?"enero–junio":LOW(state.period),
-    title: ytd?"Acumulado enero–junio 2026":CAP(state.period)+" 2026",
-    sales:sumM("sales",ms),inventory:sumM("inventory",ms),payroll:sumM("payroll",ms),
-    opex: ytd?H1.opex:sumM("opex",ms), pila:sumM("pila",ms),
-    open:M[ms[0]].bank.open, close:M[ms[ms.length-1]].bank.close,
-    credits:ms.reduce((a,m)=>a+M[m].bank.credits,0), debits:ms.reduce((a,m)=>a+M[m].bank.debits,0)};
-  d.result=d.sales-d.inventory-d.payroll-d.opex;
-  d.be=BE*d.n;
-  d.prev= ytd?null:(MONTHS.indexOf(state.period)>0?MONTHS[MONTHS.indexOf(state.period)-1]:null);
+  const d={ytd,ms,n:ms.length,name:ytd?"enero–junio":LOW(state.period),title:ytd?"Acumulado enero–junio 2026":CAP(state.period)+" 2026",
+    sales:sumM("sales",ms),inventory:sumM("inventory",ms),payroll:sumM("payroll",ms),opex:ytd?H1.opex:sumM("opex",ms),pila:sumM("pila",ms),
+    open:M[ms[0]].bank.open,close:M[ms[ms.length-1]].bank.close,
+    credits:ms.reduce((a,m)=>a+M[m].bank.credits,0),debits:ms.reduce((a,m)=>a+M[m].bank.debits,0)};
+  d.result=d.sales-d.inventory-d.payroll-d.opex; d.be=BE*d.n;
+  const i=MONTHS.indexOf(state.period); d.prev=ytd||i<1?null:MONTHS[i-1];
   return d;
 }
 
 /* ============================================================
    COMPONENTES
    ============================================================ */
-function kpi(label,value,sub,cls=""){return `<div class="kpi ${cls}"><div class="lbl">${label}</div><div class="val">${value}</div>${sub?`<div class="sub">${sub}</div>`:""}</div>`;}
-
+const FIT_QUERY="(min-width:1080px) and (min-height:620px)";
+const FIT=()=>window.matchMedia(FIT_QUERY).matches;
 const MOBILE=()=>window.innerWidth<720;
-const CW=()=>MOBILE()?440:760;
+/* Tamaño del gráfico: en vista ajustada usa el espacio real disponible; si no, un lienzo proporcional */
+function box(id,defH){
+  const el=document.getElementById(id);
+  if(FIT()&&el.clientHeight>110&&el.clientWidth>200) return {el,W:Math.round(el.clientWidth),H:Math.round(el.clientHeight)};
+  const W=MOBILE()?440:760; return {el,W,H:MOBILE()?Math.round(defH*1.1):defH};
+}
 const GUT=86;
-function refLine(r,x1,x2,yy){return `<line x1="${x1}" x2="${x2}" y1="${yy}" y2="${yy}" stroke="${r.color}" stroke-width="2" stroke-dasharray="7 5"/><text x="${x2+6}" y="${yy-3}" class="ref" fill="${r.color}">${esc(r.name)}</text><text x="${x2+6}" y="${yy+13}" class="ref" fill="${r.color}">${esc(r.value)}</text>`;}
+function kpi(label,value,sub,cls=""){return `<div class="kpi ${cls}"><span class="lbl">${label}</span><span class="val">${value}</span>${[].concat(sub||[]).filter(Boolean).map(s=>`<span class="sub">${s}</span>`).join("")}</div>`;}
+function refLine(r,x1,x2,yy,ly){ly=ly??yy;return `<line x1="${x1}" x2="${x2}" y1="${yy}" y2="${yy}" stroke="${r.color}" stroke-width="2" stroke-dasharray="7 5"/><text x="${x2+6}" y="${ly-3}" class="ref" fill="${r.color}">${esc(r.name)}</text><text x="${x2+6}" y="${ly+13}" class="ref" fill="${r.color}">${esc(r.value)}</text>`;}
+
 function barChart(o){
-  const data=o.data,W=CW(),H=o.h||(MOBILE()?300:270),padX=14,top=30,bottom=o.sub?52:34;
-  const padR=(o.refs&&o.refs.length)?GUT:padX;
-  const refs=o.refs||[];
+  const {W,H}=o.box,data=o.data,padX=14,top=30,bottom=o.sub?50:32,refs=o.refs||[],padR=refs.length?GUT:padX;
   const hi=Math.max(...data.map(x=>x.v),...refs.map(r=>r.v),0)*1.14||1;
   const lo=Math.min(...data.map(x=>x.v),0)*1.25;
   const y=v=>top+(hi-v)/(hi-lo)*(H-top-bottom);
@@ -568,264 +623,318 @@ function barChart(o){
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.label)}">`;
   data.forEach((x,i)=>{
     const cx=padX+slot*i+slot/2,y0=y(0),yv=y(x.v),yt=Math.min(y0,yv),h=Math.max(Math.abs(y0-yv),1);
-    const sel=state.period===x.k, dim=state.period!=="YTD"&&!sel;
+    const sel=!o.noSel&&state.period===x.k,dim=!o.noSel&&state.period!=="YTD"&&!sel;
     const fill=typeof o.color==="function"?o.color(x):o.color;
     s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw/2}" y="${yt}" width="${bw}" height="${h}" rx="3" fill="${fill}"><title>${CAP(x.k)}: ${money(x.v)}</title></rect>`;
     s+=`<text x="${cx}" y="${x.v>=0?yt-8:yt+h+17}" text-anchor="middle" class="val${sel?' sel':''}">${fMs(x.v)}</text></g>`;
-    s+=`<text x="${cx}" y="${H-bottom+20}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[x.k]}</text>`;
-    if(o.sub) s+=`<text x="${cx}" y="${H-bottom+37}" text-anchor="middle" class="tick small">${esc(o.sub(x))}</text>`;
+    s+=`<text x="${cx}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[x.k]}</text>`;
+    if(o.sub) s+=`<text x="${cx}" y="${H-bottom+35}" text-anchor="middle" class="tick small">${esc(o.sub(x))}</text>`;
   });
   s+=`<line x1="${padX}" x2="${W-padR}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
-  const ry=refs.map(r=>y(r.v)); if(ry.length===2&&Math.abs(ry[0]-ry[1])<34){const m=(ry[0]+ry[1])/2; if(ry[0]<ry[1]){ry[0]=m-17;ry[1]=m+17;}else{ry[0]=m+17;ry[1]=m-17;}}
-  refs.forEach((r,i)=>{const yy=y(r.v);s+=`<line x1="${padX}" x2="${W-padR}" y1="${yy}" y2="${yy}" stroke="${r.color}" stroke-width="2" stroke-dasharray="7 5"/><text x="${W-padR+6}" y="${ry[i]-3}" class="ref" fill="${r.color}">${esc(r.name)}</text><text x="${W-padR+6}" y="${ry[i]+13}" class="ref" fill="${r.color}">${esc(r.value)}</text>`;});
+  const ly=refs.map(r=>y(r.v));
+  if(ly.length===2&&Math.abs(ly[0]-ly[1])<34){const m=(ly[0]+ly[1])/2;const up=ly[0]<ly[1];ly[0]=m+(up?-17:17);ly[1]=m+(up?17:-17);}
+  refs.forEach((r,i)=>s+=refLine(r,padX,W-padR,y(r.v),ly[i]));
   return s+"</svg>";
 }
-
-function salesCostChart(){
-  const W=CW(),H=MOBILE()?320:300,padX=14,padR=GUT,top=30,bottom=34,mob=MOBILE();
+function salesCostChart(b){
+  const {W,H}=b,padX=14,padR=GUT,top=30,bottom=32,small=W<520;
   const rows=MONTHS.map(m=>({k:m,s:M[m].sales,parts:[[M[m].inventory,"var(--teal)","Compras"],[M[m].payroll,"#8FA9CF","Nómina"],[M[m].opex,"var(--yellow)","Gastos"]]}));
   rows.forEach(r=>r.c=r.parts.reduce((a,p)=>a+p[0],0));
   const hi=Math.max(...rows.map(r=>Math.max(r.s,r.c)),BE)*1.12;
   const y=v=>top+(hi-v)/hi*(H-top-bottom);
-  const slot=(W-padX-padR)/rows.length,bw=Math.min(slot*.32,40);
+  const slot=(W-padX-padR)/rows.length,bw=Math.min(slot*.32,46);
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Ventas frente a costos por mes">`;
   rows.forEach((r,i)=>{
     const cx=padX+slot*i+slot/2,sel=state.period===r.k,dim=state.period!=="YTD"&&!sel;
-    s+=`<g${dim?' class="dim"':''}>`;
-    s+=`<rect x="${cx-bw-3}" y="${y(r.s)}" width="${bw}" height="${y(0)-y(r.s)}" rx="3" fill="var(--navy)"><title>${CAP(r.k)} ventas: ${money(r.s)}</title></rect>`;
-    s+=`<text x="${cx-bw/2-3}" y="${y(r.s)-8}" text-anchor="middle" class="val"${mob?' style="font-size:13px"':''}>${fMs(r.s)}</text>`;
+    s+=`<g${dim?' class="dim"':''}><rect x="${cx-bw-3}" y="${y(r.s)}" width="${bw}" height="${y(0)-y(r.s)}" rx="3" fill="var(--navy)"><title>${CAP(r.k)} ventas: ${money(r.s)}</title></rect>`;
+    s+=`<text x="${cx-bw/2-3}" y="${y(r.s)-8}" text-anchor="middle" class="val"${small?' style="font-size:13px"':''}>${fMs(r.s)}</text>`;
     let acc=0;
     r.parts.forEach(p=>{const y1=y(acc+p[0]),y0=y(acc);s+=`<rect x="${cx+3}" y="${y1}" width="${bw}" height="${y0-y1}" fill="${p[1]}"><title>${CAP(r.k)} ${p[2]}: ${money(p[0])}</title></rect>`;acc+=p[0];});
-    if(!mob) s+=`<text x="${cx+bw/2+3}" y="${y(r.c)-8}" text-anchor="middle" class="val" style="fill:var(--muted)">${fMs(r.c)}</text>`;
-    s+=`</g><text x="${cx}" y="${H-bottom+20}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[r.k]}</text>`;
+    if(!small) s+=`<text x="${cx+bw/2+3}" y="${y(r.c)-8}" text-anchor="middle" class="val" style="fill:var(--muted)">${fMs(r.c)}</text>`;
+    s+=`</g><text x="${cx}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${SHORT[r.k]}</text>`;
   });
   s+=`<line x1="${padX}" x2="${W-padR}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
   s+=refLine({name:"Equilibrio",value:fMs(BE),color:"var(--orange)"},padX,W-padR,y(BE));
   return s+"</svg>";
 }
-
-function lineChart(data,label){
-  const W=CW(),H=MOBILE()?290:260,padX=MOBILE()?26:40,top=34,bottom=34;
-  const hi=Math.max(...data.map(x=>x.v))*1.15,lo=0;
-  const y=v=>top+(hi-v)/(hi-lo)*(H-top-bottom);
+function lineChart(b,data,label,noSel){
+  const {W,H}=b,padX=W<520?26:44,top=34,bottom=32;
+  const hi=Math.max(...data.map(x=>x.v))*1.15;
+  const y=v=>top+(hi-v)/hi*(H-top-bottom);
   const x=i=>padX+i*(W-padX*2)/(data.length-1);
-  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">`;
-  s+=`<line x1="${padX-20}" x2="${W-padX+20}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
-  s+=`<polygon fill="rgba(34,77,142,.08)" points="${x(0)},${y(0)} ${data.map((p,i)=>x(i)+","+y(p.v)).join(" ")} ${x(data.length-1)},${y(0)}"/>`;
-  s+=`<polyline fill="none" stroke="var(--navy)" stroke-width="3" points="${data.map((p,i)=>x(i)+","+y(p.v)).join(" ")}"/>`;
-  data.forEach((p,i)=>{const sel=state.period===p.k,last=i===data.length-1;
+  const pts=data.map((p,i)=>x(i)+","+y(p.v)).join(" ");
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}"><line x1="${padX-20}" x2="${W-padX+20}" y1="${y(0)}" y2="${y(0)}" class="axis"/>`;
+  s+=`<polygon fill="rgba(34,77,142,.08)" points="${x(0)},${y(0)} ${pts} ${x(data.length-1)},${y(0)}"/><polyline fill="none" stroke="var(--navy)" stroke-width="3" points="${pts}"/>`;
+  data.forEach((p,i)=>{const sel=!noSel&&state.period===p.k,last=i===data.length-1;
     s+=`<circle cx="${x(i)}" cy="${y(p.v)}" r="${sel?7:5}" fill="${last?'var(--orange)':'#fff'}" stroke="${last?'var(--orange)':'var(--navy)'}" stroke-width="2.5"><title>${esc(p.label||CAP(p.k))}: ${money(p.v)}</title></circle>`;
     s+=`<text x="${x(i)}" y="${y(p.v)-13}" text-anchor="middle" class="val${sel?' sel':''}">${fMs(p.v)}</text>`;
-    s+=`<text x="${x(i)}" y="${H-bottom+20}" text-anchor="middle" class="tick${sel?' sel':''}">${p.tick||SHORT[p.k]}</text>`;});
+    s+=`<text x="${x(i)}" y="${H-bottom+19}" text-anchor="middle" class="tick${sel?' sel':''}">${p.tick||SHORT[p.k]}</text>`;});
   return s+"</svg>";
 }
-
-function hbars(el,items,{total,hl=[],pctLabel="del total"}={}){
+function hbars(items,{total,hl=[],cls=""}={}){
   const max=Math.max(...items.map(x=>x[1]));
-  document.getElementById(el).innerHTML=items.map(x=>`<div class="hb-row${hl.includes(x[0])?' hl':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)} ${pctLabel}</small>`:""}</span></div>`).join("");
+  return items.map(x=>`<div class="hb-row ${cls}${hl.includes(x[0])?' hl':''}"><span class="hb-name" title="${esc(x[0])}">${esc(x[0])}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/max*100).toFixed(1)}%"></div></div><span class="hb-num">${fM(x[1])}${total?`<small>${pct(x[1]/total)}</small>`:""}</span></div>`).join("");
 }
+const setHTML=(id,h)=>document.getElementById(id).innerHTML=h;
 function topWithOthers(items,k){const s=items.slice().sort((a,b)=>b[1]-a[1]);if(s.length<=k)return s;const rest=s.slice(k).reduce((a,x)=>a+x[1],0);return [...s.slice(0,k),[`Otros (${s.length-k} conceptos)`,rest]];}
 
-function monthTable(el,cols,totalRow){
+/* Tablas mensuales: se abren en un diálogo para no alargar la vista */
+const TABLES={};
+function monthTable(cols,totalRow){
   let h=`<table><thead><tr><th>Mes</th>${cols.map(c=>`<th class="num">${c.h}</th>`).join("")}</tr></thead><tbody>`;
   MONTHS.forEach((m,i)=>{h+=`<tr${state.period===m?' class="sel"':''}><td>${CAP(m)}</td>${cols.map(c=>{const v=c.f(m,i);return `<td class="num${c.cls?(' '+c.cls(v)):''}">${c.fmt(v)}</td>`;}).join("")}</tr>`;});
   if(totalRow) h+=`<tr class="tot"><td>${totalRow.label}</td>${totalRow.cells.map(c=>`<td class="num">${c}</td>`).join("")}</tr>`;
-  document.getElementById(el).innerHTML=h+"</tbody></table>";
+  return h+"</tbody></table>";
 }
-const prevOf=i=>i>0?MONTHS[i-1]:null;
-const varCol=f=>({h:"Var. mes",f:(m,i)=>i>0?M[m][f]/M[prevOf(i)][f]-1:NaN,fmt:v=>sPct(v),cls:v=>v<0?"neg":v>0?"pos":""});
+const varCol=f=>({h:"Var. mes",f:(m,i)=>i>0?M[m][f]/M[MONTHS[i-1]][f]-1:NaN,fmt:v=>sPct(v),cls:v=>v<0?"neg":v>0?"pos":""});
 
 /* ============================================================
-   RENDER POR SECCIÓN
+   SECCIONES
    ============================================================ */
 function renderResumen(){
-  const d=per(),cover=d.close/BURN,people=d.ytd?`${Math.min(...MONTHS.map(m=>M[m].people.length))} a ${Math.max(...MONTHS.map(m=>M[m].people.length))} personas por mes`:`${M[state.period].people.length} personas`;
+  const d=per(),cover=d.close/BURN,counts=MONTHS.map(m=>M[m].people.length);
   const vsPrev=f=>d.prev?`${sPct(d[f]/M[d.prev][f]-1)} frente a ${LOW(d.prev)}`:"";
-  const card=(tab,label,value,subs,cls="")=>`<button type="button" class="kpi ${cls}" data-go="${tab}"><span class="lbl">${label}</span><span class="val" style="display:block">${value}</span>${subs.filter(Boolean).map(x=>`<span class="sub" style="display:block">${x}</span>`).join("")}<span class="go">Ver módulo</span></button>`;
-  document.getElementById("sumKpis").innerHTML=
-    card("ventas","Ventas netas",fM(d.sales),[d.ytd?`Promedio ${fM(d.sales/N)} por mes`:vsPrev("sales"),`Equilibrio: ${fM(d.be)}${d.sales<d.be?` (${pct(d.sales/d.be,0)} alcanzado)`:""}`])+
-    card("compras","Compras inventariables",fM(d.inventory),[`${pct(d.inventory/d.sales)} de las ventas`,d.ytd?"No equivale aún al costo de ventas":vsPrev("inventory")])+
-    card("gastos","Gastos operativos",fM(d.opex),[`${pct(d.opex/d.sales)} de las ventas`,d.ytd?`Ocupación: ${fM(OCCUPANCY)} (${pct(OCCUPANCY/T.sales)} de ventas)`:vsPrev("opex")])+
-    card("nomina","Carga laboral",fM(d.payroll),[`${pct(d.payroll/d.sales)} de las ventas`,people])+
-    card("caja","Caja al cierre",fM(d.close),[`${sPct(d.close/d.open-1)} frente al saldo inicial`,`Cubre ${nf(cover,1)} meses al consumo promedio`],cover<1?"bad":"")+
-    card("resultado","Resultado operativo aproximado",fM(d.result),[`${pct(d.result/d.sales)} de las ventas, sin financieros`,d.ytd?`Con financieros: ${fM(d.result-H1.known_finance)}`:""],d.result<0?"bad":"good");
-  document.querySelectorAll("#sumKpis [data-go]").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.go)));
-  document.getElementById("chSalesCost").innerHTML=salesCostChart();
+  const card=(tab,label,value,subs,cls="")=>`<button type="button" class="kpi ${cls}" data-go="${tab}"><span class="lbl"><span>${label}</span><span class="go">Ver módulo</span></span><span class="val">${value}</span>${subs.filter(Boolean).map(x=>`<span class="sub">${x}</span>`).join("")}</button>`;
+  setHTML("sumKpis",
+    card("ventas","Ventas netas",fM(d.sales),[d.ytd?`Promedio ${fM(d.sales/N)} por mes`:vsPrev("sales"),`Equilibrio ${fM(d.be)}`])+
+    card("compras","Compras",fM(d.inventory),[`${pct(d.inventory/d.sales)} de las ventas`,d.ytd?"Aún no es costo de ventas":vsPrev("inventory")])+
+    card("gastos","Gastos operativos",fM(d.opex),[`${pct(d.opex/d.sales)} de las ventas`,d.ytd?`Ocupación ${pct(OCCUPANCY/T.sales)} de ventas`:vsPrev("opex")])+
+    card("nomina","Carga laboral",fM(d.payroll),[`${pct(d.payroll/d.sales)} de las ventas`,d.ytd?`${Math.min(...counts)} a ${Math.max(...counts)} personas por mes`:`${M[state.period].people.length} personas`])+
+    card("caja","Caja al cierre",fM(d.close),[`${sPct(d.close/d.open-1)} vs saldo inicial`,`Cubre ${nf(cover,1)} meses`],cover<1?"bad":"")+
+    card("resultado","Resultado operativo",fM(d.result),[`${pct(d.result/d.sales)} de las ventas`,d.ytd?`Con financieros ${fM(d.result-H1.known_finance)}`:"Sin gastos financieros"],d.result<0?"bad":"good"));
+  document.querySelectorAll("#sumKpis [data-go]").forEach(b=>b.onclick=()=>showTab(b.dataset.go));
+  const b=box("chSalesCost",300); b.el.innerHTML=salesCostChart(b);
 }
 
 function renderVentas(){
   const d=per(),avg=T.sales/N,best=MONTHS.reduce((a,m)=>M[m].sales>M[a].sales?m:a);
-  document.getElementById("salesKpis").innerHTML=
+  setHTML("salesKpis",
     kpi(d.ytd?"Ventas del semestre":"Ventas del mes",fM(d.sales),d.ytd?`${pct(M.JUNIO.sales/M.ENERO.sales-1)} de enero a junio`:`${pct(d.sales/T.sales)} del semestre`)+
-    (d.ytd?kpi("Promedio mensual",fM(avg),`Mejor mes: ${LOW(best)} con ${fM(M[best].sales)}`)
-          :kpi("Frente al mes anterior",d.prev?sPct(d.sales/M[d.prev].sales-1):"—",d.prev?`${LOW(d.prev)}: ${fM(M[d.prev].sales)}`:"Enero es el primer mes",d.prev&&d.sales<M[d.prev].sales?"bad":""))+
-    kpi("Frente al promedio",d.ytd?`${MONTHS.filter(m=>M[m].sales>=avg).length} de ${N} meses`:sPct(d.sales/avg-1),d.ytd?"meses por encima del promedio":`Promedio ${fM(avg)}`)+
-    kpi("Meses sobre equilibrio",`${MONTHS.filter(m=>M[m].sales>=BE).length} de ${N}`,`Equilibrio ${fM(BE)} por mes`);
-  document.getElementById("chSales").innerHTML=barChart({label:"Ventas netas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),
-    color:x=>x.v>=BE?"var(--teal-dk)":"var(--navy)",
+    (d.ytd?kpi("Promedio mensual",fM(avg),`Mejor mes: ${LOW(best)}, ${fM(M[best].sales)}`)
+          :kpi("Frente al mes anterior",d.prev?sPct(d.sales/M[d.prev].sales-1):"—",d.prev?`${CAP(d.prev)}: ${fM(M[d.prev].sales)}`:"Enero es el primer mes",d.prev&&d.sales<M[d.prev].sales?"bad":""))+
+    kpi("Frente al promedio",d.ytd?`${MONTHS.filter(m=>M[m].sales>=avg).length} de ${N} meses`:sPct(d.sales/avg-1),d.ytd?"por encima del promedio":`Promedio ${fM(avg)}`)+
+    kpi("Meses sobre equilibrio",`${MONTHS.filter(m=>M[m].sales>=BE).length} de ${N}`,`Equilibrio ${fM(BE)} por mes`));
+  const b=box("chSales",270);
+  b.el.innerHTML=barChart({box:b,label:"Ventas netas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=BE?"var(--teal-dk)":"var(--navy)",
     refs:[{v:BE,name:"Equilibrio",value:fMs(BE),color:"var(--orange)"},{v:avg,name:"Promedio",value:fMs(avg),color:"var(--muted)"}]});
   renderCompare();
-  monthTable("tbSales",[{h:"Ventas netas",f:m=>M[m].sales,fmt:money},varCol("sales"),{h:"Vs equilibrio",f:m=>M[m].sales-BE,fmt:money,cls:v=>v<0?"neg":"pos"}],
-    {label:"Semestre",cells:[money(T.sales),"",money(T.sales-BE*N)]});
+  TABLES.sales=["Ventas netas por mes",monthTable([{h:"Ventas netas",f:m=>M[m].sales,fmt:money},varCol("sales"),{h:"Frente al equilibrio",f:m=>M[m].sales-BE,fmt:money,cls:v=>v<0?"neg":"pos"}],{label:"Semestre",cells:[money(T.sales),"",money(T.sales-BE*N)]})];
 }
 function renderCompare(){
   const a=document.getElementById("cmpA").value,b=document.getElementById("cmpB").value,A=M[a].sales,B=M[b].sales,dv=B-A,dp=B/A-1;
-  document.getElementById("cmpOut").innerHTML=`<div class="mini"><span>${CAP(a)}</span><b>${fM(A)}</b></div><div class="mini"><span>${CAP(b)}</span><b>${fM(B)}</b></div><div class="mini"><span>Diferencia ${CAP(b)} − ${CAP(a)}</span><b class="${dv<0?'neg':'pos'}">${fM(dv)}</b></div><div class="mini"><span>Variación</span><b class="${dp<0?'neg':'pos'}">${sPct(dp)}</b></div>`;
+  setHTML("cmpOut",`<div class="mini"><span>${CAP(a)}</span><b>${fM(A)}</b></div><div class="mini"><span>${CAP(b)}</span><b>${fM(B)}</b></div><div class="mini"><span>Diferencia</span><b class="${dv<0?'neg':'pos'}">${fM(dv)}</b></div><div class="mini"><span>Variación</span><b class="${dp<0?'neg':'pos'}">${sPct(dp)}</b></div>`);
 }
 
 function renderCompras(){
   const d=per(),prime=(d.inventory+d.payroll)/d.sales;
-  document.getElementById("invKpis").innerHTML=
+  setHTML("invKpis",
     kpi(d.ytd?"Compras del semestre":"Compras de "+d.name,fM(d.inventory),d.prev?`${sPct(d.inventory/M[d.prev].inventory-1)} frente a ${LOW(d.prev)}`:"")+
     kpi("Peso sobre ventas",pct(d.inventory/d.sales),`Semestre: ${pct(T.inventory/T.sales)}`)+
-    kpi("Compras + nómina sobre ventas",pct(prime),`Referencia orientativa: hasta ${pct(REF.primeCost.good,0)}`,prime>REF.primeCost.warn?"bad":"");
-  document.getElementById("chInv").innerHTML=barChart({label:"Compras inventariables por mes",data:MONTHS.map(m=>({k:m,v:M[m].inventory})),color:"var(--teal)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
-  const inv=PROVIDERS.filter(p=>p[2]==="inventory").map(p=>[p[0].replace(/ S\.A\.S\.| S\.A\./,""),p[1]]);
-  hbars("hbInvProv",inv,{total:T.inventory});
-  hbars("hbInvCat",CATEGORIES.inventory,{total:T.inventory});
-  document.getElementById("invCompNote").textContent=d.ytd?"Acumulado Ene–Jun.":`Acumulado Ene–Jun: la base aún no tiene el detalle por concepto de ${d.name}.`;
-  monthTable("tbInv",[{h:"Compras",f:m=>M[m].inventory,fmt:money},{h:"% ventas",f:m=>M[m].inventory/M[m].sales,fmt:v=>pct(v)},varCol("inventory")],
-    {label:"Semestre",cells:[money(T.inventory),pct(T.inventory/T.sales),""]});
+    kpi("Compras + nómina sobre ventas",pct(prime),`Referencia orientativa: hasta ${pct(REF.primeCost.good,0)}`,prime>REF.primeCost.warn?"bad":""));
+  const b=box("chInv",270);
+  b.el.innerHTML=barChart({box:b,label:"Compras inventariables por mes",data:MONTHS.map(m=>({k:m,v:M[m].inventory})),color:"var(--teal)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
+  {const pv=PROVIDERS.filter(p=>p[2]==="inventory").map(p=>[p[0].replace(/ S\.A\.S\.| S\.A\./,""),p[1]]);const top=pv.slice(0,5),rest=T.inventory-top.reduce((a,x)=>a+x[1],0);setHTML("hbInvProv",hbars([...top,["Otros proveedores",rest]],{total:T.inventory}));}
+  setHTML("hbInvCat",hbars(CATEGORIES.inventory,{total:T.inventory}));
+  document.getElementById("invCompNote").textContent=d.ytd?"Acumulado Ene–Jun.":`Acumulado Ene–Jun; aún no hay detalle por concepto de ${d.name}.`;
+  TABLES.inv=["Compras inventariables por mes",monthTable([{h:"Compras",f:m=>M[m].inventory,fmt:money},{h:"% ventas",f:m=>M[m].inventory/M[m].sales,fmt:v=>pct(v)},varCol("inventory")],{label:"Semestre",cells:[money(T.inventory),pct(T.inventory/T.sales),""]})];
 }
 
 function renderGastos(){
   const d=per(),central=PROVIDERS.find(p=>p[3]==="Ocupación");
-  document.getElementById("opexKpis").innerHTML=
-    kpi(d.ytd?"Gastos del semestre":"Gastos de "+d.name,fM(d.opex),d.prev?`${sPct(d.opex/M[d.prev].opex-1)} frente a ${LOW(d.prev)}`:(d.ytd?"Total consolidado validado":""))+
+  setHTML("opexKpis",
+    kpi(d.ytd?"Gastos del semestre":"Gastos de "+d.name,fM(d.opex),d.prev?`${sPct(d.opex/M[d.prev].opex-1)} frente a ${LOW(d.prev)}`:(d.ytd?"Consolidado validado":""))+
     kpi("Peso sobre ventas",pct(d.opex/d.sales),`Semestre: ${pct(H1.opex/T.sales)}`)+
-    kpi("Ocupación del semestre",fM(OCCUPANCY),`${pct(OCCUPANCY/T.sales)} de las ventas y ${pct(OCCUPANCY/H1.opex,0)} del gasto operativo`,"warnline")+
-    kpi("Pendiente de clasificar",fM(H1.assets_policy+H1.mixed),`Activos ${fM(H1.assets_policy)} y partidas mixtas ${fM(H1.mixed)}; fuera del resultado`);
-  document.getElementById("chOpex").innerHTML=barChart({label:"Gastos operativos por mes",data:MONTHS.map(m=>({k:m,v:M[m].opex})),color:"var(--yellow)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
-  hbars("hbOpexCat",topWithOthers(CATEGORIES.opex,6),{total:H1.opex,hl:["Ocupación"]});
-  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Jun. ":`Acumulado Ene–Jun: aún no hay detalle por concepto de ${d.name}. `)+`${central[0]} concentra ${pct(central[1]/H1.opex,0)} del gasto operativo.`;
-  document.getElementById("opexRecon").innerHTML=`<b>Conciliación pendiente:</b> los meses suman ${fM(T.opexMonths)} y el consolidado validado es ${fM(H1.opex)}. La diferencia de ${fM(H1.opex-T.opexMonths)} se rastrea en la fuente y no se reparte entre meses.`;
-  monthTable("tbOpex",[{h:"Gastos operativos",f:m=>M[m].opex,fmt:money},{h:"% ventas",f:m=>M[m].opex/M[m].sales,fmt:v=>pct(v)},varCol("opex")],
-    {label:"Suma de meses",cells:[money(T.opexMonths),pct(T.opexMonths/T.sales),""]});
+    kpi("Ocupación del semestre",fM(OCCUPANCY),`${pct(OCCUPANCY/T.sales)} de ventas; ${pct(OCCUPANCY/H1.opex,0)} del gasto operativo`,"warnline")+
+    kpi("Pendiente de clasificar",fM(H1.assets_policy+H1.mixed),`Activos ${fM(H1.assets_policy)} y mixtas ${fM(H1.mixed)}`));
+  const b=box("chOpex",270);
+  b.el.innerHTML=barChart({box:b,label:"Gastos operativos por mes",data:MONTHS.map(m=>({k:m,v:M[m].opex})),color:"var(--yellow)",sub:x=>pct(x.v/M[x.k].sales,0)+" de ventas"});
+  setHTML("hbOpexCat",hbars(topWithOthers(CATEGORIES.opex,7),{total:H1.opex,hl:["Ocupación"]}));
+  document.getElementById("opexCompNote").textContent=(d.ytd?"Acumulado Ene–Jun. ":`Acumulado Ene–Jun; aún no hay detalle de ${d.name}. `)+`${central[0].replace(" S.A.S.","")} concentra ${pct(central[1]/H1.opex,0)} del gasto.`;
+  document.getElementById("opexRecon").textContent=`Conciliación pendiente: los meses suman ${fM(T.opexMonths)} y el consolidado validado es ${fM(H1.opex)}; la diferencia de ${fM(H1.opex-T.opexMonths)} no se reparte entre meses.`;
+  TABLES.opex=["Gastos operativos por mes",monthTable([{h:"Gastos operativos",f:m=>M[m].opex,fmt:money},{h:"% ventas",f:m=>M[m].opex/M[m].sales,fmt:v=>pct(v)},varCol("opex")],{label:"Suma de meses",cells:[money(T.opexMonths),pct(T.opexMonths/T.sales),""]})];
 }
 
 function renderNomina(){
-  const d=per(),counts=MONTHS.map(m=>M[m].people.length),mn=Math.min(...counts),mx=Math.max(...counts);
-  const all=ALL_PEOPLE.length,full=ALL_PEOPLE.filter(p=>p[1]===N).length;
-  document.getElementById("payKpis").innerHTML=
+  const d=per(),counts=MONTHS.map(m=>M[m].people.length),all=ALL_PEOPLE.length,full=ALL_PEOPLE.filter(p=>p[1]===N).length;
+  setHTML("payKpis",
     kpi(d.ytd?"Carga laboral del semestre":"Carga laboral de "+d.name,fM(d.payroll),d.prev?`${sPct(d.payroll/M[d.prev].payroll-1)} frente a ${LOW(d.prev)}`:"Provisional")+
     kpi("Peso sobre ventas",pct(d.payroll/d.sales),`Semestre: ${pct(T.payroll/T.sales)}`,d.payroll/d.sales>REF.labor.warn?"bad":"")+
-    (d.ytd?kpi("Personas por mes",`${mn} a ${mx}`,`${all} personas distintas; ${full} trabajaron los ${N} meses`)
+    (d.ytd?kpi("Personas por mes",`${Math.min(...counts)} a ${Math.max(...counts)}`,`${all} distintas; ${full} trabajaron los ${N} meses`)
           :kpi("Personas en "+d.name,String(M[state.period].people.length),`${M[state.period].pilaPeople} con PILA`))+
-    kpi(d.ytd?"PILA del semestre":"PILA de "+d.name,fM(d.pila),d.ytd?`Pagada en caja: ${fM(H1.pila_cash)}`:`${M[state.period].pilaPeople} empleados con aportes`);
-  document.getElementById("chPay").innerHTML=barChart({label:"Carga laboral por mes",data:MONTHS.map(m=>({k:m,v:M[m].payroll})),color:"#6F8FC0",sub:x=>M[x.k].people.length+" personas"});
-  // Matriz de turnos
+    kpi(d.ytd?"PILA del semestre":"PILA de "+d.name,fM(d.pila),d.ytd?`Pagada en caja: ${fM(H1.pila_cash)}`:`${M[state.period].pilaPeople} empleados con aportes`));
+  const b=box("chPay",270);
+  b.el.innerHTML=barChart({box:b,label:"Carga laboral por mes",data:MONTHS.map(m=>({k:m,v:M[m].payroll})),color:"#6F8FC0",sub:x=>M[x.k].people.length+" personas"});
   const ci=MONTHS.indexOf(state.period);
   let r=`<table class="roster"><thead><tr><th>Persona</th>${MONTHS.map((m,i)=>`<th class="${i===ci?'colsel':''}">${SHORT[m]}</th>`).join("")}<th>Meses</th></tr></thead><tbody>`;
-  ALL_PEOPLE.forEach(([p,c])=>{r+=`<tr><td>${esc(p)}</td>${MONTHS.map((m,i)=>`<td class="${i===ci?'colsel':''}"><span class="cell${M[m].people.includes(p)?' in':''}" aria-label="${M[m].people.includes(p)?'Trabajó':'Sin pagos'}"></span></td>`).join("")}<td>${c}</td></tr>`;});
+  ALL_PEOPLE.forEach(([p,c])=>{r+=`<tr><td>${esc(p)}</td>${MONTHS.map((m,i)=>{const on=M[m].people.includes(p);return `<td class="${i===ci?'colsel':''}"><span class="cell${on?' in':''}" title="${esc(p)} · ${CAP(m)}: ${on?'con pagos':'sin pagos'}"></span></td>`;}).join("")}<td>${c}</td></tr>`;});
   r+=`</tbody><tfoot><tr><td>Personas</td>${MONTHS.map((m,i)=>`<td class="${i===ci?'colsel':''}">${M[m].people.length}</td>`).join("")}<td>${all}</td></tr></tfoot></table>`;
-  document.getElementById("roster").innerHTML=r;
-  hbars("hbPattern",PAY_PATTERNS.map(x=>[`${x[0]} (${x[1]})`,x[2]]),{total:T.payroll});
-  monthTable("tbPay",[{h:"Carga laboral",f:m=>M[m].payroll,fmt:money},{h:"% ventas",f:m=>M[m].payroll/M[m].sales,fmt:v=>pct(v)},varCol("payroll"),{h:"Personas",f:m=>M[m].people.length,fmt:String},{h:"PILA",f:m=>M[m].pila,fmt:money}],
-    {label:"Semestre",cells:[money(T.payroll),pct(T.payroll/T.sales),"",`${all} distintas`,money(T.pila)]});
+  setHTML("roster",r);
+  setHTML("hbPattern",hbars(PAY_PATTERNS.map(x=>[`${x[0]} (${x[1]})`,x[2]]),{total:T.payroll,cls:"nav"}));
+  TABLES.pay=["Carga laboral por mes",monthTable([{h:"Carga laboral",f:m=>M[m].payroll,fmt:money},{h:"% ventas",f:m=>M[m].payroll/M[m].sales,fmt:v=>pct(v)},varCol("payroll"),{h:"Personas",f:m=>M[m].people.length,fmt:String},{h:"PILA",f:m=>M[m].pila,fmt:money}],{label:"Semestre",cells:[money(T.payroll),pct(T.payroll/T.sales),"",`${all} distintas`,money(T.pila)]})];
 }
 
 function renderCaja(){
   const d=per();
-  document.getElementById("cashKpis").innerHTML=
+  setHTML("cashKpis",
     kpi("Saldo inicial",fM(d.open),d.ytd?"1 de enero":"Inicio de "+d.name)+
     kpi(d.ytd?"Abonos del semestre":"Abonos del mes",fM(d.credits))+
     kpi(d.ytd?"Cargos del semestre":"Cargos del mes",fM(d.debits))+
-    kpi("Saldo final",fM(d.close),`${sPct(d.close/d.open-1)} frente al saldo inicial`,d.close<d.open?"bad":"good");
-  const pts=[{k:"INICIO",v:T.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))];
-  document.getElementById("chCash").innerHTML=lineChart(pts,"Saldo al cierre de cada mes");
-  document.getElementById("cashFin").innerHTML=[
-    ["Consumo promedio de caja",fM(BURN)+" por mes"],
-    ["Cobertura del saldo al 30-jun",nf(T.close/BURN,1)+" meses"],
-    ["Desembolso neto del crédito",fM(H1.credit_net_inflow)],
-    ["Saldo de capital del crédito al 30-jun",fM(H1.credit_principal)],
-    ["Impuestos pagados en el semestre",fM(H1.tax_cash)],
-    ["PILA pagada en caja",fM(H1.pila_cash)]
-  ].map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
-  monthTable("tbCash",[{h:"Inicial",f:m=>M[m].bank.open,fmt:money},{h:"Abonos",f:m=>M[m].bank.credits,fmt:money},{h:"Cargos",f:m=>M[m].bank.debits,fmt:money},{h:"Final",f:m=>M[m].bank.close,fmt:money},{h:"Variación",f:m=>M[m].bank.close-M[m].bank.open,fmt:money,cls:v=>v<0?"neg":"pos"}],
-    {label:"Semestre",cells:[money(T.open),money(T.credits),money(T.debits),money(T.close),money(T.close-T.open)]});
+    kpi("Saldo final",fM(d.close),`${sPct(d.close/d.open-1)} frente al saldo inicial`,d.close<d.open?"bad":"good"));
+  const b=box("chCash",260);
+  b.el.innerHTML=lineChart(b,[{k:"INICIO",v:T.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo al cierre de cada mes");
+  setHTML("cashFin",[["Consumo promedio de caja",fM(BURN)+" por mes"],["Cobertura del saldo al 30-jun",nf(T.close/BURN,1)+" meses"],["Desembolso neto del crédito",fM(H1.credit_net_inflow)],["Saldo de capital del crédito al 30-jun",fM(H1.credit_principal)],["Impuestos pagados en el semestre",fM(H1.tax_cash)],["PILA pagada en caja",fM(H1.pila_cash)]].map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join(""));
+  TABLES.cash=["Movimiento mensual de caja",monthTable([{h:"Inicial",f:m=>M[m].bank.open,fmt:money},{h:"Abonos",f:m=>M[m].bank.credits,fmt:money},{h:"Cargos",f:m=>M[m].bank.debits,fmt:money},{h:"Final",f:m=>M[m].bank.close,fmt:money},{h:"Variación",f:m=>M[m].bank.close-M[m].bank.open,fmt:money,cls:v=>v<0?"neg":"pos"}],{label:"Semestre",cells:[money(T.open),money(T.credits),money(T.debits),money(T.close),money(T.close-T.open)]})];
 }
 
 function renderResultado(){
-  const res=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex}));
-  const sumRes=res.reduce((a,x)=>a+x.v,0);
-  document.getElementById("chResult").innerHTML=barChart({label:"Resultado operativo aproximado por mes",data:res,color:x=>x.v<0?"var(--orange)":"var(--teal-dk)",h:250});
-  document.getElementById("resultNote").textContent=`Suma de los meses: ${fM(sumRes)}. Con el consolidado validado de gastos operativos (${fM(H1.opex-T.opexMonths)} más) el semestre queda en ${fM(T.sales-T.inventory-T.payroll-H1.opex)}.`;
+  const res=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex})),sumRes=res.reduce((a,x)=>a+x.v,0);
+  const b=box("chResult",250);
+  b.el.innerHTML=barChart({box:b,label:"Resultado operativo aproximado por mes",data:res,color:x=>x.v<0?"var(--orange)":"var(--teal-dk)",noSel:true});
+  document.getElementById("resultNote").textContent=`Suma de los meses ${fM(sumRes)}; con el consolidado validado de gastos operativos el semestre queda en ${fM(T.sales-T.inventory-T.payroll-H1.opex)}. Las compras hacen de costo de alimentos mientras no haya inventarios.`;
   const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance;
-  document.getElementById("scenarios").innerHTML=
-    kpi("Si inventario inicial = final",fM(base),"Incluye gastos financieros conocidos, sin interés APE",base<0?"bad":"good")+
+  setHTML("scenarios",
+    kpi("Si inventario inicial = final",fM(base),"Con gastos financieros conocidos, sin interés APE",base<0?"bad":"good")+
     kpi("Con interés APE candidato",fM(base-H1.ape_interest),"Escenario más exigente",base-H1.ape_interest<0?"bad":"good")+
-    kpi("Aumento de inventario que llevaría a cero",fM(Math.max(0,-base)),"Inventario final menos inicial, sin APE");
+    kpi("Aumento de inventario para llegar a cero",fM(Math.max(0,-base)),"Inventario final menos inicial, sin APE"));
   simulate();
-  const rows=(el,a)=>document.getElementById(el).innerHTML=a.map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("");
+  const rows=(id,a)=>setHTML(id,a.map(r=>`<div class="r"><span>${r[0]}</span><b>${r[1]}</b></div>`).join(""));
   rows("posAssets",[["Caja cuenta empresarial",fM(T.close)],["Anticipos tributarios",fM(H1.tax_assets)],["Ventas registradas “por pagar” (en control)",fM(H1.sales_pending)],["Inventario al 30-jun","Pendiente"]]);
-  rows("posLiab",[["Pasivos tributarios",fM(H1.tax_liability)],["Crédito bancario, saldo de capital",fM(H1.credit_principal)],["Saldo económico APE",fM(H1.investor_balance)],["Cuotas APE may–jun programadas (incluidas en el saldo)",fM(H1.investor_pending_may_jun)]]);
+  rows("posLiab",[["Pasivos tributarios",fM(H1.tax_liability)],["Crédito bancario, saldo de capital",fM(H1.credit_principal)],["Saldo económico APE (clasificación pendiente)",fM(H1.investor_balance)],["Cuotas APE may–jun, incluidas en el saldo",fM(H1.investor_pending_may_jun)]]);
 }
 function simulate(){
-  const ii=document.getElementById("invIni"),ff=document.getElementById("invFin"),out=document.getElementById("simOut"),msg=document.getElementById("simMsg");
+  const ii=document.getElementById("invIni"),ff=document.getElementById("invFin"),msg=document.getElementById("simMsg");
   if(ii.value===""||ff.value===""){
-    out.innerHTML=["Costo de ventas","Margen bruto","Resultado antes de renta","Margen del resultado"].map(t=>`<div class="mini"><span>${t}</span><b style="color:var(--muted)">—</b></div>`).join("");
-    msg.className="callout warn mt";msg.textContent="Ingresa el inventario inicial y final valorizados para calcular el costo de ventas real.";return;
+    setHTML("simOut",["Costo de ventas","Margen bruto","Resultado antes de renta","Margen del resultado"].map(t=>`<div class="mini"><span>${t}</span><b style="color:var(--muted)">—</b></div>`).join(""));
+    msg.className="callout warn";msg.textContent="Ingresa el inventario inicial y final valorizados para calcular el costo de ventas real.";return;
   }
-  const cogs=Number(ii.value)+T.inventory-Number(ff.value),gross=T.sales-cogs;
-  const ape=document.getElementById("apeT").value==="1"?H1.ape_interest:0;
+  const cogs=Number(ii.value)+T.inventory-Number(ff.value),gross=T.sales-cogs,ape=document.getElementById("apeT").value==="1"?H1.ape_interest:0;
   const r=gross-H1.opex-T.payroll-H1.known_finance-ape;
-  out.innerHTML=`<div class="mini"><span>Costo de ventas</span><b>${fM(cogs)}</b></div><div class="mini"><span>Margen bruto</span><b>${fM(gross)} <small style="font-size:.8rem">${pct(gross/T.sales)}</small></b></div><div class="mini"><span>Resultado antes de renta</span><b class="${r<0?'neg':'pos'}">${fM(r)}</b></div><div class="mini"><span>Margen del resultado</span><b class="${r<0?'neg':'pos'}">${pct(r/T.sales)}</b></div>`;
-  msg.className="callout mt "+(r>=0?"":"bad");
+  setHTML("simOut",`<div class="mini"><span>Costo de ventas</span><b>${fM(cogs)}</b></div><div class="mini"><span>Margen bruto (${pct(gross/T.sales)})</span><b>${fM(gross)}</b></div><div class="mini"><span>Resultado antes de renta</span><b class="${r<0?'neg':'pos'}">${fM(r)}</b></div><div class="mini"><span>Margen del resultado</span><b class="${r<0?'neg':'pos'}">${pct(r/T.sales)}</b></div>`);
+  msg.className="callout "+(r>=0?"":"bad");
   msg.innerHTML=r>=0?"<b>Resultado positivo</b> con estos inventarios.":`<b>Resultado negativo</b> con estos inventarios: faltan ${fM(-r)} para llegar a cero.`;
 }
 
+/* ---------- Diagnóstico: relato para socios e inversionistas ---------- */
 function renderDiag(){
-  const avg=T.sales/N,drop=M.JUNIO.sales/M.ENERO.sales-1,over=MONTHS.filter(m=>M[m].sales>=BE);
-  const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance,occ=OCCUPANCY/T.sales,prime=(T.inventory+T.payroll)/T.sales;
-  const lowMonths=MONTHS.slice(3);
-  document.getElementById("diagFigs").innerHTML=
-    kpi("Ventas netas del semestre",fM(T.sales))+kpi("Ventas de enero a junio",pct(drop),"",drop<0?"bad":"")+
-    kpi("Venta mensual de equilibrio",fM(BE,1),"Con gastos financieros conocidos")+kpi("Caja al 30 de junio",fM(T.close),"",T.close<BURN?"bad":"");
-  const list=a=>a.length<=1?a.join(""):a.slice(0,-1).join(", ")+" y "+a[a.length-1];
-  document.getElementById("diagBody").innerHTML=`
-  <article>
-    <h3>Comportamiento de las ventas</h3>
-    <p>Durante el semestre registramos ventas netas por <b>${fM(T.sales)}</b>, un promedio de <b>${fM(avg)}</b> por mes.</p>
-    <p>El comportamiento no fue uniforme. ${list(over.map((m,i)=>i?LOW(m):CAP(m)))} superaron el nivel de equilibrio, mientras que ${list(lowMonths.map(LOW))} quedaron por debajo (${lowMonths.map(m=>fM(M[m].sales,1)).join(", ")}). Junio cerró en <b>${fM(M.JUNIO.sales)}</b>, ${pct(Math.abs(drop))} menos que enero.</p>
-    <p>MARANELLO ya demostró que puede vender más de $70 millones al mes, pero no sostuvo ese ritmo al cierre del semestre, y buena parte de los costos no baja cuando bajan las ventas.</p>
-  </article>
-  <article>
-    <h3>Estructura de costos</h3>
-    <p>Los gastos operativos suman <b>${fM(H1.opex)}</b> y la nómina procesada <b>${fM(T.payroll)}</b>: juntos equivalen al <b>${pct((H1.opex+T.payroll)/T.sales)}</b> de las ventas, antes del costo de alimentos y bebidas.</p>
-    <p>Dentro del gasto operativo, la <b>ocupación</b> suma ${fM(OCCUPANCY)}, el ${pct(occ)} de las ventas y el ${pct(OCCUPANCY/H1.opex,0)} de todo el gasto operativo. Es el rubro individual de mayor peso fuera de la nómina.</p>
-    <p>Las compras inventariables llegaron a ${fM(T.inventory)}. Sumadas a la nómina representan el <b>${pct(prime)}</b> de las ventas. Todavía no son costo de ventas definitivo porque falta valorizar inventarios.</p>
-  </article>
-  <article>
-    <h3>Rentabilidad y punto de equilibrio</h3>
-    <p><b>Todavía no hay una utilidad contable definitiva.</b> Si el inventario inicial y final fueran iguales, el resultado del semestre sería cercano a <b>${fM(base)}</b>; con el componente financiero candidato de los inversionistas, <b>${fM(base-H1.ape_interest)}</b>.</p>
-    <p>Son una señal gerencial, no una pérdida certificada. Con la estructura actual, incluidos los gastos financieros conocidos, necesitamos vender cerca de <b>${fM(BE,1)} por mes</b> para llegar al equilibrio (${fM(BE_APE,1)} si se reconoce el interés APE). Junio quedó ${fM(BE-M.JUNIO.sales,1)} por debajo.</p>
-  </article>
-  <article class="alert">
-    <h3>Liquidez y financiación</h3>
-    <p>La cuenta empresarial empezó el semestre con <b>${fM(T.open)}</b> y cerró junio con <b>${fM(T.close)}</b>: en promedio se consumieron ${fM(BURN)} por mes, y el saldo final no alcanza para un mes a ese ritmo.</p>
-    <p>En el mismo periodo recibimos un desembolso neto de crédito bancario por ${fM(H1.credit_net_inflow)} (saldo de capital al 30 de junio: ${fM(H1.credit_principal)}). La presión no es solo contable: ya se refleja en la caja disponible para operar.</p>
-    <p>Los compromisos con inversionistas agregan presión, pero el análisis indica que no son la causa principal del desequilibrio operativo.</p>
-  </article>
-  <article class="close">
+  const avg=T.sales/N,drop=M.JUNIO.sales/M.ENERO.sales-1,over=MONTHS.filter(m=>M[m].sales>=BE),under=MONTHS.filter(m=>M[m].sales<BE);
+  const base=T.sales-T.inventory-T.payroll-H1.opex-H1.known_finance;
+  const monthRes=MONTHS.map(m=>({k:m,v:M[m].sales-M[m].inventory-M[m].payroll-M[m].opex}));
+  let streak=MONTHS.length; for(let i=MONTHS.length-1;i>=0&&monthRes[i].v<0;i--) streak=i;
+  const bestTwo=over.length?over.reduce((a,m)=>a+M[m].sales,0)/over.length:Math.max(...MONTHS.map(m=>M[m].sales));
+  const iso=document.getElementById("isoLogo").src;
+  const otherOpex=H1.opex-OCCUPANCY;
+  const structure=[["Nómina",T.payroll],["Compras",T.inventory],["Ocupación",OCCUPANCY],["Otros gastos operativos",otherOpex]].map(x=>[x[0],x[1]/T.sales]);
+  const structTotal=structure.reduce((a,x)=>a+x[1],0);
+  const cases=[["Nivel de junio",M.JUNIO.sales],["Promedio del semestre",avg],["Equilibrio",BE],[`Promedio ${list(over.map(LOW))}`,bestTwo]].map(c=>[c[0],c[1],resultAt(c[1])]);
+  const maxAbs=Math.max(...cases.map(c=>Math.abs(c[2])))||1;
+  const onePoint=avg*0.01;
+
+  setHTML("story",`
+  <div class="s-hero">
+    <div>
+      <h3>MARANELLO sabe vender. Hoy su estructura cuesta más de lo que estamos vendiendo.</h3>
+      <p>En el primer semestre de 2026 consolidamos ventas, compras, gastos, nómina, bancos, impuestos y financiación. Por primera vez tenemos una lectura completa del negocio: el mercado existe, pero desde abril las ventas bajaron y los costos no. Esta es la situación, lo que significa y lo que proponemos hacer.</p>
+    </div>
+    <img src="${iso}" alt="">
+  </div>
+
+  <div class="s-figs">
+    <div class="s-fig"><b>${fM(T.sales)}</b><span>Ventas netas del semestre</span></div>
+    <div class="s-fig bad"><b>${pct(drop)}</b><span>Variación de ventas de enero a junio</span></div>
+    <div class="s-fig"><b>${fM(BE,1)}</b><span>Venta mensual necesaria para el equilibrio</span></div>
+    <div class="s-fig bad"><b>${fM(T.close)}</b><span>Caja de la cuenta empresarial al 30 de junio</span></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-text">
+      <h3>Sabemos vender, pero no sostuvimos el ritmo</h3>
+      <p>Vendimos <b>${fM(T.sales)}</b> en seis meses, un promedio de ${fM(avg)} al mes. En ${list(over.map(LOW))} superamos los ${fM(BE,1)} que la operación necesita.</p>
+      <p>Desde abril el nivel bajó: ${list(under.filter(m=>MONTHS.indexOf(m)>=3).map(m=>`${LOW(m)} ${fM(M[m].sales,1)}`))}. Junio cerró ${pct(Math.abs(drop))} por debajo de enero.</p>
+      <p><b>La demanda está demostrada; el reto es volver a sostenerla.</b></p>
+    </div>
+    <div class="ch-visual"><p class="cap">Ventas netas por mes, millones de pesos</p><div class="chart diag-chart" id="dvSales"></div></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-text">
+      <h3>La estructura quedó grande para las ventas actuales</h3>
+      <p>Por cada peso vendido en el semestre, la nómina se llevó ${pct(structure[0][1],0)}, las compras ${pct(structure[1][1],0)} y la ocupación del local ${pct(structure[2][1],0)}. Sumando el resto de gastos operativos, los costos registrados equivalen al <b>${pct(structTotal)}</b> de las ventas.</p>
+      <p>Nómina y ocupación son costos que no bajan cuando bajan las ventas. Por eso cada mes flojo pesa tanto en el resultado.</p>
+      <p>Para dimensionarlo: al nivel de ventas promedio, cada punto porcentual de costo fijo sobre ventas equivale a unos <b>${fM(onePoint)} al mes</b>.</p>
+    </div>
+    <div class="ch-visual"><p class="cap">Costos del semestre como porcentaje de las ventas</p><div class="hb">${structure.map(x=>`<div class="hb-row${x[0]==="Ocupación"?' hl':''}"><span class="hb-name">${x[0]}</span><div class="hb-track"><div class="hb-fill" style="width:${(x[1]/structure[0][1]*100).toFixed(1)}%"></div></div><span class="hb-num">${pct(x[1])}</span></div>`).join("")}<div class="hb-row"><span class="hb-name"><b>Total</b></span><span></span><span class="hb-num"><b>${pct(structTotal)}</b></span></div></div></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-text">
+      <h3>${streak<N?`Desde ${LOW(MONTHS[streak])}, cada mes cierra en negativo`:"El resultado operativo del semestre"}</h3>
+      <p>Restando compras, nómina y gastos operativos a las ventas de cada mes, enero dejó ${fM(monthRes[0].v,1)} y junio ${fM(monthRes[N-1].v,1)}.</p>
+      <p>Aún no hay utilidad contable definitiva porque faltan los inventarios valorizados. Como referencia, si el inventario inicial y final fueran iguales, el semestre cerraría cerca de <b>${fM(base)}</b> con gastos financieros, y <b>${fM(base-H1.ape_interest)}</b> reconociendo el interés de los inversionistas.</p>
+      <p>Son señales gerenciales, no pérdidas certificadas.</p>
+    </div>
+    <div class="ch-visual"><p class="cap">Resultado operativo aproximado por mes, millones de pesos</p><div class="chart diag-chart" id="dvResult"></div></div>
+  </div>
+
+  <div class="chapter alert">
+    <div class="ch-text">
+      <h3>La caja ya lo está sintiendo</h3>
+      <p>La cuenta empresarial empezó el año con <b>${fM(T.open)}</b> y cerró junio con <b>${fM(T.close)}</b>: consumimos en promedio ${fM(BURN)} al mes, y el saldo actual no alcanza para cubrir un mes a ese ritmo.</p>
+      <p>En el semestre tomamos un crédito bancario con desembolso neto de ${fM(H1.credit_net_inflow)}; su saldo de capital al 30 de junio es ${fM(H1.credit_principal)}. Los compromisos con inversionistas suman presión, pero no son la causa principal del desequilibrio.</p>
+    </div>
+    <div class="ch-visual"><p class="cap">Saldo de la cuenta empresarial, millones de pesos</p><div class="chart diag-chart" id="dvCash"></div></div>
+  </div>
+
+  <div class="chapter">
+    <div class="ch-text">
+      <h3>Qué cambia si recuperamos ventas</h3>
+      <p>Con la estructura actual y el mismo peso de las compras (${pct(VAR_RATIO)} de las ventas), el resultado mensual depende casi por completo del nivel de ventas.</p>
+      <p>Al ritmo de junio perdemos alrededor de ${fM(-cases[0][2],1)} al mes. Si volvemos al nivel que ya alcanzamos en ${list(over.map(LOW))}, el mismo negocio genera cerca de <b>${fM(cases[3][2],1)} al mes</b>.</p>
+      <p>Es una estimación simple, pero muestra que el camino no pasa solo por recortar: recuperar ventas cambia el signo del resultado.</p>
+    </div>
+    <div class="ch-visual"><p class="cap">Resultado mensual estimado según nivel de ventas (incluye gastos financieros conocidos)</p>
+      <div class="whatif">${cases.map(c=>{const w=Math.abs(c[2])/maxAbs*50;return `<div class="wi"><span>${c[0]}<br><small style="color:var(--muted)">${fM(c[1],1)} en ventas</small></span><div class="wi-bar"><div class="z" style="left:50%"></div>${Math.abs(c[2])>1?`<div class="f" style="${c[2]<0?`right:50%`:`left:50%`};width:${w}%;background:${c[2]<0?'var(--orange)':'var(--teal-dk)'}"></div>`:""}</div><b class="${c[2]<-1?'neg':c[2]>1?'pos':''}">${Math.abs(c[2])<1?"≈ $0":fM(c[2],1)}</b></div>`;}).join("")}</div>
+    </div>
+  </div>
+
+  <h3 class="s-block-title">Lo que proponemos</h3>
+  <div class="proposals">
+    <div class="prop"><h4>Recuperar ventas</h4><p>Volver a vender por encima de ${fM(BE,1)} al mes, un nivel que ya alcanzamos en ${list(over.map(LOW))}. Junio quedó ${fM(BE-M.JUNIO.sales,1)} por debajo.</p><div class="measure"><b>Cómo lo mediremos:</b> ventas netas mensuales frente al equilibrio.</div></div>
+    <div class="prop"><h4>Ajustar nómina y ocupación</h4><p>Hoy la nómina pesa ${pct(T.payroll/T.sales)} de las ventas y la ocupación ${pct(OCCUPANCY/T.sales)}. Revisar turnos, organización del equipo y condiciones del local.</p><div class="measure"><b>Cómo lo mediremos:</b> nómina y ocupación como porcentaje de las ventas de cada mes.</div></div>
+    <div class="prop"><h4>Conocer el costo real de alimentos</h4><p>Valorizar inventario inicial y final para pasar de compras a costo de ventas, y así conocer el margen bruto real por mes.</p><div class="measure"><b>Cómo lo mediremos:</b> costo de ventas y margen bruto mensual.</div></div>
+  </div>
+
+  <div class="s-close">
     <h3>Nuestra lectura</h3>
-    <p><b>MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable.</b> Tiene una estructura pensada para ventas superiores a las de los últimos meses: cerca de $74–75 millones la operación se acerca al equilibrio; entre $48 y $58 millones, nómina, ocupación y servicios presionan el resultado y la caja.</p>
-    <p>Proponemos concentrarnos en tres frentes: <b>recuperar ventas</b>, <b>revisar la estructura laboral y el costo de ocupación</b>, y <b>determinar el costo real de alimentos con inventarios</b>.</p>
-  </article>
-  <details class="data"><summary>Prioridades para cerrar la información</summary><div class="tw"><ul>
-    <li><b>Inventario inicial y final valorizados:</b> para calcular costo de ventas y margen bruto.</li>
-    <li><b>Depuración laboral:</b> separar empleados formales, turnos, ocasionales y otros conceptos de la hoja de pagos.</li>
-    <li><b>Instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
-    <li><b>Partidas mixtas y activos:</b> ${fM(H1.mixed+H1.assets_policy)} por clasificar entre gasto, costo y activo.</li>
-    <li><b>Gastos operativos:</b> rastrear la diferencia de ${fM(H1.opex-T.opexMonths)} entre meses y consolidado.</li>
-    <li><b>Cuentas relacionadas:</b> completar movimientos para cerrar el flujo de caja consolidado.</li>
-    <li><b>Ventas “por pagar”:</b> conciliar ${fM(H1.sales_pending)} con bancos antes de reconocerlas como cuenta por cobrar.</li>
-  </ul></div></details>
-  <details class="data"><summary>Notas metodológicas y fuentes</summary><div class="tw">
-    <p><b>Proceso:</b> fuente original, depuración, anti-duplicación, clasificación, causación frente a caja, conciliación y nivel de certeza.</p>
-    <p><b>Equilibrio:</b> (gastos operativos + nómina + gastos financieros conocidos) por mes, dividido entre 1 − compras/ventas del semestre (${pct(VAR_RATIO)}).</p>
-    <p>Las compras no se convierten automáticamente en costo de ventas ni los movimientos bancarios en gastos. El capital de impuestos y financiación se separa del resultado. Los escenarios no sustituyen cifras contables definitivas.</p>
-    <p><b>Fuentes:</b> ventas, documentos UBL y compras, correo, WhatsApp, nómina y PILA, bancos, impuestos, financiación e inversionistas.</p>
-  </div></details>`;
+    <p>MARANELLO no es un negocio sin capacidad de venta ni necesariamente inviable. Tiene una estructura pensada para vender cerca de $74–75 millones al mes; cuando las ventas caen a $48–58 millones, nómina, ocupación y servicios presionan el resultado y la caja.</p>
+    <p>La situación requiere intervención y seguimiento, y hoy contamos con una base financiera organizada para decidir con información y no solo con percepciones.</p>
+  </div>
+
+  <details class="fold method">
+    <summary><b>Qué falta para cerrar las cifras</b><span>Pendientes de información y conciliación.</span></summary>
+    <div class="fold-body"><ul>
+      <li><b>Inventario inicial y final valorizados:</b> para calcular costo de ventas y margen bruto.</li>
+      <li><b>Depuración laboral:</b> separar empleados formales, turnos, ocasionales y otros conceptos de la hoja de pagos.</li>
+      <li><b>Instrumento APE:</b> definir su clasificación y el reconocimiento del componente financiero.</li>
+      <li><b>Partidas mixtas y activos:</b> ${fM(H1.mixed+H1.assets_policy)} por clasificar entre gasto, costo y activo.</li>
+      <li><b>Gastos operativos:</b> rastrear la diferencia de ${fM(H1.opex-T.opexMonths)} entre meses y consolidado.</li>
+      <li><b>Cuentas relacionadas:</b> completar movimientos para cerrar el flujo de caja consolidado.</li>
+      <li><b>Ventas “por pagar”:</b> conciliar ${fM(H1.sales_pending)} con bancos antes de reconocerlas como cuenta por cobrar.</li>
+    </ul></div>
+  </details>
+  <details class="fold method">
+    <summary><b>Notas metodológicas y fuentes</b><span>Cómo se construyeron las cifras.</span></summary>
+    <div class="fold-body">
+      <p><b>Proceso:</b> fuente original, depuración, anti-duplicación, clasificación, causación frente a caja, conciliación y nivel de certeza.</p>
+      <p><b>Equilibrio:</b> (gastos operativos + nómina + gastos financieros conocidos) por mes, dividido entre 1 − compras/ventas del semestre (${pct(VAR_RATIO)}). Con interés APE sería ${fM(BE_APE,1)}.</p>
+      <p><b>Escenarios por nivel de ventas:</b> ventas × (1 − ${pct(VAR_RATIO)}) − estructura mensual de ${fM(FIXED_MONTH)}.</p>
+      <p><b>Fuentes:</b> ventas, documentos UBL y compras, correo, WhatsApp, nómina y PILA, bancos, impuestos, financiación e inversionistas.</p>
+    </div>
+  </details>`);
+  const W=el=>Math.max(320,Math.round(el.clientWidth||520));
+  const dS=document.getElementById("dvSales"),dR=document.getElementById("dvResult"),dC=document.getElementById("dvCash");
+  dS.innerHTML=barChart({box:{W:W(dS),H:230},label:"Ventas por mes",data:MONTHS.map(m=>({k:m,v:M[m].sales})),color:x=>x.v>=BE?"var(--teal-dk)":"var(--navy)",refs:[{v:BE,name:"Equilibrio",value:fMs(BE),color:"var(--orange)"}],noSel:true});
+  dR.innerHTML=barChart({box:{W:W(dR),H:230},label:"Resultado por mes",data:monthRes,color:x=>x.v<0?"var(--orange)":"var(--teal-dk)",noSel:true});
+  dC.innerHTML=lineChart({W:W(dC),H:230},[{k:"INICIO",v:T.open,tick:"1-ene",label:"Saldo inicial"},...MONTHS.map(m=>({k:m,v:M[m].bank.close}))],"Saldo de caja",true);
 }
 
 /* ============================================================
@@ -837,14 +946,16 @@ function renderAll(){
   const d=per();
   document.querySelectorAll("[data-scope]").forEach(e=>e.textContent=d.title);
   document.querySelectorAll(".pbtn").forEach(b=>{b.classList.toggle("on",b.dataset.p===state.period);b.setAttribute("aria-pressed",b.dataset.p===state.period);});
-  TABS.forEach(t=>RENDER[t]());
+  TABS.forEach(t=>{if(t!==state.tab)RENDER[t]();});
+  RENDER[state.tab]();
 }
 function showTab(t){
-  state.tab=t;
+  state.tab=t; document.body.dataset.tab=t;
   document.querySelectorAll(".section").forEach(s=>s.classList.toggle("on",s.id===t));
-  document.querySelectorAll(".tab").forEach(b=>{b.classList.toggle("on",b.dataset.tab===t);if(b.dataset.tab===t){b.setAttribute("aria-current","page");b.scrollIntoView({block:"nearest",inline:"nearest"});}else b.removeAttribute("aria-current");});
+  document.querySelectorAll(".tab").forEach(b=>{const on=b.dataset.tab===t;b.classList.toggle("on",on);if(on){b.setAttribute("aria-current","page");b.scrollIntoView({block:"nearest",inline:"nearest"});}else b.removeAttribute("aria-current");});
   document.getElementById("period").classList.toggle("fixed",FIXED_TABS.includes(t));
-  window.scrollTo({top:0});
+  document.querySelector("main").scrollTop=0; window.scrollTo({top:0});
+  RENDER[t]();
 }
 (function init(){
   const p=document.getElementById("period");
@@ -854,21 +965,29 @@ function showTab(t){
   document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
   ["invIni","invFin"].forEach(id=>document.getElementById(id).addEventListener("input",simulate));
   document.getElementById("apeT").addEventListener("change",simulate);
-  document.getElementById("simReset").addEventListener("click",()=>{document.getElementById("invIni").value="";document.getElementById("invFin").value="";document.getElementById("apeT").value="0";simulate();});
+  document.getElementById("simReset").addEventListener("click",()=>{["invIni","invFin"].forEach(id=>document.getElementById(id).value="");document.getElementById("apeT").value="0";simulate();});
+  const fold=document.getElementById("simFold");
+  fold.addEventListener("toggle",()=>{document.body.classList.toggle("sim-open",fold.open);RENDER.resultado();if(fold.open)fold.scrollIntoView({block:"nearest",behavior:"smooth"});});
+  const dlg=document.getElementById("dlg");
+  document.querySelectorAll("[data-table]").forEach(b=>b.addEventListener("click",()=>{const t=TABLES[b.dataset.table];if(!t)return;document.getElementById("dlgTitle").textContent=t[0];setHTML("dlgBody",t[1]);dlg.showModal();}));
+  document.getElementById("dlgClose").addEventListener("click",()=>dlg.close());
+  dlg.addEventListener("click",e=>{if(e.target===dlg)dlg.close();});
   const bp=document.getElementById("btnPresent");
   bp.addEventListener("click",()=>{const on=document.documentElement.classList.toggle("present");bp.classList.toggle("on",on);bp.setAttribute("aria-pressed",on);bp.textContent=on?"Salir de presentación":"Presentar";
-    try{if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!on&&document.fullscreenElement)document.exitFullscreen();}catch(e){}});
+    try{if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!on&&document.fullscreenElement)document.exitFullscreen();}catch(e){}
+    setTimeout(()=>RENDER[state.tab](),250);});
   document.getElementById("btnPrint").addEventListener("click",()=>window.print());
   document.addEventListener("keydown",e=>{
-    if(!document.documentElement.classList.contains("present"))return;
+    if(!document.documentElement.classList.contains("present")||dlg.open)return;
     if(["INPUT","SELECT","TEXTAREA"].includes(document.activeElement.tagName))return;
     const i=TABS.indexOf(state.tab);
     if(e.key==="ArrowRight"&&i<TABS.length-1){showTab(TABS[i+1]);e.preventDefault();}
     if(e.key==="ArrowLeft"&&i>0){showTab(TABS[i-1]);e.preventDefault();}
   });
-  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.documentElement.classList.contains("present"))bp.click();});
-  let rz;window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(renderAll,200);});
+  document.addEventListener("fullscreenchange",()=>{if(!document.fullscreenElement&&document.documentElement.classList.contains("present"))bp.click();else setTimeout(()=>RENDER[state.tab](),150);});
+  let rz;window.addEventListener("resize",()=>{clearTimeout(rz);rz=setTimeout(()=>RENDER[state.tab](),150);});
   renderAll();
+  try{if(sessionStorage.getItem("maraFinanceAccess")==="1")unlock();}catch(e){}
 })();
 </script>
 </body>
